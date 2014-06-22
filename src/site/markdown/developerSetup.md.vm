@@ -1,0 +1,43 @@
+# Developer setup guide
+
+These instructions are intended to assist the would-be ${project.name} 
+developer with setting up an environment in which to successfully build the 
+${project.name} source code.
+
+## Required tools
+
+* Maven
+
+## Details
+    
+### Installation
+
+1. [Download and Install Maven](http://maven.apache.org/download.cgi) - 
+Download the latest version of Maven and install it
+
+2. Add username/password github account to `settings.xml` maven.
+
+```xml
+<servers>
+  <server>
+    <id>github</id>
+    <username>GitHubLogin</username>
+    <password>GitHubPassw0rd</password>
+  </server>
+</servers>
+```
+
+### Environment
+
+### Build
+
+Once the above setup is complete:
+
+1. Open a fresh terminal
+2. Navigate to the `${project.name} directory, or whatever you called it.
+3. Type the following on the command line:
+
+
+    mvn clean install
+    
+

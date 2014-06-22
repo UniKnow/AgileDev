@@ -14,6 +14,7 @@
     </bannerRight>
     <body>
         <menu name="Guidelines">
+            <item name="Developers Setup" href="developerSetup.html"/>
             <item name="Site Documentation" href="siteDocumentation.html"/>
         </menu>
     </body>

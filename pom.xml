@@ -13,6 +13,7 @@
     <properties>
         <maven.compiler.source>1.7</maven.compiler.source>
         <maven.compiler.target>1.7</maven.compiler.target>
+
         <project.build.sourceEncoding>
             UTF-8
         </project.build.sourceEncoding>
@@ -20,10 +21,26 @@
             UTF-8
         </project.reporting.outputEncoding>
 
+        <github.global.server>github</github.global.server>
+
         <!-- Version information dependencies -->
         <doxia.version>1.5</doxia.version>
 
     </properties>
+
+    <distributionManagement>
+        <site>
+            <id>github-pages-site</id>
+            <url>site/${project.version}</url>
+        </site>
+    </distributionManagement>
+
+    <scm>
+        <connection>scm:git:git://github.com/uniKnow/AgileDev.git</connection>
+        <developerConnection>scm:git:git@github
+            .com:uniKnow/AgileDev.git</developerConnection>
+        <url>https://github.com/UniKnow/AgileDev</url>
+    </scm>
 
     <build>
         <plugins>
@@ -31,6 +48,10 @@
                 <artifactId>maven-site-plugin</artifactId>
                 <version>3.3</version>
                 <dependencies>
+                    <!--
+                    allows markdown syntax for site generation. To use it place
+                    files below src/site/markdown/[filename].md
+                    -->
                     <dependency>
                         <groupId>org.apache.maven.doxia</groupId>
                         <artifactId>doxia-module-markdown</artifactId>
@@ -38,7 +59,38 @@
                     </dependency>
                 </dependencies>
                 <configuration>
+                    <!--
+                    Disable deployment of the maven site; this will be done by
+                    the github site plugin
+                    -->
+                    <skipDeploy>true</skipDeploy>
                 </configuration>
+            </plugin>
+
+            <!--
+            Note: ensure the proper GitHub authentication settings are included
+            in your settings.xml
+            -->
+            <plugin>
+                <groupId>com.github.github</groupId>
+                <artifactId>site-maven-plugin</artifactId>
+                <version>0.9</version>
+                <configuration>
+                    <message>
+                        Creating site for ${project.artifactId}, ${project.version}
+                    </message>
+                    <path>${project.distributionManagement.site.url}</path>
+                    <merge>true</merge>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>github-site</id>
+                        <goals>
+                            <goal>site</goal>
+                        </goals>
+                        <phase>site-deploy</phase>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>
