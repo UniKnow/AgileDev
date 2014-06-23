@@ -110,6 +110,8 @@ Unordered list
 <pre class="prettyprint">
 An [inline link](http://www.google.com/ "optional title").
 
+An [inline link to header page](#Site_Documentation) references header on current page.
+
 A [reference link][id].
 
 [id] defined elsewhere
@@ -123,6 +125,7 @@ Mail to: &lt;address@example.com&gt;
 </td>
 <td>
 <p>An <a class="externalLink" href="http://www.google.com/" title="optional title">inline link</a>.</p>
+<p>An <a href="#Site_Documentation">inline link to header page</a> references header on current page.</p>
 <p>A <a class="externalLink" href="http://www.google.com/" title="optional title">reference link</a>.</p>
 <p><a class="externalLink" href="http://www.google.com/" title="optional title">id</a> defined elsewhere</p>
 <p>Linked URL: <a class="externalLink" href="http://www.google.com/">http://www.google.com/</a></p>
