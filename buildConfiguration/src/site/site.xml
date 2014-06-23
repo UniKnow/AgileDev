@@ -14,11 +14,7 @@
     </bannerRight>
     <body>
         <menu name="Guidelines">
-            <item name="Developers Setup" href="developerSetup.html"/>
-            <item name="Site Documentation" href="siteDocumentation.html"/>
+            <item name="Java Coding standard" href="javaCodingStandard.html"/>
         </menu>
-
-        <menu ref="modules" />
-
     </body>
 </project>

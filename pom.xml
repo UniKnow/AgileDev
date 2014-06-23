@@ -35,12 +35,17 @@
         </site>
     </distributionManagement>
 
+
     <scm>
         <connection>scm:git:git://github.com/uniKnow/AgileDev.git</connection>
         <developerConnection>scm:git:git@github
             .com:uniKnow/AgileDev.git</developerConnection>
         <url>https://github.com/UniKnow/AgileDev</url>
     </scm>
+
+    <modules>
+        <module>buildConfiguration</module>
+    </modules>
 
     <build>
         <plugins>
