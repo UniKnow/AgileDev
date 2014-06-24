@@ -87,7 +87,7 @@ Four spaces should be used as the unit of indentation.
 
 ### Line length
 
-Avoid lines longer than 120 characters.
+Avoid lines longer than 80 characters.
 
 ### Wrapping lines
 

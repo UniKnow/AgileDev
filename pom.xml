@@ -45,6 +45,7 @@
 
     <modules>
         <module>buildConfiguration</module>
+        <module>parent</module>
     </modules>
 
     <build>
