@@ -6,10 +6,7 @@ A file consists of sections that should be separated by blank lines.
  
 Files longer than 2000 lines are cumbersome and should be avoided.
 
-Each java source file contains a single `public` class or interface. When 
-`private` classes and interfaces are associated with a public class they can 
-be put in the same source file as the `public` class. The `public` class 
-should be the first class or interface in the file. 
+Each java source file contains a single `public` class or interface. When `private` classes and interfaces are associated with a public class they can be put in the same source file as the `public` class. The `public` class should be the first class or interface in the file. 
 
 Java source files should have the following ordering:
 
@@ -63,19 +60,17 @@ notice. For example:
      * ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
      */
     
-## Package and import statements
+### Package and import statements
  
- The first non-comment line is a `package` statement. After that `import`
-  statements can follow. For example:
+The first non-comment line is a `package` statement. After that `import` statements can follow. For example:
   
      package org.uniknow.agiledev
       
      import org.uniknow.agiledev.*;
      
-## Class and interface declarations
+### Class and interface declarations
  
- The following table describes the parts of a class or interface declaration 
- in the order that they should appear.
+The following table describes the parts of a class or interface declaration  in the order that they should appear.
  
 | Part of class/interface declaration | Notes  |
 | ----------------------------------- |--------|
@@ -85,3 +80,62 @@ notice. For example:
 | Instance variables | First `public`, then `protected`, and then `private` |
 | Constructors | |
 | Methods | These methods should be grouped by functionality rather than by scope or accessibility. For example, a `private` method can be in between two public instance methods. The goal is to make reading and understanding the code easier.
+
+## Indentation
+
+Four spaces should be used as the unit of indentation.
+
+### Line length
+
+Avoid lines longer than 120 characters.
+
+### Wrapping lines
+
+When an expression does not fit on a single line, break it according these general principles:
+
+* Break after a comma.
+* Break before an operator.
+* Align the new line with the beginning of the expression at the same level on the previous line.
+* If the above rules lead to confusion code or to code that's squished against the right margin, just indent 8 spaces instead.
+
+Here are some examples of breaking method calls:
+ 
+    function(expression1, expression2, expression3,
+             expression4, expression5);
+             
+    var = function(expression1,
+                   function2(expression1,
+                             expression2));
+                             
+Following is an example of breaking an arithmetic expression.
+
+    name1 = name2 * (name3 + name4 - name5)
+            + 4 * name6;
+            
+Following are 2 examples of indenting method declarations. The first is the conventional case. The second would shift the second and third lines to the far right if it is used conventional indentation, so instead it indents only 8 spaces:
+
+    // CONVENTIONAL INDENTATION
+    someMethod(int arg1, Object otherArg, String yetAnotherArg,
+               Object andStillAnother);
+               
+    // INDENT 8 SPACES TO AVOID VERY DEEP INDENTS
+    private static synchronized verryLongMethodName(int arg1,
+            Object anotherArg, String yetAnotherArg,
+            Object andStillAnother);
+            
+Line wrapping for `if` statements should generally use the 8 space rule, since conventional (4 spaces) indentation makes seeing the body difficult.
+
+    if ((condition1 && condition2)
+            || (condition3 && condition4)
+            || (condition5 && condition6)) {
+        doSomething();
+    }
+    
+Following are examples to format a ternary expression:
+
+    alpha = (aLongBooleanExpression) ? beta : gama;
+    
+    alpha = (aLongBooleanExpression)
+            ? beta
+            : gama;
+            
