@@ -1,0 +1,53 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>org.uniknow.agiledev</groupId>
+        <artifactId>parent</artifactId>
+        <version>0.1.0-SNAPSHOT</version>
+    </parent>
+
+    <artifactId>cucumber-reporting</artifactId>
+    <name>Cucumber Reporting</name>
+    <description>Tooling to generate confluence pages based on functional tests written in Cucumber</description>
+
+    <dependencies>
+        <!-- Dependencies to generate Confluence report -->
+        <dependency>
+            <groupId>info.cukes</groupId>
+            <artifactId>cucumber-core</artifactId>
+            <version>${cucumber.version}</version>
+            <!--<scope>test</scope>-->
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse.mylyn.wikitext</groupId>
+            <artifactId>wikitext.confluence</artifactId>
+            <version>${mylyn.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse.mylyn.wikitext</groupId>
+            <artifactId>wikitext.core</artifactId>
+            <version>${mylyn.version}</version>
+        </dependency>
+
+        <!--
+        <dependency>
+            <groupId>info.cukes</groupId>
+            <artifactId>cucumber-junit</artifactId>
+            <version>${cucumber.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>info.cukes</groupId>
+            <artifactId>cucumber-java</artifactId>
+            <version>${cucumber.version}</version>
+            <scope>test</scope>
+        </dependency>
+        -->
+    </dependencies>
+
+    <build>
+    </build>
+</project>
