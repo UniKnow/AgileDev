@@ -39,7 +39,10 @@
  */
 package org.agiledev.cucumber.report;
 
+import net.sf.oval.constraint.Min;
+import net.sf.oval.guard.Guarded;
 import cucumber.runtime.CucumberException;
+import net.sf.oval.constraint.NotNull;
 import org.eclipse.mylyn.internal.wikitext.confluence.core.ConfluenceDocumentBuilder;
 import org.eclipse.mylyn.wikitext.core.parser.Attributes;
 
@@ -51,16 +54,30 @@ import java.util.List;
  * Created with IntelliJ IDEA. User: mase Date: 6/3/14 Time: 12:09 PM To change
  * this template use File | Settings | File Templates.
  */
+@Guarded
 public class ConfluenceReportBuilder extends ConfluenceDocumentBuilder {
 
     private final Writer writer;
 
-    public ConfluenceReportBuilder(Writer out) {
-        super(out);
-        writer = out;
+    /**
+     * Constructor
+     * 
+     * @param writer
+     *            Writer that will be used to persist confluence report
+     */
+    public ConfluenceReportBuilder(@NotNull Writer writer) {
+        super(writer);
+        this.writer = writer;
     }
 
-    public void beginHeading(int level, String title) {
+    /**
+     * 
+     * @param level
+     *            Level of header. Minimal value is 1
+     * @param title
+     *            Title of header
+     */
+    public void beginHeading(@Min(1) int level, String title) {
         Attributes attributes = new Attributes();
         beginHeading(level, attributes);
         characters(title);
