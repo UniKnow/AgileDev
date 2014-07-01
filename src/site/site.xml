@@ -16,6 +16,7 @@
         <menu name="Guidelines">
             <item name="Developers Setup" href="developerSetup.html"/>
             <item name="Site Documentation" href="siteDocumentation.html"/>
+            <item name="Glossary" href="glossary.html"/>
         </menu>
 
         <menu ref="modules" />

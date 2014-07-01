@@ -15,25 +15,41 @@
     <description>Parent POM projects based on AgileDev</description>
     <packaging>pom</packaging>
 
-    <properties>
-        <maven.compiler.source>1.7</maven.compiler.source>
-        <maven.compiler.target>1.7</maven.compiler.target>
-
-        <!-- Version information dependencies -->
-        <buildConfiguration.version>0.1.0-SNAPSHOT</buildConfiguration.version>
-        <cucumber.version>1.1.5</cucumber.version>
-        <junit.version>4.11</junit.version>
-        <mylyn.version>1.7.4.v20130429</mylyn.version>
-
-    </properties>
-
     <dependencies>
+        <!--
+        Dependencies for shared/root classes framework
+        -->
+        <dependency>
+            <groupId>org.uniknow.agiledev</groupId>
+            <artifactId>common</artifactId>
+        </dependency>
+
+        <!-- Dependencies for enabling Design by Contract -->
+        <dependency>
+            <groupId>net.sf.oval</groupId>
+            <artifactId>oval</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.codehaus.groovy</groupId>
+            <artifactId>groovy-all</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjrt</artifactId>
+        </dependency>
+
+        <!-- Dependency for findbug statically code analyzing -->
+        <dependency>
+            <groupId>com.google.code.findbugs</groupId>
+            <artifactId>jsr305</artifactId>
+        </dependency>
+
+        <!-- Test dependencies -->
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
-            <version>${junit.version}</version>
-            <scope>test</scope>
         </dependency>
+
     </dependencies>
 
     <build>
@@ -44,11 +60,60 @@
             -->
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.1</version>
+            </plugin>
+
+            <!--
+                AspectJ compile time weaving. Required for Design by Contract
+            -->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>aspectj-maven-plugin</artifactId>
+                <version>1.4</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>compile</goal>
+                            <!--<goal>test-compile</goal>-->
+                        </goals>
+                    </execution>
+                </executions>
                 <configuration>
                     <source>${maven.compiler.source}</source>
                     <target>${maven.compiler.target}</target>
+                    <showWeaveInfo>true</showWeaveInfo>
+                    <complianceLevel>${maven.compiler.target}</complianceLevel>
+
+                    <encoding>${project.build.sourceEncoding}</encoding>
+
+                    <aspectLibraries>
+                        <aspectLibrary>
+                            <groupId>net.sf.oval</groupId>
+                            <artifactId>oval</artifactId>
+                        </aspectLibrary>
+                    </aspectLibraries>
+
+                    <weaveDependencies>
+                        <weaveDependency>
+                            <groupId>org.uniknow.agiledev</groupId>
+                            <artifactId>common</artifactId>
+                        </weaveDependency>
+                    </weaveDependencies>
+
                 </configuration>
+
+                <dependencies>
+                    <dependency>
+                        <groupId>org.aspectj</groupId>
+                        <artifactId>aspectjrt</artifactId>
+                        <version>${aspectj.version}</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>org.aspectj</groupId>
+                        <artifactId>aspectjtools</artifactId>
+                        <version>${aspectj.version}</version>
+                    </dependency>
+                </dependencies>
+
             </plugin>
 
             <!--
@@ -57,37 +122,6 @@
             <plugin>
                 <groupId>com.mycila.maven-license-plugin</groupId>
                 <artifactId>maven-license-plugin</artifactId>
-                <version>1.9.0</version>
-                <configuration>
-                    <strictCheck>true</strictCheck>
-                    <header>license/header.txt</header>
-                    <properties>
-                        <organizationName>uniknow</organizationName>
-                        <inceptionYear>2014</inceptionYear>
-                    </properties>
-
-                    <excludes>
-                        <exclude>**/*.iml</exclude>
-                        <exclude>target/**</exclude>
-                        <exclude>.idea/**</exclude>
-                    </excludes>
-
-                </configuration>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>format</goal>
-                        </goals>
-                        <phase>process-sources</phase>
-                    </execution>
-                </executions>
-                <dependencies>
-                    <dependency>
-                        <groupId>org.uniknow.agiledev</groupId>
-                        <artifactId>buildConfiguration</artifactId>
-                        <version>${buildConfiguration.version}</version>
-                    </dependency>
-                </dependencies>
             </plugin>
 
             <!--
@@ -96,27 +130,8 @@
                 formatted and can use the exported xml formatting definitions
             -->
             <plugin>
-                <groupId>com.googlecode.maven-java-formatter-plugin
-                </groupId>
+                <groupId>com.googlecode.maven-java-formatter-plugin</groupId>
                 <artifactId>maven-java-formatter-plugin</artifactId>
-                <version>0.4</version>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>format</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <configuration>
-                    <configFile>formatter/uniknow.xml</configFile>
-                </configuration>
-                <dependencies>
-                    <dependency>
-                        <groupId>org.uniknow.agiledev</groupId>
-                        <artifactId>buildConfiguration</artifactId>
-                        <version>${buildConfiguration.version}</version>
-                    </dependency>
-                </dependencies>
             </plugin>
 
         </plugins>

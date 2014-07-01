@@ -11,10 +11,8 @@
     <description>Tooling for Agile development</description>
 
     <properties>
-        <!--
         <maven.compiler.source>1.7</maven.compiler.source>
         <maven.compiler.target>1.7</maven.compiler.target>
-        -->
 
         <project.build.sourceEncoding>
             UTF-8
@@ -26,15 +24,16 @@
         <github.global.server>github</github.global.server>
 
         <!-- Version information dependencies -->
-        <!--
-        <buildConfiguration.version>0.1.0-SNAPSHOT</buildConfiguration.version>
+        <agiledev.version>0.1.0-SNAPSHOT</agiledev.version>
+        <aspectj.version>1.7.2</aspectj.version>
+        <buildConfiguration.version>${agiledev.version}</buildConfiguration.version>
         <cucumber.version>1.1.5</cucumber.version>
-        -->
         <doxia.version>1.5</doxia.version>
-        <!--
+        <findbugs.jsr305.version>2.0.2</findbugs.jsr305.version>
+        <groovy.version>2.1.6</groovy.version>
         <junit.version>4.11</junit.version>
         <mylyn.version>1.7.4.v20130429</mylyn.version>
-        -->
+        <oval.version>1.81</oval.version>
     </properties>
 
     <distributionManagement>
@@ -48,17 +47,149 @@
     <scm>
         <connection>scm:git:git://github.com/uniKnow/AgileDev.git</connection>
         <developerConnection>scm:git:git@github
-            .com:uniKnow/AgileDev.git</developerConnection>
+            .com:uniKnow/AgileDev.git
+        </developerConnection>
         <url>https://github.com/UniKnow/AgileDev</url>
     </scm>
 
     <modules>
         <module>buildConfiguration</module>
+        <module>common</module>
         <module>parent</module>
         <module>cucumber-reporting</module>
     </modules>
 
+    <dependencyManagement>
+        <dependencies>
+            <!--
+            Dependencies for shared/root classes framework
+            -->
+            <dependency>
+                <groupId>org.uniknow.agiledev</groupId>
+                <artifactId>common</artifactId>
+                <version>${agiledev.version}</version>
+            </dependency>
+
+            <!-- Dependencies for enabling Design by Contract -->
+            <dependency>
+                <groupId>org.aspectj</groupId>
+                <artifactId>aspectjrt</artifactId>
+                <version>${aspectj.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>net.sf.oval</groupId>
+                <artifactId>oval</artifactId>
+                <version>${oval.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.codehaus.groovy</groupId>
+                <artifactId>groovy-all</artifactId>
+                <version>${groovy.version}</version>
+            </dependency>
+
+            <!-- Dependency for findbug statically code analyzing -->
+            <dependency>
+                <groupId>com.google.code.findbugs</groupId>
+                <artifactId>jsr305</artifactId>
+                <version>${findbugs.jsr305.version}</version>
+            </dependency>
+
+            <!-- Dependencies testing -->
+            <dependency>
+                <groupId>junit</groupId>
+                <artifactId>junit</artifactId>
+                <version>${junit.version}</version>
+                <scope>test</scope>
+            </dependency>
+
+        </dependencies>
+    </dependencyManagement>
+
     <build>
+        <pluginManagement>
+            <plugins>
+                <!--
+                Maven Java compiler plugin
+                -->
+                <plugin>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>3.1</version>
+                    <configuration>
+                        <source>${maven.compiler.source}</source>
+                        <target>${maven.compiler.target}</target>
+                    </configuration>
+                </plugin>
+
+                <!--
+                   Plugin for managing the license of project
+                -->
+                <plugin>
+                    <groupId>com.mycila.maven-license-plugin</groupId>
+                    <artifactId>maven-license-plugin</artifactId>
+                    <version>1.9.0</version>
+                    <configuration>
+                        <strictCheck>true</strictCheck>
+                        <header>license/header.txt</header>
+                        <properties>
+                            <organizationName>uniknow</organizationName>
+                            <inceptionYear>2014</inceptionYear>
+                        </properties>
+
+                        <excludes>
+                            <exclude>**/*.iml</exclude>
+                            <exclude>target/**</exclude>
+                            <exclude>.idea/**</exclude>
+                        </excludes>
+
+                    </configuration>
+                    <executions>
+                        <execution>
+                            <goals>
+                                <goal>format</goal>
+                            </goals>
+                            <phase>process-sources</phase>
+                        </execution>
+                    </executions>
+                    <dependencies>
+                        <dependency>
+                            <groupId>org.uniknow.agiledev</groupId>
+                            <artifactId>buildConfiguration</artifactId>
+                            <version>${buildConfiguration.version}</version>
+                        </dependency>
+                    </dependencies>
+                </plugin>
+
+                <!--
+                    Plugin for formatting java source files following specified
+                    code conventions. The formatter is based on the eclipse
+                    formatted and can use the exported xml formatting definitions
+                -->
+                <plugin>
+                    <groupId>com.googlecode.maven-java-formatter-plugin
+                    </groupId>
+                    <artifactId>maven-java-formatter-plugin</artifactId>
+                    <version>0.4</version>
+                    <executions>
+                        <execution>
+                            <goals>
+                                <goal>format</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                    <configuration>
+                        <configFile>formatter/uniknow.xml</configFile>
+                    </configuration>
+                    <dependencies>
+                        <dependency>
+                            <groupId>org.uniknow.agiledev</groupId>
+                            <artifactId>buildConfiguration</artifactId>
+                            <version>${buildConfiguration.version}</version>
+                        </dependency>
+                    </dependencies>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+
         <plugins>
             <plugin>
                 <artifactId>maven-site-plugin</artifactId>
@@ -93,7 +224,8 @@
                 <version>0.9</version>
                 <configuration>
                     <message>
-                        Creating site for ${project.artifactId}, ${project.version}
+                        Creating site for ${project.artifactId},
+                        ${project.version}
                     </message>
                     <path>${project.distributionManagement.site.url}</path>
                     <merge>true</merge>
