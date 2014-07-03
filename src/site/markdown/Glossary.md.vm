@@ -20,4 +20,4 @@
 
 ## U
 
-* **User story** - Traditionally expressing intended system behavior has been captured in software requirements specifications. In agile this traditional document is replaced by a series of stories which express the intent of the system. Stories are small, independent behaviors that can be implemented incrementally, each of which provides some value to the user. The recommended form of expressing a user story is the user voice form, and it appears as follows: As a <user role> I can <activity> so that <business value>
+* **User story** - Traditionally expressing intended system behavior has been captured in software requirements specifications. In agile this traditional document is replaced by a series of stories which express the intent of the system. Stories are small, independent behaviors that can be implemented incrementally, each of which provides some value to the user. The recommended form of expressing a user story is the user voice form, and it appears as follows: As a *user role* I can *activity* so that *business value*
