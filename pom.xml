@@ -57,6 +57,7 @@
         <module>common</module>
         <module>parent</module>
         <module>cucumber-reporting</module>
+        <module>cucumber-reporting-example</module>
     </modules>
 
     <dependencyManagement>
@@ -196,8 +197,18 @@
                 <version>3.3</version>
                 <dependencies>
                     <!--
-                    allows markdown syntax for site generation. To use it place
-                    files below src/site/markdown/[filename].md
+                    allows confluence syntax for site documentation. To use it
+                    place files below src/site/confluence/[filename].confluence
+                    -->
+                    <dependency>
+                        <groupId>org.apache.maven.doxia</groupId>
+                        <artifactId>doxia-module-confluence</artifactId>
+                        <version>${doxia.version}</version>
+                    </dependency>
+
+                    <!--
+                    allows markdown syntax for site documentation. To use it
+                    place files below src/site/markdown/[filename].md
                     -->
                     <dependency>
                         <groupId>org.apache.maven.doxia</groupId>
@@ -212,6 +223,42 @@
                     -->
                     <skipDeploy>true</skipDeploy>
                 </configuration>
+            </plugin>
+
+            <!--
+            Plugin to create PDF
+            -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-pdf-plugin</artifactId>
+                <version>1.2</version>
+                <executions>
+                    <execution>
+                        <id>pdf</id>
+                        <phase>site</phase>
+                        <goals>
+                            <goal>pdf</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>
+                                ${project.reporting.outputDirectory}
+                            </outputDirectory>
+                            <includeReports>false</includeReports>
+                        </configuration>
+                    </execution>
+                </executions>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.apache.maven.doxia</groupId>
+                        <artifactId>doxia-module-confluence</artifactId>
+                        <version>${doxia.version}</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>org.apache.maven.doxia</groupId>
+                        <artifactId>doxia-module-confluence</artifactId>
+                        <version>${doxia.version}</version>
+                    </dependency>
+                </dependencies>
             </plugin>
 
             <!--

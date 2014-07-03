@@ -1,0 +1,29 @@
+h1. Features
+
+h2. Favorites Repository
+
+h3. Empty Favorites Repository
+
+||Step||Description||Result|
+|Given |empty Favorites Repository|passed|
+|When |there is nothing added to the repository|passed|
+|Then |favorite book is null|failed|
+
+h3. Going Postal added to Favorites Repository
+
+||Step||Description||Result|
+|Given |empty Favorites Repository|passed|
+|When |Going Postal is added to Favorites Repository|passed|
+|Then |favorite book is Going Postal|passed|
+
+h2. Template feature
+
+A short, introductory  section that specifies, who is the driver or primary stakeholder of the story (the actor(s) who derive business benefit from the story), which effect the stakeholders wants the story to have, what business value the stakeholder will derive from this effect
+
+h3. Unimplemented story
+
+||Step||Description||Result|
+|Given |something|undefined|
+|When |certain event is occurring|undefined|
+|Then |something should have occurred|undefined|
+
