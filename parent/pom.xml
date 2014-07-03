@@ -12,6 +12,7 @@
     <groupId>org.uniknow.agiledev</groupId>
     <artifactId>parent</artifactId>
     <name>AgileDev parent POM</name>
+    <version>0.1.0-SNAPSHOT</version>
     <description>Parent POM projects based on AgileDev</description>
     <packaging>pom</packaging>
 

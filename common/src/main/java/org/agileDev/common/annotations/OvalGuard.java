@@ -61,6 +61,7 @@ public class OvalGuard extends GuardAspect2 {
         // RuntimeException
         getGuard().setExceptionTranslator(
             new ExceptionTranslatorJDKExceptionsImpl());
+
     }
 
 }

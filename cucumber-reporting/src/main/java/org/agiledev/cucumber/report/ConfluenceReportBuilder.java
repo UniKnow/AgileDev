@@ -54,7 +54,7 @@ import java.util.List;
  * Created with IntelliJ IDEA. User: mase Date: 6/3/14 Time: 12:09 PM To change
  * this template use File | Settings | File Templates.
  */
-@Guarded
+// @Guarded
 public class ConfluenceReportBuilder extends ConfluenceDocumentBuilder {
 
     private final Writer writer;

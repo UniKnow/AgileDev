@@ -7,6 +7,7 @@
         <groupId>org.uniknow.agiledev</groupId>
         <artifactId>parent</artifactId>
         <version>0.1.0-SNAPSHOT</version>
+        <relativePath>../parent/pom.xml</relativePath>
     </parent>
 
     <artifactId>cucumber-reporting</artifactId>
