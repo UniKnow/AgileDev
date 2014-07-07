@@ -54,27 +54,27 @@ import java.util.List;
  */
 public class ConfluenceReportBuilderTest {
 
-    // /**
-    // * Validates IllegalArgumentException is thrown in case passed builder is
-    // * null
-    // */
-    // @Test(expected = IllegalArgumentException.class)
-    // public void testConstructorBuilderNull() {
-    // new ConfluenceReportBuilder(null);
-    // }
-    //
-    // /**
-    // * Validates IllegalArgumentException is thrown in case specified header
-    // * level <1
-    // */
-    // @Test(expected = IllegalArgumentException.class)
-    // public void testBeginHeaderLevelLessThanOne() {
-    // StringWriter writer = new StringWriter();
-    //
-    // ConfluenceReportBuilder builder = new ConfluenceReportBuilder(writer);
-    // builder.beginDocument();
-    // builder.beginHeading(0, "TEST");
-    // }
+    /**
+     * Validates IllegalArgumentException is thrown in case passed builder is
+     * null
+     */
+    @Test(expected = IllegalArgumentException.class)
+    public void testConstructorBuilderNull() {
+        new ConfluenceReportBuilder(null);
+    }
+
+    /**
+     * Validates IllegalArgumentException is thrown in case specified header
+     * level <1
+     */
+    @Test(expected = IllegalArgumentException.class)
+    public void testBeginHeaderLevelLessThanOne() {
+        StringWriter writer = new StringWriter();
+
+        ConfluenceReportBuilder builder = new ConfluenceReportBuilder(writer);
+        builder.beginDocument();
+        builder.beginHeading(0, "TEST");
+    }
 
     /**
      * Validates Header is successfully appended to confluence document
