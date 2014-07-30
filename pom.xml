@@ -188,6 +188,72 @@
                         </dependency>
                     </dependencies>
                 </plugin>
+
+                <!-- Plugin to generate javadocs -->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-javadoc-plugin</artifactId>
+                    <version>2.9.1</version>
+                    <configuration>
+                        <!--
+                        A Doclet that allows the use of Markdown and
+                        PlantUML in JavaDoc comments.
+                        -->
+                        <doclet>ch.raffael.doclets.pegdown.PegdownDoclet
+                        </doclet>
+                        <docletArtifact>
+                            <groupId>ch.raffael.pegdown-doclet</groupId>
+                            <artifactId>pegdown-doclet</artifactId>
+                            <version>1.1</version>
+                        </docletArtifact>
+                        <useStandardDocletOptions>
+                            true
+                        </useStandardDocletOptions>
+                    </configuration>
+                </plugin>
+
+                <!-- Instrument classes for code coverage reporting -->
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>cobertura-maven-plugin</artifactId>
+                    <version>2.6</version>
+                    <configuration>
+                        <aggregate>false</aggregate>
+                        <attach>false</attach>
+                        <check>
+                        </check>
+                        <instrumentation>
+                            <ignores>
+                                <ignore>org.agileDev.*</ignore>
+                            </ignores>
+                            <excludes>
+                                <exlude>org/agileDev/**/*.class</exlude>
+                            </excludes>
+                        </instrumentation>
+                        <formats>
+                            <format>html</format>
+                            <format>xml</format>
+                        </formats>
+                    </configuration>
+                    <executions>
+                        <!--<execution>-->
+                            <!--<id>clean</id>-->
+                            <!--<phase>pre-site</phase>-->
+                            <!--<goals>-->
+                                <!--<goal>clean</goal>-->
+                            <!--</goals>-->
+                        <!--</execution>-->
+                        <execution>
+                            <id>instrument-code-coverage</id>
+                            <phase>site</phase>
+                            <goals>
+                                <!--<goal>instrument</goal>-->
+                                <goal>cobertura</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+
             </plugins>
         </pluginManagement>
 
@@ -222,6 +288,7 @@
                     the github site plugin
                     -->
                     <skipDeploy>true</skipDeploy>
+
                 </configuration>
             </plugin>
 
