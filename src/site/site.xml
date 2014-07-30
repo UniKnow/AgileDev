@@ -16,10 +16,16 @@
         <menu name="Guidelines">
             <item name="Developers Setup" href="developerSetup.html"/>
             <item name="Site Documentation" href="siteDocumentation.html"/>
+        </menu>
+
+        <menu name="Best Practices">
+            <item name="Branching Models" href="branchingModels.html"/>
+        </menu>
+
+        <menu name="Documentation">
             <item name="Glossary" href="Glossary.html"/>
         </menu>
 
-        <menu ref="modules" />
-
+        <menu ref="modules"/>
     </body>
 </project>
