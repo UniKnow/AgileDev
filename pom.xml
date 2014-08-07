@@ -178,6 +178,7 @@
                         </execution>
                     </executions>
                     <configuration>
+                        <lineEnding>LF</lineEnding>
                         <configFile>formatter/uniknow.xml</configFile>
                     </configuration>
                     <dependencies>
