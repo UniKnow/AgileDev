@@ -50,25 +50,8 @@ public class GivenModel extends StepBasedModel {
     public GivenModel() {
     }
 
-    public TableModel table() {
-        for (Object step : steps)
-            if (step instanceof TableModel)
-                return (TableModel) step;
-
-        return null;
-    }
-
     protected final String getKeyWord() {
         return Keyword.keyword("Given");
     }
 
-    // public String text() {
-    // StringBuilder text = new StringBuilder();
-    // for (Object step : steps) {
-    // text.append(Keyword.keyword("Given"));
-    // text.append(" ");
-    // text.append(step.toString());
-    // }
-    // return text.toString().trim();
-    // }
 }

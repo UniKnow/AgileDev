@@ -147,8 +147,7 @@ public class WritingFreemarkerFileScenarios {
         String text = writer.textFor(story);
 
         Then("scenario should have image with name " + scenarioStatus);
-        String imageFile = "img src=\"resources" + File.separator
-            + scenarioStatus + ".png\"";
+        String imageFile = "img src=\"resources/" + scenarioStatus + ".png\"";
         assertTrue(text.lastIndexOf(imageFile) != text.indexOf(imageFile));
     }
 

@@ -43,20 +43,49 @@ import net.sf.oval.constraint.NotNull;
 import net.sf.oval.guard.Guarded;
 
 /**
- * Created by mase on 17-08-14.
+ * Entity which contains Narrative. A narrative is a short, introductory section
+ * that specifies:
+ * 
+ * <ul>
+ * <li>who (which business or project role) is the driver or primary stakeholder
+ * of the story (the actor who derives business benefit from the story)</li>
+ * <li>which effect the stakeholder wants the story to have</li>
+ * <li>what business value the stakeholder will derive from this story</li>
+ * </ul>
+ * 
+ * @author mase
  */
 @Guarded
 public class NarrativeModel {
 
+    /**
+     * Contains primary stakeholder of the story
+     */
     @NotNull
     private final String as;
 
+    /**
+     * Contains description of effect the stakeholder wants the story to have
+     */
     @NotNull
     private final String iWant;
 
+    /**
+     * Contains the business value the stakeholder will derive from this story
+     */
     @NotNull
     private final String soThat;
 
+    /**
+     * Constructor {@code NarrativeModel}
+     * 
+     * @param as
+     *            primary stakeholder of the story
+     * @param iWant
+     *            effect the stakeholder wants the story to have
+     * @param soThat
+     *            business value the stakeholder will derive from this story
+     */
     NarrativeModel(@NotNull String as, @NotNull String iWant,
         @NotNull String soThat) {
         this.as = as;

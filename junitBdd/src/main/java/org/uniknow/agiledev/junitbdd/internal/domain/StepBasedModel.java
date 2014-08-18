@@ -39,12 +39,19 @@
  */
 package org.uniknow.agiledev.junitbdd.internal.domain;
 
+import net.sf.oval.constraint.NotNull;
+
 import java.util.*;
 
 @SuppressWarnings({ "rawtypes", "unchecked" })
 public abstract class StepBasedModel implements WithText {
 
-    protected List steps = new LinkedList();
+    /**
+     * Contains steps of which Story consist
+     */
+    @NotNull
+    private final List steps = new LinkedList();
+
     private String token;
 
     public StepBasedModel() {
@@ -67,6 +74,12 @@ public abstract class StepBasedModel implements WithText {
         return text.toString().trim();
     }
 
+    /**
+     * Returns list containing steps of which story consist.
+     * 
+     * @return list containing steps of which story consist.
+     */
+    @NotNull
     public List steps() {
         return steps;
     }
@@ -82,11 +95,11 @@ public abstract class StepBasedModel implements WithText {
         return text();
     }
 
-    @Override
-    public StepBasedModel withToken(String token) {
-        this.token = token;
-        return this;
-    }
+    // @Override
+    // public StepBasedModel withToken(String token) {
+    // this.token = token;
+    // return this;
+    // }
 
     public String token() {
         return token;
