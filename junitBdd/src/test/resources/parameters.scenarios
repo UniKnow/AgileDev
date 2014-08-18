@@ -1,0 +1,9 @@
+ Story: Library
+     Scenario: lend an existing book from the library
+         Given a kid and a book in the library:
+         	|title|author|min age|accept|
+         	|Children from Bullerbyn|Astrid Lidgren|0|true|
+         	|Paddington bear|Michael Bond|0|true|
+         	|Kamasutra|Vatsyayana Mallanaga|18|false|
+         When the kid tries to borrow the book
+         Then it should be given if its appropriate

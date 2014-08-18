@@ -1,0 +1,14 @@
+ Historie: Biblioteket
+ 	Som en bilbioteke bruger
+ 	For at låne en bog
+ 	Jeg vil få bogen fra en bibliotekar
+ 	Så jeg kan tage den med mig hjæmme
+ 
+     Scenarie: låne en eksiterende bog fra bilbioteket	[PENDING]
+         Givet 'Børn fra Bullerbyn' bogen i biblioteket
+         	Og en smukke bibliotekar.
+         Når bogen lånes
+         	Og bibliotekaren is smiler til dig
+         Så bilbioteket har bogen ikke mere
+         	Og bibliotekaren vil gå ud med dig
+         	Men du er gift

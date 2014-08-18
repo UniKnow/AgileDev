@@ -6,7 +6,7 @@
     <name>AgileDev</name>
     <groupId>org.uniknow</groupId>
     <artifactId>agiledev</artifactId>
-    <version>0.1.0-SNAPSHOT</version>
+    <version>0.1.1-SNAPSHOT</version>
     <packaging>pom</packaging>
     <description>Tooling for Agile development</description>
 
@@ -24,7 +24,7 @@
         <github.global.server>github</github.global.server>
 
         <!-- Version information dependencies -->
-        <agiledev.version>0.1.0-SNAPSHOT</agiledev.version>
+        <agiledev.version>0.1.1-SNAPSHOT</agiledev.version>
         <aspectj.version>1.7.2</aspectj.version>
         <buildConfiguration.version>${agiledev.version}</buildConfiguration.version>
         <cucumber.version>1.1.5</cucumber.version>
@@ -56,6 +56,7 @@
         <module>buildConfiguration</module>
         <module>common</module>
         <module>parent</module>
+        <module>junitBdd</module>
         <module>cucumber-reporting</module>
         <module>cucumber-reporting-example</module>
     </modules>
