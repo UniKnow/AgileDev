@@ -50,13 +50,13 @@ public class AndModel extends StepBasedModel {
         super(text);
     }
 
-    public TableModel table() {
-        for (Object step : steps)
-            if (step instanceof TableModel)
-                return (TableModel) step;
-
-        return null;
-    }
+    // public TableModel table() {
+    // for (Object step : steps)
+    // if (step instanceof TableModel)
+    // return (TableModel) step;
+    //
+    // return null;
+    // }
 
     protected final String getKeyWord() {
         return Keyword.keyword("And");

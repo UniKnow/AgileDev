@@ -56,7 +56,21 @@ import org.uniknow.agiledev.junitbdd.internal.domain.ScenarioModel.ScenarioStatu
 import org.uniknow.agiledev.junitbdd.internal.domain.*;
 
 public class ScenarioListenerTest {
+
     private ScenarioListener listener = new ScenarioListener();
+
+    /**
+     * Verifies IllegalArgumentException is thrown when passed test results is
+     * null
+     */
+    @Scenario
+    @Test(expected = IllegalArgumentException.class)
+    public void testRunFinishedResultNull() throws Exception {
+        Given("instance of ScenarioListener");
+        When("test finishes with test results null");
+        Then("IllegalArgumentException is thrown");
+        listener.testRunFinished(null);
+    }
 
     @Test
     public void shouldCreateStoryUponTestRunStart() throws Exception {

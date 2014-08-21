@@ -19,7 +19,7 @@ A short, introductory section that specifies
 
 * who (which business or project role) is the driver or primary stakeholder of the story (the actor who derives business benefit from the story)
 * which effect the stakeholder wants the story to have
-* what business value the stakeholder will derive from this effect
+* what business value the stakeholder will derive from this story
 
 Acceptance criteria or scenarios
 

@@ -45,6 +45,8 @@ import java.util.*;
 
 import junitparams.*;
 
+import net.sf.oval.constraint.NotNull;
+import net.sf.oval.guard.Guarded;
 import org.junit.runner.*;
 import org.junit.runner.notification.*;
 
@@ -55,6 +57,7 @@ import org.uniknow.agiledev.junitbdd.internal.domain.*;
 import org.uniknow.agiledev.junitbdd.internal.domain.ScenarioModel.ScenarioStatus;
 import org.uniknow.agiledev.junitbdd.internal.writers.*;
 
+@Guarded
 public class ScenarioListener extends RunListener {
 
     private StoryModel story;
@@ -82,7 +85,7 @@ public class ScenarioListener extends RunListener {
     }
 
     @Override
-    public void testRunFinished(Result result) throws Exception {
+    public void testRunFinished(@NotNull Result result) throws Exception {
         setScenariosStatuses(result);
         updateStoriesList();
         generateReport();
@@ -105,7 +108,7 @@ public class ScenarioListener extends RunListener {
         }
     }
 
-    private void setScenariosStatuses(Result result) {
+    private void setScenariosStatuses(@NotNull Result result) {
         setAllFailedScenariosToStatusFailed(result);
         setAllPassedAndPendingScenariosToProperStatus();
     }
@@ -117,7 +120,7 @@ public class ScenarioListener extends RunListener {
         }
     }
 
-    private void setAllFailedScenariosToStatusFailed(Result result) {
+    private void setAllFailedScenariosToStatusFailed(@NotNull Result result) {
         for (Failure failure : result.getFailures())
             story.scenarioDescribedBy(failure.getDescription()).withStatus(
                 ScenarioStatus.FAILED.withDetails(failure.getException()));

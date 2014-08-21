@@ -44,6 +44,7 @@ import static org.uniknow.agiledev.junitbdd.internal.BDDStringUtils.*;
 import java.io.*;
 import java.util.*;
 
+import net.sf.oval.constraint.NotNull;
 import org.junit.runner.*;
 
 import org.uniknow.agiledev.junitbdd.Narrative;
@@ -52,24 +53,29 @@ import org.uniknow.agiledev.junitbdd.internal.domain.ScenarioModel.ScenarioStatu
 import org.uniknow.agiledev.junitbdd.internal.writers.Keyword;
 
 public class StoryModel implements WithText {
-    // private String SO_THAT = "So that";
-    // private String I_WANT = "I want";
-    // private String IN_ORDER = "In order";
-    // private String AS = "As";
-    // private List<String> phrases = Arrays.asList(AS, IN_ORDER, I_WANT,
-    // SO_THAT);
 
+    /**
+     * Contains name of story
+     */
     private String name;
+
+    /**
+     * Optional short, introductory section of Story
+     */
     private NarrativeModel narrative;
 
     /**
      * Contains what type of report should be generated, default is none
      */
     private String report = "none";
-    private List<ScenarioModel> scenarios = new ArrayList<ScenarioModel>();
-    private String packageName = "";
 
-    // private Map<String, String> steps = new HashMap<String, String>();
+    /**
+     * Contains scenarios which are covered by this story
+     */
+    @NotNull
+    private final List<ScenarioModel> scenarios = new ArrayList();
+
+    private String packageName = "";
 
     public StoryModel() {
     }
@@ -92,6 +98,12 @@ public class StoryModel implements WithText {
         return this;
     }
 
+    /**
+     * Returns list of scenarios which are covered by this story
+     * 
+     * @return list of scenarios which are covered by this story
+     */
+    @NotNull
     public List<ScenarioModel> scenarios() {
         return scenarios;
     }
@@ -199,26 +211,9 @@ public class StoryModel implements WithText {
         return this;
     }
 
-    @Override
-    public StoryModel withToken(String token) {
-        return this;
-    }
-
-    // public void withNarrativeStep(StepBasedModel step) {
-    // steps.put(step.token(), step.text());
-    // }
-
     public void withNarrative(Narrative narrative) {
         this.narrative = new NarrativeModel(narrative.as(), narrative.iWant(),
             narrative.soThat());
-        // String firstStep = findStepMatchingStartOf(narrative);
-        // int nextStepIndex = findNextStepIndex(narrative, firstStep);
-        //
-        // setNarrativeStep(narrative, firstStep, firstStep.length(),
-        // nextStepIndex);
-        //
-        // if (nextStepIndex > -1)
-        // withNarrative(narrative.substring(nextStepIndex));
     }
 
     public String as() {
