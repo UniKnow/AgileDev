@@ -217,9 +217,6 @@ public class BDDRunner extends BlockJUnit4ClassRunner {
         for (FrameworkMethod child : resultMethods)
             describeMethod(child);
 
-        System.out
-            .println("MASE: Methods whcih will be executed by TumblerRunner are:"
-                + resultMethods);
         return resultMethods;
     }
 

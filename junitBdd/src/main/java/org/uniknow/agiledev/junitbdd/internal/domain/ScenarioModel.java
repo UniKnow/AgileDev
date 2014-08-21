@@ -137,7 +137,6 @@ public class ScenarioModel {
     }
 
     public ScenarioModel withAnd(String and) {
-        System.out.println("Adding AND part scenario");
         steps.add(new AndModel(and));
         return this;
     }
