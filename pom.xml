@@ -59,7 +59,7 @@
         <module>junitBdd</module>
         <module>cucumber-reporting</module>
         <module>cucumber-reporting-example</module>
-        <module>tutorials</module>
+        <!--<module>tutorials</module>-->
     </modules>
 
     <dependencyManagement>

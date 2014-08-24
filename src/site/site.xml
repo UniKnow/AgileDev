@@ -24,7 +24,7 @@
 
         <menu name="Documentation">
             <item name="Glossary" href="Glossary.html"/>
-            <item name="Abbreviations" href="abbreviations.html"
+            <item name="Abbreviations" href="abbreviations.html"/>
         </menu>
 
         <menu ref="modules"/>
