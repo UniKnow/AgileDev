@@ -39,6 +39,8 @@
  */
 package org.uniknow.agiledev.junitbdd;
 
+import org.junit.Test;
+
 import java.lang.annotation.*;
 
 /**
@@ -50,6 +52,17 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.METHOD)
 public @interface Scenario {
+
+    /**
+     * Default empty exception
+     */
+    static class None extends Throwable {
+        private static final long serialVersionUID = 1L;
+
+        private None() {
+        }
+    }
+
     /**
      * Scenario name. This is optional - if not used, the method name
      * (de-camelised) will be used.
@@ -64,4 +77,11 @@ public @interface Scenario {
      * scenario is fully defined.
      */
     boolean pending() default false;
+
+    /**
+     * Optionally specify {@code expected}, a {@code Throwable}, to cause a test
+     * method to succeed iff an exception of the specified class is thrown by
+     * the method.
+     */
+    Class<? extends Throwable> expected() default None.class;
 }

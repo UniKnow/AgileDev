@@ -116,15 +116,20 @@ public class BDDRunner extends BlockJUnit4ClassRunner {
         Statement methodBlock = methodBlock(method);
 
         Description description = describeMethod(method);
+
+        // Determine expectedException exception
+        Class<? extends Throwable> expectedException = expectedException(method);
         if (isPending(method))
-            runScenario(true, description, notifier, methodBlock);
+            runScenario(true, description, notifier, methodBlock,
+                expectedException);
         else {
             TestMethod testMethod = parameterisedRunner.testMethodFor(method);
             if (parameterisedRunner.shouldRun(testMethod))
                 parameterisedRunner.runParameterisedTest(testMethod,
                     methodBlock, notifier);
             else
-                runScenario(false, description, notifier, methodBlock);
+                runScenario(false, description, notifier, methodBlock,
+                    expectedException);
         }
     }
 
@@ -140,8 +145,30 @@ public class BDDRunner extends BlockJUnit4ClassRunner {
         return method.getAnnotation(Scenario.class).pending();
     }
 
+    /**
+     * Returns expected exception while executing scenario. If no exception is
+     * expected returned class will be {@code Scenario.None}
+     */
+    private Class<? extends Throwable> expectedException(FrameworkMethod method) {
+        return method.getAnnotation(Scenario.class).expected();
+    }
+
+    /**
+     * Execute scenario
+     * 
+     * @param pending
+     *            boolean indicating whether scenario is pending or not
+     * @param description
+     *            description of scenario which is executed
+     * @param notifier
+     * @param methodInvoker
+     * @param expectedException
+     *            exception that is expected when executing scenario. If no
+     *            exception is expected the value is Scenario.None
+     */
     private void runScenario(boolean pending, Description description,
-        RunNotifier notifier, Statement methodInvoker) {
+        RunNotifier notifier, Statement methodInvoker,
+        Class<? extends Throwable> expectedException) {
         EachTestNotifier eachNotifier = new EachTestNotifier(notifier,
             description);
         try {
@@ -152,7 +179,7 @@ public class BDDRunner extends BlockJUnit4ClassRunner {
 
             methodInvoker.evaluate();
         } catch (Throwable e) {
-            if (!pending)
+            if (!pending && !expectedException.isInstance(e))
                 notifier.fireTestFailure(new Failure(description, e));
         } finally {
             eachNotifier.fireTestFinished();
