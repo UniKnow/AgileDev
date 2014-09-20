@@ -168,6 +168,11 @@ public class ScenarioListenerTest {
                 public Class<? extends Annotation> annotationType() {
                     return Scenario.class;
                 }
+
+                @Override
+                public Class<? extends Throwable> expected() {
+                    return Scenario.None.class;
+                }
             });
         ScenarioManager.cleanScenario();
         listener.testRunStarted(description);

@@ -25,7 +25,7 @@
 
         <!-- Version information dependencies -->
         <agiledev.version>0.1.2-SNAPSHOT</agiledev.version>
-        <aspectj.version>1.8.2</aspectj.version>
+        <aspectj.version>1.7.2</aspectj.version>
         <buildConfiguration.version>${agiledev.version}</buildConfiguration.version>
         <cucumber.version>1.1.5</cucumber.version>
         <doxia.version>1.5</doxia.version>

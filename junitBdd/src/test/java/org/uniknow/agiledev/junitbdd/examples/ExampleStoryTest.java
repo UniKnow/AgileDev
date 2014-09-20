@@ -81,4 +81,16 @@ public class ExampleStoryTest {
         Then("Expected");
     }
 
+    /**
+     * Example Scenario that throws expected exception
+     */
+    @Scenario(value = "Example of scenario that throws expected exception",
+        expected = Exception.class)
+    public void testScenarioThrowsException() throws Exception {
+        Given("some pre-conditionals");
+        When("Executing certain behavior");
+        Then("Exception is expected");
+        throw new Exception();
+    }
+
 }
