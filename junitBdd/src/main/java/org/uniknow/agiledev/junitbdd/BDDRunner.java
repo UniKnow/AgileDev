@@ -179,7 +179,7 @@ public class BDDRunner extends BlockJUnit4ClassRunner {
 
             methodInvoker.evaluate();
 
-            if (expectedException !=Scenario.None.class) {
+            if (expectedException != Scenario.None.class) {
                 notifier.fireTestFailure(new Failure(description,
                     new Exception("Expected exception of type "
                         + expectedException)));
