@@ -16,6 +16,8 @@
     <packaging>pom</packaging>
 
     <modules>
+        <!--<module>dbc</module>-->
+        <module>ddd</module>
         <module>rest</module>
     </modules>
     </project>
