@@ -28,3 +28,7 @@
 ## M
 
 * **Modifier** - See [Command](#Command).
+
+## U
+
+* **Ubiquitous Language** - A language structured around the domain model and used by all team members to connect all activities of the team with the software.

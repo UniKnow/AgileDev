@@ -27,6 +27,7 @@
         <agiledev.version>0.1.3-SNAPSHOT</agiledev.version>
         <aspectj.version>1.8.2</aspectj.version>
         <buildConfiguration.version>${agiledev.version}</buildConfiguration.version>
+        <cglib.version>3.1</cglib.version>
         <cucumber.version>1.1.5</cucumber.version>
         <doxia.version>1.5</doxia.version>
         <findbugs.jsr305.version>2.0.2</findbugs.jsr305.version>
@@ -34,6 +35,7 @@
         <junit.version>4.11</junit.version>
         <mylyn.version>1.7.4.v20130429</mylyn.version>
         <oval.version>1.84</oval.version>
+        <spring.framework.version>3.0.7.RELEASE</spring.framework.version>
     </properties>
 
     <distributionManagement>
@@ -57,6 +59,7 @@
         <module>common</module>
         <module>parent</module>
         <module>junitBdd</module>
+        <module>dbc4spring</module>
         <module>cucumber-reporting</module>
         <module>cucumber-reporting-example</module>
         <module>tutorials</module>
@@ -80,6 +83,12 @@
                 <version>${aspectj.version}</version>
             </dependency>
             <dependency>
+                <groupId>org.aspectj</groupId>
+                <artifactId>aspectjweaver</artifactId>
+                <version>${aspectj.version}</version>
+                <scope>runtime</scope>
+            </dependency>
+            <dependency>
                 <groupId>net.sf.oval</groupId>
                 <artifactId>oval</artifactId>
                 <version>${oval.version}</version>
@@ -89,6 +98,40 @@
                 <artifactId>groovy-all</artifactId>
                 <version>${groovy.version}</version>
             </dependency>
+            <dependency>
+                <groupId>cglib</groupId>
+                <artifactId>cglib</artifactId>
+                <version>${cglib.version}</version>
+            </dependency>
+
+
+            <!-- Dependencies spring -->
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-beans</artifactId>
+                <version>${spring.framework.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-aop</artifactId>
+                <version>${spring.framework.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-test</artifactId>
+                <version>${spring.framework.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-core</artifactId>
+                <version>${spring.framework.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-context</artifactId>
+                <version>${spring.framework.version}</version>
+            </dependency>
+
 
             <!-- Dependency for findbug statically code analyzing -->
             <dependency>

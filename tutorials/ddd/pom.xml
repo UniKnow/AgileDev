@@ -3,32 +3,69 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <!--
     <parent>
         <groupId>org.uniknow.agiledev</groupId>
         <artifactId>parent</artifactId>
         <version>0.1.3-SNAPSHOT</version>
         <relativePath>../../parent/pom.xml</relativePath>
     </parent>
-    -->
 
-    <groupId>org.uniknow.agiledev.tutorial</groupId>
+    <groupId>org.uniknow.agiledev.tutorials</groupId>
     <artifactId>ddd</artifactId>
-    <version>0.1.3-SNAPSHOT</version>
     <name>Tutorial Domain Driven Design</name>
 
     <description>
-        The following tutorial describes best practices for applying Domain Driven Design.
+        The following tutorial describes best practices for applying Domain
+        Driven Design.
     </description>
 
-    <properties>
-    </properties>
+    <!--<properties>-->
+        <!--<spring.framework.version>3.0.3.RELEASE</spring.framework.version>-->
+    <!--</properties>-->
 
     <dependencies>
+
+        <dependency>
+            <groupId>org.uniknow.agiledev</groupId>
+            <artifactId>dbc4spring</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <!--
+          Dependencies Test
+        -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
+            <scope>test</scope>
+        </dependency>
+
     </dependencies>
 
     <build>
         <plugins>
+
+            <!-- Disable aspect weaving because that breaks spring validation -->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>aspectj-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <phase>none</phase>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <version>2.10</version>
+            </plugin>
         </plugins>
     </build>
 </project>

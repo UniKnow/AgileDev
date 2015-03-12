@@ -10,7 +10,7 @@
         <relativePath>../../parent/pom.xml</relativePath>
     </parent>
 
-    <groupId>org.uniknow.agiledev.tutorial</groupId>
+    <groupId>org.uniknow.agiledev.tutorials</groupId>
     <artifactId>rest</artifactId>
     <name>Tutorial Rest</name>
     <description>Tutorial explaining how to quickly setup Rest services
