@@ -58,9 +58,9 @@ import javax.inject.Named;
 public class TestCargo {
 
     @Inject
-    private ObjectFactory<Cargo> factory;
-
-    // found duplicate ??? private CargoFactory factory;
+    // private ObjectFactory<Cargo> factory;
+    // found duplicate ???
+    private Factory<Cargo> factory;
 
     /**
      * Verifies {@code MethodConstraintViolationException} is thrown when
@@ -69,7 +69,7 @@ public class TestCargo {
     @Test(expected = MethodConstraintViolationException.class)
     public void testCargoSameIdentityNull() {
         // with object factory:
-        Cargo cargo = factory.getObject();
+        Cargo cargo = factory.createInstance();
         // Cargo cargo = factory.createInstance();
         cargo.sameIdentity(null);
     }

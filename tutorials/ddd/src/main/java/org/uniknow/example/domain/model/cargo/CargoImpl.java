@@ -39,31 +39,28 @@
  */
 package org.uniknow.example.domain.model.cargo;
 
-import org.springframework.beans.BeansException;
-import org.springframework.beans.factory.ObjectFactory;
-import org.springframework.beans.factory.config.AbstractFactoryBean;
-import org.springframework.context.ApplicationContext;
 import org.uniknow.agiledev.dbc4spring.AutoValidating;
-import org.uniknow.agiledev.ddd.domain.model.common.Factory;
 
-import javax.inject.Inject;
 import javax.inject.Named;
+import javax.validation.constraints.NotNull;
 
 /**
- * Created by mase on 3/12/2015.
+ * Created by mase on 14-03-15.
  */
 @Named
 @AutoValidating
-public class CargoFactory implements Factory<Cargo> {
+public class CargoImpl implements Cargo {
 
     /**
-     * Factory by which Spring managed bean can be created
+     * Compares {@code Entities} by their identity, not by attributes.
+     * 
+     * @param other
+     *            The other {@code Entity}. .
+     * @return true if the identities are the same, regardless of other
+     *         attributes.
      */
-    @Inject
-    private ObjectFactory<Cargo> factory;
-
     @Override
-    public Cargo createInstance() {
-        return factory.getObject();
+    public boolean sameIdentity(@NotNull Cargo other) {
+        return false;
     }
 }
