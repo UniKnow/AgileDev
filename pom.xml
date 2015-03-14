@@ -32,6 +32,7 @@
         <doxia.version>1.5</doxia.version>
         <findbugs.jsr305.version>2.0.2</findbugs.jsr305.version>
         <groovy.version>2.1.6</groovy.version>
+        <hibernate.version>4.2.0.Final</hibernate.version>
         <junit.version>4.11</junit.version>
         <mylyn.version>1.7.4.v20130429</mylyn.version>
         <oval.version>1.84</oval.version>
@@ -132,6 +133,13 @@
                 <version>${spring.framework.version}</version>
             </dependency>
 
+
+            <!-- Dependency hibernate -->
+            <dependency>
+                <groupId>org.hibernate</groupId>
+                <artifactId>hibernate-validator</artifactId>
+                <version>${hibernate.version}</version>
+            </dependency>
 
             <!-- Dependency for findbug statically code analyzing -->
             <dependency>

@@ -54,5 +54,5 @@ public interface Factory<T> {
 
     @NotNull
     @Valid
-    T create();
+    T createInstance();
 }

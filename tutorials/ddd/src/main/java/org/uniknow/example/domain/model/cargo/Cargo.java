@@ -39,25 +39,28 @@
  */
 package org.uniknow.example.domain.model.cargo;
 
+import org.springframework.stereotype.Component;
 import org.uniknow.agiledev.dbc4spring.AutoValidating;
 import org.uniknow.agiledev.ddd.domain.model.common.Entity;
+
+import javax.annotation.Resource;
+import javax.inject.Named;
 
 /**
  * Created by mase on 3/12/2015.
  */
-@AutoValidating
-public class Cargo implements Entity<Cargo> {
+public interface Cargo extends Entity<Cargo> {
 
-    /**
-     * Compares {@code Cargo} entities by their identity, not by attributes.
-     * 
-     * @param other
-     *            The other {@code Cargo}.
-     * @return true if the identities are the same, regardless of other
-     *         attributes.
-     */
-    @Override
-    public boolean sameIdentity(Cargo other) {
-        return false;
-    }
+    // /**
+    // * Compares {@code Cargo} entities by their identity, not by attributes.
+    // *
+    // * @param other
+    // * The other {@code Cargo}.
+    // * @return true if the identities are the same, regardless of other
+    // * attributes.
+    // */
+    // @Override
+    // public boolean sameIdentity(Cargo other) {
+    // return false;
+    // }
 }

@@ -42,11 +42,13 @@ package org.uniknow.example.domain.model.cargo;
 import org.hibernate.validator.method.MethodConstraintViolationException;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.beans.factory.ObjectFactory;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.uniknow.agiledev.ddd.domain.model.common.Factory;
 
 import javax.inject.Inject;
+import javax.inject.Named;
 
 /**
  * Unit test {@code Cargo}.
@@ -56,7 +58,9 @@ import javax.inject.Inject;
 public class TestCargo {
 
     @Inject
-    private Factory<Cargo> factory;
+    private ObjectFactory<Cargo> factory;
+
+    // found duplicate ??? private CargoFactory factory;
 
     /**
      * Verifies {@code MethodConstraintViolationException} is thrown when
@@ -64,7 +68,9 @@ public class TestCargo {
      */
     @Test(expected = MethodConstraintViolationException.class)
     public void testCargoSameIdentityNull() {
-        Cargo cargo = factory.create();
+        // with object factory:
+        Cargo cargo = factory.getObject();
+        // Cargo cargo = factory.createInstance();
         cargo.sameIdentity(null);
     }
 

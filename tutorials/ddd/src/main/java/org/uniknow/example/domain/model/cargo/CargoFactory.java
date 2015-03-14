@@ -39,17 +39,34 @@
  */
 package org.uniknow.example.domain.model.cargo;
 
+import org.springframework.beans.BeansException;
+import org.springframework.beans.factory.ObjectFactory;
+import org.springframework.beans.factory.config.AbstractFactoryBean;
+import org.springframework.context.ApplicationContext;
 import org.uniknow.agiledev.dbc4spring.AutoValidating;
 import org.uniknow.agiledev.ddd.domain.model.common.Factory;
+
+import javax.inject.Inject;
+import javax.inject.Named;
 
 /**
  * Created by mase on 3/12/2015.
  */
+// @Named
 @AutoValidating
-public class CargoFactory implements Factory<Cargo> {
+public class CargoFactory extends AbstractFactoryBean<Cargo> implements
+    Factory<Cargo> {
+
+    @Inject
+    private ApplicationContext context;
 
     @Override
-    public Cargo create() {
-        return new Cargo();
+    public Class<?> getObjectType() {
+        return Cargo.class;
+    }
+
+    @Override
+    public Cargo createInstance() {
+        return context.getBean(Cargo.class);
     }
 }

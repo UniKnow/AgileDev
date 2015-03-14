@@ -61,7 +61,21 @@
         <menu name="Core">
             <item name="Introduction DDD" href="core/introduction_ddd.html" />
             <item name="Building blocks DDD" href="core/building_blocks_ddd.html" collapse="true">
+                <item name="Aggregates" href="core/aggregates.html" />
                 <item name="Entities" href="core/entities.html" />
+                <item name="Factories" href="core/factories.html" />
+                <item name="Layered Architecture" href="core/layered_architecture.html" />
+                <item name="Modules" href="core/modules.html" />
+                <item name="Repositories" href="core/repositories.html" />
+                <item name="Services" href="core/services.html" />
+                <item name="Value Objects" href="core/value_objects.html" />
+            </item>
+            <item name="Best practices" href="core/best_practices.html" collapse="true">
+                <!--<item name="Making behavior obvious" collapse="false">-->
+                    <item name="Assertions" href="core/assertions.html" />
+                    <item name="Intention revealing interfaces" href="core/intention_revealing_interfaces.html"/>
+                    <item name="Side effect free functions" href="core/side_effect_free_functions.html" />
+                <!--</item>-->
             </item>
             <item name="Glossary" href="core/glossary.html" />
         </menu>
