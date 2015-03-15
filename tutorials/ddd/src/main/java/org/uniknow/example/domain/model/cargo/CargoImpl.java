@@ -39,6 +39,7 @@
  */
 package org.uniknow.example.domain.model.cargo;
 
+import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.context.annotation.Scope;
 import org.uniknow.agiledev.dbc4spring.AutoValidating;
 
@@ -50,7 +51,7 @@ import javax.validation.constraints.NotNull;
  */
 @Named
 @AutoValidating
-@Scope("prototype")
+@Scope(BeanDefinition.SCOPE_PROTOTYPE)
 public class CargoImpl implements Cargo {
 
     /**
