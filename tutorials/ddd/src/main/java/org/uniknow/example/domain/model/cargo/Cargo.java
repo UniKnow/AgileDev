@@ -39,6 +39,7 @@
  */
 package org.uniknow.example.domain.model.cargo;
 
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 import org.uniknow.agiledev.dbc4spring.AutoValidating;
 import org.uniknow.agiledev.ddd.domain.model.common.Entity;

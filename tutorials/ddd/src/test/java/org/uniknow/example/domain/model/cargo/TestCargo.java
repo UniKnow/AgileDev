@@ -50,6 +50,8 @@ import org.uniknow.agiledev.ddd.domain.model.common.Factory;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import static org.junit.Assert.*;
+
 /**
  * Unit test {@code Cargo}.
  */
@@ -58,8 +60,6 @@ import javax.inject.Named;
 public class TestCargo {
 
     @Inject
-    // private ObjectFactory<Cargo> factory;
-    // found duplicate ???
     private Factory<Cargo> factory;
 
     /**
@@ -72,6 +72,18 @@ public class TestCargo {
         Cargo cargo = factory.createInstance();
         // Cargo cargo = factory.createInstance();
         cargo.sameIdentity(null);
+    }
+
+    /**
+     * Verifies created instances are unique.
+     */
+    @Test
+    public void testCargoFactoryUniqueInstances() {
+        // with object factory:
+        Cargo firstInstance = factory.createInstance();
+        Cargo secondInstance = factory.createInstance();
+
+        assertNotEquals(firstInstance, secondInstance);
     }
 
 }
