@@ -37,22 +37,51 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
-package org.uniknow.agiledev.ddd.domain.model.common;
+package org.uniknow.example.domain.model.cargo;
 
+import net.sf.oval.constraint.NotNull;
+import org.springframework.beans.BeansException;
+import org.springframework.beans.factory.ObjectFactory;
+import org.springframework.beans.factory.config.BeanDefinition;
+import org.springframework.context.annotation.Scope;
 import org.uniknow.agiledev.dbc4spring.AutoValidating;
 
-import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
+import javax.inject.Inject;
+import javax.inject.Named;
 
 /**
- * Generic interface for Factory of entities, aggregates or
- * 
- * @param <T>
- *            Type of class that will be created by this factory.
+ * Created by mase on 15-03-15.
  */
-public interface Factory<T> {
+// @AutoValidating
+// causes IllegalArgumentException???
+@Named
+@Scope(BeanDefinition.SCOPE_PROTOTYPE)
+public class CustomerFactory implements ObjectFactory<Customer> {
 
-    @NotNull
-    @Valid
-    T createInstance();
+    private String name;
+
+    @Inject
+    private ObjectFactory<Customer> factory;
+
+    private CustomerFactory() {
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    /**
+     * Return an instance (possibly shared or independent) of the object managed
+     * by this factory.
+     * 
+     * @return an instance of the bean (should never be <code>null</code>)
+     * @throws org.springframework.beans.BeansException
+     *             in case of creation errors
+     */
+    @Override
+    public Customer getObject() {
+        Customer customer = factory.getObject();
+        customer.setName(name);
+        return customer;
+    }
 }

@@ -49,19 +49,10 @@
             http://www.springframework.org/schema/context
             http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 
-
-
-
     <!-- Import Hibernate Validation Spring configuration file -->
     <import resource="classpath:validation-spring-config.xml" />
 
     <context:annotation-config/>
     <context:component-scan base-package="org.uniknow.example"/>
-
-    <!-- Factory by which Cargo instances can be created -->
-    <!--<bean id="cargoFactory" class="org.uniknow.example.domain.model.cargo.CargoFactory"/>-->
-
-    <!-- Entity bean Cargo -->
-    <!--<bean id="cargo" class="org.uniknow.example.domain.model.cargo.Cargo"/>-->
 
 </beans>

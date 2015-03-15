@@ -39,52 +39,22 @@
  */
 package org.uniknow.example.domain.model.cargo;
 
-import org.hibernate.validator.method.MethodConstraintViolationException;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.beans.factory.ObjectFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.NotEmpty;
 
-import javax.inject.Inject;
-import javax.inject.Named;
+import org.uniknow.agiledev.dbc4spring.AutoValidating;
 
-import static org.junit.Assert.*;
+import javax.validation.constraints.NotNull;
 
 /**
- * Unit test {@code Cargo}.
+ * Created by mase on 15-03-15.
  */
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = "/ddd-context.xml")
-public class TestCargo {
+public interface Customer {
 
-    @Inject
-    private ObjectFactory<Cargo> factory;
+    @NotNull
+    @NotEmpty
+    @NotBlank
+    String getName();
 
-    /**
-     * Verifies {@code MethodConstraintViolationException} is thrown when
-     * attempting to compare entity identity to null.
-     */
-    @Test(expected = MethodConstraintViolationException.class)
-    public void testCargoSameIdentityNull() {
-        // with object factory:
-        Cargo cargo = factory.getObject();
-        // Cargo cargo = factory.createInstance();
-        cargo.sameIdentity(null);
-    }
-
-    /**
-     * Verifies created instances are unique.
-     */
-    @Test
-    public void testCargoFactoryUniqueInstances() {
-        // with object factory:
-        Cargo firstInstance = factory.getObject();
-        Cargo secondInstance = factory.getObject();
-
-        assertNotEquals(firstInstance, secondInstance);
-    }
-
+    void setName(@NotNull @NotEmpty @NotBlank String name);
 }

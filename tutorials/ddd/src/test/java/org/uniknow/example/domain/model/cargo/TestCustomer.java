@@ -39,31 +39,59 @@
  */
 package org.uniknow.example.domain.model.cargo;
 
-import org.springframework.beans.BeansException;
+import org.hibernate.validator.method.MethodConstraintViolationException;
+import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.springframework.beans.factory.ObjectFactory;
-import org.springframework.beans.factory.config.AbstractFactoryBean;
-import org.springframework.context.ApplicationContext;
-import org.uniknow.agiledev.dbc4spring.AutoValidating;
-import org.uniknow.agiledev.ddd.domain.model.common.Factory;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import javax.inject.Inject;
-import javax.inject.Named;
+
+import static org.junit.Assert.*;
 
 /**
- * Created by mase on 3/12/2015.
+ * Created by mase on 15-03-15.
  */
-@Named
-@AutoValidating
-public class CargoFactory implements Factory<Cargo> {
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations = "/ddd-context.xml")
+public class TestCustomer {
+
+    @Inject
+    private CustomerFactory factory;
+
+    @Test
+    public void testInstantiationCustomer() {
+        // with object factory:
+        final String customerName = "John@doe.com";
+
+        factory.setName(customerName);
+        Customer customer = factory.getObject();
+
+        assertNotNull(customer);
+        assertNotNull(customer.getName());
+        assertEquals(customerName, customer.getName());
+    }
 
     /**
-     * Factory by which Spring managed bean can be created
+     * Test {@Code MethodConstraintViolationException} is thrown when
+     * name of customer is set to null.
      */
-    @Inject
-    private ObjectFactory<Cargo> factory;
+    @Test(expected = MethodConstraintViolationException.class)
+    public void testInstantiateCustomerWithNameNull() {
+        factory.setName(null);
+        factory.getObject();
+        // customer.getName();
+    }
 
-    @Override
-    public Cargo createInstance() {
-        return factory.getObject();
+    /**
+     * Test {@Code MethodConstraintViolationException} is thrown when
+     * name of customer is set to empty string.
+     */
+    @Test(expected = MethodConstraintViolationException.class)
+    public void testInstantiateCustomerWithNameEmptyString() {
+        factory.setName("   ");
+        factory.getObject();
+        // customer.getName();
     }
 }
