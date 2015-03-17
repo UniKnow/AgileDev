@@ -44,12 +44,7 @@ import java.util.Date;
 /**
  * Created by mase on 3/11/2015.
  */
-@AutoValidating
-public class MovieRepository implements Repository<Movie> {
-
-    // public Movie create(Object... releaseDate) {
-    // return null;
-    // }
+public class MovieRepository extends Repository<Movie> {
 
     public Movie createMovie(Date releaseDate) {
         System.out.println("Creating Movie with release date " + releaseDate);

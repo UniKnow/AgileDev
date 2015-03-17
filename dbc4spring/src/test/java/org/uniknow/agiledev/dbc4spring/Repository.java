@@ -46,8 +46,9 @@ import java.util.Date;
 /**
  * Created by mase on 3/12/2015.
  */
-public interface Repository<T> {
+@AutoValidating
+public abstract class Repository<T> {
 
     @Valid
-    T createMovie(@NotNull Date releaseDate);
+    public abstract T createMovie(@NotNull Date releaseDate);
 }
