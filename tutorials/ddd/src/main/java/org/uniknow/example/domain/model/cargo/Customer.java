@@ -49,6 +49,7 @@ import javax.validation.constraints.NotNull;
 /**
  * Created by mase on 15-03-15.
  */
+@AutoValidating
 public interface Customer {
 
     @NotNull

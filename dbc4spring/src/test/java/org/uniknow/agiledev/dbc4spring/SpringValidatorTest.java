@@ -76,4 +76,11 @@ public class SpringValidatorTest {
             .currentTimeMillis()));
         assertNotNull(movie);
     }
+
+    @Test(expected = MethodConstraintViolationException.class)
+    public void setTitleMovieNull() {
+        Movie movie = repository.createMovie(new Date(System
+            .currentTimeMillis()));
+        movie.setTitle(null);
+    }
 }

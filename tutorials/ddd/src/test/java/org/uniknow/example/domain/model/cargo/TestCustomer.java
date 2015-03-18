@@ -47,6 +47,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import javax.inject.Inject;
+import javax.inject.Named;
 
 import static org.junit.Assert.*;
 
@@ -58,6 +59,7 @@ import static org.junit.Assert.*;
 public class TestCustomer {
 
     @Inject
+    @Named("customerFactory")
     private CustomerFactory factory;
 
     @Test
@@ -80,7 +82,7 @@ public class TestCustomer {
     @Test(expected = MethodConstraintViolationException.class)
     public void testInstantiateCustomerWithNameNull() {
         factory.setName(null);
-        factory.getObject();
+        // factory.getObject();
         // customer.getName();
     }
 

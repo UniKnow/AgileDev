@@ -39,34 +39,37 @@
  */
 package org.uniknow.example.domain.model.cargo;
 
-import net.sf.oval.constraint.NotNull;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.ObjectFactory;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 import org.uniknow.agiledev.dbc4spring.AutoValidating;
+import org.uniknow.agiledev.ddd.domain.model.common.Factory;
 
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.validation.constraints.NotNull;
 
 /**
  * Created by mase on 15-03-15.
  */
 // @AutoValidating
-// causes IllegalArgumentException???
-@Named
+// causes bean not found when implements ObjectFactory<Customer>
+@Named("customerFactory")
 @Scope(BeanDefinition.SCOPE_PROTOTYPE)
-public class CustomerFactory implements ObjectFactory<Customer> {
+public class CustomerFactory extends Factory<Customer> {
 
     private String name;
 
     @Inject
     private ObjectFactory<Customer> factory;
 
-    private CustomerFactory() {
+    public CustomerFactory() {
     }
 
-    public void setName(String name) {
+    // @AutoValidating
+    public void setName(@NotNull String name) {
         this.name = name;
     }
 
@@ -78,7 +81,7 @@ public class CustomerFactory implements ObjectFactory<Customer> {
      * @throws org.springframework.beans.BeansException
      *             in case of creation errors
      */
-    @Override
+    // @Override
     public Customer getObject() {
         Customer customer = factory.getObject();
         customer.setName(name);

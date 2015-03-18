@@ -39,16 +39,32 @@
  */
 package org.uniknow.agiledev.dbc4spring;
 
+import org.springframework.beans.factory.config.BeanDefinition;
+import org.springframework.context.annotation.Scope;
+
+import javax.inject.Named;
+import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 /**
  * Created by mase on 3/11/2015.
  */
+@Named
+@Scope(BeanDefinition.SCOPE_PROTOTYPE)
 public class Movie {
 
     @NotNull(message = "Null is not a valid value for release date")
-    private final Date releaseDate;
+    private Date releaseDate;
+
+    private String title;
+
+    /**
+     * Constructor movie
+     */
+    public Movie() {
+        this(new Date());
+    }
 
     /**
      * Constructor movie
@@ -57,6 +73,15 @@ public class Movie {
      */
     public Movie(Date releaseDate) {
         this.releaseDate = releaseDate;
+    }
+
+    public void setReleaseDate(Date releaseDate) {
+        this.releaseDate = releaseDate;
+    }
+
+    @AutoValidating
+    public void setTitle(@NotNull String title) {
+        this.title = title;
     }
 
 }

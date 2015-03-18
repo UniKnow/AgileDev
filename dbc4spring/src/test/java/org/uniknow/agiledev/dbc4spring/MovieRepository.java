@@ -39,15 +39,28 @@
  */
 package org.uniknow.agiledev.dbc4spring;
 
+import org.springframework.beans.factory.ObjectFactory;
+
+import javax.inject.Inject;
+import javax.inject.Named;
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 /**
  * Created by mase on 3/11/2015.
  */
-public class MovieRepository extends Repository<Movie> {
+@Named
+@AutoValidating // This should come from interface Repository :(
+public class MovieRepository implements Repository<Movie> {
+
+    @Inject
+    private ObjectFactory<Movie> factory;
 
     public Movie createMovie(Date releaseDate) {
         System.out.println("Creating Movie with release date " + releaseDate);
-        return new Movie(releaseDate);
+        Movie movie = factory.getObject();
+        movie.setReleaseDate(releaseDate);
+        return movie;
+        // return new Movie(releaseDate);
     }
 }
