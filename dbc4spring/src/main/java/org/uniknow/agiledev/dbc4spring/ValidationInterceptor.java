@@ -39,14 +39,16 @@
  */
 package org.uniknow.agiledev.dbc4spring;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.inject.Inject;
-import javax.validation.Validator;
+import javax.validation.*;
 
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.hibernate.validator.method.MethodConstraintViolation;
 import org.hibernate.validator.method.MethodConstraintViolationException;
@@ -73,6 +75,7 @@ public class ValidationInterceptor {
         MethodValidator methodValidator = validator
             .unwrap(MethodValidator.class);
 
+        // Validate constraint(s) method parameters.
         Set<MethodConstraintViolation<Object>> parametersViolations = methodValidator
             .validateAllParameters(pjp.getTarget(), signature.getMethod(),
                 pjp.getArgs());
@@ -82,6 +85,18 @@ public class ValidationInterceptor {
 
         result = pjp.proceed(); // Execute the method
 
+        Set<ConstraintViolation<Object>> violations;
+
+        // Validate field level constrains class
+        ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
+        Validator validator = factory.getValidator();
+        violations = validator.validate(pjp.getTarget());
+        if (!violations.isEmpty()) {
+            throw new ConstraintViolationException(
+                new HashSet<ConstraintViolation<?>>(violations));
+        }
+
+        // Validate constraint return value method
         Set<MethodConstraintViolation<Object>> returnValueViolations = methodValidator
             .validateReturnValue(pjp.getTarget(), signature.getMethod(), result);
         if (!returnValueViolations.isEmpty()) {

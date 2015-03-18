@@ -39,29 +39,31 @@
  */
 package org.uniknow.agiledev.dbc4spring;
 
-import org.springframework.beans.factory.ObjectFactory;
+import org.hibernate.validator.method.MethodConstraintViolationException;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import javax.inject.Inject;
-import javax.inject.Named;
-import javax.validation.constraints.NotNull;
-import java.util.Date;
+import javax.validation.ValidationException;
+import java.math.BigDecimal;
 
 /**
- * Created by mase on 3/11/2015.
+ * Created by mase on 3/18/2015.
  */
-@Named
-@AutoValidating
-// This should come from interface Repository :(
-public class MovieRepository implements Repository<Movie> {
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations = "/service-spring-config.xml")
+public class TestExampleValidationConstraint {
 
     @Inject
-    private ObjectFactory<Movie> factory;
+    private ExampleValidationConstraint example;
 
-    public Movie createMovie(Date releaseDate) {
-        System.out.println("Creating Movie with release date " + releaseDate);
-        Movie movie = factory.getObject();
-        movie.setReleaseDate(releaseDate);
-        return movie;
-        // return new Movie(releaseDate);
+    /**
+     * Verify that price can't be below 0
+     */
+    @Test(expected = ValidationException.class)
+    public void testPriceBelowZero() {
+        example.setPrice(new BigDecimal("-0.001"));
     }
 }

@@ -39,29 +39,29 @@
  */
 package org.uniknow.agiledev.dbc4spring;
 
-import org.springframework.beans.factory.ObjectFactory;
-
-import javax.inject.Inject;
 import javax.inject.Named;
-import javax.validation.constraints.NotNull;
-import java.util.Date;
+import javax.validation.Valid;
+import javax.validation.constraints.DecimalMax;
+import javax.validation.constraints.DecimalMin;
+import javax.validation.constraints.Digits;
+import java.math.BigDecimal;
 
 /**
- * Created by mase on 3/11/2015.
+ * Created by mase on 3/18/2015.
  */
 @Named
 @AutoValidating
-// This should come from interface Repository :(
-public class MovieRepository implements Repository<Movie> {
+public class ExampleValidationConstraint {
 
-    @Inject
-    private ObjectFactory<Movie> factory;
+    /**
+     * Example of price which can only be from 00.00 till 99.99
+     */
+    @DecimalMin("0.00")
+    @DecimalMax("99.99")
+    @Digits(integer = 2, fraction = 2)
+    private BigDecimal price;
 
-    public Movie createMovie(Date releaseDate) {
-        System.out.println("Creating Movie with release date " + releaseDate);
-        Movie movie = factory.getObject();
-        movie.setReleaseDate(releaseDate);
-        return movie;
-        // return new Movie(releaseDate);
+    public void setPrice(BigDecimal price) {
+        this.price = price;
     }
 }
