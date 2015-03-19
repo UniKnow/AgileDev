@@ -87,11 +87,12 @@ public class ValidationInterceptor {
 
         Set<ConstraintViolation<Object>> violations;
 
-        // Validate field level constrains class
+        // Validate field level constraints class
         ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
         Validator validator = factory.getValidator();
         violations = validator.validate(pjp.getTarget());
         if (!violations.isEmpty()) {
+            System.out.println("exception " + violations);
             throw new ConstraintViolationException(
                 new HashSet<ConstraintViolation<?>>(violations));
         }

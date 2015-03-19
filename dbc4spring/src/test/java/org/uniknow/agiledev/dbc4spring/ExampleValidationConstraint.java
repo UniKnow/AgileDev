@@ -39,29 +39,185 @@
  */
 package org.uniknow.agiledev.dbc4spring;
 
+import org.hibernate.validator.constraints.*;
+
 import javax.inject.Named;
 import javax.validation.Valid;
-import javax.validation.constraints.DecimalMax;
-import javax.validation.constraints.DecimalMin;
-import javax.validation.constraints.Digits;
+import javax.validation.constraints.*;
 import java.math.BigDecimal;
+import java.util.Date;
 
 /**
- * Created by mase on 3/18/2015.
+ * Examples of appliance constraints.
  */
 @Named
 @AutoValidating
 public class ExampleValidationConstraint {
 
-    /**
-     * Example of price which can only be from 00.00 till 99.99
-     */
-    @DecimalMin("0.00")
-    @DecimalMax("99.99")
-    @Digits(integer = 2, fraction = 2)
-    private BigDecimal price;
+    private BigDecimal price = new BigDecimal(0);
 
-    public void setPrice(BigDecimal price) {
+    private boolean active;
+
+    private Date eventDate;
+
+    private Date birthday;
+
+    private int quantity;
+
+    private String userName;
+
+    private String email;
+
+    private String identifier;
+
+    private String phoneNumber;
+
+    private String url;
+
+    /**
+     * Method by which price is set.
+     * 
+     * @param price
+     *            price, should be in the range of 0.00 till 99.99 and have the
+     *            format xx.xx
+     */
+    public void setPrice(@DecimalMin("0.00") @DecimalMax("99.99") @Digits(
+        integer = 2, fraction = 2) BigDecimal price) {
         this.price = price;
+    }
+
+    public BigDecimal getPrice() {
+        return price;
+    }
+
+    /**
+     * Example of method for which passed boolean parameter should always be
+     * {@code false}.
+     * 
+     * @param active
+     *            boolean indicating whether customer is active; should always
+     *            be {@code false}.
+     */
+    public void setCustomerInactive(@AssertFalse boolean active) {
+        this.active = active;
+    }
+
+    /**
+     * Example of method for which passed boolean parameter should always be
+     * {@code true}.
+     * 
+     * @param active
+     *            boolean indicating whether customer is active; should always
+     *            be {@code true}.
+     */
+    public void setCustomerActive(@AssertTrue boolean active) {
+        this.active = active;
+    }
+
+    /**
+     * Method by which status of customer is returned.
+     */
+    public boolean isCustomerActive() {
+        return active;
+    }
+
+    /**
+     * Example of method for which the passed date must be in the future.
+     */
+    public void setEventDate(@Future Date eventDate) {
+        this.eventDate = eventDate;
+    }
+
+    public Date getEventDate() {
+        return eventDate;
+    }
+
+    /**
+     * Example of method for which the passed integer value must be in the range
+     * 5 till 10.
+     */
+    public void setQuantity(@Min(5) @Max(10) int quantity) {
+        this.quantity = quantity;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    /**
+     * Example of method for which the passed value may not be {@code null},
+     * empty or blank string.
+     */
+    public void setUserName(@NotNull @NotEmpty @NotBlank String userName) {
+        this.userName = userName;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    /**
+     * Example of method for which the passed value must be {@code null}.
+     */
+    public void setUnusedValue(@Null Object value) {
+    }
+
+    /**
+     * Example of method for which the passed date must be in the past.
+     */
+    public void setBirthday(@Past Date birthday) {
+        this.birthday = birthday;
+    }
+
+    public Date getBirthday() {
+        return birthday;
+    }
+
+    /**
+     * Example of method for which the value must match a particular reqular
+     * expression
+     */
+    public void setPhoneNumber(
+        @Pattern(regexp = "^\\+(?:[0-9] ?){6,14}[0-9]$") String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    /**
+     * Example of method for which the value must match a particular regular
+     * expression.
+     */
+    public void setEmailAddress(@Email String email) {
+        this.email = email;
+    }
+
+    public String getEmailAddress() {
+        return email;
+    }
+
+    /**
+     * Example of method for which the size of the String must be within certain
+     * boundaries
+     */
+    public void setIdentifier(@Size(min = 2, max = 10) String identifier) {
+        this.identifier = identifier;
+    }
+
+    public String getIdentifier() {
+        return identifier;
+    }
+
+    /**
+     * Example of method for which the passed parameter must be a valid url
+     */
+    public void setUrl(@URL String url) {
+        this.url = url;
+    }
+
+    public String getUrl() {
+        return url;
     }
 }
