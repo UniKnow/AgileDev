@@ -63,9 +63,10 @@ public class ValidationInterceptor {
     @Inject
     private Validator validator;
 
-    // Match any public methods in a class annotated with @AutoValidating
-    // @Around("execution(public * *(..)) && @within(org.uniknow.agiledev.dbc4spring.AutoValidating))")
-    @Around("execution(public * *(..)) && (@target(org.uniknow.agiledev.dbc4spring.AutoValidating) || @annotation(org.uniknow.agiledev.dbc4spring.AutoValidating)))")
+    /**
+     * Matches any public method in a class annotated with `@Validated`.
+     */
+    @Around("execution(public * *(..)) && (@target(org.uniknow.agiledev.dbc4spring.Validated) || @annotation(org.uniknow.agiledev.dbc4spring.Validated)))")
     public Object validateMethodInvocation(ProceedingJoinPoint pjp)
         throws Throwable {
         System.out.println("Invoked method:" + pjp);

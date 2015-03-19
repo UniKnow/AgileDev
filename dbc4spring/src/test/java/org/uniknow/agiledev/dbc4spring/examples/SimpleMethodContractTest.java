@@ -37,25 +37,43 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
-package org.uniknow.example.domain.model.cargo;
+package org.uniknow.agiledev.dbc4spring.examples;
 
-import org.hibernate.validator.constraints.NotBlank;
-import org.hibernate.validator.constraints.NotEmpty;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import org.uniknow.agiledev.dbc4spring.Validated;
-
-import javax.validation.constraints.NotNull;
+import javax.inject.Inject;
+import javax.validation.ValidationException;
 
 /**
- * Created by mase on 15-03-15.
+ * Verifies that {@code ValidationException} is thrown when client doesn't
+ * comply to the agreed contract.
  */
-@Validated
-public interface Customer {
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations = "/service-spring-config.xml")
+public class SimpleMethodContractTest {
 
-    @NotNull
-    @NotEmpty
-    @NotBlank
-    String getName();
+    @Inject
+    private SimpleMethodContract contract;
 
-    void setName(@NotNull @NotEmpty @NotBlank String name);
+    /**
+     * Verifies {@code ValidationException} is thrown when specified index is
+     * below 0
+     */
+    @Test(expected = ValidationException.class)
+    public void getValueIndexBelowMin() {
+        contract.getValue(-1);
+    }
+
+    /**
+     * Verifies {@code ValidationException} is thrown when specified index is
+     * above {@code MAX_VALUES}-1
+     */
+    @Test(expected = ValidationException.class)
+    public void getValueIndexAboveMax() {
+        contract.getValue(SimpleMethodContract.MAX_VALUES);
+    }
+
 }

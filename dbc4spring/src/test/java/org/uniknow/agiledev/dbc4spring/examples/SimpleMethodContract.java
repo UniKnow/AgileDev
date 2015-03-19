@@ -37,25 +37,33 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
-package org.uniknow.example.domain.model.cargo;
-
-import org.hibernate.validator.constraints.NotBlank;
-import org.hibernate.validator.constraints.NotEmpty;
+package org.uniknow.agiledev.dbc4spring.examples;
 
 import org.uniknow.agiledev.dbc4spring.Validated;
 
-import javax.validation.constraints.NotNull;
+import javax.inject.Named;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 
 /**
- * Created by mase on 15-03-15.
+ * A simple contract is shown below. The client of the method must send a
+ * parameter of type `int` that is smaller than
+ * {@code MAX_VALUES. In return the client can be certain that that the method returns the value placed at the requested postion in the array.
+
  */
+@Named
 @Validated
-public interface Customer {
+public class SimpleMethodContract {
 
-    @NotNull
-    @NotEmpty
-    @NotBlank
-    String getName();
+    /**
+     * Max number of values that can be persisted.
+     */
+    public static final int MAX_VALUES = 10;
 
-    void setName(@NotNull @NotEmpty @NotBlank String name);
+    private int values[] = new int[MAX_VALUES];
+
+    public int getValue(@Max(MAX_VALUES - 1) @Min(0) final int index) {
+        return values[index];
+    }
+
 }

@@ -43,7 +43,6 @@ import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.context.annotation.Scope;
 
 import javax.inject.Named;
-import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
 
@@ -79,7 +78,7 @@ public class Movie {
         this.releaseDate = releaseDate;
     }
 
-    @AutoValidating
+    @Validated
     public void setTitle(@NotNull String title) {
         this.title = title;
     }

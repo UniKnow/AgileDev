@@ -60,7 +60,7 @@ import static org.junit.Assert.*;
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = "/service-spring-config.xml")
-public class TestExampleValidationConstraint {
+public class ExampleValidationConstraintTest {
 
     @Inject
     private ExampleValidationConstraint example;

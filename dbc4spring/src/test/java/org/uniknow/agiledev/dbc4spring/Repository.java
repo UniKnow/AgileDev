@@ -39,14 +39,13 @@
  */
 package org.uniknow.agiledev.dbc4spring;
 
-import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 /**
  * Created by mase on 3/12/2015.
  */
-@AutoValidating
+@Validated
 public interface Repository<T> {
 
     T createMovie(@NotNull Date releaseDate);

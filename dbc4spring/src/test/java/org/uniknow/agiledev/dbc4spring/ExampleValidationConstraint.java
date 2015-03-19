@@ -42,7 +42,6 @@ package org.uniknow.agiledev.dbc4spring;
 import org.hibernate.validator.constraints.*;
 
 import javax.inject.Named;
-import javax.validation.Valid;
 import javax.validation.constraints.*;
 import java.math.BigDecimal;
 import java.util.Date;
@@ -51,7 +50,7 @@ import java.util.Date;
  * Examples of appliance constraints.
  */
 @Named
-@AutoValidating
+@Validated
 public class ExampleValidationConstraint {
 
     private BigDecimal price = new BigDecimal(0);

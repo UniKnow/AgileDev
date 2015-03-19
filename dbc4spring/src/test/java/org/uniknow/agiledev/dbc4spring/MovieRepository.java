@@ -43,14 +43,13 @@ import org.springframework.beans.factory.ObjectFactory;
 
 import javax.inject.Inject;
 import javax.inject.Named;
-import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 /**
  * Created by mase on 3/11/2015.
  */
 @Named
-@AutoValidating
+@Validated
 // This should come from interface Repository :(
 public class MovieRepository implements Repository<Movie> {
 
