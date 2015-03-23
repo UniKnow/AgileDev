@@ -37,9 +37,10 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
-package org.uniknow.agiledev.dbc4spring;
+package org.uniknow.agiledev.dbc4spring.examples;
 
 import org.hibernate.validator.constraints.*;
+import org.uniknow.agiledev.dbc4spring.Validated;
 
 import javax.inject.Named;
 import javax.validation.constraints.*;

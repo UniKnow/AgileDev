@@ -33,6 +33,7 @@
         <findbugs.jsr305.version>2.0.2</findbugs.jsr305.version>
         <groovy.version>2.1.6</groovy.version>
         <hibernate.version>4.2.0.Final</hibernate.version>
+        <javax.inject.version>1</javax.inject.version>
         <junit.version>4.11</junit.version>
         <mylyn.version>1.7.4.v20130429</mylyn.version>
         <oval.version>1.84</oval.version>
@@ -75,6 +76,13 @@
                 <groupId>org.uniknow.agiledev</groupId>
                 <artifactId>common</artifactId>
                 <version>${agiledev.version}</version>
+            </dependency>
+
+            <!-- Dependencies javax -->
+            <dependency>
+                <groupId>javax.inject</groupId>
+                <artifactId>javax.inject</artifactId>
+                <version>${javax.inject.version}</version>
             </dependency>
 
             <!-- Dependencies for enabling Design by Contract -->
@@ -121,6 +129,7 @@
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-test</artifactId>
                 <version>${spring.framework.version}</version>
+                <scope>test</scope>
             </dependency>
             <dependency>
                 <groupId>org.springframework</groupId>

@@ -51,9 +51,4 @@
     <!-- Import Hibernate Validation Spring configuration file -->
     <import resource="classpath:validation-spring-config.xml" />
     <context:component-scan base-package="org.uniknow.agiledev.dbc4spring"/>
-
-    <!--<bean id="movie" class="org.uniknow.agiledev.contracts4spring.Movie" />-->
-
-    <!-- Declaration of MovieRepository -->
-    <!--<bean id="movieRepository" class="org.uniknow.agiledev.dbc4spring.MovieRepository" />-->
 </beans>
