@@ -88,7 +88,7 @@ public class ValidationInterceptor {
 
         Set<ConstraintViolation<Object>> violations;
 
-        // Validate field level constraints class
+        // Validate invariants class
         ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
         Validator validator = factory.getValidator();
         violations = validator.validate(pjp.getTarget());

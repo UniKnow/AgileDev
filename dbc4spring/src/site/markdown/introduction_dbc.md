@@ -35,7 +35,37 @@ As a summary you can say that if the client invoke a method with a satisfied pre
 
 ## Invariant
 
-An invariant is a certain constraint that must be true for all methods that are grouped into an class.
+An invariant is a certain constraint that must be true for all methods that are grouped into an class. There could for example be an class which represents a house. A house can contain one of more rooms which have a certain area. Lets say there exist several methods that can change the characteristics of a house and a room. Then the house class will need an invariant which says that the summation of rooms areas must be the same as the total area of the house.
+
+Invariants are used to ensure that the properties of the entity always have correct values andt that the present state is correct regardless of which method is invoked.
+
+Assertions like preconditions and postconditions are used to verify the input and output of a single method. An invariant, must be verified on every call to a method of a class to ensure the correct properties.
+
+In this example, the invariant guarantees that the `PositiveInteger`'s value is always greater than or equal to zero.
+
+    /**
+     * Example of an invariant that guarantees that value is positive
+     */
+    @Named
+    @Validated
+    @Scope(BeanDefinition.SCOPE_PROTOTYPE)
+    public class PositiveInteger {
+
+        @Min(0)
+        private int value = 0;
+
+        public void add(int addedValue) {
+            value += addedValue;
+        }
+
+        public void subtract(int subtractedValue) {
+            value -= subtractedValue;
+        }
+
+        public int toInt() {
+            return value;
+        }
+    }
 
 
 
