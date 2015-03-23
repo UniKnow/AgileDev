@@ -15,6 +15,14 @@
     <description>Tooling to generate confluence pages based on functional tests written in Cucumber</description>
 
     <dependencies>
+        <!--
+        Dependencies for shared/root classes framework
+        -->
+        <dependency>
+            <groupId>org.uniknow.agiledev</groupId>
+            <artifactId>common</artifactId>
+        </dependency>
+
         <!-- Dependencies to generate Confluence report -->
         <dependency>
             <groupId>info.cukes</groupId>
@@ -41,4 +49,13 @@
             <url>http://repo.jenkins-ci.org/releases/</url>
         </repository>
     </repositories>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>aspectj-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
 </project>

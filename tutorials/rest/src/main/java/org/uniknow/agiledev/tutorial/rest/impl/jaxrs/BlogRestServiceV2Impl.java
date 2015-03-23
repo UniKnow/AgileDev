@@ -39,16 +39,16 @@
  */
 package org.uniknow.agiledev.tutorial.rest.impl.jaxrs;
 
-import net.sf.oval.constraint.NotNull;
-import net.sf.oval.guard.Guarded;
 import org.dozer.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.uniknow.agiledev.dbc4spring.Validated;
 import org.uniknow.agiledev.tutorial.rest.api.BlogService;
 import org.uniknow.agiledev.tutorial.rest.api.domain.MyPost;
 import org.uniknow.agiledev.tutorial.rest.api.jaxrs.V2.BlogRestService;
 import org.uniknow.agiledev.tutorial.rest.api.jaxrs.V2.Post;
 
+import javax.validation.constraints.NotNull;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.Response;
@@ -59,7 +59,7 @@ import java.util.List;
 /**
  * Implementation of V2 blog rest service
  */
-@Guarded
+@Validated
 @Component
 public class BlogRestServiceV2Impl implements BlogRestService {
     private BlogService service;

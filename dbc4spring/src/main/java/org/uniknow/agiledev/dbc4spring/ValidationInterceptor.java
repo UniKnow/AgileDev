@@ -55,7 +55,8 @@ import org.hibernate.validator.method.MethodConstraintViolationException;
 import org.hibernate.validator.method.MethodValidator;
 
 /**
- * Created by mase on 3/11/2015.
+ * Intercepts method calls of calsses which are annotated with
+ * {@code @Validated}.
  */
 @Aspect
 public class ValidationInterceptor {
@@ -69,7 +70,6 @@ public class ValidationInterceptor {
     @Around("execution(public * *(..)) && (@target(org.uniknow.agiledev.dbc4spring.Validated) || @annotation(org.uniknow.agiledev.dbc4spring.Validated)))")
     public Object validateMethodInvocation(ProceedingJoinPoint pjp)
         throws Throwable {
-        System.out.println("Invoked method:" + pjp);
 
         Object result;
         MethodSignature signature = (MethodSignature) pjp.getSignature();
@@ -93,7 +93,6 @@ public class ValidationInterceptor {
         Validator validator = factory.getValidator();
         violations = validator.validate(pjp.getTarget());
         if (!violations.isEmpty()) {
-            System.out.println("exception " + violations);
             throw new ConstraintViolationException(
                 new HashSet<ConstraintViolation<?>>(violations));
         }

@@ -35,7 +35,7 @@
             <groupId>org.uniknow.agiledev</groupId>
             <artifactId>cucumber-reporting</artifactId>
             <version>${project.version}</version>
-            <scope>test</scope>
+            <!--<scope>test</scope>-->
         </dependency>
     </dependencies>
 

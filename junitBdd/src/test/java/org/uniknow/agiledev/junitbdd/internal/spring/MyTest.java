@@ -57,7 +57,7 @@ import org.uniknow.agiledev.junitbdd.SpringBDDRunner;
 public class MyTest {
 
     @Autowired
-    Config.MyComponent myComponent;
+    MyComponent myComponent;
 
     @Scenario
     public void test1() throws Exception {

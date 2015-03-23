@@ -19,12 +19,15 @@
         <!--
         Dependencies for shared/root classes framework
         -->
+        <!--
         <dependency>
             <groupId>org.uniknow.agiledev</groupId>
             <artifactId>common</artifactId>
         </dependency>
+        -->
 
         <!-- Dependencies for enabling Design by Contract -->
+        <!--
         <dependency>
             <groupId>net.sf.oval</groupId>
             <artifactId>oval</artifactId>
@@ -37,6 +40,7 @@
             <groupId>org.aspectj</groupId>
             <artifactId>aspectjrt</artifactId>
         </dependency>
+        -->
 
         <!-- Dependency for findbug statically code analyzing -->
         <dependency>
@@ -53,17 +57,10 @@
     </dependencies>
 
     <build>
-        <plugins>
-
+        <pluginManagement>
+            <plugins>
             <!--
-            Maven Java compiler plugin
-            -->
-            <plugin>
-                <artifactId>maven-compiler-plugin</artifactId>
-            </plugin>
-
-            <!--
-                AspectJ compile time weaving. Required for Design by Contract
+            AspectJ compile time weaving. Required for Design by Contract
             -->
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
@@ -97,14 +94,6 @@
                             <artifactId>common</artifactId>
                         </aspectLibrary>
                     </aspectLibraries>
-                    <!--
-                    <weaveDependencies>
-                        <weaveDependency>
-                            <groupId>org.uniknow.agiledev</groupId>
-                            <artifactId>common</artifactId>
-                        </weaveDependency>
-                    </weaveDependencies>
-                    -->
 
                 </configuration>
 
@@ -120,7 +109,17 @@
                         <version>${aspectj.version}</version>
                     </dependency>
                 </dependencies>
+            </plugin>
+            </plugins>
+        </pluginManagement>
 
+        <plugins>
+
+            <!--
+            Maven Java compiler plugin
+            -->
+            <plugin>
+                <artifactId>maven-compiler-plugin</artifactId>
             </plugin>
 
             <!--

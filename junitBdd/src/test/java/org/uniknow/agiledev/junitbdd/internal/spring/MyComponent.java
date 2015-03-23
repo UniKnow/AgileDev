@@ -39,14 +39,11 @@
  */
 package org.uniknow.agiledev.junitbdd.internal.spring;
 
-import org.springframework.context.annotation.*;
-import org.springframework.stereotype.*;
+import org.springframework.stereotype.Component;
 
-@Configuration
-public class Config {
-    @Bean
-    public MyComponent myComponent() {
-        return new MyComponent();
-    }
-
+/**
+ * Created by mase on 3/23/2015.
+ */
+@Component
+public class MyComponent {
 }

@@ -48,6 +48,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.validation.ValidationException;
 
 import static org.junit.Assert.*;
 
@@ -79,7 +80,7 @@ public class TestCustomer {
      * Test {@Code MethodConstraintViolationException} is thrown when
      * name of customer is set to null.
      */
-    @Test(expected = MethodConstraintViolationException.class)
+    @Test(expected = ValidationException.class)
     public void testInstantiateCustomerWithNameNull() {
         factory.setName(null);
         // factory.getObject();
@@ -90,7 +91,7 @@ public class TestCustomer {
      * Test {@Code MethodConstraintViolationException} is thrown when
      * name of customer is set to empty string.
      */
-    @Test(expected = MethodConstraintViolationException.class)
+    @Test(expected = ValidationException.class)
     public void testInstantiateCustomerWithNameEmptyString() {
         factory.setName("   ");
         factory.getObject();
