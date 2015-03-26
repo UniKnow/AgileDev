@@ -45,11 +45,14 @@ import java.util.Set;
 import javax.inject.Inject;
 import javax.validation.*;
 
+import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
+import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
-import org.aspectj.lang.annotation.Before;
+import org.aspectj.lang.annotation.Pointcut;
 import org.aspectj.lang.reflect.MethodSignature;
+import org.aspectj.lang.reflect.ConstructorSignature;
 import org.hibernate.validator.method.MethodConstraintViolation;
 import org.hibernate.validator.method.MethodConstraintViolationException;
 import org.hibernate.validator.method.MethodValidator;
@@ -61,13 +64,39 @@ import org.hibernate.validator.method.MethodValidator;
 @Aspect
 public class ValidationInterceptor {
 
-    @Inject
+    // @Inject
     private Validator validator;
 
+    public ValidationInterceptor() {
+        ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
+        validator = factory.getValidator();
+    }
+
     /**
-     * Matches any public method in a class annotated with `@Validated`.
+     * Matches constructor in class annotated with `@Validated`.
+     * 
+     * *NOTE:* This will only work when class compiled with aspectj.
      */
-    @Around("execution(public * *(..)) && (@target(org.uniknow.agiledev.dbc4spring.Validated) || @annotation(org.uniknow.agiledev.dbc4spring.Validated)))")
+    // @Around("execution((@org.uniknow.agiledev.dbc4spring.Validated *).new(..))")
+    @After("execution((@org.uniknow.agiledev.dbc4spring.Validated *).new(..))")
+    public void validateConstructorInvocation(JoinPoint joinPoint)
+        throws Throwable {
+        // Validate invariants class
+        Set<ConstraintViolation<Object>> violations = validator
+            .validate(joinPoint.getTarget());
+        if (!violations.isEmpty()) {
+            System.out.println(violations);
+            throw new ConstraintViolationException(
+                new HashSet<ConstraintViolation<?>>(violations));
+        }
+    }
+
+    /**
+     * Matches any public method, beside equals and hashcode, in a class
+     * annotated with `@Validated`.
+     */
+    // @Around("execution(public * (@org.uniknow.agiledev.dbc4spring.Validated *).*(..))")
+    @Around("execution(public * (@org.uniknow.agiledev.dbc4spring.Validated *).*(..)) && !execution( * *.equals(..)) && !execution(* *.hashCode(..))")
     public Object validateMethodInvocation(ProceedingJoinPoint pjp)
         throws Throwable {
 
@@ -75,6 +104,7 @@ public class ValidationInterceptor {
         MethodSignature signature = (MethodSignature) pjp.getSignature();
         MethodValidator methodValidator = validator
             .unwrap(MethodValidator.class);
+        System.out.println("Executing " + signature.getName());
 
         // Validate constraint(s) method parameters.
         Set<MethodConstraintViolation<Object>> parametersViolations = methodValidator
@@ -89,8 +119,8 @@ public class ValidationInterceptor {
         Set<ConstraintViolation<Object>> violations;
 
         // Validate invariants class
-        ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
-        Validator validator = factory.getValidator();
+        // ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
+        // Validator validator = factory.getValidator();
         violations = validator.validate(pjp.getTarget());
         if (!violations.isEmpty()) {
             throw new ConstraintViolationException(

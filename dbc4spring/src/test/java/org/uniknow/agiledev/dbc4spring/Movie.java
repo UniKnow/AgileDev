@@ -50,6 +50,7 @@ import java.util.Date;
  * Created by mase on 3/11/2015.
  */
 @Named
+@Validated
 @Scope(BeanDefinition.SCOPE_PROTOTYPE)
 public class Movie {
 
@@ -78,7 +79,6 @@ public class Movie {
         this.releaseDate = releaseDate;
     }
 
-    @Validated
     public void setTitle(@NotNull String title) {
         this.title = title;
     }

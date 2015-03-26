@@ -50,5 +50,6 @@
 
     <!-- Import Hibernate Validation Spring configuration file -->
     <import resource="classpath:validation-spring-config.xml" />
+
     <context:component-scan base-package="org.uniknow.agiledev.dbc4spring"/>
 </beans>

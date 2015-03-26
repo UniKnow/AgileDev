@@ -42,7 +42,8 @@ package org.uniknow.agiledev.dbc4spring;
 import java.lang.annotation.*;
 
 /**
- * Activates automatic method-level validation for any annotated bean.
+ * Activates automatic method-level validation for any annotated bean. The
+ * methods {@code equals} and {@code hashCode} will be excluded from validation.
  * 
  * @author mase
  * 
