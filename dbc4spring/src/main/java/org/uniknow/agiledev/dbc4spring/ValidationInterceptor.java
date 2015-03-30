@@ -60,6 +60,9 @@ import org.hibernate.validator.method.MethodValidator;
 /**
  * Intercepts method calls of calsses which are annotated with
  * {@code @Validated}.
+ * 
+ * @author mase
+ * @since 0.1.3
  */
 @Aspect
 public class ValidationInterceptor {
@@ -77,7 +80,6 @@ public class ValidationInterceptor {
      * 
      * *NOTE:* This will only work when class compiled with aspectj.
      */
-    // @Around("execution((@org.uniknow.agiledev.dbc4spring.Validated *).new(..))")
     @After("execution((@org.uniknow.agiledev.dbc4spring.Validated *).new(..))")
     public void validateConstructorInvocation(JoinPoint joinPoint)
         throws Throwable {
@@ -95,7 +97,6 @@ public class ValidationInterceptor {
      * Matches any public method, beside equals and hashcode, in a class
      * annotated with `@Validated`.
      */
-    // @Around("execution(public * (@org.uniknow.agiledev.dbc4spring.Validated *).*(..))")
     @Around("execution(public * (@org.uniknow.agiledev.dbc4spring.Validated *).*(..)) && !execution( * *.equals(..)) && !execution(* *.hashCode(..))")
     public Object validateMethodInvocation(ProceedingJoinPoint pjp)
         throws Throwable {
@@ -119,8 +120,6 @@ public class ValidationInterceptor {
         Set<ConstraintViolation<Object>> violations;
 
         // Validate invariants class
-        // ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
-        // Validator validator = factory.getValidator();
         violations = validator.validate(pjp.getTarget());
         if (!violations.isEmpty()) {
             throw new ConstraintViolationException(

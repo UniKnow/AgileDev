@@ -46,7 +46,7 @@ import java.lang.annotation.*;
  * methods {@code equals} and {@code hashCode} will be excluded from validation.
  * 
  * @author mase
- * 
+ * @since 0.1.3
  */
 @Target({ ElementType.METHOD, ElementType.TYPE })
 @Retention(RetentionPolicy.RUNTIME)

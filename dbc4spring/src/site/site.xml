@@ -54,6 +54,7 @@
         <menu name="Overview">
             <item name="Introduction DBC" href="introduction_dbc.html"/>
             <item name="Constraints" href="validation_constraints.html"/>
+            <item name="Usage dbc4spring" href="usage.html"/>
         </menu>
     </body>
 </project>
