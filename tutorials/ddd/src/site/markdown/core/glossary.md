@@ -9,7 +9,7 @@
 
 ## B
 
-* **Bounded Context** - The delimited applicability of a particular model. Bounding contexts gives team members a clear and shared understanding of what has to be consistent and what can be developed independently.
+* **Bounded Context** - A division of a larger system that has its own ubiquitous language and domain model. Bounding contexts gives team members a clear and shared understanding of what has to be consistent and what can be developed independently. As with other DDD concepts bounded contexts are most valuable when carried through into the implementation.
 
 ## C
 
@@ -27,14 +27,23 @@
 * **Domain Driven Design** - Domain Driven Design is not a technology or a methodology. DDD provides a structure of practices and terminology for making design decissions that focus and accelerate software projects dealing with complicated domains.
 * **Domain Service** - Encapsulates business logic that doesn't naturally fit within a domain object, and are NOT typical CRUD operations, those would belong to a Repository.
 
+## E
+
+* **Entities** - Entities are characterized by having an identity that's not tied to their attribute values. All attributes in an entity can change and it's still the same entity. Conversely, two entities might be equivalent in all their attributes, but will still be distinct.
+
 ## I
 
 * **Infrastructure Services** - Used to abstract technical concerns (e.g. MSMQ, email provider, etc)
 
 ## M
 
+* **Model** - A useful approximation to the problem at hand.
 * **Modifier** - See [Command](#Command).
 
 ## U
 
-* **Ubiquitous Language** - A language structured around the domain model and used by all team members to connect all activities of the team with the software.
+* **Ubiquitous Language** - A language structured around the domain model and used by all team members to connect all activities of the team with the software. The idea is to avoid translations because they blunt communication and makes knowledge crunching anemic.
+
+## V
+
+* **Value Object** - Value objects have no seperate identity; they are defined solely by their attribute values. Though we are typically talking of objects when referring to value types, native types are actually a good example of value types. It is common to make value types immutable.
