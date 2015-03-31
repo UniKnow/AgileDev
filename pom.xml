@@ -4,7 +4,7 @@
     <name>AgileDev</name>
     <groupId>org.uniknow</groupId>
     <artifactId>agiledev</artifactId>
-    <version>0.1.3</version>
+    <version>0.1.3-SNAPSHOT</version>
     <packaging>pom</packaging>
     <description>Tooling for Agile development</description>
 
@@ -22,7 +22,7 @@
         <github.global.server>github</github.global.server>
 
         <!-- Version information dependencies -->
-        <agiledev.version>0.1.3</agiledev.version>
+        <agiledev.version>0.1.3-SNAPSHOT</agiledev.version>
         <aspectj.version>[1.7.0,1.8.5]</aspectj.version>
         <buildConfiguration.version>${agiledev.version}</buildConfiguration.version>
         <cglib.version>3.1</cglib.version>
