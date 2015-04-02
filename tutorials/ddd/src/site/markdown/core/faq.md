@@ -35,3 +35,7 @@ Events are immutable because they represent domain actions that took place in th
 
 CQRS means "Command Query Responsibility Segregation" and like the name states the responsibility between commands (write requests) and queries (read requests) is segregated; e.g the write and read requests are handled by different objects.
 We can further split up the data storage, having separate write/read stores. Though separating read/write stores is often discussed in relation with CQRS, this is not CQRS itself. CQRS is just the first split of commands and queries.
+
+## Should I use push or pull when publishing events?
+
+Push has the advantage that events can be published as they happen. Pull has the advantage that read sides can be more active and independent.

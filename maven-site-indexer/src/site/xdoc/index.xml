@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document>
+    <properties>
+        <author>Raffaele Guidi</author>
+        <title>Maven Site Indexer Plugin</title>
+    </properties>
+    <meta name="keyword" content="maven java site index indexer"/>
+    <body>
+        <section name="Maven Site Indexer plugin">
+            <p>
+               An easy way to index your maven site and give it a nice ajax search box.
+            </p>
+            <p>It's <b>as easy as</b>:</p>
+            <ul>
+                <li>adding the plugin to your pom.xml (see <a href="usage.html">usage instructions</a> - of course it should already have the site plugin configured)</li>
+                <li>putting searchbox.html in src/site/resources (you can customize it if you have a good javascript-fu)
+<source>//in example you can change the positioning
+$("#searchbox", window.parent.document).css('top', '10px');
+$("#searchbox", window.parent.document).css('left', $(window).width()- 325);
+...
+&lt;!-- or change the color of the search results box -->
+&lt;div style="background-color: lightyellow" id="searchOutput"/&gt;</source>
+			 	</li>
+                <li>putting search.js in src/site/resources/js (just put it as it is)</li>
+                <li>calling mvn site</li>
+                <li>opening up your site and enjoying your nice and hassle-free search box!</li>
+            </ul>
+            <p>Wanna see it in action? Look at the top right corner of this page ;) Wanna try it? It's apache licensed and <a href="https://github.com/raffaeleguidi/Maven-Site-Indexer-plugin">you can find it on GitHub</a></p>
+        </section>
+    </body>
+</document>

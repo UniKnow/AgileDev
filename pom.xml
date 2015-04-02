@@ -68,6 +68,7 @@
 
     <modules>
         <module>buildConfiguration</module>
+        <module>maven-site-indexer</module>
         <module>common</module>
         <module>parent</module>
         <module>junitBdd</module>
@@ -161,6 +162,12 @@
                 <artifactId>spring-aspects</artifactId>
                 <version>${spring.framework.version}</version>
             </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-tx</artifactId>
+                <version>${spring.framework.version}</version>
+            </dependency>
+
 
 
             <!-- Dependency hibernate -->

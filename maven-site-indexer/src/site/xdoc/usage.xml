@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document>
+    <properties>
+        <author>Raffaele Guidi</author>
+        <title>Usage instructions</title>
+    </properties>
+    <meta name="keyword" content="maven java site index indexer"/>
+    <body>
+        <section name="Adding the plugin to your POM">
+            <p>
+               The Maven Site Indexer is a standard maven plugin. Download the code, mvn install it and then add the following to your pom.xml
+            </p>
+<source>
+ &lt;plugin>
+   &lt;groupId>org.apache.maven.plugins&lt;/groupId>
+   &lt;artifactId>index&lt;/artifactId>
+   &lt;version>0.0.1-SNAPSHOT&lt;/version>
+   &lt;executions>
+     &lt;execution>
+       &lt;phase>site&lt;/phase>
+       &lt;goals>
+         &lt;goal>index&lt;/goal>
+       &lt;/goals>
+     &lt;/execution>
+   &lt;/executions>
+ &lt;/plugin></source>
+		</section>
+    </body>
+</document>

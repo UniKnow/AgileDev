@@ -1,0 +1,14 @@
+<project name="Sample Project">
+    <bannerLeft>
+        <name>Maven</name>
+        <src>images/apache-maven-project.png</src>
+        <href>index.html</href>
+    </bannerLeft>
+    <body>
+        <menu name="Menu">
+            <item name="Overview" href="index.html"/>
+            <item name="Usage instructions" href="usage.html"/>
+        </menu>
+        <menu ref="reports"/>
+    </body>
+</project>

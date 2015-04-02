@@ -1,0 +1,57 @@
+<!DOCTYPE script PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
+<head>
+	<title>Indexer</title>
+	<!-- http://dev.theladders.com/archives/2006/11/introducing_javascript_fulltex_1.html -->
+	<script language="JavaScript" src="js/search.js"></script>
+	<script language="JavaScript" src="../../index.js"></script>
+	
+	<script language="JavaScript">
+	function print(what) {
+		var div = document.getElementById('searchOutput');
+		div.innerHTML += what;
+	}
+	
+	function clr() {
+		var div = document.getElementById('searchOutput');
+		div.innerHTML = '';
+	}
+	
+	function clr2() {
+		var div = document.getElementById('searchOutput');
+		div.innerHTML = '';
+		var q = document.getElementById('q');
+		q.value = '';
+	}
+	
+	function go(q) {
+		clr();
+		//var searchTerms = ["apache", "memory", "memory cache", "direct*"];
+		var searchTerms = [q];
+		
+		//alert(index.search);
+		
+		for (var w in searchTerms) {
+			print("String <b>" + searchTerms[w] + "</b> found in:");
+			print("<ul>");
+			var result = index.search(searchTerms[w]);
+			for (var r in result) {
+				print('<li><a href="' + result[r] + '">' + titles.get(result[r]) + '</a></li>');
+			}
+			print("</ul>");
+		}
+	}
+	</script>
+</head>
+<body>
+	<div style="float:left; width: 900px"></div>
+	<div style="float:right; background-color:lightyellow; border: 1px orange solid; padding: 10px">
+		<form action="#" onsubmit="go(this.q.value); return false;">
+			<input type="text" id="q" />
+			<input type="submit" value="search" />
+			<input type="button" value="clear" onclick="clr2();"/>
+		</form>
+		<div id="searchOutput">
+		</div>
+	</div>
+</body>
