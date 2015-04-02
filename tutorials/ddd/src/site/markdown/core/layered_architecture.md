@@ -37,3 +37,7 @@ The domain layer:
 * Manages the state of a business use case if the use case spans multiple user requests, (e.g. loan registration process which consists of multiple steps: user entering loan details, system returning products and rates, user selecting particular product, system locking the loan for selected rate).
 * Contains [domain services](services).
 * Is the heart of the bounded context and should be well isolated from the other layers. Also, it should not be dependent on the application frameworks used in the other layers, (Hibernate, Spring, etc).
+
+## CRUD operations
+
+TODO: see [Domain Driven Design (DDD) architecture layer design for CRUD operation](http://www.pinfaq.com/1478/domain-driven-design-architecture-layer-design-operation)

@@ -16,6 +16,8 @@ An infrastructure service would be something that communicates directly with ext
 
 Domain services are the coordinators, allowing higher level functionality between many different smaller parts. Since domain services are first-class citizens of the domain model, their names and usage should be part of the ubiquitous language. Meanings and responsibilities should make sense to the stakeholders or domain experts.
 
+The application service will be acting as façade and accepts any request from clients. Once the request comes, based on the operation, it may call a Factory to create domain object, or calls repository service to re-create existing domain objects. Conversion between, DTO (Data Transfer Object) to domain objects and Domain objects to DTO will be happening here. Application service can also call another application service to perform additional operations.
+
 The differences between a domain service and an application service are subtle but critical:
 
 * Domain services are very granular where as application services are a facade with as purpose providing an API.

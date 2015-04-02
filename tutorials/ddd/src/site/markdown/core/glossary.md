@@ -22,10 +22,12 @@
 
 ## D
 
+* **Data Transfer Object** - A Data Transfer Object (DTO) is a data container which is used to transport data between layers and tiers. It mainly contains of attributes. DTOs are anemic in general and do not contain any business logic.
 * **DDD** - See [Domain Driven Design](#Domain_Driven_Design).
 * **Declarative Design** - A form of programming in which a precise description of properties actually controls the software.
 * **Domain Driven Design** - Domain Driven Design is not a technology or a methodology. DDD provides a structure of practices and terminology for making design decissions that focus and accelerate software projects dealing with complicated domains.
 * **Domain Service** - Encapsulates business logic that doesn't naturally fit within a domain object, and are NOT typical CRUD operations, those would belong to a Repository.
+* **DTO** - See [Data Transfer Object](#Data_Transfer_Object).
 
 ## E
 
