@@ -9,7 +9,7 @@
 
 ## B
 
-* **Bounded Context** - A division of a larger system that has its own ubiquitous language and domain model. Bounding contexts gives team members a clear and shared understanding of what has to be consistent and what can be developed independently. As with other DDD concepts bounded contexts are most valuable when carried through into the implementation.
+* **Bounded Context** - A division of a larger system that has its own ubiquitous language and domain model. Bounding contexts gives team members a clear and shared understanding of what has to be consistent and what can be developed independently.
 
 ## C
 
@@ -32,6 +32,7 @@
 ## E
 
 * **Entities** - Entities are characterized by having an identity that's not tied to their attribute values. All attributes in an entity can change and it's still the same entity. Conversely, two entities might be equivalent in all their attributes, but will still be distinct.
+* **Event** - An event represents something that took place in the domain. Since an event represents something in the past, it can be considered as a fact and used to take decisions in other parts of the system.
 
 ## I
 

@@ -77,6 +77,7 @@
                     <item name="Side effect free functions" href="core/side_effect_free_functions.html" />
                 <!--</item>-->
             </item>
+            <item name="FAQ" href="core/faq/html" />
             <item name="Glossary" href="core/glossary.html" />
         </menu>
     </body>
