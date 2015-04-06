@@ -49,11 +49,11 @@
     <script>
       $(document).ready(function() {
         $("#searchbox", window.parent.document).css('position', 'fixed');
-        $("#searchbox", window.parent.document).css('top', '10px');
-        $("#searchbox", window.parent.document).css('left', $(window).width()- 325);
-        $("#searchbox", window.parent.document).css('height', 100);
+        $("#searchbox", window.parent.document).css('top', '0px');
+        $("#searchbox", window.parent.document).css('right', '10px');
+        $("#searchbox", window.parent.document).css('height', 35);
       });
-      
+
       function print(what) {
     		var div = document.getElementById('searchOutput');
     		div.innerHTML += what;

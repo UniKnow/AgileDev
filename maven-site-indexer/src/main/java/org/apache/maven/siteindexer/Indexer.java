@@ -8,10 +8,13 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.FilenameFilter;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.nio.file.DirectoryStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.StringTokenizer;
 
 import org.apache.maven.plugin.logging.Log;
@@ -95,7 +98,7 @@ public class Indexer {
             String newText = oldText.replaceAll("</body>",
                     "<div id=\"searchbox\">" +
                             "  <iframe id=\"searchbox-frame\" src=\""+
-                            startDir + "/searchbox.html\" width=\"100%\" style=\"border: 0\" height=\"100%\">" +
+                            startDir + "searchbox.html\" width=\"100%\" style=\"border: 0\" height=\"100%\">" +
                             "  </iframe>" +
                             "</div>" +
                             signature +
@@ -170,10 +173,24 @@ public class Indexer {
         log.info("done with folder '" + dirName + "'");
     }
 
-    public void buildIndex(String startDir, String outputFile) throws IOException {
-        Path path = Paths.get(outputFile);
-        //File file = new File(outputFile);
+    /**
+     * Build index
+     *
+     * @param startDir root of site that needs to be indexed
+     * @param outputFile location at which index file needs to be persisted
+     * @param searchBox location of search box
+     * @throws IOException
+     */
+    public void buildIndex(String startDir, String outputFile, Path searchBox) throws IOException {
 
+        // Put search box within root of site
+        Files.copy(searchBox, Paths.get(startDir, "searchbox.html"), StandardCopyOption.REPLACE_EXISTING);
+
+        // Put search.js within root/js of site
+        Files.copy(PathUtils.getResourceAsPath("/search.js"), Paths.get(startDir, "js/search.js"), StandardCopyOption.REPLACE_EXISTING);
+
+        // Create index file
+        Path path = Paths.get(outputFile);
         if (!path.toFile().exists()) {
             // Create index file
             log.info("creating " + path.toAbsolutePath());
