@@ -98,6 +98,9 @@
                         </goals>
                     </execution>
                 </executions>
+                <configuration>
+                    <!--<site>${project.build.directory}/target/site</site>-->
+                </configuration>
             </plugin>
 
 
