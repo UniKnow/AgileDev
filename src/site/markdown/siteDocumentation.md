@@ -1,6 +1,6 @@
 # Site Documentation
 
-All documentation of ${project.name} is within the code base and is written in 
+All documentation is within the code base and is written in
 MarkDown. 
 Markdown is a plain text formatting syntax designed so that it can be 
 converted to HTML. There is no clearly defined Markdown standard but if you 
@@ -40,14 +40,12 @@ Put a blank Line in between to start a new graph.
 # Header 1
 ## Header 2
 ### Header 3
-etc.
 </pre>
 </td>
 <td>
-<h1>Header 1</h1>
-<h2>Header 2</h2>
-<h3>Header 3</h3>
-etc.
+Header 1
+Header 2
+Header 3
 </td>
 </tr>
 
