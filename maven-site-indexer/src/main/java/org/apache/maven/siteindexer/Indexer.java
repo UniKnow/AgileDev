@@ -10,6 +10,7 @@ import java.io.FilenameFilter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.net.URI;
 import java.nio.file.DirectoryStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -24,15 +25,16 @@ import org.jsoup.nodes.Document;
 
 public class Indexer {
 
-    private String startDir;
+    private Path startDir;
     private Log log;
 
     public Indexer(Log log) {
         this.log = log;
     }
 
-    private String relativeToStart(String filename) {
-        return filename.replaceAll("\\\\", "\\/").substring(startDir.length());
+    private String relativeToStart(Path filename) {
+        return  startDir.relativize(filename).toString().replaceAll("\\\\", "\\/");
+        //return filename.replaceAll("\\\\", "\\/").substring(startDir.toString().length());
     }
 
 
@@ -98,7 +100,7 @@ public class Indexer {
             String newText = oldText.replaceAll("</body>",
                     "<div id=\"searchbox\">" +
                             "  <iframe id=\"searchbox-frame\" src=\""+
-                            startDir + "searchbox.html\" width=\"100%\" style=\"border: 0\" height=\"100%\">" +
+                            startDir.toUri().toURL() + "searchbox.html\" width=\"100%\" style=\"border: 0\" height=\"100%\">" +
                             "  </iframe>" +
                             "</div>" +
                             signature +
@@ -115,15 +117,16 @@ public class Indexer {
         }
     }
 
-    private void parseDocument(String filename, FileOutputStream out) throws IOException {
+    private void parseDocument(Path filename, FileOutputStream out) throws IOException {
         log.info("indexing '" + relativeToStart(filename) + "'...");
         out.write("var d = new LADDERS.search.document();\r\n".getBytes());
+        //out.write(("d.add(\"id\", '" + relativeToStart(filename) + "');\r\n").getBytes());
         out.write(("d.add(\"id\", '" + relativeToStart(filename) + "');\r\n").getBytes());
         out.write("d.add(\"text\", \"".getBytes());
 
         Document doc;
         try {
-            doc = Jsoup.parse(new File(filename), "utf-8");
+            doc = Jsoup.parse(new File(filename.toUri()), "utf-8");
             tokenizeText(doc.text(), out);
             out.write("\");\r\n".getBytes());
             out.write(("d.add(\"title\", '" + doc.title() + "');\r\n").getBytes());
@@ -137,9 +140,9 @@ public class Indexer {
         log.info("done indexing '" + relativeToStart(filename) + "'");
     }
 
-    private void crawlFolder(String dirName, FileOutputStream out) throws IOException {
-        log.info("crawling folder '" + dirName + "'...");
-        Path path = Paths.get(dirName);
+    private void crawlFolder(Path directory, FileOutputStream out) throws IOException {
+        log.info("crawling folder '" + directory + "'...");
+        //Path path = Paths.get(dirName);
 
         // Traverse html files within directory
         DirectoryStream.Filter<Path> htmlFilter = new DirectoryStream.Filter<Path>() {
@@ -149,10 +152,10 @@ public class Indexer {
                 return !Files.isDirectory(entry) && (entry.getFileName().toString().endsWith("htm") || entry.getFileName().toString().endsWith("html"));
             }
         };
-        DirectoryStream<Path> files = Files.newDirectoryStream(path, htmlFilter);
+        DirectoryStream<Path> files = Files.newDirectoryStream(directory, htmlFilter);
         for(Path file : files) {
             if (!file.toAbsolutePath().endsWith("searchbox.html")) {
-                parseDocument(file.toAbsolutePath().toString(), out);
+                parseDocument(file , out);
                 addTags(file.toAbsolutePath());
             }
         }
@@ -165,12 +168,12 @@ public class Indexer {
                 return Files.isDirectory(entry);
             }
         };
-        DirectoryStream<Path> directories = Files.newDirectoryStream(path, subDirectoryFilter);
+        DirectoryStream<Path> directories = Files.newDirectoryStream(directory, subDirectoryFilter);
         for(Path dir : directories) {
-            crawlFolder(dir.toString(), out);
+            crawlFolder(dir, out);
         }
 
-        log.info("done with folder '" + dirName + "'");
+        log.info("done with folder '" + directory + "'");
     }
 
     /**
@@ -181,13 +184,13 @@ public class Indexer {
      * @param searchBox location of search box
      * @throws IOException
      */
-    public void buildIndex(String startDir, String outputFile, Path searchBox) throws IOException {
+    public void buildIndex(Path startDir, String outputFile, Path searchBox) throws IOException {
 
         // Put search box within root of site
-        Files.copy(searchBox, Paths.get(startDir, "searchbox.html"), StandardCopyOption.REPLACE_EXISTING);
+        Files.copy(searchBox, startDir.resolve("searchbox.html"), StandardCopyOption.REPLACE_EXISTING);
 
         // Put search.js within root/js of site
-        Files.copy(PathUtils.getResourceAsPath("/search.js"), Paths.get(startDir, "js/search.js"), StandardCopyOption.REPLACE_EXISTING);
+        Files.copy(PathUtils.getResourceAsPath("/search.js"), startDir.resolve("js/search.js"), StandardCopyOption.REPLACE_EXISTING);
 
         // Create index file
         Path path = Paths.get(outputFile);
@@ -204,7 +207,7 @@ public class Indexer {
         out.write("var index = new LADDERS.search.index();\r\n".getBytes());
         out.write("var titles = new LADDERS.search.document();\r\n".getBytes());
         log.info("index.js initialized");
-        this.startDir = new File(startDir).getAbsolutePath() + File.separator;
+        this.startDir = startDir; //new File(startDir).getAbsolutePath() + File.separator;
         crawlFolder(startDir, out);
         out.close();
     }

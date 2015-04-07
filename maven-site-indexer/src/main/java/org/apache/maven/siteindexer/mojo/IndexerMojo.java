@@ -69,7 +69,7 @@ public class IndexerMojo extends AbstractMojo {
 			}
 
 			indexer.buildIndex(
-					site.getAbsolutePath(),
+					Paths.get(site.getAbsolutePath()),
 					site.getAbsolutePath() + "/js/index.js",
 					searchBoxPath);
 
