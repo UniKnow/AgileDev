@@ -55,6 +55,25 @@
     <build>
         <finalName>siteindexer</finalName>
         <plugins>
+            <!--
+                Plugin for managing the license of project
+            -->
+            <plugin>
+                <groupId>com.mycila.maven-license-plugin</groupId>
+                <artifactId>maven-license-plugin</artifactId>
+            </plugin>
+
+            <!--
+                Plugin for formatting java source files following specified
+                code conventions. The formatter is based on the eclipse
+                formatted and can use the exported xml formatting definitions
+            -->
+            <plugin>
+                <groupId>com.googlecode.maven-java-formatter-plugin</groupId>
+                <artifactId>maven-java-formatter-plugin</artifactId>
+            </plugin>
+
+
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-plugin-plugin</artifactId>
@@ -72,6 +91,7 @@
                     </execution>
                 </executions>
             </plugin>
+
 
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>

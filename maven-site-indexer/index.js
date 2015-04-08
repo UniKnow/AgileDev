@@ -1,3 +1,42 @@
+/*
+ * Copyright (C) 2014 uniknow. All rights reserved.
+ *
+ * This Java class is subject of the following restrictions:
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions are met:
+ *
+ * 1. Redistributions of  source code must  retain the above copyright  notice,
+ *    this list of conditions and the following disclaimer.
+ *
+ * 2. Redistributions in binary form must reproduce the above copyright notice,
+ *    this list of conditions and the following disclaimer in the documentation
+ *    and/or other materials provided with the distribution.
+ *
+ * 3. The end-user documentation included with the redistribution, if any, must
+ *    include  the following  acknowledgment:  "This product includes  software
+ *    developed  by uniknow."
+ *    Alternately, this  acknowledgment may  appear in the software itself,  if
+ *    and wherever such third-party acknowledgments normally appear.
+ *
+ * 4. The name ''uniknow'' must  not  be used to  endorse or promote  products
+ *    derived from  this software without prior written permission.
+ *
+ * 5. Products  derived from this software may not  be called ''UniKnow'', nor
+ *    may ''uniknow'' appear  in their name,  without prior written permission
+ *    of uniknow.
+ *
+ * THIS SOFTWARE IS PROVIDED ''AS IS'' AND ANY EXPRESSED OR IMPLIED WARRANTIES,
+ * INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
+ * FITNESS  FOR A PARTICULAR  PURPOSE ARE  DISCLAIMED.  IN NO  EVENT SHALL  WWS
+ * OR ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+ * EXEMPLARY,  OR  CONSEQUENTIAL   DAMAGES   (INCLUDING, BUT  NOT  LIMITED  TO,
+ * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOS  OF USE, DATA, OR  PROFITS;
+ * OR BUSINESS  INTERRUPTION)  HOWEVER CAUSED AND ON ANY  THEORY  OF LIABILITY,
+ * WHETHER  IN CONTRACT,  STRICT LIABILITY,  OR TORT (INCLUDING  NEGLIGENCE  OR
+ * OTHERWISE) ARISING IN  ANY WAY OUT OF THE  USE  OF THIS  SOFTWARE,  EVEN  IF
+ * ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ */
 var index = new LADDERS.search.index();
 var titles = new LADDERS.search.document();
 var d = new LADDERS.search.document();
@@ -16,7 +55,7 @@ index.addDocument(d);
 
 var d = new LADDERS.search.document();
 d.add("id", 'dependency-convergence.html');
-d.add("text", "Reactor Dependency Convergence Apache DirectMemory Reactor Dependency Convergence Last Published 2011 11 10 Version 0 5 5 SNAPSHOT Project Documentation Project Information Distribution Management About Dependencies Issue Tracking Project Plugins Continuous Integration Project License Dependency Management Mailing Lists Project Team Dependency Convergence Source Repository Plugin Management Project Modules Project Summary Project Reports ASF How Apache Works Foundation Sponsoring Apache Thanks Reactor Dependency Convergence Legend All projects share one version of the dependency At least one project has a differing version of the dependency Statistics Number of sub projects 6 Number of dependencies NOD 20 Number of unique artifacts NOA 20 Number of SNAPSHOT artifacts NOS 0 Convergence NOD NOA  100% Ready for Release 100% Convergence and no SNAPSHOTS  Success Dependencies used in sub projects ch qos logback logback classic 0 9 26 org apache directmemory directmemory cache ch qos logback logback core 0 9 26 org apache directmemory directmemory cache com carrotsearch junit benchmarks 0 3 0 org apache directmemory directmemory cache com dyuproject protostuff protostuff api 1 0 4 org apache directmemory directmemory cache com dyuproject protostuff protostuff core 1 0 4 org apache directmemory directmemory cache com dyuproject protostuff protostuff runtime 1 0 4 org apache directmemory directmemory cache com google guava guava r09 org apache directmemory directmemory cache com h2database h2 1 3 158 org apache directmemory directmemory cache junit junit 4 10 org apache directmemory itests osgi org apache directmemory directmemory cache net sf josql gentlyweb utils 1 5 org apache directmemory directmemory cache org apache directmemory directmemory cache 0 5 5 SNAPSHOT org apache directmemory itests osgi org apache servicemix bundles org apache servicemix bundles josql 1 5_5 org apache directmemory directmemory cache org aspectj aspectjrt 1 6 11 org apache directmemory directmemory cache org ops4j pax exam pax exam 1 2 4 org apache directmemory itests osgi org ops4j pax exam pax exam container default 1 2 4 org apache directmemory itests osgi org ops4j pax exam pax exam junit 1 2 4 org apache directmemory itests osgi org ops4j pax swissbox pax swissbox tinybundles 1 3 1 org apache directmemory itests osgi org osgi org osgi core 4 2 0 org apache directmemory itests osgi org slf4j slf4j api 1 6 1 org apache directmemory directmemory cache org slf4j slf4j simple 1 6 1 org apache directmemory itests osgi Copyright 2011 The Apache Software Foundation All Rights Reserved ");
+d.add("text", "Reactor Dependency Convergence Apache DirectMemory Reactor Dependency Convergence Last Published 2011 11 10 Version 0 5 5 SNAPSHOT Project Documentation Project Information Distribution Management About Dependencies Issue Tracking Project Plugins Continuous Integration Project License Dependency Management Mailing Lists Project Team Dependency Convergence Source Repository Plugin Management Project Modules Project Summary Project Reports ASF How Apache Works Foundation Sponsoring Apache Thanks Reactor Dependency Convergence Legend All projects share one version of the dependency At least one project has a differing version of the dependency Statistics Number of sub projects 6 Number of dependencies NOD 20 Number of unique artifacts NOA 20 Number of SNAPSHOT artifacts NOS 0 Convergence NOD NOA ï¿½100% Ready for Release 100% Convergence and no SNAPSHOTS ï¿½Success Dependencies used in sub projects ch qos logback logback classic 0 9 26 org apache directmemory directmemory cache ch qos logback logback core 0 9 26 org apache directmemory directmemory cache com carrotsearch junit benchmarks 0 3 0 org apache directmemory directmemory cache com dyuproject protostuff protostuff api 1 0 4 org apache directmemory directmemory cache com dyuproject protostuff protostuff core 1 0 4 org apache directmemory directmemory cache com dyuproject protostuff protostuff runtime 1 0 4 org apache directmemory directmemory cache com google guava guava r09 org apache directmemory directmemory cache com h2database h2 1 3 158 org apache directmemory directmemory cache junit junit 4 10 org apache directmemory itests osgi org apache directmemory directmemory cache net sf josql gentlyweb utils 1 5 org apache directmemory directmemory cache org apache directmemory directmemory cache 0 5 5 SNAPSHOT org apache directmemory itests osgi org apache servicemix bundles org apache servicemix bundles josql 1 5_5 org apache directmemory directmemory cache org aspectj aspectjrt 1 6 11 org apache directmemory directmemory cache org ops4j pax exam pax exam 1 2 4 org apache directmemory itests osgi org ops4j pax exam pax exam container default 1 2 4 org apache directmemory itests osgi org ops4j pax exam pax exam junit 1 2 4 org apache directmemory itests osgi org ops4j pax swissbox pax swissbox tinybundles 1 3 1 org apache directmemory itests osgi org osgi org osgi core 4 2 0 org apache directmemory itests osgi org slf4j slf4j api 1 6 1 org apache directmemory directmemory cache org slf4j slf4j simple 1 6 1 org apache directmemory itests osgi Copyright 2011 The Apache Software Foundation All Rights Reserved ");
 d.add("title", 'Reactor Dependency Convergence');
 titles.add("dependency-convergence.html", "Reactor Dependency Convergence");
 index.addDocument(d);
