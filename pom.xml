@@ -488,7 +488,7 @@
                     <enableFeatureVersions>true</enableFeatureVersions>
 
                     <!-- Enable SSH agent to push to origin using SSH keys -->
-                    <enableSshAgent>false</enableSshAgent>
+                    <enableSshAgent>true</enableSshAgent>
 
                     <!-- Keep your maven submodules at the same version as the parent POM  -->
                     <autoVersionSubmodules>true</autoVersionSubmodules>
