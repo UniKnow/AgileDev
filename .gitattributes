@@ -22,6 +22,7 @@
 .gitignore eol=lf
 .gitattributes eol=lf
 *.java eol=lf
+*.properties eol=lf
 *.scala eol=lf
 *.xml eol=lf
 *.jmx eol=lf
@@ -59,8 +60,6 @@
 *.zip binary
 
 # secure-crypto files
-ContentSigningServiceImpl.java binary
-fdt.devclass binary
 README.txt binary
 *.sig binary
 
