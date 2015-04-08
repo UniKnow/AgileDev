@@ -4,9 +4,37 @@
     <name>AgileDev</name>
     <groupId>org.uniknow</groupId>
     <artifactId>agiledev</artifactId>
-    <version>0.1.5</version>
+    <version>0.1.7</version>
     <packaging>pom</packaging>
     <description>Tooling for Agile development</description>
+    <url>https://github.com/UniKnow/AgileDev</url>
+
+    <licenses>
+        <license>
+            <name>Apache License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+            <distribution>repo</distribution>
+            <comments>A business-friendly OSS license</comments>
+        </license>
+    </licenses>
+
+    <organization>
+        <name>UniKnow</name>
+        <url>http://www.uniknow.org</url>
+    </organization>
+
+    <developers>
+        <developer>
+            <id>mase</id>
+            <name>Mark Schenk</name>
+            <organization>UniKnow</organization>
+            <roles>
+                <role>architect</role>
+                <role>developer</role>
+            </roles>
+            <timezone>Europe/Amsterdam</timezone>
+        </developer>
+    </developers>
 
     <properties>
         <maven.compiler.source>1.7</maven.compiler.source>
@@ -242,7 +270,7 @@
                         <dependency>
                             <groupId>org.uniknow.agiledev</groupId>
                             <artifactId>buildConfiguration</artifactId>
-                            <version>0.1.5</version>
+                            <version>0.1.7</version>
                         </dependency>
                     </dependencies>
                 </plugin>
@@ -272,7 +300,7 @@
                         <dependency>
                             <groupId>org.uniknow.agiledev</groupId>
                             <artifactId>buildConfiguration</artifactId>
-                            <version>0.1.5</version>
+                            <version>0.1.7</version>
                         </dependency>
                     </dependencies>
                 </plugin>
@@ -516,7 +544,7 @@
                         Prevents deployments from dev workstations so that they can be done
                         by a CI server
                     -->
-                    <noDeploy>true</noDeploy>
+                    <noDeploy>false</noDeploy>
 
                     <!--
                         If set to true, the plugin sets the property "performRelease" to true, which activates the profile "release-profile"
