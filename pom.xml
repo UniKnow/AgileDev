@@ -516,7 +516,7 @@
                         Prevents deployments from dev workstations so that they can be done
                         by a CI server
                     -->
-                    <noDeploy>true</noDeploy>
+                    <noDeploy>false</noDeploy>
 
                     <!--
                         If set to true, the plugin sets the property "performRelease" to true, which activates the profile "release-profile"
