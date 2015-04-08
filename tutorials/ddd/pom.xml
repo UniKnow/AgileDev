@@ -87,7 +87,7 @@
 
             <!-- Index maven site so that we can search -->
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
+                <groupId>org.uniknow.maven.plugins</groupId>
                 <artifactId>index</artifactId>
                 <version>${project.version}</version>
                 <executions>
