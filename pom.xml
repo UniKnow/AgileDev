@@ -22,9 +22,9 @@
         <github.global.server>github</github.global.server>
 
         <!-- Version information dependencies -->
-        <agiledev.version>0.1.3-SNAPSHOT</agiledev.version>
+        <!--<agiledev.version>0.1.3-SNAPSHOT</agiledev.version>-->
         <aspectj.version>[1.7.0,1.8.5]</aspectj.version>
-        <buildConfiguration.version>${agiledev.version}</buildConfiguration.version>
+        <buildConfiguration.version>${project.version}</buildConfiguration.version>
         <cglib.version>3.1</cglib.version>
         <cucumber.version>1.1.5</cucumber.version>
         <doxia.version>1.5</doxia.version>
@@ -86,7 +86,7 @@
             <dependency>
                 <groupId>org.uniknow.agiledev</groupId>
                 <artifactId>common</artifactId>
-                <version>${agiledev.version}</version>
+                <version>${project.version}</version>
             </dependency>
 
             <!-- Dependencies javax -->
@@ -244,7 +244,7 @@
                         <dependency>
                             <groupId>org.uniknow.agiledev</groupId>
                             <artifactId>buildConfiguration</artifactId>
-                            <version>${buildConfiguration.version}</version>
+                            <version>${project.version}</version>
                         </dependency>
                     </dependencies>
                 </plugin>
