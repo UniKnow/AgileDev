@@ -1,3 +1,42 @@
+/**
+ * Copyright (C) 2014 uniknow. All rights reserved.
+ * 
+ * This Java class is subject of the following restrictions:
+ * 
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions are met:
+ * 
+ * 1. Redistributions of source code must retain the above copyright notice,
+ * this list of conditions and the following disclaimer.
+ * 
+ * 2. Redistributions in binary form must reproduce the above copyright notice,
+ * this list of conditions and the following disclaimer in the documentation
+ * and/or other materials provided with the distribution.
+ * 
+ * 3. The end-user documentation included with the redistribution, if any, must
+ * include the following acknowledgment: "This product includes software
+ * developed by uniknow." Alternately, this acknowledgment may appear in the
+ * software itself, if and wherever such third-party acknowledgments normally
+ * appear.
+ * 
+ * 4. The name ''uniknow'' must not be used to endorse or promote products
+ * derived from this software without prior written permission.
+ * 
+ * 5. Products derived from this software may not be called ''UniKnow'', nor may
+ * ''uniknow'' appear in their name, without prior written permission of
+ * uniknow.
+ * 
+ * THIS SOFTWARE IS PROVIDED ''AS IS'' AND ANY EXPRESSED OR IMPLIED WARRANTIES,
+ * INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
+ * FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL WWS OR ITS
+ * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+ * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+ * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOS OF USE, DATA, OR PROFITS; OR
+ * BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER
+ * IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+ * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+ * POSSIBILITY OF SUCH DAMAGE.
+ */
 
 package org.apache.maven.siteindexer;
 
@@ -22,7 +61,6 @@ import org.apache.maven.plugin.logging.Log;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
-
 public class Indexer {
 
     private Path startDir;
@@ -33,43 +71,28 @@ public class Indexer {
     }
 
     private String relativeToStart(Path filename) {
-        return  startDir.relativize(filename).toString().replaceAll("\\\\", "\\/");
-        //return filename.replaceAll("\\\\", "\\/").substring(startDir.toString().length());
+        return startDir.relativize(filename).toString()
+            .replaceAll("\\\\", "\\/");
     }
-
 
     private String clean(String textContent) {
-        return textContent
-                .replaceAll("\\.", " ")
-                .replaceAll("\\\"", " ")
-                .replaceAll("\\\\", " ")
-                .replaceAll("\\/", " ")
-                .replaceAll("\\'", " ")
-                .replaceAll("\\-", " ")
-                .replaceAll("\\.", " ")
-                .replaceAll("\\:", " ")
-                .replaceAll("\\;", " ")
-                .replaceAll("\\!", " ")
-                .replaceAll("\\?", " ")
-                .replaceAll("\\|", " ")
-                .replaceAll("\\(", " ")
-                .replaceAll("\\)", " ")
-                .replaceAll("\\[", " ")
-                .replaceAll("\\]", " ")
-                .replaceAll("\\{", " ")
-                .replaceAll("\\}", " ")
-                .replaceAll("\\$", " ")
-                .replaceAll("\\=", " ")
-                .replaceAll("\\+", " ")
-                .replaceAll("\\*", " ")
-                .replaceAll("\\^", " ")
-                .replaceAll("\\~", " ")
-                .replaceAll("\\©", " ")
-                .replaceAll("\\,", " ")
-                ;
+        return textContent.replaceAll("\\.", " ").replaceAll("\\\"", " ")
+            .replaceAll("\\\\", " ").replaceAll("\\/", " ")
+            .replaceAll("\\'", " ").replaceAll("\\-", " ")
+            .replaceAll("\\.", " ").replaceAll("\\:", " ")
+            .replaceAll("\\;", " ").replaceAll("\\!", " ")
+            .replaceAll("\\?", " ").replaceAll("\\|", " ")
+            .replaceAll("\\(", " ").replaceAll("\\)", " ")
+            .replaceAll("\\[", " ").replaceAll("\\]", " ")
+            .replaceAll("\\{", " ").replaceAll("\\}", " ")
+            .replaceAll("\\$", " ").replaceAll("\\=", " ")
+            .replaceAll("\\+", " ").replaceAll("\\*", " ")
+            .replaceAll("\\^", " ").replaceAll("\\~", " ")
+            .replaceAll("\\©", " ").replaceAll("\\,", " ");
     }
 
-    private void tokenizeText(String textContent, FileOutputStream out) throws IOException {
+    private void tokenizeText(String textContent, FileOutputStream out)
+        throws IOException {
         String clean = clean(textContent);
         StringTokenizer st = new StringTokenizer(clean);
         while (st.hasMoreTokens()) {
@@ -82,8 +105,9 @@ public class Indexer {
 
     private void addTags(Path file) {
         try {
-            //File file = new File(startDir + filename);
-            BufferedReader reader = new BufferedReader(new FileReader(file.toFile()));
+            // File file = new File(startDir + filename);
+            BufferedReader reader = new BufferedReader(new FileReader(
+                file.toFile()));
             String line = "", oldText = "";
             while ((line = reader.readLine()) != null) {
                 oldText += line + "\r\n";
@@ -91,22 +115,21 @@ public class Indexer {
             reader.close();
 
             if (oldText.indexOf("id=\"searchbox\"") > 0) {
-                log.info("tags already added to '" + file.getFileName() + "', quitting");
+                log.info("tags already added to '" + file.getFileName()
+                    + "', quitting");
                 return;
             }
 
             log.info("applying tags to '" + file.getFileName() + "'...");
 
-            String newText = oldText.replaceAll("</body>",
-                    "<div id=\"searchbox\">" +
-                            "  <iframe id=\"searchbox-frame\" src=\""+
-                            startDir.toUri().toURL() + "searchbox.html\" width=\"100%\" style=\"border: 0\" height=\"100%\">" +
-                            "  </iframe>" +
-                            "</div>" +
-                            signature +
-                            "</body>"
-            );
-
+            String newText = oldText
+                .replaceAll(
+                    "</body>",
+                    "<div id=\"searchbox\">"
+                        + "  <iframe id=\"searchbox-frame\" src=\""
+                        + startDir.toUri().toURL()
+                        + "searchbox.html\" width=\"100%\" style=\"border: 0\" height=\"100%\">"
+                        + "  </iframe>" + "</div>" + signature + "</body>");
 
             FileWriter writer = new FileWriter(file.toFile());
             writer.write(newText);
@@ -117,11 +140,14 @@ public class Indexer {
         }
     }
 
-    private void parseDocument(Path filename, FileOutputStream out) throws IOException {
+    private void parseDocument(Path filename, FileOutputStream out)
+        throws IOException {
         log.info("indexing '" + relativeToStart(filename) + "'...");
         out.write("var d = new LADDERS.search.document();\r\n".getBytes());
-        //out.write(("d.add(\"id\", '" + relativeToStart(filename) + "');\r\n").getBytes());
-        out.write(("d.add(\"id\", '" + relativeToStart(filename) + "');\r\n").getBytes());
+        // out.write(("d.add(\"id\", '" + relativeToStart(filename) +
+        // "');\r\n").getBytes());
+        out.write(("d.add(\"id\", '" + relativeToStart(filename) + "');\r\n")
+            .getBytes());
         out.write("d.add(\"text\", \"".getBytes());
 
         Document doc;
@@ -129,10 +155,10 @@ public class Indexer {
             doc = Jsoup.parse(new File(filename.toUri()), "utf-8");
             tokenizeText(doc.text(), out);
             out.write("\");\r\n".getBytes());
-            out.write(("d.add(\"title\", '" + doc.title() + "');\r\n").getBytes());
-            out.write(
-                    ("titles.add(\"" + relativeToStart(filename) + "\", \"" + doc.title() + "\");\r\n").getBytes()
-            );
+            out.write(("d.add(\"title\", '" + doc.title() + "');\r\n")
+                .getBytes());
+            out.write(("titles.add(\"" + relativeToStart(filename) + "\", \""
+                + doc.title() + "\");\r\n").getBytes());
         } catch (IOException e) {
             log.error(e);
         }
@@ -140,22 +166,26 @@ public class Indexer {
         log.info("done indexing '" + relativeToStart(filename) + "'");
     }
 
-    private void crawlFolder(Path directory, FileOutputStream out) throws IOException {
+    private void crawlFolder(Path directory, FileOutputStream out)
+        throws IOException {
         log.info("crawling folder '" + directory + "'...");
-        //Path path = Paths.get(dirName);
+        // Path path = Paths.get(dirName);
 
         // Traverse html files within directory
         DirectoryStream.Filter<Path> htmlFilter = new DirectoryStream.Filter<Path>() {
 
             @Override
             public boolean accept(Path entry) throws IOException {
-                return !Files.isDirectory(entry) && (entry.getFileName().toString().endsWith("htm") || entry.getFileName().toString().endsWith("html"));
+                return !Files.isDirectory(entry)
+                    && (entry.getFileName().toString().endsWith("htm") || entry
+                        .getFileName().toString().endsWith("html"));
             }
         };
-        DirectoryStream<Path> files = Files.newDirectoryStream(directory, htmlFilter);
-        for(Path file : files) {
+        DirectoryStream<Path> files = Files.newDirectoryStream(directory,
+            htmlFilter);
+        for (Path file : files) {
             if (!file.toAbsolutePath().endsWith("searchbox.html")) {
-                parseDocument(file , out);
+                parseDocument(file, out);
                 addTags(file.toAbsolutePath());
             }
         }
@@ -168,8 +198,9 @@ public class Indexer {
                 return Files.isDirectory(entry);
             }
         };
-        DirectoryStream<Path> directories = Files.newDirectoryStream(directory, subDirectoryFilter);
-        for(Path dir : directories) {
+        DirectoryStream<Path> directories = Files.newDirectoryStream(directory,
+            subDirectoryFilter);
+        for (Path dir : directories) {
             crawlFolder(dir, out);
         }
 
@@ -178,36 +209,44 @@ public class Indexer {
 
     /**
      * Build index
-     *
-     * @param startDir root of site that needs to be indexed
-     * @param outputFile location at which index file needs to be persisted
-     * @param searchBox location of search box
+     * 
+     * @param startDir
+     *            root of site that needs to be indexed
+     * @param outputFile
+     *            location at which index file needs to be persisted
+     * @param searchBox
+     *            location of search box
      * @throws IOException
      */
-    public void buildIndex(Path startDir, String outputFile, Path searchBox) throws IOException {
+    public void buildIndex(Path startDir, String outputFile, Path searchBox)
+        throws IOException {
 
         // Put search box within root of site
-        Files.copy(searchBox, startDir.resolve("searchbox.html"), StandardCopyOption.REPLACE_EXISTING);
+        Files.copy(searchBox, startDir.resolve("searchbox.html"),
+            StandardCopyOption.REPLACE_EXISTING);
 
         // Put search.js within root/js of site
-        Files.copy(PathUtils.getResourceAsPath("/search.js"), startDir.resolve("js/search.js"), StandardCopyOption.REPLACE_EXISTING);
+        Files.copy(PathUtils.getResourceAsPath("/search.js"),
+            startDir.resolve("js/search.js"),
+            StandardCopyOption.REPLACE_EXISTING);
 
         // Create index file
         Path path = Paths.get(outputFile);
         if (!path.toFile().exists()) {
             // Create index file
             log.info("creating " + path.toAbsolutePath());
-//            Files.createDirectories(path);
+            // Files.createDirectories(path);
             Files.createFile(path);
         }
         FileOutputStream out = new FileOutputStream(path.toFile());
         log.info("opened " + path.toAbsolutePath());
-        //LADDER search reference:
-        //http://dev.theladders.com/archives/2006/11/introducing_javascript_fulltex_1.html
+        // LADDER search reference:
+        // http://dev.theladders.com/archives/2006/11/introducing_javascript_fulltex_1.html
         out.write("var index = new LADDERS.search.index();\r\n".getBytes());
         out.write("var titles = new LADDERS.search.document();\r\n".getBytes());
         log.info("index.js initialized");
-        this.startDir = startDir; //new File(startDir).getAbsolutePath() + File.separator;
+        this.startDir = startDir; // new File(startDir).getAbsolutePath() +
+                                  // File.separator;
         crawlFolder(startDir, out);
         out.close();
     }
