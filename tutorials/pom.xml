@@ -15,7 +15,7 @@
 
     <modules>
         <!--<module>dbc</module>-->
-        <!--<module>ddd</module> -->
+        <module>ddd</module>
         <module>rest</module>
     </modules>
     </project>

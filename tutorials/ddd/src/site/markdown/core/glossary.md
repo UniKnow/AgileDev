@@ -43,6 +43,10 @@
 * **Model** - A useful approximation to the problem at hand.
 * **Modifier** - See [Command](#Command).
 
+## S
+
+* **Saga** - In essence, sagas listen for events and dispatch commands. A saga spans more than one messages and manages a process.
+
 ## U
 
 * **Ubiquitous Language** - A language structured around the domain model and used by all team members to connect all activities of the team with the software. The idea is to avoid translations because they blunt communication and makes knowledge crunching anemic.

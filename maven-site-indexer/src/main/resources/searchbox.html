@@ -51,7 +51,7 @@
         $("#searchbox", window.parent.document).css('position', 'fixed');
         $("#searchbox", window.parent.document).css('top', '0px');
         $("#searchbox", window.parent.document).css('right', '10px');
-        $("#searchbox", window.parent.document).css('height', '35px');
+        $("#searchbox", window.parent.document).css('height', 100);
       });
 
       function print(what) {
@@ -63,7 +63,7 @@
     		var div = document.getElementById('searchOutput');
     		div.innerHTML = '';
 	        $("#searchOutput").css('padding', '0px');
-	        $("#searchbox", window.parent.document).css('height', '35px');
+	        $("#searchbox", window.parent.document).css('height', 100);
     	}
 
     	function clr2() {
@@ -72,7 +72,7 @@
     		var q = document.getElementById('q');
     		q.value = '';
         	$("#searchOutput").css('padding', '0px');
-            $("#searchbox", window.parent.document).css('height', '35px');
+            $("#searchbox", window.parent.document).css('height', 100);
     	}
 
     	function go(q) {
