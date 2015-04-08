@@ -1,0 +1,69 @@
+# #################################################### #
+# Git Attributes file for standardising local settings
+# #################################################### #
+#
+# However this will result in git warning you about the 
+# conversions every time. To silence the warning set the 
+# local safecrlf value to "false" running the git command
+#
+#     git config core.safecrlf false
+#
+# from within the Combine project.
+#
+# #################################################### #
+
+
+# Autodetect text files and normalise their line endings 
+# when checked in to your repository
+* text=auto
+
+# Explicitly set the following files to normalise line endings 
+# to unix style LF when checked in.
+.gitignore eol=lf
+.gitattributes eol=lf
+*.java eol=lf
+*.scala eol=lf
+*.xml eol=lf
+*.jmx eol=lf
+*.properties eol=lf
+*.js eol=lf
+*.jsp eol=lf
+*.php eol=lf
+*.htm eol=lf
+*.html eol=lf
+*.css eol=lf
+*.xsl eol=lf
+*.txt eol=lf
+*.vm eol=lf
+*.sql eol=lf
+*.conf eol=lf
+
+# Explicitly set the following files to normalise line endings 
+# to Windows style CRLF when checked in.
+*.bat eol=crlf
+*.ini eol=crlf
+*.rtf eol=crlf
+
+# Denote files that are binary and should not be modified.
+*.png binary
+*.PNG binary
+*.jpg binary
+*.JPG binary
+*.ico binary
+*.exe binary
+*.apk binary
+*.pdf binary
+*.ppt binary
+*.dll binary
+*.so binary
+*.zip binary
+
+# secure-crypto files
+ContentSigningServiceImpl.java binary
+fdt.devclass binary
+README.txt binary
+*.sig binary
+
+
+# #################################################### #
+

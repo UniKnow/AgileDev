@@ -37,26 +37,21 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
-package org.apache.maven.siteindexer.mojo;
+package org.uniknow.maven.index.plugins;
 
 import java.io.File;
 import java.io.IOException;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.nio.file.FileSystem;
-import java.nio.file.FileSystems;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.HashMap;
 
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
 import org.apache.maven.plugins.annotations.LifecyclePhase;
-import org.apache.maven.siteindexer.Indexer;
+import org.uniknow.maven.index.Indexer;
 import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
-import org.apache.maven.siteindexer.PathUtils;
+import org.uniknow.maven.index.PathUtils;
 
 /**
  * This goal will build the index.

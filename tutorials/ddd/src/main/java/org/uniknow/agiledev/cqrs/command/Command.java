@@ -37,18 +37,13 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
-package org.apache.maven.siteindexer.test;
+package org.uniknow.agiledev.cqrs.command;
 
-public class IndexerTest {
-    // @Test
-    // public void indexTest() {
-    // Indexer indexer = new Indexer();
-    // try {
-    // indexer.buildIndex(
-    // "C:\\Development\\Apache\\directmemory\\trunk\\target\\site\\",
-    // "index.js");
-    // } catch (IOException e) {
-    // e.printStackTrace();
-    // }
-    // }
+import org.uniknow.agiledev.dbc4spring.Validated;
+
+/**
+ * Commands are things that indicate requests to our domain.
+ */
+@Validated
+public class Command {
 }
