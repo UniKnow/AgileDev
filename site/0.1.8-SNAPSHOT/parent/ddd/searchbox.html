@@ -1,0 +1,108 @@
+<!--
+
+    Copyright (C) 2014 uniknow. All rights reserved.
+
+    This Java class is subject of the following restrictions:
+
+    Redistribution and use in source and binary forms, with or without
+    modification, are permitted provided that the following conditions are met:
+
+    1. Redistributions of  source code must  retain the above copyright  notice,
+       this list of conditions and the following disclaimer.
+
+    2. Redistributions in binary form must reproduce the above copyright notice,
+       this list of conditions and the following disclaimer in the documentation
+       and/or other materials provided with the distribution.
+
+    3. The end-user documentation included with the redistribution, if any, must
+       include  the following  acknowledgment:  "This product includes  software
+       developed  by uniknow."
+       Alternately, this  acknowledgment may  appear in the software itself,  if
+       and wherever such third-party acknowledgments normally appear.
+
+    4. The name ''uniknow'' must  not  be used to  endorse or promote  products
+       derived from  this software without prior written permission.
+
+    5. Products  derived from this software may not  be called ''UniKnow'', nor
+       may ''uniknow'' appear  in their name,  without prior written permission
+       of uniknow.
+
+    THIS SOFTWARE IS PROVIDED ''AS IS'' AND ANY EXPRESSED OR IMPLIED WARRANTIES,
+    INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
+    FITNESS  FOR A PARTICULAR  PURPOSE ARE  DISCLAIMED.  IN NO  EVENT SHALL  WWS
+    OR ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+    EXEMPLARY,  OR  CONSEQUENTIAL   DAMAGES   (INCLUDING, BUT  NOT  LIMITED  TO,
+    PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOS  OF USE, DATA, OR  PROFITS;
+    OR BUSINESS  INTERRUPTION)  HOWEVER CAUSED AND ON ANY  THEORY  OF LIABILITY,
+    WHETHER  IN CONTRACT,  STRICT LIABILITY,  OR TORT (INCLUDING  NEGLIGENCE  OR
+    OTHERWISE) ARISING IN  ANY WAY OUT OF THE  USE  OF THIS  SOFTWARE,  EVEN  IF
+    ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+-->
+<html>
+  <head>
+	<script language="JavaScript" src="js/search.js"></script>
+    <script language="JavaScript" src="js/index.js"></script>
+    <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="stylesheet" type="text/css"/>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
+    <script>
+      $(document).ready(function() {
+        $("#searchbox", window.parent.document).css('position', 'fixed');
+        $("#searchbox", window.parent.document).css('top', '0px');
+        $("#searchbox", window.parent.document).css('right', '10px');
+        $("#searchbox", window.parent.document).css('height', 100);
+      });
+
+      function print(what) {
+    		var div = document.getElementById('searchOutput');
+    		div.innerHTML += what;
+    	}
+
+    	function clr() {
+    		var div = document.getElementById('searchOutput');
+    		div.innerHTML = '';
+	        $("#searchOutput").css('padding', '0px');
+	        $("#searchbox", window.parent.document).css('height', 100);
+    	}
+
+    	function clr2() {
+    		var div = document.getElementById('searchOutput');
+    		div.innerHTML = '';
+    		var q = document.getElementById('q');
+    		q.value = '';
+        	$("#searchOutput").css('padding', '0px');
+            $("#searchbox", window.parent.document).css('height', 100);
+    	}
+
+    	function go(q) {
+    		clr();
+    		var searchTerms = [q];
+    		
+    		for (var w in searchTerms) {
+    			print("Found <b>'" + searchTerms[w] + "'</b> in:");
+    			print("<ul>");
+    			var result = index.search(searchTerms[w]);
+    			for (var r in result) {
+    				print('<li><a target="_parent" href="' + result[r] + '">' + titles.get(result[r]) + '</a></li>');
+    			}
+    			print("</ul>");
+    		}
+      		$("#searchOutput").css('padding', '10px');
+            $("#searchbox", window.parent.document).css('height', 100+$("#searchOutput").height());
+    	}
+
+      
+    </script>
+  </head>
+  <body style="font-family: Verdana, Helvetica, Arial, sans-serif; font-size: small">
+
+	  <form action='#' onsubmit="go(document.getElementById('q').value); return false;">
+	    <input type="text" id="q" />
+	    <input type="button" onclick="go(document.getElementById('q').value);" value="search" style="width: 65px"/>
+	    <input type="button" value="clear" onclick="clr2();" style="width: 65px"/>
+	  </form>
+	  <div style="background-color: lightyellow" id="searchOutput"/>
+  
+  </body>
+</html>
