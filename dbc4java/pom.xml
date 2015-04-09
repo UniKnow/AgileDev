@@ -9,7 +9,7 @@
     </parent>
 
     <artifactId>dbc4java</artifactId>
-    <name>Design By Contracts for Spring</name>
+    <name>Design By Contracts for Java</name>
     <description>
         dbc4java is a java solution for 'Design by Contract' with
         seamless integration into the Spring Framework.
