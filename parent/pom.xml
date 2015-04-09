@@ -4,7 +4,7 @@
     <parent>
         <groupId>org.uniknow</groupId>
         <artifactId>agiledev</artifactId>
-        <version>0.1.7</version>
+        <version>0.1.8</version>
     </parent>
 
     <groupId>org.uniknow.agiledev</groupId>
@@ -14,32 +14,6 @@
     <packaging>pom</packaging>
 
     <dependencies>
-        <!--
-        Dependencies for shared/root classes framework
-        -->
-        <!--
-        <dependency>
-            <groupId>org.uniknow.agiledev</groupId>
-            <artifactId>common</artifactId>
-        </dependency>
-        -->
-
-        <!-- Dependencies for enabling Design by Contract -->
-        <!--
-        <dependency>
-            <groupId>net.sf.oval</groupId>
-            <artifactId>oval</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.codehaus.groovy</groupId>
-            <artifactId>groovy-all</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.aspectj</groupId>
-            <artifactId>aspectjrt</artifactId>
-        </dependency>
-        -->
-
         <!-- Dependency for findbug statically code analyzing -->
         <dependency>
             <groupId>com.google.code.findbugs</groupId>
@@ -57,57 +31,26 @@
     <build>
         <pluginManagement>
             <plugins>
-            <!--
-            AspectJ compile time weaving. Required for Design by Contract
-            -->
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>aspectj-maven-plugin</artifactId>
-                <version>1.5</version>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>compile</goal>
-                            <!--<goal>test-compile</goal>-->
-                        </goals>
-                    </execution>
-                </executions>
-                <configuration>
-                    <source>${maven.compiler.source}</source>
-                    <target>${maven.compiler.target}</target>
-                    <showWeaveInfo>true</showWeaveInfo>
-                    <complianceLevel>${maven.compiler.target}</complianceLevel>
-
-                    <encoding>${project.build.sourceEncoding}</encoding>
-
-                    <aspectLibraries>
-                        <aspectLibrary>
-                            <groupId>net.sf.oval</groupId>
-                            <artifactId>oval</artifactId>
-                        </aspectLibrary>
-                    </aspectLibraries>
-                    <aspectLibraries>
-                        <aspectLibrary>
-                            <groupId>org.uniknow.agiledev</groupId>
-                            <artifactId>common</artifactId>
-                        </aspectLibrary>
-                    </aspectLibraries>
-
-                </configuration>
-
-                <dependencies>
-                    <dependency>
-                        <groupId>org.aspectj</groupId>
-                        <artifactId>aspectjrt</artifactId>
-                        <version>${aspectj.version}</version>
-                    </dependency>
-                    <dependency>
-                        <groupId>org.aspectj</groupId>
-                        <artifactId>aspectjtools</artifactId>
-                        <version>${aspectj.version}</version>
-                    </dependency>
-                </dependencies>
-            </plugin>
+                <!--
+                AspectJ compile time weaving. Required for Design by Contract
+                -->
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>aspectj-maven-plugin</artifactId>
+                    <version>1.5</version>
+                    <dependencies>
+                        <dependency>
+                            <groupId>org.aspectj</groupId>
+                            <artifactId>aspectjrt</artifactId>
+                            <version>${aspectj.version}</version>
+                        </dependency>
+                        <dependency>
+                            <groupId>org.aspectj</groupId>
+                            <artifactId>aspectjtools</artifactId>
+                            <version>${aspectj.version}</version>
+                        </dependency>
+                    </dependencies>
+                </plugin>
             </plugins>
         </pluginManagement>
 

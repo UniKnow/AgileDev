@@ -40,6 +40,10 @@
 package org.agiledev.cucumber.report;
 
 import org.junit.Test;
+
+import javax.validation.ConstraintViolationException;
+import javax.validation.ValidationException;
+
 import static org.junit.Assert.*;
 
 import java.io.PrintWriter;
@@ -58,7 +62,7 @@ public class ConfluenceReportBuilderTest {
      * Validates IllegalArgumentException is thrown in case passed builder is
      * null
      */
-    @Test(expected = IllegalArgumentException.class)
+    @Test(expected = ValidationException.class)
     public void testConstructorBuilderNull() {
         new ConfluenceReportBuilder(null);
     }
@@ -67,7 +71,7 @@ public class ConfluenceReportBuilderTest {
      * Validates IllegalArgumentException is thrown in case specified header
      * level <1
      */
-    @Test(expected = IllegalArgumentException.class)
+    @Test(expected = ValidationException.class)
     public void testBeginHeaderLevelLessThanOne() {
         StringWriter writer = new StringWriter();
 

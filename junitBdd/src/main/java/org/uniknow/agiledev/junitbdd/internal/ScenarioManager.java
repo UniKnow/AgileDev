@@ -39,11 +39,12 @@
  */
 package org.uniknow.agiledev.junitbdd.internal;
 
-import net.sf.oval.constraint.NotNull;
-import net.sf.oval.guard.Guarded;
+import org.uniknow.agiledev.dbc4java.Validated;
 import org.uniknow.agiledev.junitbdd.internal.domain.*;
 
-@Guarded
+import javax.validation.constraints.NotNull;
+
+@Validated
 public class ScenarioManager {
 
     /**

@@ -39,8 +39,8 @@
  */
 package org.uniknow.agiledev.junitbdd.internal.domain;
 
-import net.sf.oval.constraint.NotNull;
-import net.sf.oval.guard.Guarded;
+import org.springframework.validation.annotation.Validated;
+import javax.validation.constraints.NotNull;
 
 /**
  * Entity which contains Narrative. A narrative is a short, introductory section
@@ -55,7 +55,7 @@ import net.sf.oval.guard.Guarded;
  * 
  * @author mase
  */
-@Guarded
+@Validated
 public class NarrativeModel {
 
     /**

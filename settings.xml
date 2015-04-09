@@ -1,0 +1,20 @@
+<settings>
+
+	<servers>
+        <!-- Credentials for accessing GitHub Repository -->
+        <server>
+            <id>github</id>
+            <username>${env.CI_GITHUB_USERNAME}</username>
+            <password>${env.CI_GITHUB_PASSWORD}</password>
+        </server>
+
+        <!-- credentials ossrh (OSS Repository Hosting)-->
+        <server>
+            <id>ossrh</id>
+            <username>${env.CI_DEPLOY_USERNAME}</username>
+            <password>${env.CI_DEPLOY_PASSWORD}</password>
+        </server>
+
+	</servers>
+
+</settings>

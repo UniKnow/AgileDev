@@ -54,13 +54,4 @@ public class WhenModel extends StepBasedModel {
         return Keyword.keyword("When");
     }
 
-    // public String text() {
-    // StringBuilder text = new StringBuilder();
-    // for (Object step : steps) {
-    // text.append(Keyword.keyword("When"));
-    // text.append(" ");
-    // text.append(step.toString());
-    // }
-    // return text.toString().trim();
-    // }
 }

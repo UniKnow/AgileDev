@@ -39,7 +39,7 @@
  */
 package org.uniknow.agiledev.junitbdd.internal.domain;
 
-import net.sf.oval.constraint.NotNull;
+import javax.validation.constraints.*;
 
 import java.util.*;
 
