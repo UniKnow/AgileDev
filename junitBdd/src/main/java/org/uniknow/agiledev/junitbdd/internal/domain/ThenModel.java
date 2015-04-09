@@ -54,13 +54,4 @@ public class ThenModel extends StepBasedModel {
         return Keyword.keyword("Then");
     }
 
-    // public String text() {
-    // StringBuilder text = new StringBuilder();
-    // for (Object step : steps) {
-    // text.append(Keyword.keyword("Then"));
-    // text.append(" ");
-    // text.append(step.toString());
-    // }
-    // return text.toString().trim();
-    // }
 }

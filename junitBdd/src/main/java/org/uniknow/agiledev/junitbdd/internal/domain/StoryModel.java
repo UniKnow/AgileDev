@@ -44,14 +44,17 @@ import static org.uniknow.agiledev.junitbdd.internal.BDDStringUtils.*;
 import java.io.*;
 import java.util.*;
 
-import net.sf.oval.constraint.NotNull;
 import org.junit.runner.*;
 
+import org.springframework.validation.annotation.Validated;
 import org.uniknow.agiledev.junitbdd.Narrative;
 import org.uniknow.agiledev.junitbdd.internal.ParseException;
 import org.uniknow.agiledev.junitbdd.internal.domain.ScenarioModel.ScenarioStatus;
 import org.uniknow.agiledev.junitbdd.internal.writers.Keyword;
 
+import javax.validation.constraints.NotNull;
+
+@Validated
 public class StoryModel implements WithText {
 
     /**

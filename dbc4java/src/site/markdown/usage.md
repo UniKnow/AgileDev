@@ -1,4 +1,7 @@
-# Usage `dbc4spring`
+# Usage `dbc4java`
+
+To use `dbc4java` within your project you need to include the following dependency within your project.
+
 
 Classes for which its constraints need to be verified require to be annotated with `@Validated` and the constraints on fields, methods, etc are also added as annotations to the class/method.
 
@@ -25,7 +28,10 @@ Classes for which its constraints need to be verified require to be annotated wi
 
 In the example above we assure by the constraint `@Min(0)` that the integer is always positive.
 
-To assure that the constraints are validated at every method invocation the dbc4spring spring configuration file need to be imported.
+## Usage standalone
+
+## Usage within Spring
+To assure that the constraints are validated at every method invocation the dbc4java spring configuration file need to be imported.
 
     <beans xmlns="http://www.springframework.org/schema/beans"
            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"

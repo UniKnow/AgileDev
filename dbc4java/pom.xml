@@ -11,7 +11,7 @@
     <artifactId>dbc4java</artifactId>
     <name>Design By Contracts for Spring</name>
     <description>
-        dbc4spring is a java solution for 'Design by Contract' with
+        dbc4java is a java solution for 'Design by Contract' with
         seamless integration into the Spring Framework.
     </description>
 
@@ -41,6 +41,7 @@
             <artifactId>spring-aspects</artifactId>
             <scope>provided</scope>
         </dependency>
+
         <dependency>
             <groupId>org.aspectj</groupId>
             <artifactId>aspectjrt</artifactId>

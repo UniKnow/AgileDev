@@ -62,7 +62,10 @@ public class ScenarioListenerTest {
     /**
      * Verifies IllegalArgumentException is thrown when passed test results is
      * null
+     * 
+     * Ignored due to https://github.com/UniKnow/AgileDev/issues/3
      */
+    @Ignore
     @Scenario
     @Test(expected = IllegalArgumentException.class)
     public void testRunFinishedResultNull() throws Exception {

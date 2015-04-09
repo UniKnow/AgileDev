@@ -37,31 +37,51 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
-package org.agileDev.common.annotations;
+package org.uniknow.agiledev.tutorial.dbc;
 
-import net.sf.oval.exception.ExceptionTranslatorJDKExceptionsImpl;
-import net.sf.oval.guard.GuardAspect2;
-import org.aspectj.lang.annotation.Aspect;
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
 
-@Aspect
-public class OvalGuard extends GuardAspect2 {
+import javax.validation.ValidationException;
 
-    public OvalGuard() {
-        super();
+import static org.junit.Assert.assertEquals;
 
-        // specify an exception translator. Translates OVal specific
-        // exceptions to standard exceptions part of the JRE:
-        // -. ConstraintsViolatedException for constructor/method parameter
-        // translated to IllegalArgumentException
-        // -. ConstraintsViolatedException for class field translated to
-        // IllegalStateException
-        // -. ConstraintsViolatedException for method return values translated
-        // to IllegalStateException
-        // -. Other exceptions based on OValException translated to
-        // RuntimeException
-        getGuard().setExceptionTranslator(
-            new ExceptionTranslatorJDKExceptionsImpl());
+/**
+ * Verifies invariant of {@code PositiveInteger} is applied.
+ */
+public class PositiveIntegerTest {
 
+    private PositiveInteger value;
+
+    @Before
+    public void init() {
+        value = new PositiveInteger();
     }
 
+    /**
+     * Verifies initial value of {@code PositiveInteger} is 0.
+     */
+    @Test
+    public void testInitialValue() {
+        assertEquals(0, value.toInt());
+    }
+
+    /**
+     * Verifies value is properly added
+     */
+    @Test
+    public void testAddPositiveValue() {
+        value.add(1);
+        assertEquals(1, value.toInt());
+    }
+
+    /**
+     * Verifies {@code ValidationException} exception is thrown when value
+     * becomes negative
+     */
+    @Test(expected = ValidationException.class)
+    public void testAddNegativeValue() {
+        value.add(-1);
+    }
 }

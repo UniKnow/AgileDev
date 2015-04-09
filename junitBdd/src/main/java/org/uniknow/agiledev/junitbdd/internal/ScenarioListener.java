@@ -41,15 +41,16 @@ package org.uniknow.agiledev.junitbdd.internal;
 
 import static org.uniknow.agiledev.junitbdd.internal.BDDStringUtils.*;
 
+import javax.validation.constraints.NotNull;
+
 import java.util.*;
 
 import junitparams.*;
 
-import net.sf.oval.constraint.NotNull;
-import net.sf.oval.guard.Guarded;
 import org.junit.runner.*;
 import org.junit.runner.notification.*;
 
+import org.uniknow.agiledev.dbc4java.Validated;
 import org.uniknow.agiledev.junitbdd.Narrative;
 import org.uniknow.agiledev.junitbdd.Scenario;
 import org.uniknow.agiledev.junitbdd.Story;
@@ -57,7 +58,6 @@ import org.uniknow.agiledev.junitbdd.internal.domain.*;
 import org.uniknow.agiledev.junitbdd.internal.domain.ScenarioModel.ScenarioStatus;
 import org.uniknow.agiledev.junitbdd.internal.writers.*;
 
-@Guarded
 public class ScenarioListener extends RunListener {
 
     private StoryModel story;
@@ -85,7 +85,7 @@ public class ScenarioListener extends RunListener {
     }
 
     @Override
-    public void testRunFinished(@NotNull Result result) throws Exception {
+    public void testRunFinished(Result result) throws Exception {
         setScenariosStatuses(result);
         updateStoriesList();
         generateReport();

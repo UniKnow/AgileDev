@@ -37,21 +37,27 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
-package org.uniknow.agiledev.junitbdd.internal.domain;
+package org.uniknow.agiledev.tutorial.dbc;
 
-import org.uniknow.agiledev.junitbdd.internal.writers.Keyword;
+import org.uniknow.agiledev.dbc4java.Validated;
 
-public class WhenModel extends StepBasedModel {
+import javax.validation.constraints.Min;
 
-    public WhenModel(String text) {
-        super(text);
+@Validated
+public class PositiveInteger {
+
+    @Min(0)
+    private int value = 0;
+
+    public void add(int addedValue) {
+        value += addedValue;
     }
 
-    public WhenModel() {
+    public void subtract(int subtractedValue) {
+        value -= subtractedValue;
     }
 
-    protected final String getKeyWord() {
-        return Keyword.keyword("When");
+    public int toInt() {
+        return value;
     }
-
 }

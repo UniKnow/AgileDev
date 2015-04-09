@@ -105,6 +105,7 @@
         <module>dbc4java</module>
         <module>cucumber-reporting</module>
         <module>cucumber-reporting-example</module>
+        <module>tutorials/dbc</module>
         <module>tutorials/ddd</module>
         <module>tutorials/rest</module>
     </modules>
@@ -138,16 +139,6 @@
                 <artifactId>aspectjweaver</artifactId>
                 <version>${aspectj.version}</version>
                 <scope>runtime</scope>
-            </dependency>
-            <dependency>
-                <groupId>net.sf.oval</groupId>
-                <artifactId>oval</artifactId>
-                <version>${oval.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.codehaus.groovy</groupId>
-                <artifactId>groovy-all</artifactId>
-                <version>${groovy.version}</version>
             </dependency>
             <dependency>
                 <groupId>cglib</groupId>

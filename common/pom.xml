@@ -17,19 +17,19 @@
     </properties>
 
     <dependencies>
-        <!-- Dependencies for enabling Design by Contract -->
-        <dependency>
-            <groupId>net.sf.oval</groupId>
-            <artifactId>oval</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.codehaus.groovy</groupId>
-            <artifactId>groovy-all</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.aspectj</groupId>
-            <artifactId>aspectjrt</artifactId>
-        </dependency>
+        <!--&lt;!&ndash; Dependencies for enabling Design by Contract &ndash;&gt;-->
+        <!--<dependency>-->
+            <!--<groupId>net.sf.oval</groupId>-->
+            <!--<artifactId>oval</artifactId>-->
+        <!--</dependency>-->
+        <!--<dependency>-->
+            <!--<groupId>org.codehaus.groovy</groupId>-->
+            <!--<artifactId>groovy-all</artifactId>-->
+        <!--</dependency>-->
+        <!--<dependency>-->
+            <!--<groupId>org.aspectj</groupId>-->
+            <!--<artifactId>aspectjrt</artifactId>-->
+        <!--</dependency>-->
 
         <dependency>
             <groupId>junit</groupId>
@@ -46,52 +46,6 @@
             -->
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
-            </plugin>
-
-            <!--
-                AspectJ compile time weaving. Required for Design by Contract
-            -->
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>aspectj-maven-plugin</artifactId>
-                <version>1.5</version>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>compile</goal>
-                            <!--<goal>test-compile</goal>-->
-                        </goals>
-                    </execution>
-                </executions>
-                <configuration>
-                    <source>${maven.compiler.source}</source>
-                    <target>${maven.compiler.target}</target>
-                    <showWeaveInfo>true</showWeaveInfo>
-                    <complianceLevel>${maven.compiler.target}</complianceLevel>
-
-                    <encoding>${project.build.sourceEncoding}</encoding>
-
-                    <aspectLibraries>
-                        <aspectLibrary>
-                            <groupId>net.sf.oval</groupId>
-                            <artifactId>oval</artifactId>
-                        </aspectLibrary>
-                    </aspectLibraries>
-                </configuration>
-
-                <dependencies>
-                    <dependency>
-                        <groupId>org.aspectj</groupId>
-                        <artifactId>aspectjrt</artifactId>
-                        <version>${aspectj.version}</version>
-                    </dependency>
-                    <dependency>
-                        <groupId>org.aspectj</groupId>
-                        <artifactId>aspectjtools</artifactId>
-                        <version>${aspectj.version}</version>
-                    </dependency>
-                </dependencies>
-
             </plugin>
 
             <!--
