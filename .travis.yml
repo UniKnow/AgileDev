@@ -3,7 +3,7 @@ language: java
 # setting install to true to avoid unnecessary build
 install: false
 
-script: mvn clean install
+script: mvn clean install deploy site site:deploy
 
 branches:
   only:
