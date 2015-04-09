@@ -1,7 +1,7 @@
 <settings>
 
 	<servers>
-        <!-- Credentials for accessing GitHub repository -->
+        <!-- Credentials for accessing GitHub Repository -->
         <server>
             <id>github</id>
             <username>${env.CI_GITHUB_USERNAME}</username>
