@@ -1,9 +1,9 @@
 language: java
 
 # setting install to true to avoid unnecessary build
-install: false
+install: true
 
-script: mvn clean install deploy site site:deploy
+script: mvn -s settings.xml clean install deploy site site:deploy
 
 branches:
   only:
