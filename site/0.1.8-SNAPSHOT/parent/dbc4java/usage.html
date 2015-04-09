@@ -9,7 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="Date-Revision-yyyymmdd" content="20150409" />
     <meta http-equiv="Content-Language" content="en" />
-    <title>Design By Contract - Usage dbc4spring</title>
+    <title>Design By Contract - Usage dbc4java</title>
     <link rel="stylesheet" href="./css/apache-maven-fluido-1.3.0.min.css" />
     <link rel="stylesheet" href="./css/site.css" />
     <link rel="stylesheet" href="./css/print.css" media="print" />
@@ -97,7 +97,8 @@
                 
         <div id="bodyColumn"  class="span9" >
                                   
-            <h1>Usage <tt>dbc4spring</tt></h1>
+            <h1>Usage <tt>dbc4java</tt></h1>
+<p>To use <tt>dbc4java</tt> within your project you need to include the following dependency within your project.</p>
 <p>Classes for which its constraints need to be verified require to be annotated with <tt>@Validated</tt> and the constraints on fields, methods, etc are also added as annotations to the class/method.</p>
 
 <div class="source">
@@ -123,7 +124,11 @@ public class PositiveInteger {
 }
 </pre></div>
 <p>In the example above we assure by the constraint <tt>@Min(0)</tt> that the integer is always positive.</p>
-<p>To assure that the constraints are validated at every method invocation the dbc4spring spring configuration file need to be imported.</p>
+<div class="section">
+<h2>Usage standalone<a name="Usage_standalone"></a></h2></div>
+<div class="section">
+<h2>Usage within Spring<a name="Usage_within_Spring"></a></h2>
+<p>To assure that the constraints are validated at every method invocation the dbc4java spring configuration file need to be imported.</p>
 
 <div class="source">
 <pre>&lt;beans xmlns=&quot;http://www.springframework.org/schema/beans&quot;
@@ -140,7 +145,7 @@ public class PositiveInteger {
 
     &lt;context:component-scan base-package=&quot;org.uniknow.agiledev.dbc4spring&quot;/&gt;
 &lt;/beans&gt;
-</pre></div>
+</pre></div></div>
                   </div>
             </div>
           </div>
