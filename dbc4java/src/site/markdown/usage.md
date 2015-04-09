@@ -1,7 +1,28 @@
 # Usage `dbc4java`
 
-To use `dbc4java` within your project you need to include the following dependency within your project.
+To use `dbc4java` within your project you need to include the following dependency within your `pom.xml`:
 
+    <!-- Dependencies to implement Design by Contract -->
+    <dependency>
+        <groupId>org.uniknow.agiledev</groupId>
+        <artifactId>dbc4java</artifactId>
+        <version>${project.version}</version>
+    </dependency>
+    <dependency>
+        <groupId>org.aspectj</groupId>
+        <artifactId>aspectjrt</artifactId>
+        <version>1.8.5</version>
+    </dependency>
+    <dependency>
+        <groupId>org.aspectj</groupId>
+        <artifactId>aspectjweaver</artifactId>
+        <version>1.8.5</version>
+    </dependency>
+    <dependency>
+        <groupId>cglib</groupId>
+        <artifactId>cglib</artifactId>
+        <version>1.8.5</version>
+    </dependency>
 
 Classes for which its constraints need to be verified require to be annotated with `@Validated` and the constraints on fields, methods, etc are also added as annotations to the class/method.
 
@@ -29,6 +50,38 @@ Classes for which its constraints need to be verified require to be annotated wi
 In the example above we assure by the constraint `@Min(0)` that the integer is always positive.
 
 ## Usage standalone
+To assure that the constraints are validated at every method invocation all classes need to be compiled with `aspectj`. For that the following snippet needs to be added to your `pom.xml`:
+
+    <!--
+    AspectJ compile time weaving. Required for Design by Contract
+    -->
+    <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>aspectj-maven-plugin</artifactId>
+        <executions>
+            <execution>
+                <goals>
+                    <goal>compile</goal>
+                </goals>
+            </execution>
+        </executions>
+        <configuration>
+            <source>${maven.compiler.source}</source>
+            <target>${maven.compiler.target}</target>
+            <showWeaveInfo>true</showWeaveInfo>
+            <complianceLevel>${maven.compiler.target}</complianceLevel>
+
+            <encoding>${project.build.sourceEncoding}</encoding>
+
+            <weaveDependencies>
+                <weaveDependency>
+                    <groupId>org.uniknow.agiledev</groupId>
+                    <artifactId>dbc4java</artifactId>
+                </weaveDependency>
+            </weaveDependencies>
+
+        </configuration>
+    </plugin>
 
 ## Usage within Spring
 To assure that the constraints are validated at every method invocation the dbc4java spring configuration file need to be imported.
