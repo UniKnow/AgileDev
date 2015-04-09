@@ -5,7 +5,8 @@ install: true
 
 script: mvn clean install --settings settings.xml
 
-after_success: mvn site deploy --settings settings.xml
+after_success:
+   - mvn site deploy --settings settings.xml
 
 branches:
   only:
