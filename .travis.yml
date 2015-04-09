@@ -3,10 +3,7 @@ language: java
 # setting install to true to avoid unnecessary build
 install: true
 
-script: mvn clean install --settings settings.xml
-
-after_success:
-   - mvn site deploy --settings settings.xml
+script: mvn clean install site deploy --settings settings.xml
 
 branches:
   only:
