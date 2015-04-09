@@ -1,7 +1,7 @@
 <settings>
 
 	<servers>
-        <!-- credentials ossrh -->
+        <!-- credentials ossrh (OSS Repository Hosting)-->
         <server>
             <id>ossrh</id>
             <username>${env.CI_DEPLOY_USERNAME}</username>
