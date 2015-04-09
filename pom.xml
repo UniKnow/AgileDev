@@ -98,7 +98,7 @@
         <module>common</module>
         <module>parent</module>
         <module>junitBdd</module>
-        <module>dbc4spring</module>
+        <module>dbc4java</module>
         <module>cucumber-reporting</module>
         <module>cucumber-reporting-example</module>
         <module>tutorials</module>

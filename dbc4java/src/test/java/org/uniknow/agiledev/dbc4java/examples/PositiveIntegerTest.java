@@ -37,13 +37,51 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
-package org.uniknow.agiledev.cqrs.command;
+package org.uniknow.agiledev.dbc4java.examples;
 
-import org.uniknow.agiledev.dbc4java.Validated;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
+import javax.inject.Inject;
+import javax.validation.ValidationException;
+
+import static org.junit.Assert.*;
 
 /**
- * Commands are things that indicate requests to our domain.
+ * Verifies invariant of {@code PositiveInteger} is applied.
  */
-@Validated
-public class Command {
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations = "/service-spring-config.xml")
+public class PositiveIntegerTest {
+
+    @Inject
+    private PositiveInteger value;
+
+    /**
+     * Verifies initial value of {@code PositiveInteger} is 0.
+     */
+    @Test
+    public void testInitialValue() {
+        assertEquals(0, value.toInt());
+    }
+
+    /**
+     * Verifies value is properly added
+     */
+    @Test
+    public void testAddPositiveValue() {
+        value.add(1);
+        assertEquals(1, value.toInt());
+    }
+
+    /**
+     * Verifies {@code ValidationException} exception is thrown when value
+     * becomes negative
+     */
+    @Test(expected = ValidationException.class)
+    public void testAddNegativeValue() {
+        value.add(-1);
+    }
 }

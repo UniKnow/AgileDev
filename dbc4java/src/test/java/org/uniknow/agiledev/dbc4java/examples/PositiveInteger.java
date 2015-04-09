@@ -37,13 +37,35 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
-package org.uniknow.agiledev.cqrs.command;
+package org.uniknow.agiledev.dbc4java.examples;
 
+import org.springframework.beans.factory.config.BeanDefinition;
+import org.springframework.context.annotation.Scope;
 import org.uniknow.agiledev.dbc4java.Validated;
 
+import javax.inject.Named;
+import javax.validation.constraints.Min;
+
 /**
- * Commands are things that indicate requests to our domain.
+ * Example of an invariant that guarantees that value is positive
  */
+@Named
 @Validated
-public class Command {
+@Scope(BeanDefinition.SCOPE_PROTOTYPE)
+public class PositiveInteger {
+
+    @Min(0)
+    private int value = 0;
+
+    public void add(int addedValue) {
+        value += addedValue;
+    }
+
+    public void subtract(int subtractedValue) {
+        value -= subtractedValue;
+    }
+
+    public int toInt() {
+        return value;
+    }
 }

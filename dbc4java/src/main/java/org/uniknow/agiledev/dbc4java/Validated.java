@@ -37,13 +37,19 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
-package org.uniknow.agiledev.cqrs.command;
+package org.uniknow.agiledev.dbc4java;
 
-import org.uniknow.agiledev.dbc4java.Validated;
+import java.lang.annotation.*;
 
 /**
- * Commands are things that indicate requests to our domain.
+ * Activates automatic method-level validation for any annotated bean. The
+ * methods {@code equals} and {@code hashCode} will be excluded from validation.
+ * 
+ * @author mase
+ * @since 0.1.3
  */
-@Validated
-public class Command {
+@Target({ ElementType.METHOD, ElementType.TYPE })
+@Retention(RetentionPolicy.RUNTIME)
+@Inherited
+public @interface Validated {
 }

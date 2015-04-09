@@ -40,7 +40,7 @@
 package org.uniknow.agiledev.ddd.domain.model.common;
 
 import org.springframework.beans.BeansException;
-import org.uniknow.agiledev.dbc4spring.Validated;
+import org.uniknow.agiledev.dbc4java.Validated;
 
 import javax.validation.constraints.NotNull;
 

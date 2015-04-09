@@ -25,7 +25,7 @@
         <!-- Design by Contract dependencies -->
         <dependency>
             <groupId>org.uniknow.agiledev</groupId>
-            <artifactId>dbc4spring</artifactId>
+            <artifactId>dbc4java</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>

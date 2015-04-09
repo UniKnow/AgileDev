@@ -37,13 +37,50 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
-package org.uniknow.agiledev.cqrs.command;
+package org.uniknow.agiledev.dbc4java;
 
-import org.uniknow.agiledev.dbc4java.Validated;
+import org.hibernate.validator.method.MethodConstraintViolationException;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
+import javax.inject.Inject;
+import java.util.Date;
+
+import static org.junit.Assert.*;
 
 /**
- * Commands are things that indicate requests to our domain.
+ * Created by mase on 3/11/2015.
  */
-@Validated
-public class Command {
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations = "/service-spring-config.xml")
+public class SpringValidatorTest {
+
+    @Inject
+    private Repository<Movie> repository;
+
+    @Test(expected = MethodConstraintViolationException.class)
+    public void createMovieWithInvalidReleaseDate() {
+        repository.createMovie(null);
+    }
+
+    @Test(expected = MethodConstraintViolationException.class)
+    public void createWithInvalidReleaseDate() {
+        repository.createMovie(null);
+    }
+
+    @Test
+    public void createMovie() {
+        Movie movie = repository.createMovie(new Date(System
+            .currentTimeMillis()));
+        assertNotNull(movie);
+    }
+
+    @Test(expected = MethodConstraintViolationException.class)
+    public void setTitleMovieNull() {
+        Movie movie = repository.createMovie(new Date(System
+            .currentTimeMillis()));
+        movie.setTitle(null);
+    }
 }

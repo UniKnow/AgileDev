@@ -41,7 +41,7 @@ package org.uniknow.example.domain.model.cargo;
 
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.context.annotation.Scope;
-import org.uniknow.agiledev.dbc4spring.Validated;
+import org.uniknow.agiledev.dbc4java.Validated;
 
 import javax.inject.Named;
 import javax.validation.constraints.NotNull;

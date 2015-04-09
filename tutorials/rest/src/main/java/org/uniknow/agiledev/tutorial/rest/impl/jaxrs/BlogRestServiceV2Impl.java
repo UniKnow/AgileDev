@@ -42,7 +42,7 @@ package org.uniknow.agiledev.tutorial.rest.impl.jaxrs;
 import org.dozer.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.uniknow.agiledev.dbc4spring.Validated;
+import org.uniknow.agiledev.dbc4java.Validated;
 import org.uniknow.agiledev.tutorial.rest.api.BlogService;
 import org.uniknow.agiledev.tutorial.rest.api.domain.MyPost;
 import org.uniknow.agiledev.tutorial.rest.api.jaxrs.V2.BlogRestService;

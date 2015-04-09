@@ -5,53 +5,58 @@
         <groupId>org.uniknow.agiledev</groupId>
         <artifactId>parent</artifactId>
         <version>0.1.8-SNAPSHOT</version>
-        <relativePath>../../parent/pom.xml</relativePath>
+        <relativePath>../parent/pom.xml</relativePath>
     </parent>
 
-    <groupId>org.uniknow.agiledev.tutorials</groupId>
-    <artifactId>ddd</artifactId>
-    <name>Tutorial Domain Driven Design</name>
-
+    <artifactId>dbc4java</artifactId>
+    <name>Design By Contracts for Spring</name>
     <description>
-        The following tutorial describes best practices for applying Domain
-        Driven Design.
+        dbc4spring is a java solution for 'Design by Contract' with
+        seamless integration into the Spring Framework.
     </description>
 
     <dependencies>
-
         <dependency>
-            <groupId>org.uniknow.agiledev</groupId>
-            <artifactId>dbc4java</artifactId>
-            <version>${project.version}</version>
+            <groupId>javax.inject</groupId>
+            <artifactId>javax.inject</artifactId>
         </dependency>
 
-        <!-- Dependencies Spring -->
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-validator</artifactId>
+        </dependency>
+
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-beans</artifactId>
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-aop</artifactId>
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
-            <artifactId>spring-tx</artifactId>
+            <artifactId>spring-aspects</artifactId>
+            <scope>provided</scope>
         </dependency>
-
-        <!-- Dependencies aop -->
         <dependency>
             <groupId>org.aspectj</groupId>
             <artifactId>aspectjrt</artifactId>
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>org.aspectj</groupId>
             <artifactId>aspectjweaver</artifactId>
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>cglib</groupId>
             <artifactId>cglib</artifactId>
+            <scope>provided</scope>
         </dependency>
+
 
         <!--
           Dependencies Test
@@ -64,14 +69,13 @@
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-context</artifactId>
-            <!--<scope>test</scope>-->
+            <scope>test</scope>
         </dependency>
 
     </dependencies>
 
     <build>
         <plugins>
-
             <!-- Disable aspect weaving because that breaks spring validation -->
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
@@ -83,25 +87,21 @@
                 </executions>
             </plugin>
 
-            <!-- Index maven site so that we can search -->
+
             <plugin>
-                <groupId>org.uniknow.maven.plugins</groupId>
-                <artifactId>index</artifactId>
-                <version>${project.version}</version>
-                <executions>
-                    <execution>
-                        <phase>site</phase>
-                        <goals>
-                            <goal>index</goal>
-                        </goals>
-                    </execution>
-                </executions>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>2.6</version>
                 <configuration>
-                    <!--<site>${project.build.directory}/target/site</site>-->
+                    <archive>
+                        <manifest>
+                            <addClasspath>true</addClasspath>
+                        </manifest>
+                    </archive>
                 </configuration>
             </plugin>
 
-
         </plugins>
     </build>
+
 </project>

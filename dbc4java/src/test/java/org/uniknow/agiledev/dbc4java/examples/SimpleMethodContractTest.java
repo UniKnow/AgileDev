@@ -37,13 +37,43 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
-package org.uniknow.agiledev.cqrs.command;
+package org.uniknow.agiledev.dbc4java.examples;
 
-import org.uniknow.agiledev.dbc4java.Validated;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
+import javax.inject.Inject;
+import javax.validation.ValidationException;
 
 /**
- * Commands are things that indicate requests to our domain.
+ * Verifies that {@code ValidationException} is thrown when client doesn't
+ * comply to the agreed contract.
  */
-@Validated
-public class Command {
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations = "/service-spring-config.xml")
+public class SimpleMethodContractTest {
+
+    @Inject
+    private SimpleMethodContract contract;
+
+    /**
+     * Verifies {@code ValidationException} is thrown when specified index is
+     * below 0
+     */
+    @Test(expected = ValidationException.class)
+    public void getValueIndexBelowMin() {
+        contract.getValue(-1);
+    }
+
+    /**
+     * Verifies {@code ValidationException} is thrown when specified index is
+     * above {@code MAX_VALUES}-1
+     */
+    @Test(expected = ValidationException.class)
+    public void getValueIndexAboveMax() {
+        contract.getValue(SimpleMethodContract.MAX_VALUES);
+    }
+
 }

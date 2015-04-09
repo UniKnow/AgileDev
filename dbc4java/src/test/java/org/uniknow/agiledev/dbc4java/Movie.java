@@ -37,13 +37,50 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
-package org.uniknow.agiledev.cqrs.command;
+package org.uniknow.agiledev.dbc4java;
 
-import org.uniknow.agiledev.dbc4java.Validated;
+import org.springframework.beans.factory.config.BeanDefinition;
+import org.springframework.context.annotation.Scope;
+
+import javax.inject.Named;
+import javax.validation.constraints.NotNull;
+import java.util.Date;
 
 /**
- * Commands are things that indicate requests to our domain.
+ * Created by mase on 3/11/2015.
  */
+@Named
 @Validated
-public class Command {
+@Scope(BeanDefinition.SCOPE_PROTOTYPE)
+public class Movie {
+
+    @NotNull(message = "Null is not a valid value for release date")
+    private Date releaseDate;
+
+    private String title;
+
+    /**
+     * Constructor movie
+     */
+    public Movie() {
+        this(new Date());
+    }
+
+    /**
+     * Constructor movie
+     * 
+     * @param releaseDate
+     */
+    public Movie(Date releaseDate) {
+        this.releaseDate = releaseDate;
+    }
+
+    public void setReleaseDate(Date releaseDate) {
+        this.releaseDate = releaseDate;
+    }
+
+    public void setTitle(@NotNull String title) {
+        this.title = title;
+    }
+
 }

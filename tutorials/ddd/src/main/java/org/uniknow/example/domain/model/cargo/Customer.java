@@ -42,7 +42,7 @@ package org.uniknow.example.domain.model.cargo;
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.NotEmpty;
 
-import org.uniknow.agiledev.dbc4spring.Validated;
+import org.uniknow.agiledev.dbc4java.Validated;
 
 import javax.validation.constraints.NotNull;
 

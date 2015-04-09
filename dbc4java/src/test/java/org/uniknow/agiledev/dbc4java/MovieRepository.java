@@ -37,13 +37,30 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
-package org.uniknow.agiledev.cqrs.command;
+package org.uniknow.agiledev.dbc4java;
 
-import org.uniknow.agiledev.dbc4java.Validated;
+import org.springframework.beans.factory.ObjectFactory;
+
+import javax.inject.Inject;
+import javax.inject.Named;
+import java.util.Date;
 
 /**
- * Commands are things that indicate requests to our domain.
+ * Created by mase on 3/11/2015.
  */
+@Named
 @Validated
-public class Command {
+// This should come from interface Repository :(
+public class MovieRepository implements Repository<Movie> {
+
+    @Inject
+    private ObjectFactory<Movie> factory;
+
+    public Movie createMovie(Date releaseDate) {
+        System.out.println("Creating Movie with release date " + releaseDate);
+        Movie movie = factory.getObject();
+        movie.setReleaseDate(releaseDate);
+        return movie;
+        // return new Movie(releaseDate);
+    }
 }
