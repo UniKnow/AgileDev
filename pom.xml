@@ -4,7 +4,7 @@
     <name>AgileDev</name>
     <groupId>org.uniknow</groupId>
     <artifactId>agiledev</artifactId>
-    <version>0.1.9-SNAPSHOT</version>
+    <version>0.1.9-archimate-SNAPSHOT</version>
     <packaging>pom</packaging>
     <description>Tooling for Agile development</description>
     <url>https://github.com/UniKnow/AgileDev</url>
@@ -263,7 +263,7 @@
                         <dependency>
                             <groupId>org.uniknow.agiledev</groupId>
                             <artifactId>buildConfiguration</artifactId>
-                            <version>0.1.9-SNAPSHOT</version>
+                            <version>0.1.9-archimate-SNAPSHOT</version>
                         </dependency>
                     </dependencies>
                 </plugin>
@@ -293,7 +293,7 @@
                         <dependency>
                             <groupId>org.uniknow.agiledev</groupId>
                             <artifactId>buildConfiguration</artifactId>
-                            <version>0.1.9-SNAPSHOT</version>
+                            <version>0.1.9-archimate-SNAPSHOT</version>
                         </dependency>
                     </dependencies>
                 </plugin>
@@ -518,7 +518,7 @@
                         Pushing in-development features to origin allows all developers to
                         see what each other are working on
                     -->
-                    <pushFeatures>true</pushFeatures>
+                    <pushFeatures>false</pushFeatures>
 
                     <!--
                         This allows the CI server (e.g. Jenkins) to automatically push new
