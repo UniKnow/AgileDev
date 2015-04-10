@@ -58,8 +58,10 @@
     <version position="left"/>
 
     <body>
-        <menu name="Overview">
+        <menu name="Introduction">
             <item name="Why ArchiMate" href="why_archimate.html"/>
+            <item name="Benefits ArchiMate" href="benefits_archimate.html"/>
+            <item name="What is ArchiMate" href="what_is_archimate.html"/>
         </menu>
     </body>
 </project>
