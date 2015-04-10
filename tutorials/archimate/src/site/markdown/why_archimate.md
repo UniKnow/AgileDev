@@ -1,0 +1,8 @@
+# Why ArchiMate?
+
+Enterprise architecture is an important instrument to address company wide integration. It is a collection of principles, methods and models that are used in the design and realization of the organizational structure, business processes, information systems and IT infrastructure. A good architecture practice enables an organization to align business and IT operations, quickly respond to changes in the environment, and make optimal use of technological opportunities. The development and maintenance of architectures will lead to efficiency, cost reduction and flexibility.
+
+Within companies various domain architectures can be found, (organization, business process, application, information and technical architectures). Each architecture domain has its own concepts for modeling and visualization. These specific models and visualizations simplify communication, discussion and analysis within the domain.
+ However, the relations between the concepts in these different domains are in many cases unclear. Moreover, these domains often partially overlap but use different notations to express the same ideas. The resulting ambiguities and confusion prevent a efficiently operating organization.
+
+ ArchiMate wants to remove these ambiguities. It presents a unified way of modeling enterprise architectures, integrating the various domains and describing them in an easily readable way. 
