@@ -39,7 +39,7 @@
     ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 -->
-<project name="Design By Contract">
+<project name="JUnitBDD">
 
     <skin>
         <groupId>org.apache.maven.skins</groupId>
@@ -59,9 +59,8 @@
 
     <body>
         <menu name="Overview">
-            <item name="Introduction DBC" href="introduction_dbc.html"/>
-            <item name="Usage dbc4spring" href="usage.html"/>
-            <item name="Constraints" href="validation_constraints.html"/>
+            <item name="Introduction BDD" href="bdd.html"/>
+            <item name="Acronyms" href="acronyms.html"/>
         </menu>
     </body>
 </project>

@@ -7,7 +7,6 @@
     <bannerLeft>
         <name>Company name</name>
         <src>images/UniKnow-logo.jpg</src>
-        <href>www.uniknow.com/</href>
     </bannerLeft>
     <bannerRight>
         <name>${project.name}</name>
