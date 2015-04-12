@@ -6,13 +6,7 @@ target/
 .idea/
 bin/
 *.log
-
-gwt-unitCache-*
-.DS_Store
-*.ipr
-*.iws
-*.iml
 .idea
-*.swp
+*.bak
 
 

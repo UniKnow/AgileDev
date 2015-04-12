@@ -2,6 +2,10 @@
 
 ArchiMate is a modeling language for describing enterprise architectures. It presents a set of concepts within and relationships between architecture domains, and offers a uniform structure for describing the content of these domains.
 
+The most important concepts of ArchiMate are shown below.
+
+![concepts of ArchiMate](images/concepts-archimate.png)
+
 ## Services
 
 Services play a central role in the relation between domains.
