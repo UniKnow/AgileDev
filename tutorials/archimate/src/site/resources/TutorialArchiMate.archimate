@@ -10,6 +10,13 @@
     <element xsi:type="archimate:BusinessRole" id="76667cd5" name="Business Role"/>
     <element xsi:type="archimate:BusinessActor" id="b1a6f360" name="Business Actor"/>
     <element xsi:type="archimate:BusinessInterface" id="7a77302a" name="Business Interface"/>
+    <element xsi:type="archimate:BusinessActor" id="047289a4" name="Business Actor">
+      <documentation>A business role is defined as the responsibility for performing specific behavior, to which an actor can be assigned. 
+
+Business processes or business functions are assigned to a single business role with certain responsibilities or skills. A business actor that is assigned to a business role ultimately performs the corresponding behavior. A business role may be assigned to one or more business processes or business functions, while a business actor may be assigned to a business role. 
+
+A business interface or an application interface may be used by a business role, while a business interface may be part of a business role (through a composition relationship, which is not shown explicitly in the interface notation). The name of a business role should preferably be a noun.</documentation>
+    </element>
   </folder>
   <folder name="Application" id="a547deac" type="application">
     <element xsi:type="archimate:DataObject" id="af2be141" name="Data Object"/>
@@ -17,6 +24,7 @@
     <element xsi:type="archimate:ApplicationFunction" id="e221080d" name="Application Function"/>
     <element xsi:type="archimate:ApplicationComponent" id="cabbe968" name="Application Component"/>
     <element xsi:type="archimate:ApplicationInterface" id="ccf774c6" name="Application Interface"/>
+    <element xsi:type="archimate:ApplicationComponent" id="2fadd6ff" name="Application Component"/>
   </folder>
   <folder name="Technology" id="8e7cb607" type="technology">
     <element xsi:type="archimate:Artifact" id="6a22992d" name="Artifact"/>
@@ -155,6 +163,14 @@
           <bounds x="828" y="138"/>
           <sourceConnection xsi:type="archimate:Connection" id="6299eb71" source="d8c1f5db" target="3e846932" relationship="49fb4455"/>
         </child>
+      </child>
+    </element>
+    <element xsi:type="archimate:ArchimateDiagramModel" id="23a05264" name="Core Concepts">
+      <child xsi:type="archimate:DiagramObject" id="b2ecb2e6" textAlignment="2" archimateElement="2fadd6ff">
+        <bounds x="25" y="55"/>
+      </child>
+      <child xsi:type="archimate:DiagramObject" id="b48da899" textAlignment="2" archimateElement="047289a4">
+        <bounds x="25" y="120"/>
       </child>
     </element>
   </folder>

@@ -63,5 +63,9 @@
             <item name="Benefits ArchiMate" href="benefits_archimate.html"/>
             <item name="What is ArchiMate" href="what_is_archimate.html"/>
         </menu>
+        <menu name="Language">
+            <item name="ArchiMate Basics" href="archimate_basics.html" />
+            <item name="Glossary" href="glossary.html" />
+        </menu>
     </body>
 </project>
