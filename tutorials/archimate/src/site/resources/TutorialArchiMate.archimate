@@ -17,6 +17,8 @@ Business processes or business functions are assigned to a single business role 
 
 A business interface or an application interface may be used by a business role, while a business interface may be part of a business role (through a composition relationship, which is not shown explicitly in the interface notation). The name of a business role should preferably be a noun.</documentation>
     </element>
+    <element xsi:type="archimate:BusinessRole" id="2c159f6f" name="Business Role"/>
+    <element xsi:type="archimate:BusinessInteraction" id="4088302f" name="Business Interaction"/>
   </folder>
   <folder name="Application" id="a547deac" type="application">
     <element xsi:type="archimate:DataObject" id="af2be141" name="Data Object"/>
@@ -24,7 +26,9 @@ A business interface or an application interface may be used by a business role,
     <element xsi:type="archimate:ApplicationFunction" id="e221080d" name="Application Function"/>
     <element xsi:type="archimate:ApplicationComponent" id="cabbe968" name="Application Component"/>
     <element xsi:type="archimate:ApplicationInterface" id="ccf774c6" name="Application Interface"/>
-    <element xsi:type="archimate:ApplicationComponent" id="2fadd6ff" name="Application Component"/>
+    <element xsi:type="archimate:ApplicationComponent" id="2fadd6ff" name="Application Component">
+      <documentation>Application Component|An application component is defined as a modular, deployable, and replaceable part of a software system that encapsulates its behavior and data and exposes these through a set of interfaces.</documentation>
+    </element>
   </folder>
   <folder name="Technology" id="8e7cb607" type="technology">
     <element xsi:type="archimate:Artifact" id="6a22992d" name="Artifact"/>
@@ -65,7 +69,11 @@ A business interface or an application interface may be used by a business role,
     <element xsi:type="archimate:CompositionRelationship" id="53cc93b6" source="8894926b" target="566c8c20"/>
   </folder>
   <folder name="Views" id="37c2207a" type="diagrams">
-    <element xsi:type="archimate:ArchimateDiagramModel" id="80b375e9" name="Default View"/>
+    <element xsi:type="archimate:ArchimateDiagramModel" id="80b375e9" name="Default View">
+      <child xsi:type="archimate:DiagramObject" id="02e5042a" textAlignment="2" archimateElement="4088302f">
+        <bounds x="328" y="161"/>
+      </child>
+    </element>
     <element xsi:type="archimate:ArchimateDiagramModel" id="45903863" name="What is ArchiMate">
       <child xsi:type="archimate:Group" id="50c44d61" name="Business" fillColor="#ffffcb">
         <bounds x="36" y="12" width="997" height="373"/>
@@ -171,6 +179,9 @@ A business interface or an application interface may be used by a business role,
       </child>
       <child xsi:type="archimate:DiagramObject" id="b48da899" textAlignment="2" archimateElement="047289a4">
         <bounds x="25" y="120"/>
+      </child>
+      <child xsi:type="archimate:DiagramObject" id="cc42c2c0" textAlignment="2" archimateElement="2c159f6f">
+        <bounds x="25" y="180"/>
       </child>
     </element>
   </folder>
