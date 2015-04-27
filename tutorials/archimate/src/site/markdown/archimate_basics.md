@@ -52,5 +52,16 @@
 
 |Symbol|Name|Explanation|
 |------|----|-----------|
-|![Composite Relationship](images/composite_relationship.png)|Composite Relationship|Indicates that an object is composed of one ore more other objects. In contrast to the aggregate relationship, an object can be part of only one composition.|
-
+|![Composite Relationship](images/composite_relationship.png)|Composite|Indicates that an object is composed of one ore more other objects. In contrast to the aggregate relationship, an object can be part of only one composition.|
+|![Aggregate Relationship](images/aggregate_relationship.png)|Aggregate|Indicates that a concept groups a number of other concepts. In contrast to the composition relationship, an object can be part of more than one aggregation.|
+|![Assignment Relationship](images/assignment_relationship.png)|Assignment|Link active elements such as business roles and application components, with units of behavior that are performed by them, (for example an application component with an application function.|
+|![Realization Relationship](images/realization_relationship.png)|Realization|Indicates how logical entities, such as services, are realized by means of more concrete entities, (e.g., a process/function realizes a service).|
+|![Used By Relationship](images/used_by_relationship.png)|Used By|Models the use of services by processes, functions, or interactions and the access to interfaces by roles, components or collaborations.|
+|![Access Relationship](images/access_relationship.png)|Access|Indicates that a process, function, interaction, service or event 'does something' with a business or data object; e.g., create a new object, read data from the object, write or modify the object data, or delete the object. The arrow head, if present, indicatees the direction of the flow of information.|
+|![Association Relationship](images/association_relationship.png)|Association|Models a relationship between objects that is not covered by another, more specific relationship.|
+|![Triggering Relationship](images/triggering_relationship.png)|Triggering|Used to model the causal relationships between behavior concepts in a process.|
+|![Flow Relationship](images/flow_relationship.png)|Flow|Describes the exchange or transfer of information or values between processes, functions, interactions and events.|
+|![Grouping](images/grouping.png)|Grouping|The grouping relationship is used to group an arbitrary group of model objects, which can be of the same type or of different types.|
+|![Junction](images/junction.png)|Junction|A junction is used to connect dynamic (trigger or flow) relationships of the same type; e.g., to indicate splits or joins.|
+|![Specialization Relationship](images/specialization_relationship.png)|Specialization|Indicates that an object is a specialization of another object. Specialization is always possible between two instances of the same concept.|
+|
