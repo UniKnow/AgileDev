@@ -26,4 +26,11 @@
 
 |Symbol|Name|Explanation|
 |----|------|-----------|
-|![Application Component](images/application_component.png)|Application Component|An application component is defined as a modular, deployable, and replaceable part of a software system that encapsulates its behavior and data and exposes these through a set of interfaces.|
+|
+|![Application Component](images/application_component.png)|Application Component|An application component is a modular, deployable, and replaceable part of a software system that encapsulates its behavior and data and exposes these through a set of interfaces. The name of an application component should be preferably be a noun.|
+|![Application Collaboration](images/application_collaboration.png)|An application collaboration specifies which components co-operate to perform some task.|
+|![Application Interface](images/application_interface.png)|An application interface specifies how the functionality of a component can be accessed by other components (provided interface), or which functionality the component requires from its environment (required interface). The same application service may be exposes through different interfaces.|
+|![Application Function](images/application_function.png)|Application Function|An application function describes the internal behavior of an application component.|
+|![Application Interaction](images/application_interaction.png)|Application Interaction|A behavioral element that describes the behavior of an application collaboration|
+|![Application Service](images/application_service.png)|Application Service|An application service exposes the functionality of components to their environment. This functionality is accessed through one or more application interfaces. An application service is realized by one or more application functions that are performed by the component.|
+|![Data Object](images/data_object.png)|Data Object|An data object is a passive element suitable for automated processing. Application function operates on a data object. It may be communicated via interactions and used or produced by application services. It should be a self contained piece of information which a clear meaning to the business and not just to the application level.|
