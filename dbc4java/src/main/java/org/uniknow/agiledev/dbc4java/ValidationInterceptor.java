@@ -100,12 +100,12 @@ public class ValidationInterceptor {
 
         Object result;
         MethodSignature signature = (MethodSignature) pjp.getSignature();
-        MethodValidator methodValidator = validator
-            .unwrap(MethodValidator.class);
         Object instance = pjp.getTarget();
 
         // Only validate constaints on object instances
         if (instance != null) {
+            MethodValidator methodValidator = validator
+                    .unwrap(MethodValidator.class);
 
             // Validate constraint(s) method parameters.
             Set<MethodConstraintViolation<Object>> parametersViolations = methodValidator
