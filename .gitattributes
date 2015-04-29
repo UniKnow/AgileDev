@@ -21,6 +21,7 @@ core.autocrlf=true
 *.so binary
 *.zip binary
 *.archimate binary
+*.architemplate binary
 
 # #################################################### #
 
