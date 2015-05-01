@@ -39,13 +39,13 @@
  */
 package org.uniknow.agiledev.dbc4java;
 
-import org.hibernate.validator.method.MethodConstraintViolationException;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import javax.inject.Inject;
+import javax.validation.ConstraintViolationException;
 import java.util.Date;
 
 import static org.junit.Assert.*;
@@ -60,12 +60,12 @@ public class SpringValidatorTest {
     @Inject
     private Repository<Movie> repository;
 
-    @Test(expected = MethodConstraintViolationException.class)
+    @Test(expected = ConstraintViolationException.class)
     public void createMovieWithInvalidReleaseDate() {
         repository.createMovie(null);
     }
 
-    @Test(expected = MethodConstraintViolationException.class)
+    @Test(expected = ConstraintViolationException.class)
     public void createWithInvalidReleaseDate() {
         repository.createMovie(null);
     }
@@ -77,7 +77,7 @@ public class SpringValidatorTest {
         assertNotNull(movie);
     }
 
-    @Test(expected = MethodConstraintViolationException.class)
+    @Test(expected = ConstraintViolationException.class)
     public void setTitleMovieNull() {
         Movie movie = repository.createMovie(new Date(System
             .currentTimeMillis()));
