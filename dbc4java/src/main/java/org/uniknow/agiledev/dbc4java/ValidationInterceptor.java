@@ -66,6 +66,7 @@ public class ValidationInterceptor {
     private Validator validator;
 
     public ValidationInterceptor() {
+
         ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
         validator = factory.getValidator();
     }
@@ -100,6 +101,8 @@ public class ValidationInterceptor {
         MethodSignature signature = (MethodSignature) pjp.getSignature();
         Object instance = pjp.getTarget();
 
+        System.out.println("Validating method " + signature.getName());
+
         // Only validate constraints on object instances
         if (instance != null) {
             ExecutableValidator executableValidator = validator
@@ -132,6 +135,18 @@ public class ValidationInterceptor {
                 throw new ConstraintViolationException(returnValueViolations);
             }
         } else {
+            // Validate constraints static method
+            ExecutableValidator executableValidator = validator
+                .forExecutables();
+
+            // Validate constraint(s) method parameters.
+            Set<ConstraintViolation<Object>> parametersViolations = executableValidator
+                .validateParameters(pjp.getTarget(), signature.getMethod(),
+                    pjp.getArgs());
+            if (!parametersViolations.isEmpty()) {
+                throw new ConstraintViolationException(parametersViolations);
+            }
+
             result = pjp.proceed(); // Execute the method
         }
 

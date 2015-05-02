@@ -41,6 +41,8 @@ package org.uniknow.agiledev.tutorial.dbc;
 
 import org.junit.Test;
 
+import javax.validation.ValidationException;
+
 /**
  * Created by mase on 28-04-15.
  */
@@ -49,7 +51,7 @@ public class FactoryTest {
     /**
      * Verifies constraint on static method is applied
      */
-    @Test(expected = IllegalArgumentException.class)
+    @Test(expected = ValidationException.class)
     public void testConstraintStaticMethod() {
         Factory.create(null);
     }
