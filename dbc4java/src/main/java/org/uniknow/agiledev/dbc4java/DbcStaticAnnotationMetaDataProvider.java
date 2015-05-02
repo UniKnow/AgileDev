@@ -96,14 +96,16 @@ import static org.hibernate.validator.internal.util.CollectionHelper.partition;
 import static org.hibernate.validator.internal.util.ConcurrentReferenceHashMap.ReferenceType.SOFT;
 
 /**
- * {@code MetaDataProvider} which reads the metadata from annotations which is
- * the default configuration source.
+ * Specialization of default annotation provider. This annotation provider also
+ * includes static methods
  * 
- * @author Gunnar Morling
- * @author Hardy Ferentschik
+ * @author mase
+ * @since 0.1.9
  */
 public class DbcStaticAnnotationMetaDataProvider implements MetaDataProvider {
+
     private static final Log log = LoggerFactory.make();
+
     /**
      * The default initial capacity for this cache.
      */
@@ -111,6 +113,7 @@ public class DbcStaticAnnotationMetaDataProvider implements MetaDataProvider {
 
     private final ConstraintHelper constraintHelper;
     private final ConcurrentReferenceHashMap<Class<?>, BeanConfiguration<?>> configuredBeans;
+
     // private final AnnotationProcessingOptions annotationProcessingOptions;
     private final ParameterNameProvider parameterNameProvider;
 
@@ -124,11 +127,27 @@ public class DbcStaticAnnotationMetaDataProvider implements MetaDataProvider {
             DEFAULT_INITIAL_CAPACITY, SOFT, SOFT);
     }
 
+    /**
+     * Returns the annotation processing options as configured by this provider.
+     * 
+     * @return The annotation processing options as configured by this provider.
+     */
     @Override
     public AnnotationProcessingOptions getAnnotationProcessingOptions() {
         return new AnnotationProcessingOptionsImpl();
     }
 
+    /**
+     * Returns a list with the configurations for all types contained in the
+     * given type's hierarchy (including implemented interfaces) starting at the
+     * specified type.
+     * 
+     * @param beanClass
+     *            The type of interest.
+     * 
+     * @return A set with the configurations for the complete hierarchy of the
+     *         given type. May be empty, but never {@code null}.
+     */
     @Override
     public <T> List<BeanConfiguration<? super T>> getBeanConfigurationForHierarchy(
         Class<T> beanClass) {
@@ -161,37 +180,36 @@ public class DbcStaticAnnotationMetaDataProvider implements MetaDataProvider {
     }
 
     /**
+     * Retrieves constraint related meta data from the annotations of the given
+     * type.
+     * 
      * @param beanClass
      *            The bean class for which to retrieve the meta data
      * 
-     * @return Retrieves constraint related meta data from the annotations of
-     *         the given type.
+     * @return Constraint related meta data from the annotations of the given
+     *         type.
      */
     private <T> BeanConfiguration<T> retrieveBeanConfiguration(
         Class<T> beanClass) {
         Set<ConstrainedElement> constrainedElements = new HashSet<>();
-        constrainedElements.addAll(getMethodMetaData(beanClass));
 
-        // //TODO GM: currently class level constraints are represented by a
-        // PropertyMetaData. This
-        // //works but seems somewhat unnatural
-        // Set<MetaConstraint<?>> classLevelConstraints =
-        // getClassLevelConstraints( beanClass );
-        // if ( !classLevelConstraints.isEmpty() ) {
-        // ConstrainedType classLevelMetaData =
-        // new ConstrainedType(
-        // ConfigurationSource.ANNOTATION,
-        // ConstraintLocation.forClass(beanClass),
-        // classLevelConstraints
-        // );
-        // constrainedElements.add( classLevelMetaData );
-        // }
+        constrainedElements.addAll(getMethodMetaData(beanClass));
 
         return new BeanConfiguration<T>(ConfigurationSource.ANNOTATION,
             beanClass, constrainedElements, getDefaultGroupSequence(beanClass),
             getDefaultGroupSequenceProvider(beanClass));
     }
 
+    /**
+     * Returns order in which is which the groups need to be evaluated.
+     * 
+     * @param beanClass
+     *            The bean class for which to retrieve the order in which the
+     *            groups need to be evaluated.
+     * 
+     * @return list of classes defining the order in which the groups need to be
+     *         evaluated, or null if no group sequence is defined.
+     */
     private List<Class<?>> getDefaultGroupSequence(Class<?> beanClass) {
         GroupSequence groupSequenceAnnotation = beanClass
             .getAnnotation(GroupSequence.class);
@@ -232,71 +250,6 @@ public class DbcStaticAnnotationMetaDataProvider implements MetaDataProvider {
 
         throw log.getWrongDefaultGroupSequenceProviderTypeException(beanClass
             .getName());
-    }
-
-    // private Set<MetaConstraint<?>> getClassLevelConstraints(Class<?> clazz) {
-    // if ( annotationProcessingOptions.areClassLevelConstraintsIgnoredFor(
-    // clazz ) ) {
-    // return Collections.emptySet();
-    // }
-    //
-    // Set<MetaConstraint<?>> classLevelConstraints = newHashSet();
-    //
-    // // HV-262
-    // List<ConstraintDescriptorImpl<?>> classMetaData =
-    // findClassLevelConstraints( clazz );
-    //
-    // for ( ConstraintDescriptorImpl<?> constraintDescription : classMetaData )
-    // {
-    // classLevelConstraints.add( createMetaConstraint( clazz,
-    // constraintDescription ) );
-    // }
-    //
-    // return classLevelConstraints;
-    // }
-
-    // private Set<ConstrainedElement> getFieldMetaData(Class<?> beanClass) {
-    // Set<ConstrainedElement> propertyMetaData = newHashSet();
-    //
-    // for ( Field field : run( GetDeclaredFields.action(beanClass) ) ) {
-    // // HV-172
-    // if ( Modifier.isStatic(field.getModifiers()) ||
-    // annotationProcessingOptions.areMemberConstraintsIgnoredFor( field ) ||
-    // field.isSynthetic() ) {
-    //
-    // continue;
-    // }
-    //
-    // propertyMetaData.add( findPropertyMetaData( field ) );
-    // }
-    // return propertyMetaData;
-    // }
-
-    private ConstrainedField findPropertyMetaData(Field field) {
-        Set<MetaConstraint<?>> constraints = convertToMetaConstraints(
-            findConstraints(field, ElementType.FIELD), field);
-
-        Map<Class<?>, Class<?>> groupConversions = getGroupConversions(
-            field.getAnnotation(ConvertGroup.class),
-            field.getAnnotation(ConvertGroup.List.class));
-
-        boolean isCascading = field.isAnnotationPresent(Valid.class);
-        boolean requiresUnwrapping = field
-            .isAnnotationPresent(UnwrapValidatedValue.class);
-
-        return new ConstrainedField(ConfigurationSource.ANNOTATION,
-            ConstraintLocation.forProperty(field), constraints,
-            groupConversions, isCascading, requiresUnwrapping);
-    }
-
-    private Set<MetaConstraint<?>> convertToMetaConstraints(
-        List<ConstraintDescriptorImpl<?>> constraintDescriptors, Field field) {
-        Set<MetaConstraint<?>> constraints = newHashSet();
-
-        for (ConstraintDescriptorImpl<?> constraintDescription : constraintDescriptors) {
-            constraints.add(createMetaConstraint(field, constraintDescription));
-        }
-        return constraints;
     }
 
     private Set<ConstrainedExecutable> getMethodMetaData(Class<?> clazz) {
@@ -348,30 +301,12 @@ public class DbcStaticAnnotationMetaDataProvider implements MetaDataProvider {
 
         Set<MetaConstraint<?>> crossParameterConstraints = Collections
             .emptySet();
-        // if (
-        // annotationProcessingOptions.areCrossParameterConstraintsIgnoredFor(
-        // executable.getMember() ) ) {
-        // crossParameterConstraints = Collections.emptySet();
-        // }
-        // else {
-        // crossParameterConstraints = convertToMetaConstraints(
-        // executableConstraints.get(
-        // ConstraintDescriptorImpl.ConstraintType.CROSS_PARAMETER ),
-        // executable
-        // );
-        // }
 
         Set<MetaConstraint<?>> returnValueConstraints;
         Map<Class<?>, Class<?>> groupConversions;
         boolean isCascading;
         boolean requiresUnwrapping = false;
-        // if ( annotationProcessingOptions.areReturnValueConstraintsIgnoredFor(
-        // executable.getMember() ) ) {
-        // returnValueConstraints = Collections.emptySet();
-        // groupConversions = Collections.emptyMap();
-        // isCascading = false;
-        // }
-        // else {
+
         requiresUnwrapping = executable.getAccessibleObject()
             .isAnnotationPresent(UnwrapValidatedValue.class);
 
@@ -384,7 +319,6 @@ public class DbcStaticAnnotationMetaDataProvider implements MetaDataProvider {
             member.getAnnotation(ConvertGroup.List.class));
         isCascading = executable.getAccessibleObject().isAnnotationPresent(
             Valid.class);
-        // }
 
         return new ConstrainedExecutable(ConfigurationSource.ANNOTATION,
             ConstraintLocation.forReturnValue(executable),
@@ -437,26 +371,6 @@ public class DbcStaticAnnotationMetaDataProvider implements MetaDataProvider {
             ConvertGroup groupConversion = null;
             ConvertGroup.List groupConversionList = null;
             boolean requiresUnwrapping = false;
-
-            // if (
-            // annotationProcessingOptions.areParameterConstraintsIgnoredFor(
-            // executable.getMember(), i ) ) {
-            // metaData.add(
-            // new ConstrainedParameter(
-            // ConfigurationSource.ANNOTATION,
-            // ConstraintLocation.forParameter( executable, i ),
-            // ReflectionHelper.typeOf(executable, i),
-            // i,
-            // parameterName,
-            // parameterConstraints,
-            // getGroupConversions( groupConversion, groupConversionList ),
-            // false,
-            // false
-            // )
-            // );
-            // i++;
-            // continue;
-            // }
 
             for (Annotation parameterAnnotation : parameterAnnotations) {
                 // 1. mark parameter as cascading if this annotation is the
@@ -522,26 +436,6 @@ public class DbcStaticAnnotationMetaDataProvider implements MetaDataProvider {
                 .addAll(findConstraintAnnotations(member, annotation, type));
         }
 
-        return metaData;
-    }
-
-    /**
-     * Finds all constraint annotations defined for the given class and returns
-     * them in a list of constraint descriptors.
-     * 
-     * @param beanClass
-     *            The class to check for constraints annotations.
-     * 
-     * @return A list of constraint descriptors for all constraint specified on
-     *         the given class.
-     */
-    private List<ConstraintDescriptorImpl<?>> findClassLevelConstraints(
-        Class<?> beanClass) {
-        List<ConstraintDescriptorImpl<?>> metaData = newArrayList();
-        for (Annotation annotation : beanClass.getDeclaredAnnotations()) {
-            metaData.addAll(findConstraintAnnotations(null, annotation,
-                ElementType.TYPE));
-        }
         return metaData;
     }
 
@@ -616,18 +510,6 @@ public class DbcStaticAnnotationMetaDataProvider implements MetaDataProvider {
                 return v.getConstraintType();
             }
         };
-    }
-
-    private <A extends Annotation> MetaConstraint<?> createMetaConstraint(
-        Class<?> declaringClass, ConstraintDescriptorImpl<A> descriptor) {
-        return new MetaConstraint<A>(descriptor,
-            ConstraintLocation.forClass(declaringClass));
-    }
-
-    private <A extends Annotation> MetaConstraint<?> createMetaConstraint(
-        Member member, ConstraintDescriptorImpl<A> descriptor) {
-        return new MetaConstraint<A>(descriptor,
-            ConstraintLocation.forProperty(member));
     }
 
     private <A extends Annotation> MetaConstraint<A> createParameterMetaConstraint(
