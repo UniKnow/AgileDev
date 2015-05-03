@@ -348,14 +348,11 @@ public class DbcValidator implements Validator, ExecutableValidator {
 
         ValidationOrder validationOrder = determineGroupValidationOrder(groups);
 
-        System.out.println("instance is " + object + ", and executable is "
-            + executable);
         ValidationContext<T> context = getValidationContext()
             .forValidateParameters(parameterNameProvider, object, executable,
                 parameterValues);
 
         if (!beanMetaDataManager.isConstrained(context.getRootBeanClass())) {
-            System.out.println(context.getRootBeanClass() + " not constrained");
             return Collections.emptySet();
         }
 
@@ -1228,7 +1225,6 @@ public class DbcValidator implements Validator, ExecutableValidator {
             valueContext.setCurrentValidatedValue(parameterValues);
 
             // 2. validate parameter constraints
-            System.out.println("validating parameter constraints");
             for (int i = 0; i < parameterValues.length; i++) {
                 PathImpl originalPath = valueContext.getPropertyPath();
 

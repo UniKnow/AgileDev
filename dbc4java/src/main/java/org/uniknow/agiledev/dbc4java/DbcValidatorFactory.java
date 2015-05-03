@@ -223,7 +223,6 @@ public final class DbcValidatorFactory extends ValidatorFactoryImpl {
         metaDataProviders.add(new DbcStaticAnnotationMetaDataProvider(
             constraintHelper, parameterNameProvider));
 
-        System.out.println("Meta data providers " + metaDataProviders);
         return metaDataProviders;
     }
 
