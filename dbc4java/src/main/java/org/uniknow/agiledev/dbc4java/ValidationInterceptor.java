@@ -101,8 +101,6 @@ public class ValidationInterceptor {
         MethodSignature signature = (MethodSignature) pjp.getSignature();
         Object instance = pjp.getTarget();
 
-        System.out.println("Validating method " + signature.getName());
-
         // Only validate constraints on object instances
         if (instance != null) {
             ExecutableValidator executableValidator = validator
