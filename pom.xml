@@ -516,19 +516,19 @@
                 <groupId>external.atlassian.jgitflow</groupId>
                 <artifactId>jgitflow-maven-plugin</artifactId>
                 <version>1.0-m4.3</version>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>release-finish</goal>
-                        </goals>
-                        <configuration>
-                            <!--
-                                If set to true, the plugin sets the property "performRelease" to true, which activates the profile "release-profile"
-                             -->
-                            <useReleaseProfile>true</useReleaseProfile>
-                        </configuration>
-                    </execution>
-                </executions>
+                <!--<executions>-->
+                    <!--<execution>-->
+                        <!--<goals>-->
+                            <!--<goal>release-finish</goal>-->
+                        <!--</goals>-->
+                        <!--<configuration>-->
+                            <!--&lt;!&ndash;-->
+                                <!--If set to true, the plugin sets the property "performRelease" to true, which activates the profile "release-profile"-->
+                             <!--&ndash;&gt;-->
+                            <!--<useReleaseProfile>true</useReleaseProfile>-->
+                        <!--</configuration>-->
+                    <!--</execution>-->
+                <!--</executions>-->
                 <configuration>
                     <!-- Append feature name to version of feature branch -->
                     <enableFeatureVersions>true</enableFeatureVersions>
