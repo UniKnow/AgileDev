@@ -37,63 +37,19 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
-package org.uniknow.example.domain.model.cargo;
+package org.uniknow.agiledev.tutorial.dbc;
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.beans.factory.ObjectFactory;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.uniknow.agiledev.dbc4java.Validated;
 
-import javax.inject.Inject;
-import javax.inject.Named;
-import javax.validation.ValidationException;
-
-import static org.junit.Assert.*;
+import javax.validation.constraints.NotNull;
 
 /**
- * Created by mase on 15-03-15.
+ * Created by mase on 03-05-15.
  */
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = "/ddd-context.xml")
-public class TestCustomer {
+@Validated
+public class StaticClass {
 
-    @Inject
-    @Named("customerFactory")
-    private CustomerFactory factory;
+    @NotNull
+    public static String name;
 
-    @Test
-    public void testInstantiationCustomer() {
-        // with object factory:
-        final String customerName = "John@doe.com";
-
-        factory.setName(customerName);
-        Customer customer = factory.getObject();
-
-        assertNotNull(customer);
-        assertNotNull(customer.getName());
-        assertEquals(customerName, customer.getName());
-    }
-
-    /**
-     * Test {@Code MethodConstraintViolationException} is thrown when
-     * name of customer is set to null.
-     */
-    @Test(expected = ValidationException.class)
-    public void testInstantiateCustomerWithNameNull() {
-        factory.setName(null);
-        // factory.getObject();
-        // customer.getName();
-    }
-
-    /**
-     * Test {@Code MethodConstraintViolationException} is thrown when
-     * name of customer is set to empty string.
-     */
-    @Test(expected = ValidationException.class)
-    public void testInstantiateCustomerWithNameEmptyString() {
-        factory.setName("   ");
-        factory.getObject();
-        // customer.getName();
-    }
 }

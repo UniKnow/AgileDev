@@ -43,6 +43,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import javax.validation.*;
+import javax.validation.executable.ExecutableValidator;
 
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -51,9 +52,6 @@ import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
 import org.aspectj.lang.reflect.MethodSignature;
-import org.hibernate.validator.method.MethodConstraintViolation;
-import org.hibernate.validator.method.MethodConstraintViolationException;
-import org.hibernate.validator.method.MethodValidator;
 
 /**
  * Intercepts method calls of calsses which are annotated with
@@ -68,6 +66,7 @@ public class ValidationInterceptor {
     private Validator validator;
 
     public ValidationInterceptor() {
+
         ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
         validator = factory.getValidator();
     }
@@ -100,20 +99,19 @@ public class ValidationInterceptor {
 
         Object result;
         MethodSignature signature = (MethodSignature) pjp.getSignature();
-        MethodValidator methodValidator = validator
-            .unwrap(MethodValidator.class);
         Object instance = pjp.getTarget();
 
-        // Only validate constaints on object instances
+        // Only validate constraints on object instances
         if (instance != null) {
+            ExecutableValidator executableValidator = validator
+                .forExecutables();
 
             // Validate constraint(s) method parameters.
-            Set<MethodConstraintViolation<Object>> parametersViolations = methodValidator
-                .validateAllParameters(pjp.getTarget(), signature.getMethod(),
+            Set<ConstraintViolation<Object>> parametersViolations = executableValidator
+                .validateParameters(pjp.getTarget(), signature.getMethod(),
                     pjp.getArgs());
             if (!parametersViolations.isEmpty()) {
-                throw new MethodConstraintViolationException(
-                    parametersViolations);
+                throw new ConstraintViolationException(parametersViolations);
             }
 
             result = pjp.proceed(); // Execute the method
@@ -128,14 +126,25 @@ public class ValidationInterceptor {
             }
 
             // Validate constraint return value method
-            Set<MethodConstraintViolation<Object>> returnValueViolations = methodValidator
+            Set<ConstraintViolation<Object>> returnValueViolations = executableValidator
                 .validateReturnValue(pjp.getTarget(), signature.getMethod(),
                     result);
             if (!returnValueViolations.isEmpty()) {
-                throw new MethodConstraintViolationException(
-                    returnValueViolations);
+                throw new ConstraintViolationException(returnValueViolations);
             }
         } else {
+            // Validate constraints static method
+            ExecutableValidator executableValidator = validator
+                .forExecutables();
+
+            // Validate constraint(s) method parameters.
+            Set<ConstraintViolation<Object>> parametersViolations = executableValidator
+                .validateParameters(pjp.getTarget(), signature.getMethod(),
+                    pjp.getArgs());
+            if (!parametersViolations.isEmpty()) {
+                throw new ConstraintViolationException(parametersViolations);
+            }
+
             result = pjp.proceed(); // Execute the method
         }
 

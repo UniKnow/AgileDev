@@ -37,63 +37,37 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
-package org.uniknow.example.domain.model.cargo;
+package org.uniknow.agiledev.dbc4java;
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.beans.factory.ObjectFactory;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.hibernate.validator.HibernateValidator;
 
-import javax.inject.Inject;
-import javax.inject.Named;
-import javax.validation.ValidationException;
-
-import static org.junit.Assert.*;
+import javax.validation.ValidatorFactory;
+import javax.validation.spi.ConfigurationState;
 
 /**
- * Created by mase on 15-03-15.
+ * Implementation of {@code ValidationProvider} within {@code dbc4java}.
+ * 
+ * @author mase
+ * @since 0.1.9
  */
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = "/ddd-context.xml")
-public class TestCustomer {
-
-    @Inject
-    @Named("customerFactory")
-    private CustomerFactory factory;
-
-    @Test
-    public void testInstantiationCustomer() {
-        // with object factory:
-        final String customerName = "John@doe.com";
-
-        factory.setName(customerName);
-        Customer customer = factory.getObject();
-
-        assertNotNull(customer);
-        assertNotNull(customer.getName());
-        assertEquals(customerName, customer.getName());
-    }
+public class DbcValidationProvider extends HibernateValidator {
 
     /**
-     * Test {@Code MethodConstraintViolationException} is thrown when
-     * name of customer is set to null.
+     * Build a ValidatorFactory using the current provider implementation. The
+     * ValidatorFactory is assembled and follows the configuration passed via
+     * ConfigurationState.
+     * 
+     * The returned ValidatorFactory is properly initialized and ready for use.
+     * 
+     * @param configurationState
+     *            - the configuration descriptor
+     * @return the instanciated ValidatorFactory
+     * @throw ValidationException - if the ValidatorFactory cannot be built
      */
-    @Test(expected = ValidationException.class)
-    public void testInstantiateCustomerWithNameNull() {
-        factory.setName(null);
-        // factory.getObject();
-        // customer.getName();
+    @Override
+    public ValidatorFactory buildValidatorFactory(
+        ConfigurationState configurationState) {
+        return new DbcValidatorFactory(configurationState);
     }
 
-    /**
-     * Test {@Code MethodConstraintViolationException} is thrown when
-     * name of customer is set to empty string.
-     */
-    @Test(expected = ValidationException.class)
-    public void testInstantiateCustomerWithNameEmptyString() {
-        factory.setName("   ");
-        factory.getObject();
-        // customer.getName();
-    }
 }

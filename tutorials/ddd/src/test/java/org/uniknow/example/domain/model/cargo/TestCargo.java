@@ -39,7 +39,6 @@
  */
 package org.uniknow.example.domain.model.cargo;
 
-import org.hibernate.validator.method.MethodConstraintViolationException;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.ObjectFactory;
@@ -50,6 +49,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.validation.ConstraintViolationException;
 
 import static org.junit.Assert.*;
 
@@ -67,7 +67,7 @@ public class TestCargo {
      * Verifies {@code MethodConstraintViolationException} is thrown when
      * attempting to compare entity identity to null.
      */
-    @Test(expected = MethodConstraintViolationException.class)
+    @Test(expected = ConstraintViolationException.class)
     public void testCargoSameIdentityNull() {
         // with object factory:
         Cargo cargo = factory.getObject();
