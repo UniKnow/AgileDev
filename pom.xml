@@ -4,7 +4,7 @@
     <name>AgileDev</name>
     <groupId>org.uniknow</groupId>
     <artifactId>agiledev</artifactId>
-    <version>0.1.9-issue_1-SNAPSHOT</version>
+    <version>0.1.9-SNAPSHOT</version>
     <packaging>pom</packaging>
     <description>Tooling for Agile development</description>
     <url>https://github.com/UniKnow/AgileDev</url>
@@ -275,7 +275,7 @@
                         <dependency>
                             <groupId>org.uniknow.agiledev</groupId>
                             <artifactId>buildConfiguration</artifactId>
-                            <version>0.1.9-issue_1-SNAPSHOT</version>
+                            <version>0.1.9-SNAPSHOT</version>
                         </dependency>
                     </dependencies>
                 </plugin>
@@ -305,7 +305,7 @@
                         <dependency>
                             <groupId>org.uniknow.agiledev</groupId>
                             <artifactId>buildConfiguration</artifactId>
-                            <version>0.1.9-issue_1-SNAPSHOT</version>
+                            <version>0.1.9-SNAPSHOT</version>
                         </dependency>
                     </dependencies>
                 </plugin>
