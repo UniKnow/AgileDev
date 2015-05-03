@@ -223,19 +223,34 @@ public class DbcValidator implements Validator, ExecutableValidator {
             100, ReferenceType.SOFT, ReferenceType.SOFT);
     }
 
+    /**
+     * Validates all constraints on {@code object}.
+     * 
+     * @param object
+     *            object to validate
+     * @param groups
+     *            the group or list of groups targeted for validation (defaults
+     *            to {@link Default})
+     * @return constraint violations or an empty set if none
+     * @throws IllegalArgumentException
+     *             if object is {@code null} or if {@code null} is passed to the
+     *             varargs groups
+     * @throws javax.validation.ValidationException
+     *             if a non recoverable error happens during the validation
+     *             process
+     */
     @Override
     public final <T> Set<ConstraintViolation<T>> validate(T object,
         Class<?>... groups) {
-        Contracts
-            .assertNotNull(object, MESSAGES.validatedObjectMustNotBeNull());
-
-        if (!beanMetaDataManager.isConstrained(object.getClass())) {
-            return Collections.emptySet();
-        }
-
         ValidationOrder validationOrder = determineGroupValidationOrder(groups);
         ValidationContext<T> validationContext = getValidationContext()
             .forValidate(object);
+
+        if (!beanMetaDataManager.isConstrained(validationContext
+            .getRootBeanClass())) {
+            System.out.println("No constraints on class");
+            return Collections.emptySet();
+        }
 
         ValueContext<?, Object> valueContext = ValueContext
             .getLocalExecutionContext(object,
@@ -249,9 +264,6 @@ public class DbcValidator implements Validator, ExecutableValidator {
     @Override
     public final <T> Set<ConstraintViolation<T>> validateProperty(T object,
         String propertyName, Class<?>... groups) {
-        Contracts
-            .assertNotNull(object, MESSAGES.validatedObjectMustNotBeNull());
-
         sanityCheckPropertyPath(propertyName);
         ValidationOrder validationOrder = determineGroupValidationOrder(groups);
         ValidationContext<T> context = getValidationContext()
@@ -287,8 +299,6 @@ public class DbcValidator implements Validator, ExecutableValidator {
     @Override
     public <T> Set<ConstraintViolation<T>> validateParameters(T object,
         Method method, Object[] parameterValues, Class<?>... groups) {
-        // Contracts.assertNotNull( object,
-        // MESSAGES.validatedObjectMustNotBeNull() );
         Contracts
             .assertNotNull(method, MESSAGES.validatedMethodMustNotBeNull());
         Contracts.assertNotNull(parameterValues,
@@ -329,8 +339,6 @@ public class DbcValidator implements Validator, ExecutableValidator {
     @Override
     public <T> Set<ConstraintViolation<T>> validateReturnValue(T object,
         Method method, Object returnValue, Class<?>... groups) {
-        Contracts
-            .assertNotNull(object, MESSAGES.validatedObjectMustNotBeNull());
         Contracts
             .assertNotNull(method, MESSAGES.validatedMethodMustNotBeNull());
 
@@ -386,10 +394,8 @@ public class DbcValidator implements Validator, ExecutableValidator {
     @Override
     public final <T> T unwrap(Class<T> type) {
         // allow unwrapping into public super types; intentionally not exposing
-        // the
-        // fact that ExecutableValidator is implemented by this class as well as
-        // this
-        // might change
+        // the fact that ExecutableValidator is implemented by this class as
+        // well as this might change
         if (type.isAssignableFrom(Validator.class)) {
             return type.cast(this);
         }

@@ -191,13 +191,45 @@ public class DbcStaticAnnotationMetaDataProvider implements MetaDataProvider {
      */
     private <T> BeanConfiguration<T> retrieveBeanConfiguration(
         Class<T> beanClass) {
-        Set<ConstrainedElement> constrainedElements = new HashSet<>();
-
+        Set<ConstrainedElement> constrainedElements = getFieldMetaData(beanClass);
         constrainedElements.addAll(getMethodMetaData(beanClass));
 
         return new BeanConfiguration<T>(ConfigurationSource.ANNOTATION,
             beanClass, constrainedElements, getDefaultGroupSequence(beanClass),
             getDefaultGroupSequenceProvider(beanClass));
+    }
+
+    private Set<ConstrainedElement> getFieldMetaData(Class<?> beanClass) {
+        Set<ConstrainedElement> propertyMetaData = newHashSet();
+
+        for (Field field : run(GetDeclaredFields.action(beanClass))) {
+            System.out.println("Processing " + beanClass + "."
+                + field.getName());
+            if (field.isSynthetic()) {
+                System.out.println("Skipped field");
+                continue;
+            }
+
+            propertyMetaData.add(findPropertyMetaData(field));
+        }
+        return propertyMetaData;
+    }
+
+    private ConstrainedField findPropertyMetaData(Field field) {
+        Set<MetaConstraint<?>> constraints = convertToMetaConstraints(
+            findConstraints(field, ElementType.FIELD), field);
+
+        Map<Class<?>, Class<?>> groupConversions = getGroupConversions(
+            field.getAnnotation(ConvertGroup.class),
+            field.getAnnotation(ConvertGroup.List.class));
+
+        boolean isCascading = field.isAnnotationPresent(Valid.class);
+        boolean requiresUnwrapping = field
+            .isAnnotationPresent(UnwrapValidatedValue.class);
+
+        return new ConstrainedField(ConfigurationSource.ANNOTATION,
+            ConstraintLocation.forProperty(field), constraints,
+            groupConversions, isCascading, requiresUnwrapping);
     }
 
     /**
@@ -345,6 +377,28 @@ public class DbcStaticAnnotationMetaDataProvider implements MetaDataProvider {
         }
 
         return constraints;
+    }
+
+    private Set<MetaConstraint<?>> convertToMetaConstraints(
+        List<ConstraintDescriptorImpl<?>> constraintDescriptors, Field field) {
+        Set<MetaConstraint<?>> constraints = newHashSet();
+
+        for (ConstraintDescriptorImpl<?> constraintDescription : constraintDescriptors) {
+            constraints.add(createMetaConstraint(field, constraintDescription));
+        }
+        return constraints;
+    }
+
+    private <A extends Annotation> MetaConstraint<?> createMetaConstraint(
+        Class<?> declaringClass, ConstraintDescriptorImpl<A> descriptor) {
+        return new MetaConstraint<A>(descriptor,
+            ConstraintLocation.forClass(declaringClass));
+    }
+
+    private <A extends Annotation> MetaConstraint<?> createMetaConstraint(
+        Member member, ConstraintDescriptorImpl<A> descriptor) {
+        return new MetaConstraint<A>(descriptor,
+            ConstraintLocation.forProperty(member));
     }
 
     /**
