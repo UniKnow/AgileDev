@@ -532,6 +532,9 @@
                     -->
                     <pushFeatures>true</pushFeatures>
 
+                    <!-- Allow un-tracked files during finishing feature -->
+                    <allowUntracked>true</allowUntracked>
+
                     <!--
                         This allows the CI server (e.g. Jenkins) to automatically push new
                         releases to origin; you can then either manually deploy them or, if you
