@@ -45,14 +45,28 @@ import javax.validation.ValidatorFactory;
 import javax.validation.spi.ConfigurationState;
 
 /**
- * Created by mase on 01-05-15.
+ * Implementation of {@code ValidationProvider} within {@code dbc4java}.
+ * 
+ * @author mase
+ * @since 0.1.9
  */
 public class DbcValidationProvider extends HibernateValidator {
 
+    /**
+     * Build a ValidatorFactory using the current provider implementation. The
+     * ValidatorFactory is assembled and follows the configuration passed via
+     * ConfigurationState.
+     * 
+     * The returned ValidatorFactory is properly initialized and ready for use.
+     * 
+     * @param configurationState
+     *            - the configuration descriptor
+     * @return the instanciated ValidatorFactory
+     * @throw ValidationException - if the ValidatorFactory cannot be built
+     */
     @Override
     public ValidatorFactory buildValidatorFactory(
         ConfigurationState configurationState) {
-        System.out.println("Creating validator factory");
         return new DbcValidatorFactory(configurationState);
     }
 
