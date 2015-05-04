@@ -74,7 +74,7 @@
     <body>
 
         <menu name="Documentation">
-            <item name="Introduction" href="core/introduction.html" />
+            <item name="Introduction" href="introduction.html" />
         </menu>
     </body>
 </project>
