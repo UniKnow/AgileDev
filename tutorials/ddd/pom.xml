@@ -90,7 +90,7 @@
                 <version>${project.version}</version>
                 <executions>
                     <execution>
-                        <phase>site</phase>
+                        <phase>post-site</phase>
                         <goals>
                             <goal>index</goal>
                         </goals>
