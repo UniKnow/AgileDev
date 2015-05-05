@@ -115,6 +115,13 @@ public class Indexer {
 
     private final String signature = "<!-- Search box courtesy of Maven Site Indexer -->";
 
+    /**
+     * Adds tags for searchbox to specified file. If the specified file already
+     * contains tags for the searchbox the file will be unmodified.
+     * 
+     * @param file
+     *            file to which we want to add the searchbox tags.
+     */
     private void addTags(Path file) {
         try {
             // File file = new File(startDir + filename);

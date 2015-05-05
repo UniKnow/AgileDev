@@ -90,15 +90,12 @@
                 <version>${project.version}</version>
                 <executions>
                     <execution>
-                        <phase>post-site</phase>
+                        <phase>site</phase>
                         <goals>
                             <goal>index</goal>
                         </goals>
                     </execution>
                 </executions>
-                <configuration>
-                    <!--<site>${project.build.directory}/target/site</site>-->
-                </configuration>
             </plugin>
 
 
