@@ -87,23 +87,7 @@ public class IndexerMojo extends AbstractMojo {
 
             Path searchBoxPath = null;
             if (searchBox == null) {
-                // try {
-                // Get path search box from classpath
                 searchBoxPath = PathUtils.getResourceAsPath("/searchbox.html");
-
-                // URI uriToSearchBox =
-                // getClass().getResource("/searchbox.html").toURI();
-                //
-                // final String[] array = uriToSearchBox.toString().split("!");
-                // final FileSystem fs =
-                // FileSystems.newFileSystem(URI.create(array[0]), new
-                // HashMap<String, String>());
-                // searchBoxPath = fs.getPath(array[1]);
-                // }catch(URISyntaxException err) {
-                // throw new
-                // MojoExecutionException("Error occurred while determining location search box",
-                // err);
-                // }
             } else {
                 searchBoxPath = Paths.get(searchBox);
             }

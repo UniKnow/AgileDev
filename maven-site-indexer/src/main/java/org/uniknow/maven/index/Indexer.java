@@ -65,9 +65,26 @@ public class Indexer {
         this.log = log;
     }
 
-    private String relativeToStart(Path filename) {
-        return startDir.relativize(filename).toString()
-            .replaceAll("\\\\", "\\/");
+    /**
+     * Returns a relative path from {@code startDir} to specified {@code file}.
+     * 
+     * @param file
+     *            file for which we want to get the relative path
+     * @return relative path from {@code startDir} to specified {@code file}.
+     */
+    private String relativeToStart(Path file) {
+        return startDir.relativize(file).toString().replaceAll("\\\\", "\\/");
+    }
+
+    /**
+     * Returns a relative path from {@code file} to {@code startDir}.
+     * 
+     * @param file
+     *            file for which we want to get the relative path
+     * @return relative path from {@code file} to {@code startDir}.
+     */
+    private String relativeFromStart(Path file) {
+        return file.relativize(startDir).toString().replaceAll("\\\\", "\\/");
     }
 
     private String clean(String textContent) {
@@ -98,6 +115,13 @@ public class Indexer {
 
     private final String signature = "<!-- Search box courtesy of Maven Site Indexer -->";
 
+    /**
+     * Adds tags for searchbox to specified file. If the specified file already
+     * contains tags for the searchbox the file will be unmodified.
+     * 
+     * @param file
+     *            file to which we want to add the searchbox tags.
+     */
     private void addTags(Path file) {
         try {
             // File file = new File(startDir + filename);
@@ -116,15 +140,15 @@ public class Indexer {
             }
 
             log.info("applying tags to '" + file.getFileName() + "'...");
-
             String newText = oldText
                 .replaceAll(
                     "</body>",
-                    "<div id=\"searchbox\">"
-                        + "  <iframe id=\"searchbox-frame\" src=\""
-                        + startDir.toUri().toURL()
-                        + "searchbox.html\" width=\"100%\" style=\"border: 0\" height=\"100%\">"
-                        + "  </iframe>" + "</div>" + signature + "</body>");
+                    "<div id=\"searchbox\">\n"
+                        + "  <iframe id=\"searchbox-frame\" src=\"./"
+                        + relativeFromStart(file.getParent())
+                        + "/searchbox.html\" width=\"100%\" style=\"border: 0\" height=\"100%\">\n"
+                        + "  </iframe>\n" + "</div>\n" + signature
+                        + "\n</body>");
 
             FileWriter writer = new FileWriter(file.toFile());
             writer.write(newText);
