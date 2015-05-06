@@ -22,7 +22,7 @@
         </menu>
 
         <menu name="Documentation">
-            <item name="CQRS clarified"/>
+            <item name="CQRS clarified" href="cqrs.html"/>
             <item name="Glossary" href="Glossary.html"/>
             <item name="Abbreviations" href="abbreviations.html"/>
         </menu>

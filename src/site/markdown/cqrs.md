@@ -16,8 +16,6 @@ A command changes the state of an entity within the command model. A command may
 
 One should regard a command as a request to perform a unit of work which is not depending on anything else.
 
-
-
 ## Domain event
 
 In CQRS, domain events are the source all changes in the query model. When a command is executed, it will change state of one or more entities within the command model. As a result of these changes, one or more events are dispatched. The events are picked up by the event handlers of the query model and those update the query model.
