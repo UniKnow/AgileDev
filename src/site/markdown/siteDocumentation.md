@@ -1,11 +1,8 @@
 # Site Documentation
 
-All documentation is within the code base and is written in
-MarkDown. 
-Markdown is a plain text formatting syntax designed so that it can be 
-converted to HTML. There is no clearly defined Markdown standard but if you 
-comply to the following syntax the generated pages should be formatted 
-correctly.
+All documentation is within the code base and is written in MarkDown.
+
+Markdown is a plain text formatting syntax designed so that it can be converted to HTML. There is no clearly defined Markdown standard but if you comply to the following syntax the generated pages should be formatted correctly.
 
 <table>
 <tr>

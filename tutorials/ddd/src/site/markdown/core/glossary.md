@@ -3,12 +3,14 @@
 ## A
 
 * **Aggregate** - A cluster of associated objects that are treated as a unit for the purpose of data changes. External references are restricted to one member of the `Aggregate`, designated as the root. A set of consistency rules applies within the `Aggregate`'s boundaries.
+* **Aggregate root** - Gatekeeper object for the aggregate. All access to the objects within the aggregate must occur through the aggregate root; external entities are only permitted to hold a reference to the aggregate root.
 * **Analysis pattern** - A group of concepts that represents a common construction in business modeling. It may be relevant to only 1 domain or may span many domains (resource fowler 1997, p. 8)
 * **Application Service** - Used by external consumers to talk to your system (think Web Services). If consumers need access to CRUD operations, they would be exposed via a application service. Application Services will typically use both Domain Services and Repositories to deal with external requests.
 * **Assertion** - A statement of the correct state of a program at some point, independent of how it does it. Typically a `Assertion` specifies the result of an operation or the required input for and operation.
 
 ## B
 
+* **BC** - See Bounded Context.
 * **Bounded Context** - A division of a larger system that has its own ubiquitous language and domain model. Bounding contexts gives team members a clear and shared understanding of what has to be consistent and what can be developed independently.
 
 ## C
@@ -42,6 +44,10 @@
 
 * **Model** - A useful approximation to the problem at hand.
 * **Modifier** - See [Command](#Command).
+
+## R
+
+* ** Root entity** - See aggregate root.
 
 ## S
 

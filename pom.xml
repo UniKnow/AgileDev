@@ -105,6 +105,7 @@
         <module>dbc4java</module>
         <module>cucumber-reporting</module>
         <module>cucumber-reporting-example</module>
+        <module>tutorials/cqrs</module>
         <module>tutorials/dbc</module>
         <module>tutorials/ddd</module>
         <module>tutorials/rest</module>

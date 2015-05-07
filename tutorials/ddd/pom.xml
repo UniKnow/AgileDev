@@ -13,8 +13,7 @@
     <name>Tutorial Domain Driven Design</name>
 
     <description>
-        The following tutorial describes best practices for applying Domain
-        Driven Design.
+        Tutorial describing concepts of Domain Driven Design and best practices for applying Domain Driven Design.
     </description>
 
     <dependencies>
