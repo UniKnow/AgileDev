@@ -9,7 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="Date-Revision-yyyymmdd" content="20150507" />
     <meta http-equiv="Content-Language" content="en" />
-    <title>JUnitBDD - Reactor Dependency Convergence</title>
+    <title>JUnitBDD - Usage JUnitBDD</title>
     <link rel="stylesheet" href="./css/apache-maven-fluido-1.3.0.min.css" />
     <link rel="stylesheet" href="./css/site.css" />
     <link rel="stylesheet" href="./css/print.css" media="print" />
@@ -66,12 +66,10 @@
         Introduction BDD</a>
             </li>
                   
-      <li>
+      <li class="active">
     
-                          <a href="usage.html" title="Usage JUnitBDD">
-          <i class="none"></i>
-        Usage JUnitBDD</a>
-            </li>
+            <a href="#"><i class="none"></i>Usage JUnitBDD</a>
+          </li>
                   
       <li>
     
@@ -99,40 +97,45 @@
                 
         <div id="bodyColumn"  class="span9" >
                                   
-            <div class="section">
-<h2>Reactor Dependency Convergence<a name="Reactor_Dependency_Convergence"></a></h2>
-<table border="0" class="table table-striped"><caption>
-  <b>Legend:</b>
-</caption>
-<tr class="a">
-<td><img alt="error" src="images/icon_error_sml.gif" /></td>
-<td>At least one dependency has a differing version of the dependency or has SNAPSHOT dependencies.</td></tr></table><br />
-<table border="0" class="table table-striped"><caption>
-  <b>Statistics:</b>
-</caption>
-<tr class="b">
-<th>Number of modules:</th>
-<td>13</td></tr>
-<tr class="a">
-<th>Number of dependencies (NOD):</th>
-<td>68</td></tr>
-<tr class="b">
-<th>Number of unique artifacts (NOA):</th>
-<td>69</td></tr>
-<tr class="a">
-<th>Number of version-conflicting artifacts (NOC):</th>
-<td>0</td></tr>
-<tr class="b">
-<th>Number of SNAPSHOT artifacts (NOS):</th>
-<td>0</td></tr>
-<tr class="a">
-<th>Convergence (NOD/NOA):</th>
-<td><img alt="error" src="images/icon_error_sml.gif" />&#160;<b>98 %</b></td></tr>
-<tr class="b">
-<th>Ready for release (100 % convergence and no SNAPSHOTS):</th>
-<td><img alt="error" src="images/icon_error_sml.gif" />&#160;<b>Error</b><br />You do not have 100 % convergence.</td></tr></table></div>
-<div class="section">
-<h3>Dependencies used in modules<a name="Dependencies_used_in_modules"></a></h3></div>
+            <h1>Usage JUnitBDD</h1>
+
+<div class="source">
+<pre>/**
+ * Example of unit test, enrich with BDD functionality
+ */
+@RunWith(BDDRunner.class)
+@Story(value = &quot;Example JUnit BDD story&quot;, report = &quot;html&quot;)
+@Narrative(as = &quot;new Developer &quot;,
+    iWant = &quot;to have an example that shows all the possibilities of JUnitBDD &quot;,
+    soThat = &quot;I can apply them within my own project.&quot;)
+public class ExampleStoryTest {
+
+    public ExampleStoryTest() {
+    }
+
+    /**
+     * Example Scenario
+     */
+    @Scenario(&quot;Example of scenario with all possible steps&quot;)
+    public void testScenario() {
+        Given(&quot;Some pre-conditions&quot;);
+        And(&quot;Additional given&quot;);
+        When(&quot;Executing certain behavior&quot;);
+        Then(&quot;Expected&quot;);
+    }
+
+    /**
+     * Example Scenario
+     */
+    @Scenario(value = &quot;Example of pending scenario&quot;, pending = true)
+    public void testPendingScenario() {
+        Given(&quot;Some pre-conditions&quot;);
+        And(&quot;Additional given&quot;);
+        When(&quot;Executing certain behavior&quot;);
+        Then(&quot;Expected&quot;);
+    }
+}
+</pre></div>
                   </div>
             </div>
           </div>
