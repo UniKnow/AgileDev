@@ -12,6 +12,8 @@
         <name>${project.name}</name>
     </bannerRight>
     <body>
+        <menu ref="parent"/>
+
         <menu name="CQRS Reference">
             <item name="Introducing CQRS" href="introducing_cqrs.html"/>
         </menu>

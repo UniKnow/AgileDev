@@ -58,6 +58,8 @@
     <version position="left"/>
 
     <body>
+        <menu ref="parent"/>
+
         <menu name="Overview">
             <item name="Introduction BDD" href="bdd.html"/>
             <item name="Usage JUnitBDD" href="usage.html"/>

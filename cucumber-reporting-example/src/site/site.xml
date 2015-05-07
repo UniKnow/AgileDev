@@ -55,6 +55,8 @@
         <name>${project.name}</name>
     </bannerRight>
     <body>
+        <menu ref="parent"/>
+
         <menu name="Documentation">
             <item name="Introduction" href="index.html"/>
             <item name="Features" href="cucumber.html"/>
