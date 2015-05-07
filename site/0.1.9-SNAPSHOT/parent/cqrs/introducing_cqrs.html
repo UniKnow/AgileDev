@@ -9,7 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="Date-Revision-yyyymmdd" content="20150507" />
     <meta http-equiv="Content-Language" content="en" />
-    <title>Tutorial Command Query Responsibility Segregation - Reactor Dependency Convergence</title>
+    <title>Tutorial Command Query Responsibility Segregation - Introducing CQRS</title>
     <link rel="stylesheet" href="./css/apache-maven-fluido-1.3.0.min.css" />
     <link rel="stylesheet" href="./css/site.css" />
     <link rel="stylesheet" href="./css/print.css" media="print" />
@@ -59,12 +59,10 @@
                 <ul class="nav nav-list">
                     <li class="nav-header">CQRS Reference</li>
                                 
-      <li>
+      <li class="active">
     
-                          <a href="introducing_cqrs.html" title="Introducing CQRS">
-          <i class="none"></i>
-        Introducing CQRS</a>
-            </li>
+            <a href="#"><i class="none"></i>Introducing CQRS</a>
+          </li>
             </ul>
                 
                     
@@ -85,40 +83,9 @@
                 
         <div id="bodyColumn"  class="span9" >
                                   
-            <div class="section">
-<h2>Reactor Dependency Convergence<a name="Reactor_Dependency_Convergence"></a></h2>
-<table border="0" class="table table-striped"><caption>
-  <b>Legend:</b>
-</caption>
-<tr class="a">
-<td><img alt="error" src="images/icon_error_sml.gif" /></td>
-<td>At least one dependency has a differing version of the dependency or has SNAPSHOT dependencies.</td></tr></table><br />
-<table border="0" class="table table-striped"><caption>
-  <b>Statistics:</b>
-</caption>
-<tr class="b">
-<th>Number of modules:</th>
-<td>13</td></tr>
-<tr class="a">
-<th>Number of dependencies (NOD):</th>
-<td>68</td></tr>
-<tr class="b">
-<th>Number of unique artifacts (NOA):</th>
-<td>69</td></tr>
-<tr class="a">
-<th>Number of version-conflicting artifacts (NOC):</th>
-<td>0</td></tr>
-<tr class="b">
-<th>Number of SNAPSHOT artifacts (NOS):</th>
-<td>0</td></tr>
-<tr class="a">
-<th>Convergence (NOD/NOA):</th>
-<td><img alt="error" src="images/icon_error_sml.gif" />&#160;<b>98 %</b></td></tr>
-<tr class="b">
-<th>Ready for release (100 % convergence and no SNAPSHOTS):</th>
-<td><img alt="error" src="images/icon_error_sml.gif" />&#160;<b>Error</b><br />You do not have 100 % convergence.</td></tr></table></div>
-<div class="section">
-<h3>Dependencies used in modules<a name="Dependencies_used_in_modules"></a></h3></div>
+            <h1>Introducing CQRS</h1>
+<p>In this chapter we describe the Command Query Responsibility Segregation (CQRS) pattern. Here we will show you how applying this pattern affects the architecture of your enterprise application. It is important to understand that the CQRS pattern is not intended for use as the top-level architecture of your system; rather it should be applied to those modules that will gain specific benefits from the application of the pattern.</p>
+<p>Before we dive deeper into the concepts of CQRS and its usage within a complex application, we need to introduce some of the terminology that we will use in this chapter and subsequent chapters of this tutorial. Much of this terminology comes from Domain Driven Design so to learn more about the foundational principles of DDD, you should read <a href="./../ddd/index.html">Tutorial Domain Driven Design</a>.</p>
                   </div>
             </div>
           </div>
