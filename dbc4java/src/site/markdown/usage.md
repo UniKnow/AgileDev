@@ -1,4 +1,4 @@
-# Usage `dbc4java`
+# Usage dbc4java
 
 To use `dbc4java` within your project you need to include the following dependency within your `pom.xml`:
 
