@@ -1,0 +1,5 @@
+# Introducing CQRS
+
+In this chapter we describe the Command Query Responsibility Segregation (CQRS) pattern. Here we will show you how applying this pattern affects the architecture of your enterprise application. It is important to understand that the CQRS pattern is not intended for use as the top-level architecture of your system; rather it should be applied to those modules that will gain specific benefits from the application of the pattern.
+
+Before we dive deeper into the concepts of CQRS and its usage within a complex application, we need to introduce some of the terminology that we will use in this chapter and subsequent chapters of this tutorial. Much of this terminology comes from Domain Driven Design so to learn more about the foundational principles of DDD, you should read [Tutorial Domain Driven Design](./../ddd/index.html).

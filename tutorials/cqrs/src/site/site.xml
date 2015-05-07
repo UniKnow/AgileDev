@@ -13,7 +13,7 @@
     </bannerRight>
     <body>
         <menu name="CQRS Reference">
-            <item name="Context CQRS" href="context_cqrs.html"/>
+            <item name="Introducing CQRS" href="introducing_cqrs.html"/>
         </menu>
     </body>
 </project>
