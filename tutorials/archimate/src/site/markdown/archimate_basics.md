@@ -1,6 +1,7 @@
 # ArchiMate basics
 
-## Core concepts
+
+## Core elements
 
 ### Business Layer
 
@@ -48,7 +49,7 @@
 |![Infrastructure Service](images/infrastructure_service.png)|Infrastructure Service|An infrastructure service exposes the functionality on a node to ites environment. This functionality is accessed through one or more infrastructure interfaces. Typical infrastructure services may include messaging, storage, naming, and directory services.|
 |![Artifact](images/artifact/png)|Artifact|A physical piece of data that is used or produced in a software development process, or by deployment of a system. It is typically used to model (software) products such as source files, executable, scripts, database tables, documents, specifications, etc. An instance of an artifact can be deployed on a node.|
 
-### Relationships.
+### Relations.
 
 |Symbol|Name|Explanation|
 |------|----|-----------|
