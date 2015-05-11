@@ -9,13 +9,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="Date-Revision-yyyymmdd" content="20150511" />
     <meta http-equiv="Content-Language" content="en" />
-    <title>Domain Driven Design - Shared Kernel</title>
-    <link rel="stylesheet" href="../css/apache-maven-fluido-1.3.0.min.css" />
-    <link rel="stylesheet" href="../css/site.css" />
-    <link rel="stylesheet" href="../css/print.css" media="print" />
+    <title>Domain Driven Design - Why Domain Driven Design</title>
+    <link rel="stylesheet" href="./css/apache-maven-fluido-1.3.0.min.css" />
+    <link rel="stylesheet" href="./css/site.css" />
+    <link rel="stylesheet" href="./css/print.css" media="print" />
 
       
-    <script type="text/javascript" src="../js/apache-maven-fluido-1.3.0.min.js"></script>
+    <script type="text/javascript" src="./js/apache-maven-fluido-1.3.0.min.js"></script>
 
     
             </head>
@@ -26,8 +26,8 @@
         <div class="container-fluid">
           <div id="banner">
         <div class="pull-left">
-                                                  <a href="../www.uniknow.com/" id="bannerLeft">
-                                                                                                <img src="../images/UniKnow-logo.jpg"  alt="Company name"/>
+                                                  <a href="www.uniknow.com/" id="bannerLeft">
+                                                                                                <img src="images/UniKnow-logo.jpg"  alt="Company name"/>
                 </a>
                       </div>
         <div class="pull-right">              <div id="bannerRight">
@@ -61,50 +61,48 @@
                                 
       <li>
     
-                          <a href="../../index.html" title="AgileDev parent POM">
+                          <a href="../index.html" title="AgileDev parent POM">
           <i class="none"></i>
         AgileDev parent POM</a>
             </li>
                               <li class="nav-header">Core</li>
                                 
-      <li>
+      <li class="active">
     
-                          <a href="../why_ddd.html" title="Why DDD">
-          <i class="none"></i>
-        Why DDD</a>
-            </li>
+            <a href="#"><i class="none"></i>Why DDD</a>
+          </li>
                   
       <li>
     
-                          <a href="../core/introduction_ddd.html" title="Introduction DDD">
+                          <a href="core/introduction_ddd.html" title="Introduction DDD">
           <i class="none"></i>
         Introduction DDD</a>
             </li>
                                                                                                                                                                                                   
       <li>
     
-                          <a href="../core/building_blocks_ddd.html" title="Building blocks DDD">
+                          <a href="core/building_blocks_ddd.html" title="Building blocks DDD">
           <i class="icon-chevron-right"></i>
         Building blocks DDD</a>
                   </li>
                                                                                                         
       <li>
     
-                          <a href="../core/best_practices.html" title="Best practices">
+                          <a href="core/best_practices.html" title="Best practices">
           <i class="icon-chevron-right"></i>
         Best practices</a>
                   </li>
                   
       <li>
     
-                          <a href="../core/faq.html" title="FAQ">
+                          <a href="core/faq.html" title="FAQ">
           <i class="none"></i>
         FAQ</a>
             </li>
                   
       <li>
     
-                          <a href="../core/glossary.html" title="Glossary">
+                          <a href="core/glossary.html" title="Glossary">
           <i class="none"></i>
         Glossary</a>
             </li>
@@ -119,7 +117,7 @@
                             <div class="clear"></div>
                             <div class="clear"></div>
                              <a href="http://maven.apache.org/" title="Built by Maven" class="poweredBy">
-        <img class="builtBy" alt="Built by Maven" src="../images/logos/maven-feather.png" />
+        <img class="builtBy" alt="Built by Maven" src="./images/logos/maven-feather.png" />
       </a>
                   </div>
           </div>
@@ -128,9 +126,29 @@
                 
         <div id="bodyColumn"  class="span9" >
                                   
-            <h1>Shared Kernel</h1>
-<p>Once separate teams are working on closely related bounded contexts they may produce systems that may not fit together.</p>
-<p><i>Therefore</i> agree with the teams to share some subset of the domain. Keep this kernel small. Within this kernel, include, beside the subset of the model, also the subset of code and/or the database design associated with that part of the model. This shared stuff has special status, and shouldn&#x2019;t be changed without consulting the other team(s).</p>
+            <h1>Why Domain Driven Design</h1>
+<p>The value and benefits of DDD are summarized here, I will start off with the less technical benefits:</p>
+
+<ul>
+  
+<li>The organization gains a useful model of its domain. The emphasis of DDD is to invest in what matters most to the business. By focusing on the core domain we focus on what distinguish the business from all others. Other models exist to support the core domain but those are not given the priority and effort of the core domain.</li>
+  
+<li>A refined, precise definition and understanding of the business is developed. As the model is refined over time, the business develops a deep understanding of the business which can serve as an analysis tool. Details surface out of the minds of domain experts. These details can help the business to analyze the value of the current and future direction, both strategic and tactical.</li>
+  
+<li>Domain experts contribute to software design. Developers share a common language as a unified team along with domain experts.</li>
+  
+<li>A better user experience is gained. When the user experience is designed to follow the contours of the underlying expert model, users are led to correct conclusions.</li>
+</ul>
+<p>We now move into more technical driven benefits to the business:</p>
+
+<ul>
+  
+<li>Clean boundaries are placed around pure models.</li>
+  
+<li>Enterprise architecture is better organized. All teams in the enterprise develop an acute understanding of where and why integrations are necessary. The teams that have models that intersect, employ context maps to establish formal relationships and ways to integrate.</li>
+  
+<li>Agile, iterative, continuous modeling is used. The team&#x2019;s efforts follow an agile approach, which is iterative and incremental. Any agile process that the team feels comfortable with can be used successfully in a DDD project. The model that is produced is the working software. It is refined continuously until it is no longer needed by the business.</li>
+</ul>
                   </div>
             </div>
           </div>
@@ -150,7 +168,7 @@
                 </div>
     </footer>
   <div id="searchbox">
-  <iframe id="searchbox-frame" src="./../searchbox.html" width="100%" style="border: 0" height="100%">
+  <iframe id="searchbox-frame" src=".//searchbox.html" width="100%" style="border: 0" height="100%">
   </iframe>
 </div>
 <!-- Search box courtesy of Maven Site Indexer -->
