@@ -87,6 +87,13 @@
           <i class="icon-chevron-right"></i>
         Building blocks DDD</a>
                   </li>
+                  
+      <li>
+    
+                          <a href="../core/context_mapping.html" title="Context mapping">
+          <i class="none"></i>
+        Context mapping</a>
+            </li>
                                                                                                         
       <li>
     
@@ -132,13 +139,19 @@
 
 <ul>
   
+<li><b>ACL</b> - See Anti Corruption Layer.</li>
+  
 <li><b>Aggregate</b> - A cluster of associated objects that are treated as a unit for the purpose of data changes. External references are restricted to one member of the <tt>Aggregate</tt>, designated as the root. A set of consistency rules applies within the <tt>Aggregate</tt>&#x2019;s boundaries.</li>
   
 <li><b>Aggregate root</b> - Gatekeeper object for the aggregate. All access to the objects within the aggregate must occur through the aggregate root; external entities are only permitted to hold a reference to the aggregate root.</li>
   
+<li><b>Anti Corruption Layer</b> - Anti-corruption Layers help protect against corruption in the domain model when the system interacts with other systems or bounded contexts. The Anti-corruption Layer translates to and from the other system&#x2019;s models. It is often implemented using the Facade and/or Adapter design pattern.</li>
+  
 <li><b>Analysis pattern</b> - A group of concepts that represents a common construction in business modeling. It may be relevant to only 1 domain or may span many domains (resource fowler 1997, p. 8)</li>
   
-<li><b>Application Service</b> - Used by external consumers to talk to your system (think Web Services). If consumers need access to CRUD operations, they would be exposed via a application service. Application Services will typically use both Domain Services and Repositories to deal with external requests.</li>
+<li><b><a href="layered_architecture.html">Application Layer</a></b> - Manage transactions, coordinates application activities, creates and accesses domain objects.</li>
+  
+<li><b>Application Service</b> - Used by external consumers to talk to your system. If consumers need access to CRUD operations, they would be exposed via a application service. Application Services will typically use both Domain Services and Repositories to deal with external requests.</li>
   
 <li><b>Assertion</b> - A statement of the correct state of a program at some point, independent of how it does it. Typically a <tt>Assertion</tt> specifies the result of an operation or the required input for and operation.</li>
 </ul></div>
@@ -181,6 +194,8 @@
   
 <li><b>Domain Driven Design</b> - Domain Driven Design is not a technology or a methodology. DDD provides a structure of practices and terminology for making design decissions that focus and accelerate software projects dealing with complicated domains.</li>
   
+<li><b><a href="layered_architecture.html">Domain Layer</a></b> - Contains the state and behavior of the domain.</li>
+  
 <li><b>Domain Service</b> - Encapsulates business logic that doesn&#x2019;t naturally fit within a domain object, and are NOT typical CRUD operations, those would belong to a Repository.</li>
   
 <li><b>DTO</b> - See <a href="#Data_Transfer_Object">Data Transfer Object</a>.</li>
@@ -198,6 +213,8 @@
 <h2>I<a name="I"></a></h2>
 
 <ul>
+  
+<li><b><a href="layered_architecture.html">Infrastructural Layer</a></b> - Supports all other layers, includes implementation of repositories, adapters, frameworks, etc.</li>
   
 <li><b>Infrastructure Services</b> - Used to abstract technical concerns (e.g. MSMQ, email provider, etc)</li>
 </ul></div>
@@ -230,6 +247,8 @@
 <ul>
   
 <li><b>Ubiquitous Language</b> - A language structured around the domain model and used by all team members to connect all activities of the team with the software. The idea is to avoid translations because they blunt communication and makes knowledge crunching anemic.</li>
+  
+<li><b><a href="layered_architecture.html">User Interface Layer</a></b> - Accepts user commands and presents information back to the user.</li>
 </ul></div>
 <div class="section">
 <h2>V<a name="V"></a></h2>
