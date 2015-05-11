@@ -75,6 +75,7 @@
         <menu ref="parent"/>
 
         <menu name="Core">
+            <item name="Why DDD" href="why_ddd.html" />
             <item name="Introduction DDD" href="core/introduction_ddd.html" />
             <item name="Building blocks DDD" href="core/building_blocks_ddd.html" collapse="true">
                 <item name="Aggregates" href="core/aggregates.html" />
