@@ -87,6 +87,7 @@
                 <item name="Services" href="core/services.html" />
                 <item name="Value Objects" href="core/value_objects.html" />
             </item>
+            <item name="Communicating betwee"
             <item name="Best practices" href="core/best_practices.html" collapse="true">
                 <!--<item name="Making behavior obvious" collapse="false">-->
                     <item name="Assertions" href="core/assertions.html" />
