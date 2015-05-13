@@ -76,6 +76,9 @@
 
         <menu name="Documentation">
             <item name="Introduction" href="introduction.html" />
+            <item name="Best practices REST API" href="best-practices-rest-api.html">
+                <item name="Resource Archetypes" href="resource-archetypes.html"/>
+            </item>
         </menu>
     </body>
 </project>

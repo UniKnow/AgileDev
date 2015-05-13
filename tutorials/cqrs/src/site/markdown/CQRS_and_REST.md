@@ -14,9 +14,11 @@ TODO: Create CQRS prototype.
 
 ## Creating a REST API
 
-The most important responsibility of the REST API is to model the underlying domain as resources and expose it with HTTP semantics. During this process we create a public domain which is composed of resources and input/output messages.
+The most important responsibility of the REST API is to model the underlying domain as resources and expose it with HTTP semantics. During this process we create a public domain which is composed of resources and commands.
 
 In general you should NOT expose the underlying domain because you want to be able to change your domain objects without having to change the public facing API. Same thing the other way around, if changes are required to the public API, you don't want to change your domain as well.
+
+**TODO: refactor rest of article since we want to use verbs as command instead of payload and command header**
 
 ### Resources
 
@@ -50,3 +52,4 @@ TODO:
 
 * [Exposing CQRS through a RESTful API](http://www.infoq.com/articles/rest-api-on-cqrs)
 * [m-r example in c#](https://github.com/gregoryyoung/m-r)
+* [CQRS API](http://www.slideshare.net/fatmuemoo/cqrs-api)
