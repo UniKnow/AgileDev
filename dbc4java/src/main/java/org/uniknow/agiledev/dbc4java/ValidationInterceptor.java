@@ -83,7 +83,6 @@ public class ValidationInterceptor {
         Set<ConstraintViolation<Object>> violations = validator
             .validate(joinPoint.getTarget());
         if (!violations.isEmpty()) {
-            System.out.println(violations);
             throw new ConstraintViolationException(
                 new HashSet<ConstraintViolation<?>>(violations));
         }
@@ -101,8 +100,8 @@ public class ValidationInterceptor {
         MethodSignature signature = (MethodSignature) pjp.getSignature();
         Object instance = pjp.getTarget();
 
-        // Only validate constraints on object instances
         if (instance != null) {
+            // Validate constraints on object instances
             ExecutableValidator executableValidator = validator
                 .forExecutables();
 

@@ -169,12 +169,12 @@ public class DbcStaticAnnotationMetaDataProvider implements MetaDataProvider {
         BeanConfiguration<T> configuration = (BeanConfiguration<T>) configuredBeans
             .get(beanClass);
 
-        if (configuration != null) {
-            return configuration;
+        if (configuration == null) {
+            System.out
+                .println("Creating bean configuration class " + beanClass);
+            configuration = retrieveBeanConfiguration(beanClass);
+            configuredBeans.put(beanClass, configuration);
         }
-
-        configuration = retrieveBeanConfiguration(beanClass);
-        configuredBeans.put(beanClass, configuration);
 
         return configuration;
     }
@@ -203,10 +203,7 @@ public class DbcStaticAnnotationMetaDataProvider implements MetaDataProvider {
         Set<ConstrainedElement> propertyMetaData = newHashSet();
 
         for (Field field : run(GetDeclaredFields.action(beanClass))) {
-            System.out.println("Processing " + beanClass + "."
-                + field.getName());
             if (field.isSynthetic()) {
-                System.out.println("Skipped field");
                 continue;
             }
 

@@ -49,6 +49,7 @@ import javax.validation.constraints.Min;
  * A simple contract is shown below. The client of the method must send a
  * parameter of type `int` that is smaller than
  * {@code MAX_VALUES. In return the client can be certain that that the method returns the value placed at the requested postion in the array.
+
  */
 @Named
 @Validated

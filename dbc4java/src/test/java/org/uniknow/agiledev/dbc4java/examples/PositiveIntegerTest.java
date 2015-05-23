@@ -39,6 +39,7 @@
  */
 package org.uniknow.agiledev.dbc4java.examples;
 
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
@@ -82,6 +83,6 @@ public class PositiveIntegerTest {
      */
     @Test(expected = ValidationException.class)
     public void testAddNegativeValue() {
-        value.add(-1);
+    value.add(-1);
     }
 }

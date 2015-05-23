@@ -248,7 +248,6 @@ public class DbcValidator implements Validator, ExecutableValidator {
 
         if (!beanMetaDataManager.isConstrained(validationContext
             .getRootBeanClass())) {
-            System.out.println("No constraints on class");
             return Collections.emptySet();
         }
 
