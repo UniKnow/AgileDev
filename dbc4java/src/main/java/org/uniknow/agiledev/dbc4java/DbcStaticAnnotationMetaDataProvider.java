@@ -170,8 +170,6 @@ public class DbcStaticAnnotationMetaDataProvider implements MetaDataProvider {
             .get(beanClass);
 
         if (configuration == null) {
-            System.out
-                .println("Creating bean configuration class " + beanClass);
             configuration = retrieveBeanConfiguration(beanClass);
             configuredBeans.put(beanClass, configuration);
         }
