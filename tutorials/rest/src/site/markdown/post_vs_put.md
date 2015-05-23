@@ -1,0 +1,9 @@
+# POST vs PUT
+
+A common mistake is in thinking that anything that creates a new resource is a `PUT` and anything that changes an existing resource is a `POST`. In SQL terms, `POST` is an `UPDATE` and `PUT` is an `INSERT`. However, that’s not the case. In fact, the mistake is in trying to model `PUT` and `POST` in terms of `INSERT` and `UPDATE`. They are not even close.
+
+What actually happens is that `PUT` puts a resource at a specific URL. If there’s already a resource there, it’s replaced. If there’s no resource there, a new one is created. This means it’s like a `DELETE` followed by an insert of a new record with the same primary key.
+
+`POST`, however, really has no equivalent in SQL. `POST` sends some data to a specified URL. The server on the other end of this URL can do whatever it wants with this data. It can store it somewhere private. It can store it in the resource at the URL that was POSTed to. It can store it in a new resource, in which case it returns the URL of that resource. It can use it as input for several different existing and new resources. It can throw the information away. It can insert, update, or delete records in a database (or all of the above). `POST` is decidedly non-side-effect free and non-idempotent.
+
+`PUT` is a much more limited operation that never does anything more than `PUT` one resource at a specified URL. It is idempotent, which is a fancy way of saying that doing it twice is the same as doing it once. Both `PUT` and `POST` can be used to create new resources. However `PUT` should be used when the client specifies the location for the page. `POST` is used when the client sends the resource to the the server, and the server then tells the client where it put it. In SQL analogy, `POST` is an `INSERT` with an automatically generated primary key, and `PUT` is an `INSERT` that specifies the primary key in the `INSERT` statement.
