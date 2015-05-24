@@ -39,6 +39,7 @@
  */
 package org.uniknow.agiledev.dbc4java;
 
+import java.lang.reflect.Method;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -97,54 +98,41 @@ public class ValidationInterceptor {
         throws Throwable {
 
         Object result;
+        Set<ConstraintViolation<Object>> violations;
+
         MethodSignature signature = (MethodSignature) pjp.getSignature();
+        Method method = signature.getMethod();
         Object instance = pjp.getTarget();
 
+        ExecutableValidator executableValidator = validator.forExecutables();
+
+        // System.out.println("Validating " + method);
+
+        // Validate constraint(s) method parameters.
+        violations = executableValidator.validateParameters(instance, method,
+            pjp.getArgs());
+        if (!violations.isEmpty()) {
+            throw new ConstraintViolationException(violations);
+        }
+
+        result = pjp.proceed(); // Execute the method
+
         if (instance != null) {
-            // Validate constraints on object instances
-            ExecutableValidator executableValidator = validator
-                .forExecutables();
-
-            // Validate constraint(s) method parameters.
-            Set<ConstraintViolation<Object>> parametersViolations = executableValidator
-                .validateParameters(pjp.getTarget(), signature.getMethod(),
-                    pjp.getArgs());
-            if (!parametersViolations.isEmpty()) {
-                throw new ConstraintViolationException(parametersViolations);
-            }
-
-            result = pjp.proceed(); // Execute the method
-
-            Set<ConstraintViolation<Object>> violations;
-
             // Validate invariants class
-            violations = validator.validate(pjp.getTarget());
+            violations = validator.validate(instance);
             if (!violations.isEmpty()) {
                 throw new ConstraintViolationException(
                     new HashSet<ConstraintViolation<?>>(violations));
             }
+        }
 
+        if (!signature.getReturnType().equals(Void.TYPE)) {
             // Validate constraint return value method
-            Set<ConstraintViolation<Object>> returnValueViolations = executableValidator
-                .validateReturnValue(pjp.getTarget(), signature.getMethod(),
-                    result);
-            if (!returnValueViolations.isEmpty()) {
-                throw new ConstraintViolationException(returnValueViolations);
+            violations = executableValidator.validateReturnValue(instance,
+                method, result);
+            if (!violations.isEmpty()) {
+                throw new ConstraintViolationException(violations);
             }
-        } else {
-            // Validate constraints static method
-            ExecutableValidator executableValidator = validator
-                .forExecutables();
-
-            // Validate constraint(s) method parameters.
-            Set<ConstraintViolation<Object>> parametersViolations = executableValidator
-                .validateParameters(pjp.getTarget(), signature.getMethod(),
-                    pjp.getArgs());
-            if (!parametersViolations.isEmpty()) {
-                throw new ConstraintViolationException(parametersViolations);
-            }
-
-            result = pjp.proceed(); // Execute the method
         }
 
         return result;

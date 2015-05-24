@@ -348,41 +348,44 @@ public class DbcValidator implements Validator, ExecutableValidator {
     private <T> Set<ConstraintViolation<T>> validateParameters(T object,
         ExecutableElement executable, Object[] parameterValues,
         Class<?>... groups) {
-        // this might be the case for parameterless methods
-        if (parameterValues == null) {
+
+        if ((parameterValues != null) && (parameterValues.length > 0)) {
+
+            ValidationContext<T> context = getValidationContext()
+                .forValidateParameters(parameterNameProvider, object,
+                        executable, parameterValues);
+
+            if (!beanMetaDataManager.isConstrained(context.getRootBeanClass())) {
+                return Collections.emptySet();
+            }
+
+            ValidationOrder validationOrder = determineGroupValidationOrder(groups);
+            validateParametersInContext(context, parameterValues,
+                validationOrder);
+
+            return context.getFailingConstraints();
+        } else {
             return Collections.emptySet();
         }
-
-        ValidationOrder validationOrder = determineGroupValidationOrder(groups);
-
-        ValidationContext<T> context = getValidationContext()
-            .forValidateParameters(parameterNameProvider, object, executable,
-                parameterValues);
-
-        if (!beanMetaDataManager.isConstrained(context.getRootBeanClass())) {
-            return Collections.emptySet();
-        }
-
-        validateParametersInContext(context, parameterValues, validationOrder);
-
-        return context.getFailingConstraints();
     }
 
     private <T> Set<ConstraintViolation<T>> validateReturnValue(T object,
         ExecutableElement executable, Object returnValue, Class<?>... groups) {
         ValidationOrder validationOrder = determineGroupValidationOrder(groups);
 
+
         ValidationContext<T> context = getValidationContext()
             .forValidateReturnValue(object, executable, returnValue);
 
-        if (!beanMetaDataManager.isConstrained(context.getRootBeanClass())) {
+        if (beanMetaDataManager.isConstrained(context.getRootBeanClass())) {
+            validateReturnValueInContext(context, object, returnValue,
+                    validationOrder);
+
+            return context.getFailingConstraints();
+        } else {
             return Collections.emptySet();
         }
 
-        validateReturnValueInContext(context, object, returnValue,
-            validationOrder);
-
-        return context.getFailingConstraints();
     }
 
     @Override
@@ -1212,6 +1215,7 @@ public class DbcValidator implements Validator, ExecutableValidator {
             ValueContext<T, Object> valueContext = getExecutableValueContext(
                 validationContext.getRootBean(), executableMetaData,
                 currentValidatedGroup);
+
             valueContext.appendCrossParameterNode();
             valueContext.setCurrentValidatedValue(parameterValues);
 
@@ -1234,7 +1238,7 @@ public class DbcValidator implements Validator, ExecutableValidator {
                 PathImpl originalPath = valueContext.getPropertyPath();
 
                 ParameterMetaData parameterMetaData = executableMetaData
-                    .getParameterMetaData(i);
+                    .getParameterMetaData(i) ;
                 Object value = parameterValues[i];
 
                 if (value != null) {

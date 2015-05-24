@@ -83,6 +83,6 @@ public class PositiveIntegerTest {
      */
     @Test(expected = ValidationException.class)
     public void testAddNegativeValue() {
-    value.add(-1);
+        value.add(-1);
     }
 }
