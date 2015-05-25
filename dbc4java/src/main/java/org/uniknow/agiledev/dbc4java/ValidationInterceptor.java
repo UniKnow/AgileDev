@@ -109,10 +109,13 @@ public class ValidationInterceptor {
         // System.out.println("Validating " + method);
 
         // Validate constraint(s) method parameters.
-        violations = executableValidator.validateParameters(instance, method,
-            pjp.getArgs());
-        if (!violations.isEmpty()) {
-            throw new ConstraintViolationException(violations);
+        Object[] arguments = pjp.getArgs();
+        if ((arguments != null) && (arguments.length > 0)) {
+            violations = executableValidator.validateParameters(instance,
+                method, arguments);
+            if (!violations.isEmpty()) {
+                throw new ConstraintViolationException(violations);
+            }
         }
 
         result = pjp.proceed(); // Execute the method
