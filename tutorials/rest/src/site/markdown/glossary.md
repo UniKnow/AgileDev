@@ -17,6 +17,12 @@
 ## M
 * Media type - A syntax that describes the form of content.
 
+## N
+* Negative Cache - Negative cache is a cache that also stores "negative" responses, i.e. failures. This means that a program remembers the result indicating a failure even after the cause has been corrected.
+
+## P
+* Payload - A payload is something one carries. A HTTP `POST` or `PUT` requests payload is whatever comes in the "body".
+
 ## R
 * Resource - any web based concept that can be referenced by a unique identifier and manipulated via the uniform interface.
 * Resource Identifier - A universal unique ID of a specific Resource.
