@@ -81,7 +81,7 @@ Some best practives for REST API design are implicit in the HTTP standard, while
 
 Versioning helps you iterate faster and prevents invalid requests from hitting updated endpoints. It also helps smooth over any major API version transitions as you can continue to offer old API versions for a period of time.
 
----TODO: extend with reference to best approach described here.---
+See also: [Versioning REST API](versioning-rest-api)
 
 ## URIs
 
@@ -406,7 +406,7 @@ Media types use the subtype prefix `vnd` to indicate that they are owned (or con
 
 ### Media type negotiation should be used to manage resource representation versioning
 
-The version of a resource representation should be managed via media types. The client uses media type negotiation to bind to the representational form that best suit their needs. See [introduction versioning](introduction#Versioning) for more details.
+The version of a resource representation should be managed via media types. The client uses media type negotiation to bind to the representational form that best suit their needs. See [Versioning REST API](versioning-rest-api) for more details.
 
 ## Message body
 

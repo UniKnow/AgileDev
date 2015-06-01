@@ -29,8 +29,43 @@ The solution we want to create is based on the following assumptions:
 
 ## Solution overview
 
-TODO
+The previous assumptions lead to the following solution;
 
+A client starts interacting with multiple REST services. Each interaction that results into a state transition of a resource results in a URI that later can be used to confirm or cancel it. If the service doesn't hear anything after some service specific timeout, it will cancel the change automatically.
+Once the client successfully completes, the returned URIs will be used to confirm the state transitions of the resources.
+If the workflow fails the set of URIs that have been collected until the failure occurred, will be used to signal each of the REST services with uncommitted changes to cancel their state transitions.
+
+### Cancel vs Confirm
+
+One of the guarantees of classic transactions is that every change is temporary (subject to rollback) until the application explicitly indicates that everything is done and can be saved (committed). For REST the same should be possible, however there is no classical rollback. Due to that the notion of rollback is replaced by cancel and likewise the notion of commit is replaced by confirm.
+
+The goal of cancel is to revert changes across multiple participants in case of failures within a transaction. The cancellation mechanism will be internal and unconditional within each REST service. This way, each REST service will eventually cancel after some time-out.
+
+<hr/>
+**TODO**
+Try how we can generically trace resource changes.
+* Options are to store for each change in the resource status a separate entry which is identified by a unique ID. The resource status becomes permanent when confirm is received.
+* Other approach might be using [Event Sourcing](http://martinfowler.com/eaaDev/EventSourcing.html).
+<hr/>
+
+The goal of confirm is to let the REST service know that the workflow has been ended successfully. If by default everything will be cancelled there needs to be a way to perform otherwise. Within this solution that will be done via an explicit confirm request to the REST service(s) involved. In order to do this with REST the minimal requirement is a URI providing the functionality to confirm the resource state changes. Only the REST service itself should determine what that URI is. Within the response there should be an indication on when the URI will expire, indicating when the REST service itself will cancel automatically.
+
+It is up to the Client and REST service to negotiate an appropriate timeout duration.
+
+Confirmation requests that come after the URI has timeout and cancelled on its own should result in a `404`.
+
+### Transaction Coordinator
+
+To prevent that each application developer has to implement its own distributed transaction logic there should be a transaction coordinator that will take care of recovery and failure handling. This component can be delivered as a (REST) service.
+
+The URIs which are returned by the REST service will be handed over to the coordinator. The coordinator will delegate the confirmations to all participants. If all goes fine the response would be `204`.
+
+When the coordinator fails to enforce the confirmation there needs to be a way to communicate the problem back to the application. If every participant in the transaction timed out (and cancelled) this is indicated by a `404` ("Not Found") error. Everything else will result in a `409` ("Conflict") status code. The response body could contain a detailed log, showing which of the given URIs could be confirmed and which could not be confirmed.
+
+Recovery is needed in two typically cases:
+
+* The coordinator crashed - once it comes back up, it retries the remaining URIs for which it was confirming the transaction.
+* Any participant crashed or becomes unreachable due to network errors. In this case the coordinator simply retries confirmation requests.
 
 
 

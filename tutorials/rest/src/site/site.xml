@@ -79,6 +79,7 @@
             <item name="Best practices REST API" href="best-practices-rest-api.html">
                 <item name="Resource Archetypes" href="resource-archetypes.html"/>
             </item>
+            <item name="Versioning REST API" href="versioning-rest-api.html"/>
         </menu>
     </body>
 </project>
