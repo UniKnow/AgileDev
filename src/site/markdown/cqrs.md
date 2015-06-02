@@ -4,6 +4,8 @@ CQRS stands for Command Query Responsibility Segregation and helps developers to
 
 The models may share the same database, in which case the database acts as the communication between the two models, but they may also use separate databases, making the query side database a real-time reporting database. In later case there needs to be some communication mechanism between the two models, or their databases. Commonly this communication is realized by events.
 
+![CQRS](images/cqrs.png)
+
 ## Querying
 
 A query returns data and does not alter the state of the model. Once the data has been been retrieved by an actor, that same data may have been changed by another actor, in other words it is stale. If the data we are going to return to actors is stale anyway, is it really necessary to go to the master database and get it from there? Why transform the persisted data into entities if we just want data, not any rule preserving behavior? Why transform those entities to DTOs to transfer them across.

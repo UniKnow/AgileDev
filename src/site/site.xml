@@ -19,10 +19,39 @@
 
         <menu name="Best Practices">
             <item name="Branching Models" href="branchingModels.html"/>
+            <!--<item name="Making behavior obvious" collapse="false">-->
+            <item name="Assertions" href="assertions.html" />
+            <item name="Intention revealing interfaces" href="intention_revealing_interfaces.html"/>
+            <item name="Side effect free functions" href="side_effect_free_functions.html" />
         </menu>
 
         <menu name="Documentation">
-            <item name="CQRS clarified" href="cqrs.html"/>
+            <item name="Patterns" href="patterns.html">
+                <item name="API gateway" href="api-gateway.html"/>
+                <item name="Command Query Responsibility Separation" href="cqrs.html"/>
+                <item name="Client Side Discovery" href="client-side-discovery.html"/>
+                <item name="Domain Driven Design" href="ddd/introduction_ddd.html" collapse="true">
+                    <item name="Building blocks DDD" href="ddd/building_blocks_ddd.html" collapse="true">
+                        <item name="Aggregates" href="ddd/aggregates.html" />
+                        <item name="Entities" href="ddd/entities.html" />
+                        <item name="Factories" href="ddd/factories.html" />
+                        <item name="Layered Architecture" href="ddd/layered_architecture.html" />
+                        <item name="Modules" href="ddd/modules.html" />
+                        <item name="Repositories" href="ddd/repositories.html" />
+                        <item name="Services" href="ddd/services.html" />
+                        <item name="Value Objects" href="ddd/value_objects.html" />
+                    </item>
+                    <item name="Context mapping" href="ddd/context_mapping.html" />
+                </item>
+                <item name="Enterprise Integration Pattern" href="eip.html" collapse="true">
+                    <item name="Exclusive Consumer" href="eip/exclusive-consumer.html"/>
+                </item>
+                <item name="Micro Service Architecture" href="micro-service-architecture.html"/>
+                <item name="Monolithic Architecture" href="monolithic-architecture.html"/>
+                <item name="Service Connector" href="service-connector.html"/>
+                <item name="Single Responsibility Principle" href="srp.html"/>
+                <item name="Service Statelessness" href="service-statelessness.html" />
+            </item>
             <item name="Glossary" href="Glossary.html"/>
             <item name="Abbreviations" href="abbreviations.html"/>
         </menu>

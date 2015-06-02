@@ -29,3 +29,7 @@ However once the application becomes large and teams grows in size, this approac
 * A monolithic architecture can only scale in one dimension. This architecture can't scale with an increasing data volume. Each instance of the application will access all of the data, which makes caching less effectively and increases memory consumption and I/O traffic. Also different application components have different resource requirements - one might be CPU intensive while another might be I/O intensive. With a monolithic architecture we cannot scale each component independently.
 * A monolithic architecture is also an obstacle for scaling development. Once the application gets to a certain size it is useful to divide the development into several teams that focus on specific functional areas. The trouble with monolithic architecture is that it prevents teams from working independently. The teams must coordinate their development efforts and redeployments.
 * A monolithic architecture requires a long term commitment to a technology stack.
+
+## Related Patterns
+
+* [Micro Service Architecture](micro-service-architecture) is an alternative to the monolithic architecture.

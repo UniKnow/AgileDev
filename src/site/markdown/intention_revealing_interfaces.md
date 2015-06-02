@@ -1,0 +1,5 @@
+# Intention Revealing Interfaces.
+
+If a developer must consider the implementation of a component in order to use it, the value of ancapsulation is lost. If someone other that the original developer must infer the purpose of an object or operation based on its implementation, that new developer may infer a purpose that the operation or class fulfills only by change. If that was not the intent, the code may work for that moment, but the  conceptual basis of the design will have been corrupted, and the 2 developers will be working at cross purpose.
+
+*Therefore*, name classes and operations to describe their effect and purpose without reference to the means by which they do what they promise. This relieves the client developer of the need to understand the internals. These names should conform to the ubiquitous language so that team members can quickly infer their meaning. Write a test for a behavior before creating it, to force your thinking into client developer mode.
