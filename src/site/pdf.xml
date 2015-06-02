@@ -51,7 +51,7 @@
             <item name="Single Responsibility Principle" ref="srp.md"/>
             <item name="Service Statelessness" ref="service-statelessness.md"/>
         </item>
-        <item name="Glossary" ref="core/glossary.md"/>
+        <item name="Glossary" ref="glossary.md"/>
         <item name="Abbreviations" ref="abbreviations.md"/>
     </toc>
 
