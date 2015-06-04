@@ -22,6 +22,7 @@
             <item name="API gateway" ref="api-gateway.md"/>
             <item name="Command Query Responsibility Separation" ref="cqrs.md"/>
             <item name="Client Side Discovery" ref="client-side-discovery.md"/>
+            <item name="Deployment micro services" ref="deployment-micro-services.md"/>
             <item name="Domain Driven Design" ref="ddd/introduction_ddd.md">
                 <item name="Building blocks DDD"
                       ref="ddd/building_blocks_ddd.md">
@@ -37,19 +38,25 @@
                 </item>
                 <item name="Context mapping" ref="ddd/context_mapping.html"/>
             </item>
-
             <item name="Enterprise Integration Pattern" ref="eip.md"
                   collapse="true">
+                <item name="Correlation ID" ref="eip/correlation-id.md"/>
                 <item name="Exclusive Consumer"
                       ref="eip/exclusive-consumer.md"/>
+                <item name="Message Router" ref="eip/message-router.md"/>
             </item>
             <item name="Micro Service Architecture"
                   ref="micro-service-architecture.md"/>
             <item name="Monolithic Architecture"
                   ref="monolithic-architecture.md"/>
+            <item name="Self registration" ref="self-registration.md"/>
+            <item name="Server Side Discovery" ref="server-side-discovery.md"/>
             <item name="Service Connector" ref="service-connector.md"/>
-            <item name="Single Responsibility Principle" ref="srp.md"/>
+            <item name="Service Registry" ref="service-registry.md"/>
             <item name="Service Statelessness" ref="service-statelessness.md"/>
+            <item name="Single Responsibility Principle" ref="srp.md"/>
+            <item name="Try-Cancel/Confirm" ref="tcc.md"/>
+            <item name="3rd party registration" ref="third-party-registration.md"/>
         </item>
         <item name="Glossary" ref="glossary.md"/>
         <item name="Abbreviations" ref="abbreviations.md"/>

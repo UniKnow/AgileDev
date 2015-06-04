@@ -30,6 +30,7 @@
                 <item name="API gateway" href="api-gateway.html"/>
                 <item name="Command Query Responsibility Separation" href="cqrs.html"/>
                 <item name="Client Side Discovery" href="client-side-discovery.html"/>
+                <item name="Deployment micro services" href="deployment-micro-services.html"/>
                 <item name="Domain Driven Design" href="ddd/introduction_ddd.html" collapse="true">
                     <item name="Building blocks DDD" href="ddd/building_blocks_ddd.html" collapse="true">
                         <item name="Aggregates" href="ddd/aggregates.html" />
@@ -44,13 +45,20 @@
                     <item name="Context mapping" href="ddd/context_mapping.html" />
                 </item>
                 <item name="Enterprise Integration Pattern" href="eip.html" collapse="true">
+                    <item name="Correlation ID" href="eip/correlation-id.html"/>
                     <item name="Exclusive Consumer" href="eip/exclusive-consumer.html"/>
+                    <item name="Message Router" href="eip/message-router.html"/>
                 </item>
                 <item name="Micro Service Architecture" href="micro-service-architecture.html"/>
                 <item name="Monolithic Architecture" href="monolithic-architecture.html"/>
+                <item name="Self registration" href="self-registration.html"/>
+                <item name="Server Side Discovery" href="server-side-discovery.html"/>
                 <item name="Service Connector" href="service-connector.html"/>
-                <item name="Single Responsibility Principle" href="srp.html"/>
+                <item name="Service Registry" href="service-registry.html"/>
                 <item name="Service Statelessness" href="service-statelessness.html" />
+                <item name="Single Responsibility Principle" href="srp.html"/>
+                <item name="Try-Cancel/Confirm" href="tcc.html"/>
+                <item name="3rd party registration" href="third-party-registration.html"/>
             </item>
             <item name="Glossary" href="Glossary.html"/>
             <item name="Abbreviations" href="abbreviations.html"/>
