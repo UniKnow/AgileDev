@@ -1,3 +1,3 @@
 # Patterns
 
-TODO: Include context diagram for patterns
+![Pattern Context](images/pattern-context.png)

@@ -39,22 +39,26 @@
     ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 -->
-<validation-config
-        xmlns="http://jboss.org/xml/ns/javax/validation/configuration"
-        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:schemaLocation="
-                    http://jboss.org/xml/ns/javax/validation/configuration
-                    validation-configuration-1.1.xsd"
-        version="1.1">
+<document xmlns="http://maven.apache.org/DOCUMENT/1.0.1"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://maven.apache.org/DOCUMENT/1.0.1 http://maven.apache.org/xsd/document-1.0.1.xsd"
+          outputName="${project.artifactId}">
 
-    <default-provider>org.uniknow.agiledev.dbc4java.DbcValidationProvider</default-provider>
+    <meta>
+        <title>${project.name}</title>
+        <author>mase</author>
+    </meta>
 
-    <executable-validation enabled="true">
-        <default-validated-executable-types>
-            <executable-type>CONSTRUCTORS</executable-type>
-            <executable-type>NON_GETTER_METHODS</executable-type>
-            <executable-type>GETTER_METHODS</executable-type>
-        </default-validated-executable-types>
-    </executable-validation>
+    <toc name="Table of Contents">
+        <item name="Best practices REST API" ref="best-practices-rest-api.md" />
+        <item name="Versioning REST API" ref="versioning-rest-api.md" />
+        <item name="Distributed transactions with REST" ref="distributed-transactions-with-rest.md" />
+        <item name="Glossary" ref="glossary.md" />
+    </toc>
 
-</validation-config>
+    <cover>
+        <coverTitle>REST API</coverTitle>
+        <coverSubTitle>v. 0.1.2</coverSubTitle>
+        <coverType>Guidelines</coverType>
+    </cover>
+</document>
