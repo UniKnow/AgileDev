@@ -22,3 +22,7 @@ R
 S
 
     [Strict Consistency](http://www.cloudcomputingpatterns.org/Strict_Consistency)
+
+## Related patterns
+
+* [Checkpointing](checkpointing.md)/[Message Logging](message-logging.md) - Mechanism that helps to recover from fault in consistency.

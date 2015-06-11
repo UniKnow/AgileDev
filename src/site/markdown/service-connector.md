@@ -7,3 +7,7 @@ Instead we should create a service connector that encapsulates the logic a clien
 ![Service Connector](images/service-connector.png)
 
 Service connectors make services easier to use by hiding the communication specifics. The service connector encapsulate the generic communication logic required to use the service and also include the logic that is specific go the given service. Service connectors are typically responsible for service discovery and connection management, request dispatch, response handling, and some error handling
+
+## See also
+
+* [Inter-Service communication](inter-service-communication.md) - There are multiple forms in which services communicate with each other and this describes the various forms.

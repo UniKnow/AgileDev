@@ -32,8 +32,10 @@
 
             <item name="Patterns" href="patterns.html">
                 <item name="API gateway" href="api-gateway.html"/>
-                <item name="Command Query Responsibility Separation" href="cqrs.html"/>
+                <item name="Caching" href="cache.html"/>
+                <item name="Circuit Breaker" href="circuit-breaker.html"/>
                 <item name="Client Side Discovery" href="client-side-discovery.html"/>
+                <item name="Command Query Responsibility Separation" href="cqrs.html"/>
                 <item name="Deployment micro services" href="deployment-micro-services.html"/>
                 <item name="Domain Driven Design" href="ddd/introduction_ddd.html" collapse="true">
                     <item name="Building blocks DDD" href="ddd/building_blocks_ddd.html" collapse="true">
@@ -55,6 +57,7 @@
                 </item>
                 <item name="Exception Handling" href="exception-handling.html"/>
                 <item name="Micro Service Architecture" href="micro-service-architecture.html"/>
+                <item name="Mocks" ref="mocks.md"/>
                 <item name="Monolithic Architecture" href="monolithic-architecture.html"/>
                 <item name="Self registration" href="self-registration.html"/>
                 <item name="Server Side Discovery" href="server-side-discovery.html"/>
@@ -62,7 +65,9 @@
                 <item name="Service Registry" href="service-registry.html"/>
                 <item name="Service Statelessness" href="service-statelessness.html" />
                 <item name="Single Responsibility Principle" href="srp.html"/>
+                <item name="System of Record" ref="system-of-record.md" />
                 <item name="Try-Cancel/Confirm" href="tcc.html"/>
+                <item name="UUID" href="uuid.html" />
                 <item name="3rd party registration" href="third-party-registration.html"/>
             </item>
             <item name="Glossary" href="Glossary.html"/>

@@ -28,8 +28,10 @@
         <!--</menu>-->
         <item name="Patterns" ref="patterns.md">
             <item name="API gateway" ref="api-gateway.md"/>
-            <item name="Command Query Responsibility Separation" ref="cqrs.md"/>
+            <item name="Caching" ref="cache.md"/>
+            <item name="Circuit Breaker" ref="circuit-breaker.md"/>
             <item name="Client Side Discovery" ref="client-side-discovery.md"/>
+            <item name="Command Query Responsibility Separation" ref="cqrs.md"/>
             <item name="Deployment micro services"
                   ref="deployment-micro-services.md"/>
             <item name="Domain Driven Design" ref="ddd/introduction_ddd.md">
@@ -57,6 +59,7 @@
             <item name="Exception Handling" ref="exception-handling.md"/>
             <item name="Micro Service Architecture"
                   ref="micro-service-architecture.md"/>
+            <item name="Mocks" ref="mocks.md"/>
             <item name="Monolithic Architecture"
                   ref="monolithic-architecture.md"/>
             <item name="Self registration" ref="self-registration.md"/>
@@ -65,7 +68,9 @@
             <item name="Service Registry" ref="service-registry.md"/>
             <item name="Service Statelessness" ref="service-statelessness.md"/>
             <item name="Single Responsibility Principle" ref="srp.md"/>
+            <item name="System of Record" ref="system-of-record.md" />
             <item name="Try-Cancel/Confirm" ref="tcc.md"/>
+            <item name="UUID" ref="uuid.md" />
             <item name="3rd party registration"
                   ref="third-party-registration.md"/>
         </item>
@@ -75,7 +80,7 @@
 
     <cover>
         <coverTitle>${project.name}</coverTitle>
-        <coverSubTitle>v. ${project.version}</coverSubTitle>
+        <coverSubTitle>v. ${project.version}.002</coverSubTitle>
         <coverType>Guidelines</coverType>
         <projectName>${project.name}</projectName>
     </cover>

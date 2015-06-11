@@ -20,4 +20,5 @@ It however also has some drawbacks:
 * [Client side discovery](client-side-discovery.md) is an alternative solution.
 * [Message Router](eip/message-router.md)
 * [Service Registry](service-registry.md)
+* [System of record](system-of-record.md) - To assure that changes for a record are only happening on a single site.
 

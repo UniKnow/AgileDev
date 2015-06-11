@@ -11,6 +11,7 @@ Disadvantage of this approach is that it couples the client to the service regis
 * [Service Connector](service-connector.md) - Logic that is required for obtaining the location of a service can be implemented within the service connector.
 * [Service Registry](service-registry.md) - queried by client, containing locations of all service instances.
 * [Server Side Discovery](server-side-registry.md) is an alternative solution for the lookup of services.
+* [System of record](system-of-record.md) - To assure that changes for a record are only happening on a single site.
 
 ## See also
 

@@ -32,3 +32,4 @@ On top of that BDD defines how the desired behavior should be specified. Busines
 ## See also
 
 * [Cucumber](https://cucumber.io/) - BDD testing framework for several languages, (Ruby, Java, ...).
+* [An Introduction to BDD Test Automation with Serenity and JUnit](https://www.voxxed.com/blog/2014/12/introduction-bdd-test-automation-serenity-junit/)
