@@ -1,4 +1,4 @@
-# Usage `dbc4java`
+# Usage dbc4java
 
 To use `dbc4java` within your project you need to include the following dependency within your `pom.xml`:
 
@@ -79,9 +79,22 @@ To assure that the constraints are validated at every method invocation all clas
                     <artifactId>dbc4java</artifactId>
                 </weaveDependency>
             </weaveDependencies>
-
         </configuration>
+        <dependencies>
+            <dependency>
+                <groupId>org.aspectj</groupId>
+                <artifactId>aspectjrt</artifactId>
+                <version>${aspectj.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.aspectj</groupId>
+                <artifactId>aspectjtools</artifactId>
+                <version>${aspectj.version}</version>
+            </dependency>
+        </dependencies>
     </plugin>
+
+*NOTE:* `dbc4java` has been tested with aspectj version `1.8.5`.
 
 ## Usage within Spring
 To assure that the constraints are validated at every method invocation the dbc4java spring configuration file need to be imported.

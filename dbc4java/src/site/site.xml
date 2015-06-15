@@ -58,6 +58,8 @@
     <version position="left"/>
 
     <body>
+        <menu ref="parent"/>
+
         <menu name="Overview">
             <item name="Introduction DBC" href="introduction_dbc.html"/>
             <item name="Usage dbc4spring" href="usage.html"/>

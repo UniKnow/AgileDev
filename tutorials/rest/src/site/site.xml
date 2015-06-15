@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="ISO-8859-1"?>
 <!--
 
     Copyright (C) 2014 uniknow. All rights reserved.
@@ -40,33 +40,46 @@
     ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 -->
-<document>
-    <properties>
-        <author>Raffaele Guidi</author>
-        <title>Maven Site Indexer Plugin</title>
-    </properties>
-    <meta name="keyword" content="maven java site index indexer"/>
+<!--
+    http://maven.apache.org/plugins/maven-site-plugin/examples/sitedescriptor.html
+-->
+<project xmlns="http://maven.apache.org/DECORATION/1.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/DECORATION/1.0.0 http://maven.apache.org/xsd/decoration-1.0.0.xsd"
+         name="REST tutorial">
+
+    <!--<skin>-->
+        <!--<groupId>lt.velykis.maven.skins</groupId>-->
+        <!--<artifactId>reflow-maven-skin</artifactId>-->
+        <!--<version>1.1.1</version>-->
+    <!--</skin>-->
+
+    <skin>
+        <groupId>org.apache.maven.skins</groupId>
+        <artifactId>maven-fluido-skin</artifactId>
+        <version>1.3.0</version>
+    </skin>
+    <bannerLeft>
+        <name>Company name</name>
+        <src>images/UniKnow-logo.jpg</src>
+        <href>www.uniknow.com/</href>
+    </bannerLeft>
+    <bannerRight>
+        <name>${project.name}</name>
+    </bannerRight>
+
+    <publishDate position="left" format="yyyy-MM-dd" />
+    <version position="left" />
+
     <body>
-        <section name="Maven Site Indexer plugin">
-            <p>
-               An easy way to index your maven site and give it a nice ajax search box.
-            </p>
-            <p>It's <b>as easy as</b>:</p>
-            <ul>
-                <li>adding the plugin to your pom.xml (see <a href="usage.html">usage instructions</a> - of course it should already have the site plugin configured)</li>
-                <li>putting searchbox.html in src/site/resources (you can customize it if you have a good javascript-fu)
-<source>//in example you can change the positioning
-$("#searchbox", window.parent.document).css('top', '10px');
-$("#searchbox", window.parent.document).css('left', $(window).width()- 325);
-...
-&lt;!-- or change the color of the search results box -->
-&lt;div style="background-color: lightyellow" id="searchOutput"/&gt;</source>
-			 	</li>
-                <li>putting search.js in src/site/resources/js (just put it as it is)</li>
-                <li>calling mvn site</li>
-                <li>opening up your site and enjoying your nice and hassle-free search box!</li>
-            </ul>
-            <p>Wanna see it in action? Look at the top right corner of this page ;) Wanna try it? It's apache licensed and <a href="https://github.com/raffaeleguidi/Maven-Site-Indexer-plugin">you can find it on GitHub</a></p>
-        </section>
+        <menu ref="parent"/>
+
+        <menu name="Documentation">
+            <item name="Introduction" href="introduction.html" />
+            <item name="Best practices REST API" href="best-practices-rest-api.html">
+                <item name="Resource Archetypes" href="resource-archetypes.html"/>
+            </item>
+            <item name="Versioning REST API" href="versioning-rest-api.html"/>
+        </menu>
     </body>
-</document>
+</project>

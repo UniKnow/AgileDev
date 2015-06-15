@@ -13,8 +13,7 @@
     <name>Tutorial Domain Driven Design</name>
 
     <description>
-        The following tutorial describes best practices for applying Domain
-        Driven Design.
+        Tutorial describing concepts of Domain Driven Design and best practices for applying Domain Driven Design.
     </description>
 
     <dependencies>
@@ -83,6 +82,15 @@
                 </executions>
             </plugin>
 
+            <plugin>
+                <artifactId>maven-site-plugin</artifactId>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-pdf-plugin</artifactId>
+            </plugin>
+
             <!-- Index maven site so that we can search -->
             <plugin>
                 <groupId>org.uniknow.maven.plugins</groupId>
@@ -96,11 +104,12 @@
                         </goals>
                     </execution>
                 </executions>
-                <configuration>
-                    <!--<site>${project.build.directory}/target/site</site>-->
-                </configuration>
             </plugin>
 
+            <plugin>
+                <groupId>com.github.github</groupId>
+                <artifactId>site-maven-plugin</artifactId>
+            </plugin>
 
         </plugins>
     </build>

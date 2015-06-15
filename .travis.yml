@@ -10,3 +10,7 @@ after_success: mvn site deploy --settings settings.xml
 branches:
   only:
     - develop
+
+notifications:
+  email:
+    - info.uniknow@gmail.com

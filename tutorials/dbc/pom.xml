@@ -9,7 +9,7 @@
     </parent>
 
     <groupId>org.uniknow.agiledev.tutorials</groupId>
-    <artifactId>dcb</artifactId>
+    <artifactId>dbc</artifactId>
     <name>Tutorial Design by Contract</name>
 
     <description>

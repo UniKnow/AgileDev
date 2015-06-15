@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="UTF-8"?>
 <!--
 
     Copyright (C) 2014 uniknow. All rights reserved.
@@ -40,31 +39,26 @@
     ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 -->
-<document>
-    <properties>
-        <author>Raffaele Guidi</author>
-        <title>Usage instructions</title>
-    </properties>
-    <meta name="keyword" content="maven java site index indexer"/>
-    <body>
-        <section name="Adding the plugin to your POM">
-            <p>
-               The Maven Site Indexer is a standard maven plugin. Download the code, mvn install it and then add the following to your pom.xml
-            </p>
-<source>
- &lt;plugin>
-   &lt;groupId>org.apache.maven.plugins&lt;/groupId>
-   &lt;artifactId>index&lt;/artifactId>
-   &lt;version>0.0.1-SNAPSHOT&lt;/version>
-   &lt;executions>
-     &lt;execution>
-       &lt;phase>site&lt;/phase>
-       &lt;goals>
-         &lt;goal>index&lt;/goal>
-       &lt;/goals>
-     &lt;/execution>
-   &lt;/executions>
- &lt;/plugin></source>
-		</section>
-    </body>
+<document xmlns="http://maven.apache.org/DOCUMENT/1.0.1"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://maven.apache.org/DOCUMENT/1.0.1 http://maven.apache.org/xsd/document-1.0.1.xsd"
+          outputName="${project.artifactId}">
+
+    <meta>
+        <title>${project.name}</title>
+        <author>mase</author>
+    </meta>
+
+    <toc name="Table of Contents">
+        <item name="Best practices REST API" ref="best-practices-rest-api.md" />
+        <item name="Versioning REST API" ref="versioning-rest-api.md" />
+        <item name="Distributed transactions with REST" ref="distributed-transactions-with-rest.md" />
+        <item name="Glossary" ref="glossary.md" />
+    </toc>
+
+    <cover>
+        <coverTitle>REST API</coverTitle>
+        <coverSubTitle>v. 0.1.2</coverSubTitle>
+        <coverType>Guidelines</coverType>
+    </cover>
 </document>

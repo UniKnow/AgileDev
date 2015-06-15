@@ -13,6 +13,8 @@
         <name>${project.name}</name>
     </bannerRight>
     <body>
+        <menu ref="parent"/>
+
         <menu name="Guidelines">
             <item name="Java Coding standard" href="javaCodingStandard.html"/>
         </menu>

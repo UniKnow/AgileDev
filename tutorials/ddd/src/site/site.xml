@@ -72,8 +72,10 @@
     <version position="left" />
 
     <body>
+        <menu ref="parent"/>
 
         <menu name="Core">
+            <item name="Why DDD" href="why_ddd.html" />
             <item name="Introduction DDD" href="core/introduction_ddd.html" />
             <item name="Building blocks DDD" href="core/building_blocks_ddd.html" collapse="true">
                 <item name="Aggregates" href="core/aggregates.html" />
@@ -85,6 +87,7 @@
                 <item name="Services" href="core/services.html" />
                 <item name="Value Objects" href="core/value_objects.html" />
             </item>
+            <item name="Context mapping" href="core/context_mapping.html" />
             <item name="Best practices" href="core/best_practices.html" collapse="true">
                 <!--<item name="Making behavior obvious" collapse="false">-->
                     <item name="Assertions" href="core/assertions.html" />

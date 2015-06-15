@@ -39,7 +39,6 @@
  */
 package org.uniknow.example.domain.model.cargo;
 
-import org.hibernate.validator.method.MethodConstraintViolationException;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.ObjectFactory;

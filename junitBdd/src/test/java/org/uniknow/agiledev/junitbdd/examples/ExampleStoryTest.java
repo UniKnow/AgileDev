@@ -71,7 +71,7 @@ public class ExampleStoryTest {
     }
 
     /**
-     * Example Scenario
+     * Example pending Scenario
      */
     @Scenario(value = "Example of pending scenario", pending = true)
     public void testPendingScenario() {

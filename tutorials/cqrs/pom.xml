@@ -1,0 +1,58 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>org.uniknow.agiledev</groupId>
+        <artifactId>parent</artifactId>
+        <version>0.1.9-SNAPSHOT</version>
+        <relativePath>../../parent/pom.xml</relativePath>
+    </parent>
+
+    <groupId>org.uniknow.agiledev.tutorials</groupId>
+    <artifactId>cqrs</artifactId>
+    <name>Tutorial Command Query Responsibility Segregation</name>
+
+    <description>
+        The following tutorial is designed to help you get started with the CQRS
+        pattern.
+    </description>
+
+    <dependencies>
+
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <artifactId>maven-site-plugin</artifactId>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-pdf-plugin</artifactId>
+            </plugin>
+
+            <!-- Index maven site so that we can search -->
+            <plugin>
+                <groupId>org.uniknow.maven.plugins</groupId>
+                <artifactId>index</artifactId>
+                <version>${project.version}</version>
+                <executions>
+                    <execution>
+                        <phase>site</phase>
+                        <goals>
+                            <goal>index</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>com.github.github</groupId>
+                <artifactId>site-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
+</project>
