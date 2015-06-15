@@ -121,7 +121,7 @@ public class ScenarioListenerTest {
         listener.testStarted(description);
 
         Then("scenario manager should have a current scenario");
-        assertNotNull(ScenarioManager.threadSafeScenario.get());
+        assertNotNull(ScenarioManager.currentScenario());
         new File("StoryStatisticsScenariosScenarios.html").delete();
         if (System.getProperty("generateReport") != null) {
             new File("StoryStatisticsScenariosScenarios.html").delete();

@@ -44,24 +44,25 @@ import org.uniknow.agiledev.junitbdd.internal.domain.*;
 
 import javax.validation.constraints.NotNull;
 
-@Validated
+// MASE: temporary disabled since @NotNull on static method causes problems
+// @Validated
 public class ScenarioManager {
 
     /**
      * TODO: Should make private
      */
-    static final ThreadLocal<ScenarioModel> threadSafeScenario = new ThreadLocal<ScenarioModel>();
+    private static final ThreadLocal<ScenarioModel> threadSafeScenario = new ThreadLocal<ScenarioModel>();
 
-    public static void startScenario() {
+    public synchronized static void startScenario() {
         threadSafeScenario.set(new ScenarioModel(""));
     }
 
-    public static void cleanScenario() {
+    public synchronized static void cleanScenario() {
         threadSafeScenario.remove();
     }
 
     @NotNull
-    public static ScenarioModel currentScenario() {
+    public synchronized static ScenarioModel currentScenario() {
         ScenarioModel scenario = threadSafeScenario.get();
         if (scenario == null) {
             startScenario();

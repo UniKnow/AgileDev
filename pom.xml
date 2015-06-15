@@ -4,7 +4,7 @@
     <name>AgileDev</name>
     <groupId>org.uniknow</groupId>
     <artifactId>agiledev</artifactId>
-    <version>0.1.9-archimate-SNAPSHOT</version>
+    <version>0.1.9-SNAPSHOT</version>
     <packaging>pom</packaging>
     <description>Tooling for Agile development</description>
     <url>https://github.com/UniKnow/AgileDev</url>
@@ -57,7 +57,9 @@
         <findbugs.jsr305.version>2.0.2</findbugs.jsr305.version>
         <groovy.version>2.1.6</groovy.version>
         <hibernate.version>[4.2.0.Final,4.3.2.Final]</hibernate.version>
+        <hibernate-validator.version>5.1.3.Final</hibernate-validator.version>
         <javax.inject.version>1</javax.inject.version>
+        <javax.el.version>2.2.4</javax.el.version>
         <junit.version>4.11</junit.version>
         <mylyn.version>1.7.4.v20130429</mylyn.version>
         <oval.version>1.84</oval.version>
@@ -194,7 +196,17 @@
             <dependency>
                 <groupId>org.hibernate</groupId>
                 <artifactId>hibernate-validator</artifactId>
-                <version>${hibernate.version}</version>
+                <version>${hibernate-validator.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>javax.el</groupId>
+                <artifactId>javax.el-api</artifactId>
+                <version>${javax.el.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.glassfish.web</groupId>
+                <artifactId>javax.el</artifactId>
+                <version>${javax.el.version}</version>
             </dependency>
 
             <!-- Dependency for findbug statically code analyzing -->
@@ -264,7 +276,7 @@
                         <dependency>
                             <groupId>org.uniknow.agiledev</groupId>
                             <artifactId>buildConfiguration</artifactId>
-                            <version>0.1.9-archimate-SNAPSHOT</version>
+                            <version>0.1.9-SNAPSHOT</version>
                         </dependency>
                     </dependencies>
                 </plugin>
@@ -294,7 +306,7 @@
                         <dependency>
                             <groupId>org.uniknow.agiledev</groupId>
                             <artifactId>buildConfiguration</artifactId>
-                            <version>0.1.9-archimate-SNAPSHOT</version>
+                            <version>0.1.9-SNAPSHOT</version>
                         </dependency>
                     </dependencies>
                 </plugin>
@@ -520,6 +532,9 @@
                         see what each other are working on
                     -->
                     <pushFeatures>false</pushFeatures>
+
+                    <!-- Allow un-tracked files during finishing feature -->
+                    <allowUntracked>true</allowUntracked>
 
                     <!--
                         This allows the CI server (e.g. Jenkins) to automatically push new
