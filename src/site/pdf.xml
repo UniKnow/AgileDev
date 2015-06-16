@@ -35,6 +35,7 @@
             <item name="Deployment micro services"
                   ref="deployment-micro-services.md"/>
             <item name="Domain Driven Design" ref="ddd/introduction_ddd.md">
+                <item name="Domain Model" ref="ddd/domain-model.md"/>
                 <item name="Building blocks DDD"
                       ref="ddd/building_blocks_ddd.md">
                     <item name="Aggregates" ref="ddd/aggregates.md"/>

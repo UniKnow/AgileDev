@@ -67,5 +67,9 @@
             <item name="ArchiMate Basics" href="archimate_basics.html" />
             <item name="Glossary" href="glossary.html" />
         </menu>
+        <menu name="Guidelines">
+            <item name="Introduction" href="archimate-guidelines.html"/>
+            <item name="Modeling the Domain" href="modeling-domain.html"/>
+        </menu>
     </body>
 </project>

@@ -9,11 +9,14 @@
     </meta>
 
     <toc name="Table of Contents">
-            <item name="Why ArchiMate" ref="why_archimate.md"/>
-            <item name="Benefits ArchiMate" ref="benefits_archimate.md"/>
-            <item name="What is ArchiMate" ref="what_is_archimate.md"/>
-            <item name="ArchiMate Basics" ref="archimate_basics.md" />
-            <item name="Glossary" ref="glossary.md" />
+        <item name="Why ArchiMate" ref="why_archimate.md"/>
+        <item name="Benefits ArchiMate" ref="benefits_archimate.md"/>
+        <item name="What is ArchiMate" ref="what_is_archimate.md"/>
+        <item name="ArchiMate Basics" ref="archimate_basics.md"/>
+        <item name="Guidelines" ref="archimate-guidelines.md">
+            <item name="Modeling the Domain" ref="modeling-domain.md"/>
+        </item>
+        <item name="Glossary" ref="glossary.md"/>
     </toc>
 
     <cover>

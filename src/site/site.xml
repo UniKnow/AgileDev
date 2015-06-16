@@ -38,6 +38,7 @@
                 <item name="Command Query Responsibility Separation" href="cqrs.html"/>
                 <item name="Deployment micro services" href="deployment-micro-services.html"/>
                 <item name="Domain Driven Design" href="ddd/introduction_ddd.html" collapse="true">
+                    <item name="Domain Model" href="ddd/domain-model.html"/>
                     <item name="Building blocks DDD" href="ddd/building_blocks_ddd.html" collapse="true">
                         <item name="Aggregates" href="ddd/aggregates.html" />
                         <item name="Entities" href="ddd/entities.html" />
