@@ -1,6 +1,7 @@
 # Abbreviations
 
 * CQRS - Command-Query Responsibility Segregation
+* DAS - Deployable Artifact Set
 * DBC - Design By Contract
 * DIP - Dependency Inversion Principle
 * DTO - Data Transfer Object

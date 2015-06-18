@@ -32,4 +32,4 @@ However once the application becomes large and teams grows in size, this approac
 
 ## Related Patterns
 
-* [Micro Service Architecture](micro-service-architecture) is an alternative to the monolithic architecture.
+* [Microservice Architecture](micro-service-architecture) is an alternative to the monolithic architecture.

@@ -1,32 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <archimate:model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:archimate="http://www.archimatetool.com/archimate" name="Tutorial ArchiMate" id="7c8b6ef5" version="3.1.1">
   <folder name="Business" id="4cc5c243" type="business">
-    <element xsi:type="archimate:Meaning" id="a1ac18dd" name="Meaning"/>
-    <element xsi:type="archimate:BusinessObject" id="978b0757" name="Business Object"/>
-    <element xsi:type="archimate:BusinessProcess" id="f521a19b" name="Business Process"/>
-    <element xsi:type="archimate:BusinessEvent" id="f973e5a9" name="Business Event"/>
-    <element xsi:type="archimate:BusinessService" id="8f115367" name="Business Service"/>
-    <element xsi:type="archimate:Value" id="0fa23d54" name="Value"/>
-    <element xsi:type="archimate:BusinessRole" id="76667cd5" name="Business Role"/>
-    <element xsi:type="archimate:BusinessActor" id="b1a6f360" name="Business Actor"/>
-    <element xsi:type="archimate:BusinessInterface" id="7a77302a" name="Business Interface"/>
-    <element xsi:type="archimate:BusinessActor" id="047289a4" name="Business Actor">
-      <documentation>A business role is defined as the responsibility for performing specific behavior, to which an actor can be assigned. 
+    <folder name="example domain" id="6ffd3325">
+      <element xsi:type="archimate:BusinessProcess" id="5ffa87e3" name="Accept Damage Claim"/>
+      <element xsi:type="archimate:BusinessActor" id="b1a6f360" name="Business Actor"/>
+      <element xsi:type="archimate:BusinessActor" id="047289a4" name="Business Actor">
+        <documentation>A business role is defined as the responsibility for performing specific behavior, to which an actor can be assigned. 
 
 Business processes or business functions are assigned to a single business role with certain responsibilities or skills. A business actor that is assigned to a business role ultimately performs the corresponding behavior. A business role may be assigned to one or more business processes or business functions, while a business actor may be assigned to a business role. 
 
 A business interface or an application interface may be used by a business role, while a business interface may be part of a business role (through a composition relationship, which is not shown explicitly in the interface notation). The name of a business role should preferably be a noun.</documentation>
-    </element>
-    <element xsi:type="archimate:BusinessRole" id="2c159f6f" name="Business Role"/>
-    <element xsi:type="archimate:BusinessInteraction" id="4088302f" name="Business Interaction"/>
-    <element xsi:type="archimate:BusinessProcess" id="2ea88bdb" name="Register Damage"/>
-    <element xsi:type="archimate:BusinessObject" id="f120cbd4" name="Damage Claim"/>
-    <element xsi:type="archimate:BusinessEvent" id="b13b4aa8" name="Damage Occured"/>
-    <element xsi:type="archimate:BusinessProcess" id="5ffa87e3" name="Accept Damage Claim"/>
-    <element xsi:type="archimate:BusinessProcess" id="da624149" name="Evaluate Damage Claim"/>
-    <element xsi:type="archimate:BusinessProcess" id="7b0d47a8" name="Pay"/>
-    <element xsi:type="archimate:BusinessObject" id="6225c05d" name="Customer Info"/>
-    <element xsi:type="archimate:BusinessObject" id="e503c599" name="Insurrance Policy"/>
+      </element>
+      <element xsi:type="archimate:BusinessEvent" id="f973e5a9" name="Business Event"/>
+      <element xsi:type="archimate:BusinessInteraction" id="4088302f" name="Business Interaction"/>
+      <element xsi:type="archimate:BusinessInterface" id="7a77302a" name="Business Interface"/>
+      <element xsi:type="archimate:BusinessObject" id="978b0757" name="Business Object"/>
+      <element xsi:type="archimate:BusinessProcess" id="f521a19b" name="Business Process"/>
+      <element xsi:type="archimate:BusinessRole" id="76667cd5" name="Business Role"/>
+      <element xsi:type="archimate:BusinessRole" id="2c159f6f" name="Business Role"/>
+      <element xsi:type="archimate:BusinessService" id="8f115367" name="Business Service"/>
+      <element xsi:type="archimate:BusinessObject" id="6225c05d" name="Customer Info"/>
+      <element xsi:type="archimate:BusinessObject" id="f120cbd4" name="Damage Claim"/>
+      <element xsi:type="archimate:BusinessEvent" id="b13b4aa8" name="Damage Occured"/>
+      <element xsi:type="archimate:BusinessProcess" id="da624149" name="Evaluate Damage Claim"/>
+      <element xsi:type="archimate:BusinessObject" id="e503c599" name="Insurrance Policy"/>
+      <element xsi:type="archimate:Meaning" id="a1ac18dd" name="Meaning"/>
+      <element xsi:type="archimate:BusinessProcess" id="7b0d47a8" name="Pay"/>
+      <element xsi:type="archimate:BusinessProcess" id="2ea88bdb" name="Register Damage"/>
+      <element xsi:type="archimate:Value" id="0fa23d54" name="Value"/>
+    </folder>
   </folder>
   <folder name="Application" id="a547deac" type="application">
     <element xsi:type="archimate:DataObject" id="af2be141" name="Data Object"/>

@@ -25,15 +25,18 @@
                   ref="side_effect_free_functions.md"/>
         </item>
 
-        <!--</menu>-->
         <item name="Patterns" ref="patterns.md">
             <item name="API gateway" ref="api-gateway.md"/>
+            <item name="Automated testing" ref="automated-testing.md">
+                <item name="Consumer-based testing" ref="consumer-based-testing.md"/>
+                <item name="Unit testing" ref="unit-testing.md"/>
+            </item>
             <item name="Caching" ref="cache.md"/>
             <item name="Circuit Breaker" ref="circuit-breaker.md"/>
             <item name="Client Side Discovery" ref="client-side-discovery.md"/>
             <item name="Command Query Responsibility Separation" ref="cqrs.md"/>
-            <item name="Deployment micro services"
-                  ref="deployment-micro-services.md"/>
+            <item name="Deployment microservices"
+                  ref="deployment-microservices.md"/>
             <item name="Domain Driven Design" ref="ddd/introduction_ddd.md">
                 <item name="Domain Model" ref="ddd/domain-model.md"/>
                 <item name="Building blocks DDD"
@@ -58,8 +61,8 @@
                 <item name="Message Router" ref="eip/message-router.md"/>
             </item>
             <item name="Exception Handling" ref="exception-handling.md"/>
-            <item name="Micro Service Architecture"
-                  ref="micro-service-architecture.md"/>
+            <item name="Microservice Architecture"
+                  ref="microservice-architecture.md"/>
             <item name="Mocks" ref="mocks.md"/>
             <item name="Monolithic Architecture"
                   ref="monolithic-architecture.md"/>
@@ -75,6 +78,7 @@
             <item name="3rd party registration"
                   ref="third-party-registration.md"/>
         </item>
+
         <item name="Glossary" ref="glossary.md"/>
         <item name="Abbreviations" ref="abbreviations.md"/>
     </toc>

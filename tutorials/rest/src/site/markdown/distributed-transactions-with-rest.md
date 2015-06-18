@@ -1,6 +1,6 @@
 # Distributed transactions with REST
 
-With the rise of micro services the discussion around related technologies and protocols such as security, transactions and reliability are also becoming more relevant. This article focus on a simple solution which fits the following design constraints:
+With the rise of microservices the discussion around related technologies and protocols such as security, transactions and reliability are also becoming more relevant. This article focus on a simple solution which fits the following design constraints:
 
 1. Using a lightweight transaction model.
 2. Avoiding extensions to the HTTP protocol to maximize adoption.

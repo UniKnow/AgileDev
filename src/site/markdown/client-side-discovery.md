@@ -1,6 +1,6 @@
 # Client Side Discovery
 
-Services typically need to call one another. In a [monolithic](monolithic-architecture.md), services invoke one another through direct calls. In a traditional distributed system deployment, services run at fixed, well known locations (host, port, etc) and can easily call one another using HTTP/REST or some RPC mechanism. A modern micro service based application typically runs in a virtualized or containerized environment where the number of instances of a service and their locations change dynamically. As a consequence of this, you must implement a mechanism that enables clients of services to make requests to a dynamically changing set of service instances.
+Services typically need to call one another. In a [monolithic](monolithic-architecture.md), services invoke one another through direct calls. In a traditional distributed system deployment, services run at fixed, well known locations (host, port, etc) and can easily call one another using HTTP/REST or some RPC mechanism. A modern microservice based application typically runs in a virtualized or containerized environment where the number of instances of a service and their locations change dynamically. As a consequence of this, you must implement a mechanism that enables clients of services to make requests to a dynamically changing set of service instances.
 
 To overcome this the client obtains the location of a service instance by querying a [Service Registry](service-registry.md) which knows the locations of all service instances.
 

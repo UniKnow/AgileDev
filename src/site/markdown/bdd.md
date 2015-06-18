@@ -26,7 +26,7 @@ On top of that BDD defines how the desired behavior should be specified. Busines
 
 ## Related Patterns
 
-* [Test Driven Development](tdd.md) - Behavior Driven Development emerged from Test Driven Development.
+* [Test Driven Development](https://en.wikipedia.org/wiki/Test-driven_development) - Behavior Driven Development emerged from Test Driven Development.
 * [Domain Driven Design](ddd/introduction_ddd.md) - Behavior Driven Development borrows the concept of the ubiquitous language from DDD to define the tests in business terminology.
 
 ## See also

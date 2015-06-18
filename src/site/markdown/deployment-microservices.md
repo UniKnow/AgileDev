@@ -1,4 +1,4 @@
-# Deployment of  micro services
+# Deployment of  microservices
 
 
 So you have applied the different patterns as described within these guidelines and architected your application as a set of services. Each service should be deployed as a set of service instances for throughput and availability.

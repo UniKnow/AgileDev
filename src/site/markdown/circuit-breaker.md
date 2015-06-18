@@ -9,7 +9,7 @@ This simple form of circuit breaker would need an external intervention to reset
 ## Related patterns
 
 * [Active Monitoring](active-monitoring.md) - Circuit breakers are a valuable place for monitoring and any change in the breaker state should be logged. Breaker behavior is often a good source of warnings about deeper troubles in the environment.
-* [API Gateway](api-gateway.md) - An API gateway orchestrates the calls between the diverse number of micro services. Each of these calls should be via a orchestrator.
+* [API Gateway](api-gateway.md) - An API gateway orchestrates the calls between the diverse number of microservices. Each of these calls should be via a orchestrator.
 
 ## See also
 

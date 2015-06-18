@@ -9,6 +9,7 @@ Some best practives for REST API design are implicit in the HTTP standard, while
 |ID|Best practice|
 |--|----|
 |100|[Always version your API](#Always_version_your_API)|
+|101|[Use open standards for data formats](#Use_open_standards_for_data_formats)|
 |200|[Indicate hierarchical relationships by forward slash](#Indicate_hierarchical_relationships_by_forward_slash)|
 |201|[Trailing forward slash should not be included in URIs](#Trailing_forward_slash_should_not_be_included_in_URIs)|
 |202|[Hyphens should be used to improve readability of URIs](#Hyphens_should_be_used_to_improve_readability_of_URIs)|
@@ -67,13 +68,14 @@ Some best practives for REST API design are implicit in the HTTP standard, while
 |511|[HTTP headers must be optional](#HTTP_headers_must_be_optional)|
 |600|[Media type negotiation should be used to manage resource representation versioning](#Media_type_negotiation_should_be_used_to_manage_resource_representation_versioning)|
 |700|[JSON field names must be surrounded by double quotes](#JSON_field_names_must_be_surrounded_by_double_quotes)|
-|701|[JSON numbers should not be treated as Strings](#JSON_numbers_should_not_be_treated_as_Strings)|
-|702|[Use camelcase for JSON names](#Use_camelcase_for_JSON_names)|
-|703|[Additional envelopes must not be created](#Additional_envelopes_must_not_be_created)|
-|704|[A consistent form should be used to represent links](#A_consistent_form_should_be_used_to_represent_links)|
-|705|[Minimize the number of advertised entry point API URIs](#Minimize_the_number_of_advertised_entry_point_API_URIs)|
-|706|[Links should be used to advertise resource's available actions in a state sensitive manner](#Links_should_be_used_to_advertise_resource's_available_actions_in_a_state_sensitive_manner)|
-|707|[A consistent form should be used to represents error responses](#A_consistent_form_should_be_used_to_represents_error_responses)|
+|701|[Unknown JSON fields should be ignored](#Unknown_JSON_fields_should_be_ignored)|
+|702|[JSON numbers should not be treated as Strings](#JSON_numbers_should_not_be_treated_as_Strings)|
+|703|[Use camelcase for JSON names](#Use_camelcase_for_JSON_names)|
+|704|[Additional envelopes must not be created](#Additional_envelopes_must_not_be_created)|
+|705|[A consistent form should be used to represent links](#A_consistent_form_should_be_used_to_represent_links)|
+|706|[Minimize the number of advertised entry point API URIs](#Minimize_the_number_of_advertised_entry_point_API_URIs)|
+|707|[Links should be used to advertise resource's available actions in a state sensitive manner](#Links_should_be_used_to_advertise_resource's_available_actions_in_a_state_sensitive_manner)|
+|708|[A consistent form should be used to represents error responses](#A_consistent_form_should_be_used_to_represents_error_responses)|
 
 ## Generic
 
@@ -82,6 +84,12 @@ Some best practives for REST API design are implicit in the HTTP standard, while
 Versioning helps you iterate faster and prevents invalid requests from hitting updated endpoints. It also helps smooth over any major API version transitions as you can continue to offer old API versions for a period of time.
 
 See also: [Versioning REST API](versioning-rest-api)
+
+### Use open standards for data formats
+
+Using open standards with well defined syntax and semantics for data formats decreases the risk of mismatches and incorrect implementation of interfaces caused by insufficient documentation. Beside that these standards often provide off the shelf (open source) components for generating and consuming the data.
+
+Examples of common used open data formats are `JSON` and `XML`.
 
 ## URIs
 
@@ -415,6 +423,25 @@ A REST API commonly uses a message body to communicate the state of a resource. 
 ### JSON field names must be surrounded by double quotes
 
 The JSON syntax defines names as strings which are always surrounded by double quotes (`"`).
+
+### Unknown JSON fields should be ignored
+
+When mapping JSON to POJOs we must ignore any members whose names are not recognized.
+
+**Note:**
+The Jackson JSON library supports this by either using an annotation:
+
+    import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+    @JsonIgnoreProperties(ignoreUnknown = true)
+    public class MyMappingClass {
+        ...
+    }
+
+or by setting properties on the `ObjectMapper`:
+
+    ObjectMapper objectMapper = new ObjectMapper();
+    objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 
 ### JSON numbers should not be treated as Strings
 

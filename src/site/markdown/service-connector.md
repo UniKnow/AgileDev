@@ -11,3 +11,4 @@ Service connectors make services easier to use by hiding the communication speci
 ## See also
 
 * [Inter-Service communication](inter-service-communication.md) - There are multiple forms in which services communicate with each other and this describes the various forms.
+* [Consumer-based testing](consumer-based-testing.md) - To ensure that the service contract satisfies the consumer needs the Service Connector contains tests to confirm this.

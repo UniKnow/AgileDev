@@ -32,11 +32,15 @@
 
             <item name="Patterns" href="patterns.html">
                 <item name="API gateway" href="api-gateway.html"/>
+                <item name="Automated testing" href="automated-testing.html" collapse="true">
+                    <item name="Consumer-based testing" href="consumer-based-testing.html"/>
+                    <item name="Unit testing" ref="unit-testing.html"/>
+                </item>
                 <item name="Caching" href="cache.html"/>
                 <item name="Circuit Breaker" href="circuit-breaker.html"/>
                 <item name="Client Side Discovery" href="client-side-discovery.html"/>
                 <item name="Command Query Responsibility Separation" href="cqrs.html"/>
-                <item name="Deployment micro services" href="deployment-micro-services.html"/>
+                <item name="Deployment microservices" href="deployment-microservices.html"/>
                 <item name="Domain Driven Design" href="ddd/introduction_ddd.html" collapse="true">
                     <item name="Domain Model" href="ddd/domain-model.html"/>
                     <item name="Building blocks DDD" href="ddd/building_blocks_ddd.html" collapse="true">
@@ -57,7 +61,7 @@
                     <item name="Message Router" href="eip/message-router.html"/>
                 </item>
                 <item name="Exception Handling" href="exception-handling.html"/>
-                <item name="Micro Service Architecture" href="micro-service-architecture.html"/>
+                <item name="Microservice Architecture" href="microservice-architecture.html"/>
                 <item name="Mocks" ref="mocks.md"/>
                 <item name="Monolithic Architecture" href="monolithic-architecture.html"/>
                 <item name="Self registration" href="self-registration.html"/>

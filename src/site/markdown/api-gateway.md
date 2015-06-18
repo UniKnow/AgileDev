@@ -1,6 +1,6 @@
 # API Gateway
 
-Your system must expose to clients functionality that they can use. However the granularity of the APIs provided by the micro services is often different from what the client needs. Micro service APIs typically provide fine-grained APIs, which means that clients need to interact with multiple services. Also the number of service instances and their locations (hoss, port, ...) changes dynamically, and the partitioning of the services can change over time. All this should be hidden from the clients.
+Your system must expose to clients functionality that they can use. However the granularity of the APIs provided by the microservices is often different from what the client needs. Microservice APIs typically provide fine-grained APIs, which means that clients need to interact with multiple services. Also the number of service instances and their locations (hoss, port, ...) changes dynamically, and the partitioning of the services can change over time. All this should be hidden from the clients.
 
 To solve this we expose an API gateway that is the single entry point for all clients.
 
@@ -15,5 +15,5 @@ Rather than exposing a one size fits all style API, the API gateway can expose a
 
 # Related Patterns
 
-* [Service Connector](service-connector.md) - Provide high level interface that hides implementation details regarding communication, thereby making the use of the micro service easier.
-* [Try-Cancel/Commit](tcc.md) - By this pattern we can realize distributed transactions for micro services.
+* [Service Connector](service-connector.md) - Provide high level interface that hides implementation details regarding communication, thereby making the use of the microservice easier.
+* [Try-Cancel/Commit](tcc.md) - By this pattern we can realize distributed transactions for microservices.
