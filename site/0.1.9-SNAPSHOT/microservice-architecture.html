@@ -9,7 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="Date-Revision-yyyymmdd" content="20150618" />
     <meta http-equiv="Content-Language" content="en" />
-    <title>AgileDev - Project Team</title>
+    <title>AgileDev - Microservice architecture</title>
     <link rel="stylesheet" href="./css/apache-maven-fluido-1.3.0.min.css" />
     <link rel="stylesheet" href="./css/site.css" />
     <link rel="stylesheet" href="./css/print.css" media="print" />
@@ -124,7 +124,7 @@
             </li>
               </ul>
         </li>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      
       <li>
     
                           <a href="patterns.html" title="Patterns">
@@ -202,12 +202,10 @@
         Exception Handling</a>
             </li>
                       
-      <li>
+      <li class="active">
     
-                          <a href="microservice-architecture.html" title="Microservice Architecture">
-          <i class="none"></i>
-        Microservice Architecture</a>
-            </li>
+            <a href="#"><i class="none"></i>Microservice Architecture</a>
+          </li>
                       
       <li>
     
@@ -380,97 +378,13 @@
         Tutorial Rest</a>
             </li>
                               <li class="nav-header">Project Documentation</li>
-                                                                                                                                                                                                                                                                                                  
+                                                                                                                                                                                                                                                                                        
       <li>
     
                           <a href="project-info.html" title="Project Information">
-          <i class="icon-chevron-down"></i>
+          <i class="icon-chevron-right"></i>
         Project Information</a>
-                    <ul class="nav nav-list">
-                      
-      <li>
-    
-                          <a href="dependency-convergence.html" title="Dependency Convergence">
-          <i class="none"></i>
-        Dependency Convergence</a>
-            </li>
-                      
-      <li>
-    
-                          <a href="dependency-info.html" title="Dependency Information">
-          <i class="none"></i>
-        Dependency Information</a>
-            </li>
-                      
-      <li>
-    
-                          <a href="dependency-management.html" title="Dependency Management">
-          <i class="none"></i>
-        Dependency Management</a>
-            </li>
-                      
-      <li>
-    
-                          <a href="distribution-management.html" title="Distribution Management">
-          <i class="none"></i>
-        Distribution Management</a>
-            </li>
-                      
-      <li>
-    
-                          <a href="index.html" title="About">
-          <i class="none"></i>
-        About</a>
-            </li>
-                      
-      <li>
-    
-                          <a href="license.html" title="Project License">
-          <i class="none"></i>
-        Project License</a>
-            </li>
-                      
-      <li>
-    
-                          <a href="modules.html" title="Project Modules">
-          <i class="none"></i>
-        Project Modules</a>
-            </li>
-                      
-      <li>
-    
-                          <a href="plugin-management.html" title="Plugin Management">
-          <i class="none"></i>
-        Plugin Management</a>
-            </li>
-                      
-      <li>
-    
-                          <a href="plugins.html" title="Project Plugins">
-          <i class="none"></i>
-        Project Plugins</a>
-            </li>
-                      
-      <li class="active">
-    
-            <a href="#"><i class="none"></i>Project Team</a>
-          </li>
-                      
-      <li>
-    
-                          <a href="source-repository.html" title="Source Repository">
-          <i class="none"></i>
-        Source Repository</a>
-            </li>
-                      
-      <li>
-    
-                          <a href="project-summary.html" title="Project Summary">
-          <i class="none"></i>
-        Project Summary</a>
-            </li>
-              </ul>
-        </li>
+                  </li>
             </ul>
                 
                     
@@ -491,29 +405,121 @@
                 
         <div id="bodyColumn"  class="span9" >
                                   
-            <div class="section">
-<h2>The Team<a name="The_Team"></a></h2><a name="The_Team"></a>
-<p>A successful project requires many people to play many roles. Some members write code or documentation, while others are valuable as testers, submitting patches and suggestions.</p>
-<p>The team is comprised of Members and Contributors. Members have direct access to the source of a project and actively evolve the code-base. Contributors improve the project through submission of patches and suggestions to the Members. The number of Contributors to the project is unbounded. Get involved today. All contributions to the project are greatly appreciated.</p>
+            <h1>Microservice architecture</h1>
+<p>A microservice architecture is the natural consequence of applying the single responsibility principle at architectural level. Within a microservice architecture the functionality is decomposed in a set of collaborating services and the <a href="scale-cube.html">scale cube</a> is applied. Services communicate with each other either using synchronous protocols like HTTP/REST or asynchronous protocols such as AMQP/JMS. In this way, business domain concepts are modelled as resources with one or more of these managed by a microservice. Since a business request can span multiple microservices separated by network partitions, it is important to consider possible failures in the system. Techniques such as timeouts, <a href="circuit-breaker.md">circuit breakers</a>, <a href="bulkheads.md">bulkheads</a> can help to maintain overall system uptime in spite of outage.</p>
+<p>Often microservices display similar internal structure consisting of some or all of the layers as shown below.</p>
+<p><img src="images/microservices-internal-structure.png" alt="microservices internal structure" /></p>
+
+<ul>
+  
+<li>Resources act as a mapper between the application protocol as exposed by the micro service and messages to the <a href="ddd/services.md">services</a>/<a href="ddd/entities.md">entities</a> that are representing the domain. Typically, they are thin, responsible for sanity checking the request, and providing a protocol specific response according to the outcome of the request. If we for example expose the resources via REST and follow internally the <a href="cqrs.md">CQRS</a> approach, this layer would be responsible for converting the HTTP REST request into a <tt>Command</tt>.</li>
+  
+<li>The microservice logic resides in the <a href="ddd/domain-model.md">domain model</a>. <a href="ddd/services.md">Services</a> coordinate across multiple domain activities, whilst <a href="ddd/repositories.md">repositories</a> act on collections of domain entities and are often persistent. When a resource receives a request and has validated it, it either directly access the domain model, or, if many entities must be coordinated, it delegates the request to a service.</li>
+  
+<li>If a service has another service as a collaborator, some logic is needed to communicate with the external service. A <a href="service-connector.md">service connector</a> encapsulates message passing with a remote service, marshalling requests and responses from and to other services. Service connectors should be resilient to outage of remote components.</li>
+</ul>
+<p>Normally services are developed independently from another. Typically, a team will act as guardian to one or more microservices,</p>
+<p>Each service has its own storage in order to decouple from other services. When necessary, consistency between services is maintained using application events.</p>
+<p>Following this approach has a number of benefits:</p>
+
+<ul>
+  
+<li>Each service is relatively small
+  
+<ul>
+    
+<li>Easier for developers to understand.</li>
+    
+<li>The web container starts fast, which makes developers more productive and speed up deployments.</li>
+  </ul></li>
+  
+<li>Each service can be deployed independently of other services; e.g. easier to deploy new versions of services frequently.</li>
+  
+<li>Easier to scale development. It enables to organize the development effort around multiple teams. Each team can develop, deploy, and scale their service independently of all other teams.</li>
+  
+<li>Improved fault isolation.</li>
+  
+<li>Each service can be developed and deployed independently.</li>
+  
+<li>Eliminates long term commitment to a technology stack.</li>
+</ul>
+<p>There are however also a number of drawbacks:</p>
+
+<ul>
+  
+<li>Developers must deal with the additional complexity of creating distributed systems.
+  
+<ul>
+    
+<li>Testing is more difficult.</li>
+    
+<li>Developers must implement the inter-service communication mechanism</li>
+    
+<li>Implementing use cases that span multiple services without using distributed transactions is difficult (See <a href="tcc.md">Try-Cancel/Confirm</a>)</li>
+    
+<li>Implementing uses cases that span multiple services requires careful coordination between the teams.</li>
+  </ul></li>
+  
+<li>Deployment complexity in production; there is additional operational complexity of deploying and managing a system comprised of many different services.</li>
+  
+<li>Increased memory consumption. The microservice architecture replaces a monolithic application with N service instances. If each service runs in its own JVM (which is usually necessary to isolate instances) there is a overhead of N-1 JVM runtimes. Moreover, if each service runs on its own VM the overhead is even higher.</li>
+</ul>
+<p>A challenge is deciding how to partition the system into microservices. One approach is to partition services by use case. We could for example have a micro service shipping within a partitioned e-commerce application that is responsible for shipping completed orders. Another approach is to partition by <a href="ddd/entities.md">entity</a>. This kind of service is responsible for all operations that operate on entities of a given type.</p>
+<p>Ideally, each service should have only a small set of responsibilities. The <a href="srp.html">Single Responsible Principle</a> states that every class should have responsibility over a single part of the functionality provided by the software, and that responsibility should be entirely encapsulated by the class. It makes sense to apply this principle to microservice design as well.</p>
 <div class="section">
-<h3>Members<a name="Members"></a></h3><a name="Members"></a>
-<p>The following is a list of developers with commit privileges that have directly contributed to the project in one way or another.</p>
-<table border="0" class="table table-striped">
-<tr class="a">
-<th>Id</th>
-<th>Name</th>
-<th>Organization</th>
-<th>Roles</th>
-<th>Time Zone</th></tr>
-<tr class="b">
-<td><a name="mase"></a>mase</td>
-<td>Mark Schenk</td>
-<td>UniKnow</td>
-<td>architect, developer</td>
-<td>Europe/Amsterdam</td></tr></table></div>
+<h2>MicroService naming guidelines<a name="MicroService_naming_guidelines"></a></h2>
+<p>There isn&#x2019;t a really straight forward approach regarding the naming of microservices but the following guidelines should help in creating a consistency in the naming of the microservices.</p>
+
+<ul>
+  
+<li><i>Use camel case for microservice name</i></li>
+  
+<li><i>Don&#x2019;t reveal implementation details in the microservice name</i> - This not only has the potential to lead to confusion when you change the implementation of the microservice, but is also a security risk as it gives the microservice consumer an insight in how the microservice may be implemented which they may be able to exploit.</li>
+  
+<li><i>Don&#x2019;t include protocol information in the microservice name</i> - This is generally unnecessary as the service advertise itself at a particular endpoint which clearly defines the protocol to be used.</li>
+  
+<li><i>Don&#x2019;t include the word service in the microservice name</i></li>
+  
+<li><i>Don&#x2019;t include a version in the microservice name</i></li>
+  
+<li><i>Name microservice to entity at which it operates</i> - Microservices which operate on a specific entity should be named after the entity. For example if service that operates on customers may be simple named <tt>Customer</tt>.</li>
+  
+<li><i>Name microservice to functionality it performs</i> - Certain microservices are taking care of certain processes and therefore the use of verbs in the service name is common. For example a service that orchestrates the device registration could be called <tt>RegisterDevice</tt>.</li>
+</ul>
+<p>Naming conventions may seem trivial at first, but as the number of microservices grow, so will the potential to reuse. In larger organizations, this means that more and more architects, analysts, and developers are discovering and then incorporating foreign services within their solution designs. The effort required to establish a consistent level of clarity across all microservices pays off quickly when interoperability and reuse opportunities are more easily recognized and seized.</p></div>
 <div class="section">
-<h3>Contributors<a name="Contributors"></a></h3><a name="Contributors"></a>
-<p>There are no contributors listed for this project. Please check back again later.</p></div></div>
+<h2>TODO<a name="TODO"></a></h2>
+
+<ul>
+  
+<li>Check whether OSGI could help with decreasing memory consumption.</li>
+</ul></div>
+<div class="section">
+<h2>Related Patterns<a name="Related_Patterns"></a></h2>
+
+<ul>
+  
+<li><a href="API-gateway">API Gateway</a> - defines how clients access the services in a microservice architecture.</li>
+  
+<li><a href="client-side-discover">Client side discovery</a> and <a href="server-side-discover">Service side discovery</a> - Patterns used to route requests for a client to an available microservice.</li>
+  
+<li><a href="cqrs.md">Command Query Response Seperation</a> - Helps develop scalable, extensible and maintainable applications.</li>
+  
+<li><a href="ddd/introduction_ddd.md">Domain Driven Design</a> - Set of patterns for building enterprise applications based on the domain model.</li>
+  
+<li><a href="monolithic-architecture">Monolithic Architecture</a> - alternative to the monolithic architecture.</li>
+  
+<li><a href="service-connector.md">Service Connector</a> - Provide high level interface that hides implementation details regarding communication, thereby making the use of the microservice easier.</li>
+  
+<li><a href="service-statelessness">Service Statelessness</a> - To have services scalable we should attempt to make them statelessness.</li>
+</ul></div>
+<div class="section">
+<h2>See also<a name="See_also"></a></h2>
+
+<ul>
+  
+<li><a class="externalLink" href="https://docs.jboss.org/author/display/JBOSGI/User+Guide">JBOSS OSGI User guide</a> - Guide explaining how to deploy application as OSGI bundle on JBOSS server.</li>
+</ul></div>
                   </div>
             </div>
           </div>

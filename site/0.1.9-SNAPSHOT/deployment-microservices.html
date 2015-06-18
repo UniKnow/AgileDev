@@ -9,7 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="Date-Revision-yyyymmdd" content="20150618" />
     <meta http-equiv="Content-Language" content="en" />
-    <title>AgileDev - Project Team</title>
+    <title>AgileDev - Deployment of microservices</title>
     <link rel="stylesheet" href="./css/apache-maven-fluido-1.3.0.min.css" />
     <link rel="stylesheet" href="./css/site.css" />
     <link rel="stylesheet" href="./css/print.css" media="print" />
@@ -124,7 +124,7 @@
             </li>
               </ul>
         </li>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      
       <li>
     
                           <a href="patterns.html" title="Patterns">
@@ -174,12 +174,10 @@
         Command Query Responsibility Separation</a>
             </li>
                       
-      <li>
+      <li class="active">
     
-                          <a href="deployment-microservices.html" title="Deployment microservices">
-          <i class="none"></i>
-        Deployment microservices</a>
-            </li>
+            <a href="#"><i class="none"></i>Deployment microservices</a>
+          </li>
                                                                                                                                                                                                                                                                   
       <li>
     
@@ -380,97 +378,13 @@
         Tutorial Rest</a>
             </li>
                               <li class="nav-header">Project Documentation</li>
-                                                                                                                                                                                                                                                                                                  
+                                                                                                                                                                                                                                                                                        
       <li>
     
                           <a href="project-info.html" title="Project Information">
-          <i class="icon-chevron-down"></i>
+          <i class="icon-chevron-right"></i>
         Project Information</a>
-                    <ul class="nav nav-list">
-                      
-      <li>
-    
-                          <a href="dependency-convergence.html" title="Dependency Convergence">
-          <i class="none"></i>
-        Dependency Convergence</a>
-            </li>
-                      
-      <li>
-    
-                          <a href="dependency-info.html" title="Dependency Information">
-          <i class="none"></i>
-        Dependency Information</a>
-            </li>
-                      
-      <li>
-    
-                          <a href="dependency-management.html" title="Dependency Management">
-          <i class="none"></i>
-        Dependency Management</a>
-            </li>
-                      
-      <li>
-    
-                          <a href="distribution-management.html" title="Distribution Management">
-          <i class="none"></i>
-        Distribution Management</a>
-            </li>
-                      
-      <li>
-    
-                          <a href="index.html" title="About">
-          <i class="none"></i>
-        About</a>
-            </li>
-                      
-      <li>
-    
-                          <a href="license.html" title="Project License">
-          <i class="none"></i>
-        Project License</a>
-            </li>
-                      
-      <li>
-    
-                          <a href="modules.html" title="Project Modules">
-          <i class="none"></i>
-        Project Modules</a>
-            </li>
-                      
-      <li>
-    
-                          <a href="plugin-management.html" title="Plugin Management">
-          <i class="none"></i>
-        Plugin Management</a>
-            </li>
-                      
-      <li>
-    
-                          <a href="plugins.html" title="Project Plugins">
-          <i class="none"></i>
-        Project Plugins</a>
-            </li>
-                      
-      <li class="active">
-    
-            <a href="#"><i class="none"></i>Project Team</a>
-          </li>
-                      
-      <li>
-    
-                          <a href="source-repository.html" title="Source Repository">
-          <i class="none"></i>
-        Source Repository</a>
-            </li>
-                      
-      <li>
-    
-                          <a href="project-summary.html" title="Project Summary">
-          <i class="none"></i>
-        Project Summary</a>
-            </li>
-              </ul>
-        </li>
+                  </li>
             </ul>
                 
                     
@@ -491,29 +405,99 @@
                 
         <div id="bodyColumn"  class="span9" >
                                   
-            <div class="section">
-<h2>The Team<a name="The_Team"></a></h2><a name="The_Team"></a>
-<p>A successful project requires many people to play many roles. Some members write code or documentation, while others are valuable as testers, submitting patches and suggestions.</p>
-<p>The team is comprised of Members and Contributors. Members have direct access to the source of a project and actively evolve the code-base. Contributors improve the project through submission of patches and suggestions to the Members. The number of Contributors to the project is unbounded. Get involved today. All contributions to the project are greatly appreciated.</p>
+            <h1>Deployment of microservices</h1>
+<p>So you have applied the different patterns as described within these guidelines and architected your application as a set of services. Each service should be deployed as a set of service instances for throughput and availability.</p>
+<p>Forces that (could) influence the decision are:</p>
+
+<ul>
+  
+<li>Services are written using a variety of languages, frameworks and framework versions.</li>
+  
+<li>Services are independently deployable and scalable.</li>
+  
+<li>Services need to be isolated from each other.</li>
+  
+<li>Need to be able to quickly build and deploy service</li>
+  
+<li>Need to be able to restraint the resources (CPU/Memory) consumed by a service.</li>
+  
+<li>Need to monitor behavior for each service instance.</li>
+  
+<li>Deployment of application must be cost-effective</li>
+</ul>
 <div class="section">
-<h3>Members<a name="Members"></a></h3><a name="Members"></a>
-<p>The following is a list of developers with commit privileges that have directly contributed to the project in one way or another.</p>
-<table border="0" class="table table-striped">
-<tr class="a">
-<th>Id</th>
-<th>Name</th>
-<th>Organization</th>
-<th>Roles</th>
-<th>Time Zone</th></tr>
-<tr class="b">
-<td><a name="mase"></a>mase</td>
-<td>Mark Schenk</td>
-<td>UniKnow</td>
-<td>architect, developer</td>
-<td>Europe/Amsterdam</td></tr></table></div>
+<h2>Multiple service instances per host<a name="Multiple_service_instances_per_host"></a></h2>
+<p>Multiple instances of different services are running on a single host (physical or virtual machine). There are various ways of deploying:</p>
+
+<ul>
+  
+<li>Deploy each service instance as a JVM process, (for example a Tomcat instance per service instance).</li>
+  
+<li>Deploy multiple service instances in the same JVM, (for example as OSGI bundles)</li>
+</ul>
+<p>The resource utilization within this approach is more efficient than the service instance per host. The drawbacks of this approach include:</p>
+
+<ul>
+  
+<li>Risk of conflicting resource requirements.</li>
+  
+<li>Risk of conflicting dependency versions.</li>
+  
+<li>Difficult to limit the resources consumed by a service instance.</li>
+  
+<li>Difficult to monitor the resource consumption of each service.</li>
+  
+<li>Impossible to isolate each service instance.</li>
+</ul></div>
 <div class="section">
-<h3>Contributors<a name="Contributors"></a></h3><a name="Contributors"></a>
-<p>There are no contributors listed for this project. Please check back again later.</p></div></div>
+<h2>Single service instance per host<a name="Single_service_instance_per_host"></a></h2>
+<p>Within this approach we deploy each service instance on it&#x2019;s own host. The benefits of this approach include:</p>
+
+<ul>
+  
+<li>Service instances are isolated from one other.</li>
+  
+<li>There is no possible conflict regarding resource requirements or dependency versions.</li>
+  
+<li>A service instance can consume at most the resources or a single host.</li>
+  
+<li>It is straight forward to monitor, manage, and to redeploy a service instance.</li>
+</ul>
+<p>The drawback is less efficient resource utilization compared to multiple service instances per host.</p></div>
+<div class="section">
+<h2>Service instance per VM<a name="Service_instance_per_VM"></a></h2>
+<p>Within this approach we package the service as a virtual machine image and deploy each service instance as a seperate VM.</p>
+<p>The benefits of this approach include:</p>
+
+<ul>
+  
+<li>Straightforward to scale the service by increasing the number of instances.</li>
+  
+<li>VM encapsulates the details of the technology used to build the service.</li>
+  
+<li>Each service instance is isolated.</li>
+  
+<li>VM imposes limits on the CPU and memory consumed by the service instance.</li>
+</ul>
+<p>The drawback of this approach include that building a VM image is slow and time consuming.</p></div>
+<div class="section">
+<h2>Service instance per container<a name="Service_instance_per_container"></a></h2>
+<p>Package the service as a container image (<a class="externalLink" href="https://www.docker.com/">Docker</a>) and deploy each service instance as a container. The benefits of this approach are:</p>
+
+<ul>
+  
+<li>Straightforward to scale up and down a service by changing the number of container instances.</li>
+  
+<li>Container encapsulates the details of the technology used to build the service. All services are, for example, started and stopped in exactly the same way.</li>
+  
+<li>Each service instance is isolated.</li>
+  
+<li>Container imposes limits on the CPU and memory consumed by a service instance.</li>
+  
+<li>Containers are fast to build and start.</li>
+</ul>
+<p>Drawback is that the infrastructure is not as rich as the infrastructure for deploying virtual machines.</p>
+<p>TODO</p></div>
                   </div>
             </div>
           </div>

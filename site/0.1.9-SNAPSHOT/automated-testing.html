@@ -9,7 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="Date-Revision-yyyymmdd" content="20150618" />
     <meta http-equiv="Content-Language" content="en" />
-    <title>AgileDev - Project Team</title>
+    <title>AgileDev - Automated testing</title>
     <link rel="stylesheet" href="./css/apache-maven-fluido-1.3.0.min.css" />
     <link rel="stylesheet" href="./css/site.css" />
     <link rel="stylesheet" href="./css/print.css" media="print" />
@@ -124,7 +124,7 @@
             </li>
               </ul>
         </li>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      
       <li>
     
                           <a href="patterns.html" title="Patterns">
@@ -138,13 +138,20 @@
           <i class="none"></i>
         API gateway</a>
             </li>
-                                                                        
+                                                                            
+      <li class="active">
+    
+            <a href="#"><i class="icon-chevron-down"></i>Automated testing</a>
+                  <ul class="nav nav-list">
+                      
       <li>
     
-                          <a href="automated-testing.html" title="Automated testing">
-          <i class="icon-chevron-right"></i>
-        Automated testing</a>
-                  </li>
+                          <a href="consumer-based-testing.html" title="Consumer-based testing">
+          <i class="none"></i>
+        Consumer-based testing</a>
+            </li>
+              </ul>
+        </li>
                       
       <li>
     
@@ -380,97 +387,13 @@
         Tutorial Rest</a>
             </li>
                               <li class="nav-header">Project Documentation</li>
-                                                                                                                                                                                                                                                                                                  
+                                                                                                                                                                                                                                                                                        
       <li>
     
                           <a href="project-info.html" title="Project Information">
-          <i class="icon-chevron-down"></i>
+          <i class="icon-chevron-right"></i>
         Project Information</a>
-                    <ul class="nav nav-list">
-                      
-      <li>
-    
-                          <a href="dependency-convergence.html" title="Dependency Convergence">
-          <i class="none"></i>
-        Dependency Convergence</a>
-            </li>
-                      
-      <li>
-    
-                          <a href="dependency-info.html" title="Dependency Information">
-          <i class="none"></i>
-        Dependency Information</a>
-            </li>
-                      
-      <li>
-    
-                          <a href="dependency-management.html" title="Dependency Management">
-          <i class="none"></i>
-        Dependency Management</a>
-            </li>
-                      
-      <li>
-    
-                          <a href="distribution-management.html" title="Distribution Management">
-          <i class="none"></i>
-        Distribution Management</a>
-            </li>
-                      
-      <li>
-    
-                          <a href="index.html" title="About">
-          <i class="none"></i>
-        About</a>
-            </li>
-                      
-      <li>
-    
-                          <a href="license.html" title="Project License">
-          <i class="none"></i>
-        Project License</a>
-            </li>
-                      
-      <li>
-    
-                          <a href="modules.html" title="Project Modules">
-          <i class="none"></i>
-        Project Modules</a>
-            </li>
-                      
-      <li>
-    
-                          <a href="plugin-management.html" title="Plugin Management">
-          <i class="none"></i>
-        Plugin Management</a>
-            </li>
-                      
-      <li>
-    
-                          <a href="plugins.html" title="Project Plugins">
-          <i class="none"></i>
-        Project Plugins</a>
-            </li>
-                      
-      <li class="active">
-    
-            <a href="#"><i class="none"></i>Project Team</a>
-          </li>
-                      
-      <li>
-    
-                          <a href="source-repository.html" title="Source Repository">
-          <i class="none"></i>
-        Source Repository</a>
-            </li>
-                      
-      <li>
-    
-                          <a href="project-summary.html" title="Project Summary">
-          <i class="none"></i>
-        Project Summary</a>
-            </li>
-              </ul>
-        </li>
+                  </li>
             </ul>
                 
                     
@@ -491,29 +414,35 @@
                 
         <div id="bodyColumn"  class="span9" >
                                   
-            <div class="section">
-<h2>The Team<a name="The_Team"></a></h2><a name="The_Team"></a>
-<p>A successful project requires many people to play many roles. Some members write code or documentation, while others are valuable as testers, submitting patches and suggestions.</p>
-<p>The team is comprised of Members and Contributors. Members have direct access to the source of a project and actively evolve the code-base. Contributors improve the project through submission of patches and suggestions to the Members. The number of Contributors to the project is unbounded. Get involved today. All contributions to the project are greatly appreciated.</p>
+            <h1>Automated testing</h1>
+<p><b>TODO</b></p>
+<p><img src="images/testing-pyramid.png" alt="Testing pyramid" /></p>
+<p>The testing pyramid essentially points out that you should have many more low level unit tests than high level end-to-end tests running. The layers we can distinct are:</p>
+
+<ul>
+  
+<li>Exploratory -</li>
+  
+<li>End-to-End</li>
+  
+<li>Integration - By integration tests the interaction between two or more services is explicitly tested.</li>
+  
+<li>Component -</li>
+  
+<li>Unit - In this context, a &#x2018;unit&#x2019; is often a function or a method of a class instance. See <a href="unit-testing.md">unit testing</a> for more details.</li>
+</ul>
 <div class="section">
-<h3>Members<a name="Members"></a></h3><a name="Members"></a>
-<p>The following is a list of developers with commit privileges that have directly contributed to the project in one way or another.</p>
-<table border="0" class="table table-striped">
-<tr class="a">
-<th>Id</th>
-<th>Name</th>
-<th>Organization</th>
-<th>Roles</th>
-<th>Time Zone</th></tr>
-<tr class="b">
-<td><a name="mase"></a>mase</td>
-<td>Mark Schenk</td>
-<td>UniKnow</td>
-<td>architect, developer</td>
-<td>Europe/Amsterdam</td></tr></table></div>
+<h2>Test Data<a name="Test_Data"></a></h2>
+<p>One of the harder challenges within automated testing is generating valuable test data. Hard coding assumptions about data availability can be a fragile approach as there are no guarantees that the data continue to exist. Furthermore, some tests may require data consistency across multiple services.</p>
+<p>One of the robust strategies is to create the test data during the test run, as you guarantee the data exists before using it. This requires however that each service allows creating new resources, which isn&#x2019;t always the case. A solution for this could be to expose in the test environments test-only endpoints to facilitate test data creation. These end-points are of course not exposed in the production environment.</p>
+<p>An alternative strategy is to have each service publish a cohesive set of test data that is guaranteed to be stable.</p></div>
 <div class="section">
-<h3>Contributors<a name="Contributors"></a></h3><a name="Contributors"></a>
-<p>There are no contributors listed for this project. Please check back again later.</p></div></div>
+<h2>See also<a name="See_also"></a></h2>
+
+<ul>
+  
+<li>[Consumer-based testing] - To verify the integration between multiple services we could rely on consumer based testing.</li>
+</ul></div>
                   </div>
             </div>
           </div>

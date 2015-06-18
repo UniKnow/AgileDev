@@ -9,7 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="Date-Revision-yyyymmdd" content="20150618" />
     <meta http-equiv="Content-Language" content="en" />
-    <title>AgileDev - Best Practices</title>
+    <title>AgileDev - Domain Model</title>
     <link rel="stylesheet" href="../css/apache-maven-fluido-1.3.0.min.css" />
     <link rel="stylesheet" href="../css/site.css" />
     <link rel="stylesheet" href="../css/print.css" media="print" />
@@ -124,7 +124,7 @@
             </li>
               </ul>
         </li>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      
       <li>
     
                           <a href="../patterns.html" title="Patterns">
@@ -180,13 +180,34 @@
           <i class="none"></i>
         Deployment microservices</a>
             </li>
-                                                                                                                                                                                                                                                                  
+                                                                                                                                                                                                                                                                            
       <li>
     
                           <a href="../ddd/introduction_ddd.html" title="Domain Driven Design">
-          <i class="icon-chevron-right"></i>
+          <i class="icon-chevron-down"></i>
         Domain Driven Design</a>
+                    <ul class="nav nav-list">
+                      
+      <li class="active">
+    
+            <a href="#"><i class="none"></i>Domain Model</a>
+          </li>
+                                                                                                                                                                                                      
+      <li>
+    
+                          <a href="../ddd/building_blocks_ddd.html" title="Building blocks DDD">
+          <i class="icon-chevron-right"></i>
+        Building blocks DDD</a>
                   </li>
+                      
+      <li>
+    
+                          <a href="../ddd/context_mapping.html" title="Context mapping">
+          <i class="none"></i>
+        Context mapping</a>
+            </li>
+              </ul>
+        </li>
                                                                                                             
       <li>
     
@@ -407,10 +428,25 @@
                 
         <div id="bodyColumn"  class="span9" >
                                   
-            <h1>Best Practices</h1>
+            <h1>Domain Model</h1>
+<p>Domain Driven Design is based on the idea of solving problems the organisations face through code. This is achieved by focusing on the domain of the business you are working with and the problems they want to solve. This will typically involve rules, processes and existing systems that need to be integrated as part of your solution; e.g. the domain is the ideas, entities and knowledge of the problem you are trying to solve. All of the knowledge around the company and how it operates will form the domain.</p>
+<p>The Domain Model is your solution to the problem. The Domain Model usually represents an aspect of reality or something of interest. The Domain Model is often a simplification of the bigger picture, the important aspects of the solution are included while everything else is ignored.</p>
+<p>The Domain Model should represent the vocabulary and key concepts of the problem domain and it should identify the relationships among all of the <a href="entities.md">entities</a> within the scope of the domain. The important this is that the Domain Model should be accessible and understandable by everyone who is involved with the project.</p>
+<p>So the Domain is the world of the business and the Domain Model is the structured knowledge of the problem, but why is this important to Domain Driven Design? Well there are 3 reasons:</p>
+
+<ol style="list-style-type: decimal">
+  
+<li>The Domain Model and implementation shape each other - The code that is written should be intimately linked to the Domain Model.Anyone on the team (business, developers, etc) should be able to look at your code and understand how it applies to the problem you are solving. Whenever a decision needs to be made during the course of the project everyone should refer to the Domain Model to look for the answer.</li>
+  
+<li>The Domain Model is the backbone of the language used by all team members - Every member of the team should use the <a href="ubiquitous-language.md">ubiquitous language</a>. This ensures that technical and non-technical people have a common language so there is no loss of understanding between parties. The ubiquitous language should be directly derived from the Domain Model.</li>
+  
+<li>The Domain Model is distilled knowledge - The Domain Model is the outcome of an iterative discovering process where everyone on the team is involved to discuss the problem and how it should be solved. The Domain Model should capture how all think about the project and all of the distilled knowledge that has been derived from those collaboration sessions.</li>
+</ol>
 <div class="section">
-<h2>Prefer executable specifications over static documents<a name="Prefer_executable_specifications_over_static_documents"></a></h2>
-<p>The majority of the information captured in traditional specification documents, such as requirements specification, architecture specifications, or design specifications, can be captured as &#x201c;executable specifications&#x201d; in the form of tests. When you take a Test-Driven Development (TDD) approach you effectively write detailed specifications on a just-in-time (JIT) basis. With TDD you write a test, either at the customer/acceptance level or the developer level, before writing sufficient functionality to fulfill that test. The tests are used for two purposes: they specify the requirements/architecture/design and they validate your work.</p></div>
+<h2>How do you create at a Domain Model?<a name="How_do_you_create_at_a_Domain_Model"></a></h2>
+<p>Creating a Domain Model is an iterative process that attempts to discover the real problem that is faced and the correct solution that is required. It&#x2019;s important to focus a Domain Model on one important problem. Trying to capture the entire scope of a business inside a single Domain Model will be far too overcomplicated and most likely work contradicting as concepts and ideas move around within the organisation, (see <a href="bounded_context.md">bounded context</a> on how to cope with this).</p>
+<p>The problem should be mapped out through talking to business experts to discover the problems they face. This should form the conceptual problem that you are looking to tackle. Business experts won&#x2019;t talk in terms of technical solutions, so during the process important aspects of the problem should be picket out from the language and given concrete definitions to form the ubiquitous language.</p>
+<p>There should be a tight feedback loop where everyone on the project discuss the proposed Domain Model to get closer to the solution. This is an iterative approach that will likely encompass code and diagrams to really understand the problem and discover the correct solution.</p></div>
                   </div>
             </div>
           </div>

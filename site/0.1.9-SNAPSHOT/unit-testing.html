@@ -9,7 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="Date-Revision-yyyymmdd" content="20150618" />
     <meta http-equiv="Content-Language" content="en" />
-    <title>AgileDev - Project Team</title>
+    <title>AgileDev - Unit Testing</title>
     <link rel="stylesheet" href="./css/apache-maven-fluido-1.3.0.min.css" />
     <link rel="stylesheet" href="./css/site.css" />
     <link rel="stylesheet" href="./css/print.css" media="print" />
@@ -380,97 +380,13 @@
         Tutorial Rest</a>
             </li>
                               <li class="nav-header">Project Documentation</li>
-                                                                                                                                                                                                                                                                                                  
+                                                                                                                                                                                                                                                                                        
       <li>
     
                           <a href="project-info.html" title="Project Information">
-          <i class="icon-chevron-down"></i>
+          <i class="icon-chevron-right"></i>
         Project Information</a>
-                    <ul class="nav nav-list">
-                      
-      <li>
-    
-                          <a href="dependency-convergence.html" title="Dependency Convergence">
-          <i class="none"></i>
-        Dependency Convergence</a>
-            </li>
-                      
-      <li>
-    
-                          <a href="dependency-info.html" title="Dependency Information">
-          <i class="none"></i>
-        Dependency Information</a>
-            </li>
-                      
-      <li>
-    
-                          <a href="dependency-management.html" title="Dependency Management">
-          <i class="none"></i>
-        Dependency Management</a>
-            </li>
-                      
-      <li>
-    
-                          <a href="distribution-management.html" title="Distribution Management">
-          <i class="none"></i>
-        Distribution Management</a>
-            </li>
-                      
-      <li>
-    
-                          <a href="index.html" title="About">
-          <i class="none"></i>
-        About</a>
-            </li>
-                      
-      <li>
-    
-                          <a href="license.html" title="Project License">
-          <i class="none"></i>
-        Project License</a>
-            </li>
-                      
-      <li>
-    
-                          <a href="modules.html" title="Project Modules">
-          <i class="none"></i>
-        Project Modules</a>
-            </li>
-                      
-      <li>
-    
-                          <a href="plugin-management.html" title="Plugin Management">
-          <i class="none"></i>
-        Plugin Management</a>
-            </li>
-                      
-      <li>
-    
-                          <a href="plugins.html" title="Project Plugins">
-          <i class="none"></i>
-        Project Plugins</a>
-            </li>
-                      
-      <li class="active">
-    
-            <a href="#"><i class="none"></i>Project Team</a>
-          </li>
-                      
-      <li>
-    
-                          <a href="source-repository.html" title="Source Repository">
-          <i class="none"></i>
-        Source Repository</a>
-            </li>
-                      
-      <li>
-    
-                          <a href="project-summary.html" title="Project Summary">
-          <i class="none"></i>
-        Project Summary</a>
-            </li>
-              </ul>
-        </li>
+                  </li>
             </ul>
                 
                     
@@ -491,29 +407,27 @@
                 
         <div id="bodyColumn"  class="span9" >
                                   
-            <div class="section">
-<h2>The Team<a name="The_Team"></a></h2><a name="The_Team"></a>
-<p>A successful project requires many people to play many roles. Some members write code or documentation, while others are valuable as testers, submitting patches and suggestions.</p>
-<p>The team is comprised of Members and Contributors. Members have direct access to the source of a project and actively evolve the code-base. Contributors improve the project through submission of patches and suggestions to the Members. The number of Contributors to the project is unbounded. Get involved today. All contributions to the project are greatly appreciated.</p>
+            <h1>Unit Testing</h1>
+<p>Unit testing exercises the smallest piece of testable software in the application to determine whether it behaves as expected. In this context, a &#x2018;unit&#x2019; is often a function or a method of a class instance. Often, difficulty in writing a unit test can highlight when a module should be broken down into independent more coherent pieces and tested individually. Thus alongside being a useful testing strategy, unit testing is also a powerful design tool, especially when combined with <a href="bdd.md">behavior driven development</a>.</p>
+<p>Within unit testing we can make a distinction based on whether or not the unit under test is isolated from its collaborators:</p>
+
+<ul>
+  
+<li>Sociable unit testing - focuses on testing the behaviour of units by observing changes in their state. This treats the unit under test as a black box tested entirely through its interface.</li>
+  
+<li>Solarity unit testing - looks at the interactions and collaborations between an object and its dependencies, which are replaced by <a href="mocks.md">mocks</a>.</li>
+</ul>
+<p>These styles are not competing and are frequently used in the same codebase to solve different testing problems.</p>
+<p>The domain logic within a microservice often manifests as complex complex calculations and a collection of state changes. Since this kind of logic is highly state based there is often little value in trying to isolate the units. This means that we should apply solarity unit testing to the <a href="ddd/domain-model.md">domain model</a>.</p>
+<p>With plumbing code like <a href="ddd/repositories.md">repositories</a>, and <a href="service-connector.md">service connectors</a> the purpose of the unit tests is to verify the logic used to produce requests or map responses from external dependencies. As such using <a href="mocks.md">mocks</a> provides a way to control the request-response cycle in a reliable and repeatable manner. Advantage of testing these components at this level is that they provide faster feedback than integration tests and we can force error conditions by having the mocks replicate error conditions.</p>
+<p>Coordination logic such as <a href="ddd/services.md">services</a> care more about the messages passed between the modules and the domain than any complex logic. Using mocks allows the changes to the domain to be verified. If a service requires too many mocks, it is usually a good indicator that some concepts should be extracted and tested in isolation.</p>
 <div class="section">
-<h3>Members<a name="Members"></a></h3><a name="Members"></a>
-<p>The following is a list of developers with commit privileges that have directly contributed to the project in one way or another.</p>
-<table border="0" class="table table-striped">
-<tr class="a">
-<th>Id</th>
-<th>Name</th>
-<th>Organization</th>
-<th>Roles</th>
-<th>Time Zone</th></tr>
-<tr class="b">
-<td><a name="mase"></a>mase</td>
-<td>Mark Schenk</td>
-<td>UniKnow</td>
-<td>architect, developer</td>
-<td>Europe/Amsterdam</td></tr></table></div>
-<div class="section">
-<h3>Contributors<a name="Contributors"></a></h3><a name="Contributors"></a>
-<p>There are no contributors listed for this project. Please check back again later.</p></div></div>
+<h2>See also<a name="See_also"></a></h2>
+
+<ul>
+  
+<li>[ContiPerf] - A Java library for measuring performance by running JUnit tests. This could provide a early hint regarding performance bottle necks.</li>
+</ul></div>
                   </div>
             </div>
           </div>
