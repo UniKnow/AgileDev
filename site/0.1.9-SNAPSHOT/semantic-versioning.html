@@ -9,7 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="Date-Revision-yyyymmdd" content="20150623" />
     <meta http-equiv="Content-Language" content="en" />
-    <title>AgileDev - Site Documentation</title>
+    <title>AgileDev - Semantic versioning</title>
     <link rel="stylesheet" href="./css/apache-maven-fluido-1.3.0.min.css" />
     <link rel="stylesheet" href="./css/site.css" />
     <link rel="stylesheet" href="./css/print.css" media="print" />
@@ -66,10 +66,12 @@
         Developers Setup</a>
             </li>
                   
-      <li class="active">
+      <li>
     
-            <a href="#"><i class="none"></i>Site Documentation</a>
-          </li>
+                          <a href="siteDocumentation.html" title="Site Documentation">
+          <i class="none"></i>
+        Site Documentation</a>
+            </li>
                               <li class="nav-header">Documentation</li>
                                 
       <li>
@@ -78,7 +80,7 @@
           <i class="none"></i>
         Branching Models</a>
             </li>
-                                                                                                                                                        
+                                                                                                                                                                  
       <li>
     
                           <a href="software-design-principles.md" title="Software Design Principles">
@@ -114,12 +116,10 @@
         Reactive System</a>
             </li>
                       
-      <li>
+      <li class="active">
     
-                          <a href="semantic-versioning.html" title="Semantic versioning">
-          <i class="none"></i>
-        Semantic versioning</a>
-            </li>
+            <a href="#"><i class="none"></i>Semantic versioning</a>
+          </li>
                       
       <li>
     
@@ -433,249 +433,33 @@
                 
         <div id="bodyColumn"  class="span9" >
                                   
-            <h1>Site Documentation</h1>
-<p>All documentation is within the code base and is written in MarkDown.</p>
-<p>Markdown is a plain text formatting syntax designed so that it can be converted to HTML. There is no clearly defined Markdown standard but if you comply to the following syntax the generated pages should be formatted correctly.</p>
-
-<table border="0" class="table table-striped">
-
-<tr class="a">
-
-<th colspan="2">Paragraphs and Breaks</th>
-</tr>
-
-<tr class="b">
-
-<td>
-
-<div>
-<pre class="prettyprint">
-Markdown accepts text on consecutive lines
-as a hard-wrapped paragraph.
-
-Put a blank Line in between to start a new graph.
-</pre></div>
-</td>
-
-<td>
-
-<p>
-Markdown accepts text on consecutive lines
-as a hard-wrapped paragraph.
-</p><br />
-
-<p>
-Put a blank Line in between to start a new graph.
-</p>
-</td>
-</tr>
-
-
-<tr class="a">
-
-<th colspan="2">Headings</th>
-</tr>
-
-<tr class="b">
-
-<td>
-
-<div>
-<pre class="prettyprint">
-# Header 1
-## Header 2
-### Header 3
-</pre></div>
-</td>
-
-<td>
-Header 1
-Header 2
-Header 3
-</td>
-</tr>
-
-
-<tr class="a">
-
-<th colspan="2">Blockquote</th>
-</tr>
-
-<tr class="b">
-
-<td>
-
-<div>
-<pre class="prettyprint">
-&gt; Blockquote.
-</pre></div>
-</td>
-
-<td>
-
-<blockquote>
-<p>Blockquote.</p></blockquote>
-</td>
-</tr>
-
-
-<tr class="a">
-
-<th colspan="2">Lists</th>
-</tr>
-
-<tr class="b">
-
-<td>
-
-<div>
-<pre class="prettyprint">
-Start ordered list with number.
-
-6. Ordered
-7. List
-    8. Items
-
-Unordered list
-
-* Unordered
-* List
-    * Item
-</pre></div>
-</td>
-
-<td>
-
-<ol style="list-style-type: decimal">
-  
-<li>Ordered</li>
-  
-<li>List
-  
-<ol style="list-style-type: decimal">
-    
-<li>Items</li>
-  </ol></li>
-</ol>
-<p>Unordered list</p>
+            <h1>Semantic versioning</h1>
+<p>Semantic versioning are providing strict guidelines regarding version numbers.</p>
+<p>Given a version number <tt>MAJOR.MINOR.PATCH</tt>, increment the:</p>
 
 <ul>
   
-<li>Unordered</li>
+<li><tt>MAJOR</tt> version when you make incompatible API changes.</li>
   
-<li>List
+<li><tt>MINOR</tt> version when you add/change functionality which is backward compatible.</li>
   
-<ul>
-    
-<li>Item</li>
-  </ul></li>
+<li><tt>PATCH</tt> version when you make backward compatible bug fixes.</li>
 </ul>
-</td>
-</tr>
+<p>The numbers that are used for <tt>MAJOR</tt>, <tt>MINOR</tt>, and <tt>PATCH</tt> are non negative integers, and don&#x2019;t contain leading zeroes. A <tt>MAJOR</tt> version 0 is for initial development and anything may change at any time. Version <tt>1.0.0</tt> defines the first public stable version.</p>
+<p>A pre-release version may be denoted by appending a hyphen and a series of dot separated identifiers immediately following the <tt>PATCH</tt> number. The pre-release version identifier must comprise only ASCII alphanumerics ([0-9A-Za-z]). A pre-release version indicates that the version is unstable and might not satisfy the intended compatibility requirements as denoted by its associated normal version. An example of a pre-release version is <tt>1.0.0-alpha</tt>.</p>
+<p>Build metadata may be denoted by appending a plus sign and a series of dot separated identifiers immediately following the <tt>PATCH</tt> or pre-release version number. The build metadata must comprise only ASCII alphanumerics ([0-9A-Za-z]). An example of a version number with build metadata is <tt>1.0.0+201506221617</tt></p>
+<p>Once a versioned package is released, the content of that package MUST NOT be modified. Any modifications MUST be released as a new version.</p>
+<div class="section">
+<h2>See also<a name="See_also"></a></h2>
 
-
-<tr class="a">
-
-<th colspan="2">Links</th>
-</tr>
-
-<tr class="b">
-
-<td>
-
-<div>
-<pre class="prettyprint">
-An [inline link](http://www.google.com/ &quot;optional title&quot;).
-
-An [inline link to header page](#Site_Documentation) references header on current page.
-
-A [reference link][id].
-
-[id] defined elsewhere
-
-[id]: &lt;http://www.google.com/&gt; (optional title)
-
-Linked URL: &lt;http://www.google.com/&gt;
-
-Mail to: &lt;address@example.com&gt;
-</pre></div>
-</td>
-
-<td>
-
-<p>An <a class="externalLink" href="http://www.google.com/" title="optional title">inline link</a>.</p>
-
-<p>An <a href="#Site_Documentation">inline link to header page</a> references header on current page.</p>
-
-<p>A <a class="externalLink" href="http://www.google.com/" title="optional title">reference link</a>.</p>
-
-<p><a class="externalLink" href="http://www.google.com/" title="optional title">id</a> defined elsewhere</p>
-
-<p>Linked URL: <a class="externalLink" href="http://www.google.com/">http://www.google.com/</a></p>
-
-<p>Mail to: <a class="externalLink" href="mailto:address@example.com">address@example.com</a></p>
-</td>
-</tr>
-
-
-<tr class="a">
-
-<th colspan="2">Images</th>
-</tr>
-
-<tr class="b">
-
-<td>
-
-<div>
-<pre class="prettyprint">
-![Alternative title image](images/Uniknow-logo.jpg)
-</pre></div>
-</td>
-
-<td>
-<img src="images/UniKnow-logo.jpg" alt="Alternative title image" />
-</td>
-</tr>
-
-
-<tr class="a">
-
-<th colspan="2">Code</th>
-</tr>
-
-<tr class="b">
-
-<td>
-
-<div>
-<pre class="prettyprint">
-Inline `code` example.
-
-Preformatted code block:
-
-    &lt;strong&gt;Just indent 4 spaces.&lt;/strong&gt;
-
-Double-backticks (`` ` ``) delimit literal backticks
-</pre></div>
-</td>
-
-<td>
-
-<p>Inline <tt>code</tt> example.</p>
-
-<p>Preformatted code block:</p>
-
-
-<div class="source">
-<pre class="prettyprint">&lt;strong&gt;Just indent 4 spaces.&lt;/strong&gt;</pre></div>
-
-
-<p>Double-backticks (<tt>`</tt>) delimit literal backticks</p>
-</td>
-</tr>
-
-</table>
+<ul>
+  
+<li><a class="externalLink" href="http://semver.org/">Semantic versioning</a></li>
+  
+<li><a class="externalLink" href="http://resources.sei.cmu.edu/asset_files/TechnicalNote/2012_004_001_15356.pdf">Best practices for Artifact versioning in Service Oriented Systems</a></li>
+  
+<li><a class="externalLink" href="http://www.sitepoint.com/semantic-versioning-why-you-should-using/">http://www.sitepoint.com/semantic-versioning-why-you-should-using/</a></li>
+</ul></div>
                   </div>
             </div>
           </div>
