@@ -1,0 +1,5 @@
+# Bulkheads
+
+Bulkheads are a way to isolate microservices from failures. There are a lots of different bulkheads we can consider. Separation of concerns can be a way to implement bulkheads. By separating functionality into separate microservices we reduce the the change of an outage in one area affecting the another. Another form of bulkhead is using different connection pools for each downstream connection. That way, if one connection pool gets exhausted, the other connection pools aren't impacted. This would ensure that, if a downstream service start behaving slowly, only that one connection pool would be detected, allowing other calls to proceed as normal.
+
+We can regard a [circuit breaker](circuit-breaker.md) as an automatic mechanism to enable a bulkhead. This way we not only protect the consumer from the downstream problem, but also potentially protect the downstream service from more calls that may be having an adverse impact.

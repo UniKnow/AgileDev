@@ -27,6 +27,7 @@
                 <item name="Design by Contract" href="dbc.html"/>
                 <item name="Intention revealing interfaces" href="intention_revealing_interfaces.html"/>
                 <item name="Reactive System" href="reactive-system.html"/>
+                <item name="Semantic versioning" href="semantic-versioning.html"/>
                 <item name="Side effect free functions" href="side_effect_free_functions.html" />
             </item>
 
@@ -36,6 +37,7 @@
                     <item name="Consumer-based testing" href="consumer-based-testing.html"/>
                     <item name="Unit testing" ref="unit-testing.html"/>
                 </item>
+                <item name="Bulkheads" href="bulkheads.html"/>
                 <item name="Caching" href="cache.html"/>
                 <item name="Circuit Breaker" href="circuit-breaker.html"/>
                 <item name="Client Side Discovery" href="client-side-discovery.html"/>
@@ -70,7 +72,8 @@
                 <item name="Service Registry" href="service-registry.html"/>
                 <item name="Service Statelessness" href="service-statelessness.html" />
                 <item name="Single Responsibility Principle" href="srp.html"/>
-                <item name="System of Record" ref="system-of-record.md" />
+                <item name="System of Record" href="system-of-record.html" />
+                <item name="Timeouts" href="timeouts.html"/>
                 <item name="Try-Cancel/Confirm" href="tcc.html"/>
                 <item name="UUID" href="uuid.html" />
                 <item name="3rd party registration" href="third-party-registration.html"/>

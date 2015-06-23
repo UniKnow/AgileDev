@@ -10,6 +10,7 @@ This simple form of circuit breaker would need an external intervention to reset
 
 * [Active Monitoring](active-monitoring.md) - Circuit breakers are a valuable place for monitoring and any change in the breaker state should be logged. Breaker behavior is often a good source of warnings about deeper troubles in the environment.
 * [API Gateway](api-gateway.md) - An API gateway orchestrates the calls between the diverse number of microservices. Each of these calls should be via a orchestrator.
+* [Bulkheads](bulkheads.md) - Bulkheads are a way to isolate microservices from failures. By a circuit breaker we can enable bulkheads.
 
 ## See also
 

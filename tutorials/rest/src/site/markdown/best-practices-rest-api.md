@@ -10,6 +10,7 @@ Some best practives for REST API design are implicit in the HTTP standard, while
 |--|----|
 |100|[Always version your API](#Always_version_your_API)|
 |101|[Use open standards for data formats](#Use_open_standards_for_data_formats)|
+|102|[Use ISO-8601 for your dates](#Use_ISO-8601_for_your_dates)|
 |200|[Indicate hierarchical relationships by forward slash](#Indicate_hierarchical_relationships_by_forward_slash)|
 |201|[Trailing forward slash should not be included in URIs](#Trailing_forward_slash_should_not_be_included_in_URIs)|
 |202|[Hyphens should be used to improve readability of URIs](#Hyphens_should_be_used_to_improve_readability_of_URIs)|
@@ -90,6 +91,28 @@ See also: [Versioning REST API](versioning-rest-api)
 Using open standards with well defined syntax and semantics for data formats decreases the risk of mismatches and incorrect implementation of interfaces caused by insufficient documentation. Beside that these standards often provide off the shelf (open source) components for generating and consuming the data.
 
 Examples of common used open data formats are `JSON` and `XML`.
+
+### Use ISO-8601 for your dates
+
+The International Standard for the representation of dates and times is ISO 8601. ISO 8601 describes a large number of date/time formats. Different standards may need different levels of granularity in the date and time, so this profile defines six levels.
+
+* Year: `YYYY` (eg 1997)
+* Year and month: `YYYY-MM` (eg 1997-07)
+* Complete date: `YYYY-MM-DD` (eg 1997-07-16)
+* Complete date plus hours and minutes: `YYYY-MM-DDThh:mmTZD` (eg 1997-07-16T19:20+01:00)
+* Complete date plus hours, minutes and seconds: `YYYY-MM-DDThh:mm:ssTZD` (eg 1997-07-16T19:20:30+01:00)
+* Complete date plus hours, minutes, seconds and a decimal fraction of a second: `YYYY-MM-DDThh:mm:ss.sTZD` (eg 1997-07-16T19:20:30.45+01:00)
+
+where:
+
+* `YYYY` = four-digit year
+* `MM`   = two-digit month (01=January, etc.)
+* `DD`   = two-digit day of month (01 through 31)
+* `hh`   = two digits of hour (00 through 23) (am/pm NOT allowed)
+* `mm`   = two digits of minute (00 through 59)
+* `ss`   = two digits of second (00 through 59)
+* `s`    = one or more digits representing a decimal fraction of a second
+* `TZD`  = time zone designator (`Z` or +hh:mm or -hh:mm). `Z` is special UTC designator.
 
 ## URIs
 

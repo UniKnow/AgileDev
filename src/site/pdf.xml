@@ -21,6 +21,7 @@
             <item name="Intention revealing interfaces"
                   ref="intention_revealing_interfaces.md"/>
             <item name="Reactive System" ref="reactive-system.md"/>
+            <item name="Semantic versioning" ref="semantic-versioning.md"/>
             <item name="Side effect free functions"
                   ref="side_effect_free_functions.md"/>
         </item>
@@ -31,6 +32,7 @@
                 <item name="Consumer-based testing" ref="consumer-based-testing.md"/>
                 <item name="Unit testing" ref="unit-testing.md"/>
             </item>
+            <item name="Bulkheads" ref="bulkheads.md"/>
             <item name="Caching" ref="cache.md"/>
             <item name="Circuit Breaker" ref="circuit-breaker.md"/>
             <item name="Client Side Discovery" ref="client-side-discovery.md"/>
@@ -73,6 +75,7 @@
             <item name="Service Statelessness" ref="service-statelessness.md"/>
             <item name="Single Responsibility Principle" ref="srp.md"/>
             <item name="System of Record" ref="system-of-record.md" />
+            <item name="Timeouts" ref="timeouts.md"/>
             <item name="Try-Cancel/Confirm" ref="tcc.md"/>
             <item name="UUID" ref="uuid.md" />
             <item name="3rd party registration"
