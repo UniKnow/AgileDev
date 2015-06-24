@@ -4,6 +4,7 @@
 * [Caching patterns and implementation](http://ljs.academicdirect.org/A08/61_76.pdf)
 * [Enterprise Integration Patterns](http://www.enterpriseintegrationpatterns.com/index.html)
 * [Eureka](https://github.com/Netflix/eureka)
+* [Javadoc coding standards](http://blog.joda.org/2012/11/javadoc-coding-standards.html)
 * [Microservice patterns](http://microservices.io/patterns/index.html)
 * [Performance Anti-Pattern: Pre-Loading Caches on Startup](http://www.thedwick.com/2010/06/performance-anti-pattern-pre-loading-caches-on-startup/)
 * [Reactive System Manifesto](http://www.reactivemanifesto.org/)

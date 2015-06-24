@@ -19,6 +19,7 @@
 
         <menu name="Documentation">
             <item name="Branching Models" href="branchingModels.html"/>
+            <item name="Javadoc guidelines" href="javadoc-standards.html"/>
 
             <item name="Software Design Principles" href="software-design-principles.md">
                 <!--<item name="Making behavior obvious" collapse="false">-->
