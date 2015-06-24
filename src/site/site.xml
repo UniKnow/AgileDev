@@ -23,7 +23,8 @@
             <item name="Software Design Principles" href="software-design-principles.md">
                 <!--<item name="Making behavior obvious" collapse="false">-->
                 <item name="Behavior Driven Development" href="bdd.html"/>
-                <item name="Defensive Programming" ref="defensive-programming.md"/>
+                <item name="Code Reviews" href="code-reviews.html"/>
+                <item name="Defensive Programming" href="defensive-programming.html"/>
                 <item name="Design by Contract" href="dbc.html"/>
                 <item name="Intention revealing interfaces" href="intention_revealing_interfaces.html"/>
                 <item name="Reactive System" href="reactive-system.html"/>
@@ -37,6 +38,7 @@
                     <item name="Consumer-based testing" href="consumer-based-testing.html"/>
                     <item name="Unit testing" ref="unit-testing.html"/>
                 </item>
+                <item name="Builder" href="builder.html"/>
                 <item name="Bulkheads" href="bulkheads.html"/>
                 <item name="Caching" href="cache.html"/>
                 <item name="Circuit Breaker" href="circuit-breaker.html"/>

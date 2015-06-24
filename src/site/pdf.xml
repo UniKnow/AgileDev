@@ -16,6 +16,7 @@
               ref="software-design-principles.md">
             <!--<item name="Making behavior obvious" collapse="false">-->
             <item name="Behavior Driven Development" ref="bdd.md"/>
+            <item name="Code Reviews" ref="code-reviews.md"/>
             <item name="Defensive Programming" ref="defensive-programming.md"/>
             <item name="Design by Contract" ref="dbc.md"/>
             <item name="Intention revealing interfaces"
@@ -32,6 +33,7 @@
                 <item name="Consumer-based testing" ref="consumer-based-testing.md"/>
                 <item name="Unit testing" ref="unit-testing.md"/>
             </item>
+            <item name="Builder" ref="builder.md"/>
             <item name="Bulkheads" ref="bulkheads.md"/>
             <item name="Caching" ref="cache.md"/>
             <item name="Circuit Breaker" ref="circuit-breaker.md"/>
