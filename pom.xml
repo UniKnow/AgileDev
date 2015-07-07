@@ -465,6 +465,17 @@
                         <goals>
                             <goal>copy-resources</goal>
                         </goals>
+                        <configuration>
+                            <outputDirectory>${basedir}/target/pdf/images</outputDirectory>
+                            <resources>
+                                <resource>
+                                    <directory>src/site/resources/ddd/images</directory>
+                                </resource>
+                                <resource>
+                                    <directory>src/site/resources/eip/images</directory>
+                                </resource>
+                            </resources>
+                        </configuration>
                     </execution>
                 </executions>
             </plugin>

@@ -5,6 +5,7 @@
 * DBC - Design By Contract
 * DIP - Dependency Inversion Principle
 * DTO - Data Transfer Object
+* LOC - Lines Of Code
 * LFU - Least Frequently Used
 * LRU - Least Recently USed
 * REST - REpresentational State Transfer
