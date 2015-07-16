@@ -17,14 +17,14 @@ Each service has its own storage in order to decouple from other services. When 
 
 Following this approach has a number of benefits:
 
-* Each service is relatively small
+* Each service is relatively small. Defining small is subjective but one of the rule of thumbs is that the microservice should be small enough to be owned by a small agile development team, re-writable within 1 or 2 sprint, and the complexity does not require refactoring or further division into another microservice. Advantage of such small microservices are:
     * Easier for developers to understand.
     * The web container starts fast, which makes developers more productive and speed up deployments.
 * Each service can be deployed independently of other services; e.g. easier to deploy new versions of services frequently.
 * Easier to scale development. It enables to organize the development effort around multiple teams. Each team can develop, deploy, and scale their service independently of all other teams.
 * Improved fault isolation.
 * Each service can be developed and deployed independently.
-* Eliminates long term commitment to a technology stack.
+* Eliminates long term commitment to a technology stack. Each microservice has its own server, and network & hosting environment. Also the business logic, data model and the service interface(s) (API/UI) are all part of the entire system.
 
 There are however also a number of drawbacks:
 
@@ -54,6 +54,29 @@ There isn't a really straight forward approach regarding the naming of microserv
 * *Name microservice to functionality it performs* - Certain microservices are taking care of certain processes and therefore the use of verbs in the service name is common. For example a service that orchestrates the device registration could be called `RegisterDevice`.
 
 Naming conventions may seem trivial at first, but as the number of microservices grow, so will the potential to reuse. In larger organizations, this means that more and more architects, analysts, and developers are discovering and then incorporating foreign services within their solution designs. The effort required to establish a consistent level of clarity across all microservices pays off quickly when interoperability and reuse opportunities are more easily recognized and seized.
+
+## Non-functional requirements
+
+Non-functional requirements are important decision makers while designing micro services. The success of a system is largely dependent on its availability, scalability, performance, usability and flexibility.
+
+### Availability
+The golden rule for availability says, anticipate failures and design accordingly so that the system will be available for 99.999%. It means that the system can only go down for 5.5 minutes a year. The cluster model is used to support such high availability (having group of services run in active-active mode or active-standby model).
+
+So while designing microservices, it must be designed for appropriate clustering and high availability model. The basic properties of microservices such as stateless, independent and full stack will help to run multiple instances in parallel.
+
+### Scalability
+Microservices must be scalable both horizontally and vertically. Being horizontally scalable means we can have multiple instances of the microservices to increase the performance of the system. The design of the microservices must support horizontal scaling (scale-out)
+
+Also scaling vertically should be possible. If a microservice is hosted on a medium capacity and moved to a higher capacity the performance of the service should scale accordingly. Similarly downsizing the system capacity must be possible.
+
+### Performance
+Performance is measured by throughput vs response time (TPS - Transactions Per Second). The performance requirements must be available in the beginning of the design phase itself. There are technologies and design choices that will affect the performance and to avoid rework at a later stage these should be known.
+
+### Usability
+Usability aspects of the design focus on hiding the internal design, architecture, technology and other complexities to the end user of the system. Most of the time, microservices expose APIs to the end user, so the APIs must be designed in a normalized way so that it is easy to achieve the required functionality with a minimal number of API calls.
+
+### Flexibility
+Flexibility measures the adaptability to change. In the microservices eco-system, where each microservice is owned (possibly) by different teams and developed in agile methodology changes will happen faster than any other system. The microservices may not inter-operate if they don't adapt or accommodate to changes in other systems. So there must be a proper mechanism in place to publish changes to API, functional changes, etc.
 
 ## TODO
 

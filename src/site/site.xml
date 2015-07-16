@@ -68,6 +68,11 @@
                 <item name="Exception Handling" href="exception-handling.html"/>
                 <item name="Microservice Architecture" href="microservice-architecture.html"/>
                 <item name="Mocks" ref="mocks.md"/>
+                <item name="Monitoring" href="monitoring.html">
+                    <item name="Canary endpoint monitoring" href="canary-endpoint-monitoring.html"/>
+                    <item name="Log aggregation" href="log-aggregation.html"/>
+                    <item name="Synthetic monitoring" href="synthetic-monitoring.html"/>
+                </item>
                 <item name="Monolithic Architecture" href="monolithic-architecture.html"/>
                 <item name="Self registration" href="self-registration.html"/>
                 <item name="Server Side Discovery" href="server-side-discovery.html"/>

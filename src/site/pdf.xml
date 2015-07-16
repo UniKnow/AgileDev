@@ -10,7 +10,9 @@
 
     <toc name="Table of Contents">
         <item name="Branching Models" ref="branchingModels.md"/>
+        <!-- <item name="Database schema versioning" ref="db-schema-versioning.md"/>-->
         <item name="Javadoc guidelines" ref="javadoc-standards.md"/>
+        <item name="Release notes" ref="release-notes.md"/>
 
         <item name="Software Designing Principles"
               ref="software-design-principles.md">
@@ -68,6 +70,11 @@
             <item name="Microservice Architecture"
                   ref="microservice-architecture.md"/>
             <item name="Mocks" ref="mocks.md"/>
+            <item name="Monitoring" ref="monitoring.md">
+                <item name="Canary endpoint monitoring" ref="canary-endpoint-monitoring.md"/>
+                <item name="Log aggregation" ref="log-aggregation.md"/>
+                <item name="Synthetic monitoring" ref="synthetic-monitoring.md"/>
+            </item>
             <item name="Monolithic Architecture"
                   ref="monolithic-architecture.md"/>
             <item name="Self registration" ref="self-registration.md"/>

@@ -11,5 +11,6 @@
 * REST - REpresentational State Transfer
 * SRP - Single Responsible Principle
 * TCC - Try-Cancel/Confirm
+* TPS - Transaction Per Second
 * UUID - Unique Universal IDentifier
 * VV - Version Vector

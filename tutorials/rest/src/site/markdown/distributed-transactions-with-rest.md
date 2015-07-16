@@ -67,6 +67,9 @@ Recovery is needed in two typically cases:
 * The coordinator crashed - once it comes back up, it retries the remaining URIs for which it was confirming the transaction.
 * Any participant crashed or becomes unreachable due to network errors. In this case the coordinator simply retries confirmation requests.
 
+## See also:
+
+* [Narayana](http://narayana.io/index.html) - Transaction toolkit which provides support for REST transactions
 
 
 
