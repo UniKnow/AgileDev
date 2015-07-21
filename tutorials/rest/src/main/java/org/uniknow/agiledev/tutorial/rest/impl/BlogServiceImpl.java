@@ -39,6 +39,7 @@
  */
 package org.uniknow.agiledev.tutorial.rest.impl;
 
+import org.jboss.narayana.compensations.api.TxCompensate;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.uniknow.agiledev.tutorial.rest.api.BlogService;
@@ -70,6 +71,7 @@ public class BlogServiceImpl implements BlogService {
     }
 
     @Override
+    @TxCompensate(RevertPost.class)
     public int addPost(MyPost post) {
         int id = ID_GENERATOR.nextInt(1000);
         while (posts.containsKey(id)) {
@@ -78,11 +80,6 @@ public class BlogServiceImpl implements BlogService {
         post.setId(id);
         posts.put(id, post);
         return id;
-    }
-
-    @Override
-    public boolean updatePost(int id, MyPost post) {
-        return posts.put(id, post) != null;
     }
 
     @Override

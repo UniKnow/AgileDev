@@ -7,4 +7,5 @@
 * HTTP - HyperText Transfer Protocol
 * JSON - Java Script Object Notation
 * REST - Representational State Transfer
+* TCC - Try Cancel/Confirm
 * URI - Uniform Resource Identifier

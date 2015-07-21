@@ -17,6 +17,7 @@
 
     <properties>
         <dozer.version>5.5.1</dozer.version>
+        <narayana.version>5.2.0.Final</narayana.version>
         <resteasy.version>3.0.8.Final</resteasy.version>
         <!--<spring.version>3.0.3.RELEASE</spring.version>-->
     </properties>
@@ -67,6 +68,33 @@
             <artifactId>spring-aspects</artifactId>
         </dependency>
 
+        <!-- Dependencies to use Try Cancel/Confirm -->
+        <dependency>
+            <groupId>org.jboss.narayana.xts</groupId>
+            <artifactId>jbossxts</artifactId>
+            <classifier>api</classifier>
+            <version>${narayana.version}</version>
+            <scope>provided</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.jboss.logging</groupId>
+                    <artifactId>jboss-logging-spi</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+        <dependency>
+            <groupId>org.jboss.narayana.compensations</groupId>
+            <artifactId>compensations</artifactId>
+            <version>${narayana.version}</version>
+            <scope>provided</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.jboss.logging</groupId>
+                    <artifactId>jboss-logging-spi</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
 
         <dependency>
             <groupId>org.jboss.resteasy</groupId>

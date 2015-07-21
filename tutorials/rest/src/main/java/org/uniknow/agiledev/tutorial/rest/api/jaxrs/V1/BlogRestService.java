@@ -65,10 +65,6 @@ public interface BlogRestService {
     @Path("/post")
     Response addPost(Post post);
 
-    @PUT
-    @Path("/post/{id}")
-    Response updatePost(@PathParam("id") int id, Post post);
-
     @DELETE
     @Path("/post/{id}")
     Response deletePost(@PathParam("id") int id);

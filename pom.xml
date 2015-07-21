@@ -443,42 +443,42 @@
             <!--
             Plugin to create PDF
             -->
-            <plugin>
-                <artifactId>maven-resources-plugin</artifactId>
-                <version>2.7</version>
-                <configuration>
-                    <outputDirectory>${basedir}/target/pdf/images</outputDirectory>
-                    <resources>
-                        <resource>
-                            <directory>src/site/resources/ddd/images</directory>
-                        </resource>
-                        <resource>
-                            <directory>src/site/resources/eip/images</directory>
-                        </resource>
-                    </resources>
-                </configuration>
-                <executions>
-                    <execution>
-                        <!-- Copy images of DDD and EIP to common images folder -->
-                        <id>copy-images</id>
-                        <phase>site</phase>
-                        <goals>
-                            <goal>copy-resources</goal>
-                        </goals>
-                        <configuration>
-                            <outputDirectory>${basedir}/target/pdf/images</outputDirectory>
-                            <resources>
-                                <resource>
-                                    <directory>src/site/resources/ddd/images</directory>
-                                </resource>
-                                <resource>
-                                    <directory>src/site/resources/eip/images</directory>
-                                </resource>
-                            </resources>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
+            <!--<plugin>-->
+                <!--<artifactId>maven-resources-plugin</artifactId>-->
+                <!--<version>2.7</version>-->
+                <!--<configuration>-->
+                    <!--<outputDirectory>${basedir}/target/pdf/images</outputDirectory>-->
+                    <!--<resources>-->
+                        <!--<resource>-->
+                            <!--<directory>src/site/resources/ddd/images</directory>-->
+                        <!--</resource>-->
+                        <!--<resource>-->
+                            <!--<directory>src/site/resources/eip/images</directory>-->
+                        <!--</resource>-->
+                    <!--</resources>-->
+                <!--</configuration>-->
+                <!--<executions>-->
+                    <!--<execution>-->
+                        <!--&lt;!&ndash; Copy images of DDD and EIP to common images folder &ndash;&gt;-->
+                        <!--<id>copy-images</id>-->
+                        <!--<phase>site</phase>-->
+                        <!--<goals>-->
+                            <!--<goal>copy-resources</goal>-->
+                        <!--</goals>-->
+                        <!--<configuration>-->
+                            <!--<outputDirectory>${basedir}/target/pdf/images</outputDirectory>-->
+                            <!--<resources>-->
+                                <!--<resource>-->
+                                    <!--<directory>src/site/resources/ddd/images</directory>-->
+                                <!--</resource>-->
+                                <!--<resource>-->
+                                    <!--<directory>src/site/resources/eip/images</directory>-->
+                                <!--</resource>-->
+                            <!--</resources>-->
+                        <!--</configuration>-->
+                    <!--</execution>-->
+                <!--</executions>-->
+            <!--</plugin>-->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-pdf-plugin</artifactId>

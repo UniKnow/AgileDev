@@ -39,6 +39,7 @@
  */
 package org.uniknow.agiledev.tutorial.rest.api;
 
+import org.jboss.narayana.compensations.api.Compensatable;
 import org.uniknow.agiledev.tutorial.rest.api.domain.MyPost;
 
 import java.util.List;
@@ -72,18 +73,8 @@ public interface BlogService {
      * 
      * @return id of post
      */
+    @Compensatable
     int addPost(MyPost post);
-
-    /**
-     * Updates post with specified ID.
-     * 
-     * @param id
-     *            ID of post we want to update
-     * @param post
-     *            updated post
-     * @return true if post updated successfully; false otherwise
-     */
-    boolean updatePost(int id, MyPost post);
 
     /**
      * Removes post with specified ID.

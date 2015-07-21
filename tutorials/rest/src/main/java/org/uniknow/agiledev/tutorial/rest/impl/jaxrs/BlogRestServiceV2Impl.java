@@ -100,16 +100,6 @@ public class BlogRestServiceV2Impl implements BlogRestService {
     }
 
     @Override
-    public Response updatePost(@PathParam("id") int id, Post post) {
-        boolean success = service
-            .updatePost(id, mapper.map(post, MyPost.class));
-        if (!success) {
-            throw new WebApplicationException(Response.Status.NOT_MODIFIED);
-        }
-        return Response.ok().build();
-    }
-
-    @Override
     public Response deletePost(@PathParam("id") int id) {
         boolean success = service.deletePost(id);
         if (!success) {
