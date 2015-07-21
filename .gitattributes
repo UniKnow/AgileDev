@@ -5,7 +5,7 @@ core.autocrlf=true
 
 # Autodetect text files and normalise their line endings 
 # when checked in to your repository
-* text=auto
+* text=crlf
 
 # Denote files that are binary and should not be modified.
 *.png binary
