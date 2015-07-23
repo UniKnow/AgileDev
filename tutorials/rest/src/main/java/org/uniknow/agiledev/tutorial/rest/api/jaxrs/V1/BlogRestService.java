@@ -39,6 +39,9 @@
  */
 package org.uniknow.agiledev.tutorial.rest.api.jaxrs.V1;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+
 import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
 import java.util.List;
@@ -46,6 +49,7 @@ import java.util.List;
 /**
  * Version 1 of Blog Rest Service
  */
+@Api(value = "/blog", description = "Version 1 of Blog REST service")
 @Path("/blog")
 @Consumes({ "application/agiledev.blog.v1+xml",
         "application/agiledev.blog.v1+json" })
@@ -55,17 +59,21 @@ public interface BlogRestService {
 
     @GET
     @Path("/posts")
+    @ApiOperation("Returns all blog messages")
     List<Post> getPosts();
 
     @GET
     @Path("/post/{id}")
+    @ApiOperation("Returns specified blog message")
     Post getPost(@PathParam("id") int id);
 
     @POST
     @Path("/post")
+    @ApiOperation("Adds blog message")
     Response addPost(Post post);
 
     @DELETE
     @Path("/post/{id}")
+    @ApiOperation("Removes blog message")
     Response deletePost(@PathParam("id") int id);
 }

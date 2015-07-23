@@ -37,39 +37,37 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
-package org.uniknow.agiledev.tutorial.rest.api.jaxrs.V2;
+package org.uniknow.spring.compensatable.impl;
 
-import io.swagger.annotations.Api;
+import org.springframework.transaction.TransactionDefinition;
+import org.springframework.transaction.support.DefaultTransactionDefinition;
+import org.uniknow.spring.compensatable.api.Compensatable;
+import org.uniknow.spring.compensatable.api.CompensationHandler;
 
-import javax.ws.rs.*;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
-import java.util.List;
+import java.io.Serializable;
 
 /**
- * Version 2 of Blog Rest Service
+ * Transaction Definition specific for Compensatable transactions. Instances of
+ * this class will be used to instantiate new transactions.
  */
-@Api(value = "/blog", description = "Version 2 of Blog REST service")
-@Path("/blog")
-@Consumes({ MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON,
-        "application/agiledev.blog.v2+xml", "application/agiledev.blog.v2+json" })
-@Produces({ MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON,
-        "application/agiledev.blog.v2+xml", "application/agiledev.blog.v2+json" })
-public interface BlogRestService {
+final class CompensatableTransactionDefinition extends
+    DefaultTransactionDefinition {
 
-    @GET
-    @Path("/posts")
-    List<Post> getPosts();
+    private final Class<? extends CompensationHandler> handler;
 
-    @GET
-    @Path("/post/{id}")
-    Post getPost(@PathParam("id") int id);
+    CompensatableTransactionDefinition(Compensatable compensatable) {
+        super();
+        handler = compensatable.compensateHandler();
+    }
 
-    @POST
-    @Path("/post")
-    Response addPost(Post post);
+    /**
+     * Returns CompensationHandler class by which compensatable transactions can
+     * be compensated.
+     * 
+     * @return CompensationHandler class
+     */
+    Class<? extends CompensationHandler> getCompensationHandler() {
+        return handler;
+    }
 
-    @DELETE
-    @Path("/post/{id}")
-    Response deletePost(@PathParam("id") int id);
 }

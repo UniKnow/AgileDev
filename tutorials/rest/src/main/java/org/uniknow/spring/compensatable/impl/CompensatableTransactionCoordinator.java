@@ -37,39 +37,19 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
-package org.uniknow.agiledev.tutorial.rest.api.jaxrs.V2;
-
-import io.swagger.annotations.Api;
-
-import javax.ws.rs.*;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
-import java.util.List;
+package org.uniknow.spring.compensatable.impl;
 
 /**
- * Version 2 of Blog Rest Service
+ * Class responsible for creating new transactions and keeping track of their
+ * status.
+ * 
+ * TODO: implement methods to create, remove, and join other compensatable
+ * transactions.
  */
-@Api(value = "/blog", description = "Version 2 of Blog REST service")
-@Path("/blog")
-@Consumes({ MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON,
-        "application/agiledev.blog.v2+xml", "application/agiledev.blog.v2+json" })
-@Produces({ MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON,
-        "application/agiledev.blog.v2+xml", "application/agiledev.blog.v2+json" })
-public interface BlogRestService {
+import org.springframework.stereotype.Component;
 
-    @GET
-    @Path("/posts")
-    List<Post> getPosts();
+@Component
+class CompensatableTransactionCoordinator {
 
-    @GET
-    @Path("/post/{id}")
-    Post getPost(@PathParam("id") int id);
-
-    @POST
-    @Path("/post")
-    Response addPost(Post post);
-
-    @DELETE
-    @Path("/post/{id}")
-    Response deletePost(@PathParam("id") int id);
+//TransactionSynchronizationManager of Spring to
 }

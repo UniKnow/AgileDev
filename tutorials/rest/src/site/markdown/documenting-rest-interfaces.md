@@ -19,6 +19,10 @@ To generate static documentation for the REST interfaces one could use swagger i
         </plugins>
     </build>
 
+## JAXRS
+
+Annotate classes with `@Api` and the methods you want to expose with `@ApiOperation`.
+
 ## Spring MVC
 
 TODO:

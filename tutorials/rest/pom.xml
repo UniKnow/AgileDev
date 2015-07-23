@@ -1,4 +1,6 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
@@ -17,12 +19,20 @@
 
     <properties>
         <dozer.version>5.5.1</dozer.version>
-        <narayana.version>5.2.0.Final</narayana.version>
         <resteasy.version>3.0.8.Final</resteasy.version>
+        <swagger.version>1.5.0</swagger.version>
+        <swagger-maven-plugin.version>3.1.0</swagger-maven-plugin.version>
         <!--<spring.version>3.0.3.RELEASE</spring.version>-->
     </properties>
 
     <dependencies>
+        <!-- Generating REST API documentation -->
+        <dependency>
+            <groupId>io.swagger</groupId>
+            <artifactId>swagger-annotations</artifactId>
+            <version>${swagger.version}</version>
+        </dependency>
+
         <!-- Design by Contract dependencies -->
         <dependency>
             <groupId>org.uniknow.agiledev</groupId>
@@ -67,6 +77,10 @@
             <groupId>org.springframework</groupId>
             <artifactId>spring-aspects</artifactId>
         </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-tx</artifactId>
+        </dependency>
 
         <!-- Dependencies to use Try Cancel/Confirm -->
         <dependency>
@@ -82,12 +96,11 @@
                 </exclusion>
             </exclusions>
         </dependency>
-
         <dependency>
             <groupId>org.jboss.narayana.compensations</groupId>
             <artifactId>compensations</artifactId>
             <version>${narayana.version}</version>
-            <scope>provided</scope>
+            <!--<scope>provided</scope>-->
             <exclusions>
                 <exclusion>
                     <groupId>org.jboss.logging</groupId>
@@ -95,6 +108,36 @@
                 </exclusion>
             </exclusions>
         </dependency>
+        <dependency>
+            <groupId>org.jboss.narayana.jta</groupId>
+            <artifactId>narayana-jta</artifactId>
+            <version>${narayana.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>javax.transaction</groupId>
+            <artifactId>jta</artifactId>
+            <version>${jta.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.uniknow.tomcat</groupId>
+            <artifactId>narayana-tomcat-listener</artifactId>
+            <version>${project.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <!--<dependency>-->
+            <!--<groupId>org.uniknow.spring</groupId>-->
+            <!--<artifactId>spring-tcc-transactions</artifactId>-->
+            <!--<version>${project.version}</version>-->
+        <!--</dependency>-->
+        <dependency>
+            <groupId>org.jboss.logging</groupId>
+            <artifactId>jboss-logging</artifactId>
+            <version>${jboss-logging.version}</version>
+            <scope>provided</scope>
+        </dependency>
+
 
         <dependency>
             <groupId>org.jboss.resteasy</groupId>
@@ -117,6 +160,45 @@
 
     <build>
         <plugins>
+
+            <plugin>
+                <groupId>com.github.kongchen</groupId>
+                <artifactId>swagger-maven-plugin</artifactId>
+                <version>${swagger-maven-plugin.version}</version>
+                <configuration>
+                    <apiSources>
+                        <apiSource>
+                            <locations>
+                                org.uniknow.agiledev.tutorial.rest.api.jaxrs.V1
+                            </locations>
+                            <schemes>http</schemes>
+                            <host>[HOST]</host>
+                            <info>
+                                <title>API Blog service</title>
+                                <version>${project.version}</version>
+                            </info>
+                            <templatePath>
+                                ${basedir}/src/swagger/templates/documentation.html.hbs
+                            </templatePath>
+                            <outputPath>
+                                ${project.build.directory}/generated-swagger/API.html
+                            </outputPath>
+                            <swaggerDirectory>
+                                ${project.build.directory}/generated-swagger/swagger-ui
+                            </swaggerDirectory>
+                        </apiSource>
+                    </apiSources>
+                </configuration>
+                <executions>
+                    <execution>
+                        <phase>pre-site</phase>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-war-plugin</artifactId>
@@ -124,7 +206,7 @@
             </plugin>
 
             <!--
-            Plugin to initiate instance of MPV server
+            Plugin to initiate instance of tomcat server
             -->
             <plugin>
                 <groupId>org.codehaus.cargo</groupId>
@@ -137,7 +219,7 @@
                         <containerId>tomcat7x</containerId>
                         <zipUrlInstaller>
                             <url>
-                                http://apache.mirror1.spango.com/tomcat/tomcat-7/v7.0.55/bin/apache-tomcat-7.0.55.zip
+                                http://apache.mirror1.spango.com/tomcat/tomcat-7/v${tomcat.version}/bin/apache-tomcat-${tomcat.version}.zip
                             </url>
                             <downloadDir>
                                 ${project.build.directory}/downloads
@@ -148,6 +230,25 @@
                         </zipUrlInstaller>
                         <type>installed</type>
 
+                        <dependencies>
+                            <dependency>
+                                <groupId>org.jboss.narayana.jta</groupId>
+                                <artifactId>narayana-jta</artifactId>
+                            </dependency>
+                            <dependency>
+                                <groupId>org.uniknow.tomcat</groupId>
+                                <artifactId>narayana-tomcat-listener
+                                </artifactId>
+                            </dependency>
+                            <dependency>
+                                <groupId>javax.transaction</groupId>
+                                <artifactId>jta</artifactId>
+                            </dependency>
+                            <dependency>
+                                <groupId>org.jboss.logging</groupId>
+                                <artifactId>jboss-logging</artifactId>
+                            </dependency>
+                        </dependencies>
                         <!--<log>${project.build.directory}/logs/tomcat.log</log>-->
                         <!--<output>${project.build.directory}/logs/tomcat.out-->
                         <!--</output>-->
@@ -163,6 +264,20 @@
                             <cargo.rmi.port>8206</cargo.rmi.port>
                             <cargo.tomcat.ajp.port>8010</cargo.tomcat.ajp.port>
                         </properties>
+                        <files>
+                            <copy>
+                                <file>${basedir}/src/config/server.xml</file>
+                                <todir>conf</todir>
+                                <configfile>true</configfile>
+                                <overwrite>true</overwrite>
+                            </copy>
+                            <copy>
+                                <file>${basedir}/src/config/context.xml</file>
+                                <todir>conf</todir>
+                                <configfile>true</configfile>
+                                <overwrite>true</overwrite>
+                            </copy>
+                        </files>
                     </configuration>
 
                     <deployables>

@@ -44,6 +44,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.uniknow.agiledev.tutorial.rest.api.BlogService;
 import org.uniknow.agiledev.tutorial.rest.api.domain.MyPost;
+import org.uniknow.spring.compensatable.api.Compensatable;
 
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
@@ -71,15 +72,25 @@ public class BlogServiceImpl implements BlogService {
     }
 
     @Override
+    @Compensatable
     @TxCompensate(RevertPost.class)
     public int addPost(MyPost post) {
-        int id = ID_GENERATOR.nextInt(1000);
-        while (posts.containsKey(id)) {
+        int id = post.getId();
+        if (id == -1) {
             id = ID_GENERATOR.nextInt(1000);
+            while (posts.containsKey(id)) {
+                id = ID_GENERATOR.nextInt(1000);
+            }
         }
-        post.setId(id);
-        posts.put(id, post);
-        return id;
+
+        System.out.println("adding post");
+        if (posts.containsKey(id)) {
+            throw new RuntimeException("Blog with id " + id + " already exist.");
+        } else {
+            post.setId(id);
+            posts.put(id, post);
+            return id;
+        }
     }
 
     @Override

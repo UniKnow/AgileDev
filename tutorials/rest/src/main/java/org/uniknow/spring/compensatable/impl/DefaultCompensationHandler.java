@@ -37,39 +37,21 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
-package org.uniknow.agiledev.tutorial.rest.api.jaxrs.V2;
+package org.uniknow.spring.compensatable.impl;
 
-import io.swagger.annotations.Api;
-
-import javax.ws.rs.*;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
-import java.util.List;
+import org.springframework.stereotype.Component;
+import org.uniknow.spring.compensatable.api.CompensationHandler;
 
 /**
- * Version 2 of Blog Rest Service
+ * Default implementation for compensation handler. This handler won't do
+ * anything.
  */
-@Api(value = "/blog", description = "Version 2 of Blog REST service")
-@Path("/blog")
-@Consumes({ MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON,
-        "application/agiledev.blog.v2+xml", "application/agiledev.blog.v2+json" })
-@Produces({ MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON,
-        "application/agiledev.blog.v2+xml", "application/agiledev.blog.v2+json" })
-public interface BlogRestService {
+@Component
+public class DefaultCompensationHandler implements CompensationHandler {
 
-    @GET
-    @Path("/posts")
-    List<Post> getPosts();
-
-    @GET
-    @Path("/post/{id}")
-    Post getPost(@PathParam("id") int id);
-
-    @POST
-    @Path("/post")
-    Response addPost(Post post);
-
-    @DELETE
-    @Path("/post/{id}")
-    Response deletePost(@PathParam("id") int id);
+    @Override
+    public void compensate() {
+        System.out
+            .println("Compensate of default Compensation handler is invoked");
+    }
 }

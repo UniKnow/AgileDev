@@ -49,11 +49,12 @@ import javax.inject.Inject;
  */
 public class RevertPost implements CompensationHandler {
 
-    @Inject
-    MyPost post;
+    // @Inject
+    // MyPost post;
 
     @Override
     public void compensate() {
-
+        System.out.println("Reverting post");
+        throw new RuntimeException("Error during compensate");
     }
 }

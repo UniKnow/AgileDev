@@ -50,7 +50,7 @@ import java.util.List;
 @CompensationScoped
 public class MyPost {
 
-    private int id;
+    private int id = -1;
     private String title;
     private Date datePublished;
     private List<String> tags;

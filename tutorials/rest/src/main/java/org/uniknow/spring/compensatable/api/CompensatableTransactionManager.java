@@ -37,39 +37,33 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
-package org.uniknow.agiledev.tutorial.rest.api.jaxrs.V2;
+package org.uniknow.spring.compensatable.api;
 
-import io.swagger.annotations.Api;
-
-import javax.ws.rs.*;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
-import java.util.List;
+import org.springframework.stereotype.Component;
+import org.springframework.transaction.PlatformTransactionManager;
+import org.springframework.transaction.TransactionException;
 
 /**
- * Version 2 of Blog Rest Service
+ * Manages compensatable transactions
  */
-@Api(value = "/blog", description = "Version 2 of Blog REST service")
-@Path("/blog")
-@Consumes({ MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON,
-        "application/agiledev.blog.v2+xml", "application/agiledev.blog.v2+json" })
-@Produces({ MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON,
-        "application/agiledev.blog.v2+xml", "application/agiledev.blog.v2+json" })
-public interface BlogRestService {
+@Component
+public interface CompensatableTransactionManager extends
+    PlatformTransactionManager {
 
-    @GET
-    @Path("/posts")
-    List<Post> getPosts();
+    // /**
+    // * Commit the given transaction with regard to its status
+    // *
+    // * @throws org.springframework.transaction.TransactionException in case of
+    // system errors.
+    // */
+    // void commit() throws TransactionException;
+    //
+    // /**
+    // * Performs a compensation for a given transaction.
+    // *
+    // * @throws org.springframework.transaction.TransactionException in case of
+    // system errors.
+    // */
+    // void compensate() throws TransactionException;
 
-    @GET
-    @Path("/post/{id}")
-    Post getPost(@PathParam("id") int id);
-
-    @POST
-    @Path("/post")
-    Response addPost(Post post);
-
-    @DELETE
-    @Path("/post/{id}")
-    Response deletePost(@PathParam("id") int id);
 }

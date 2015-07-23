@@ -73,7 +73,6 @@ public interface BlogService {
      * 
      * @return id of post
      */
-    @Compensatable
     int addPost(MyPost post);
 
     /**

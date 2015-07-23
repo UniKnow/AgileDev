@@ -37,39 +37,40 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
-package org.uniknow.agiledev.tutorial.rest.api.jaxrs.V2;
+package org.uniknow.spring.compensatable.impl;
 
-import io.swagger.annotations.Api;
+import org.springframework.transaction.support.AbstractTransactionStatus;
+import org.springframework.transaction.support.DefaultTransactionDefinition;
+import org.uniknow.spring.compensatable.api.CompensationHandler;
 
-import javax.ws.rs.*;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
-import java.util.List;
+import java.util.UUID;
 
 /**
- * Version 2 of Blog Rest Service
+ * Created by mase on 7/23/2015.
  */
-@Api(value = "/blog", description = "Version 2 of Blog REST service")
-@Path("/blog")
-@Consumes({ MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON,
-        "application/agiledev.blog.v2+xml", "application/agiledev.blog.v2+json" })
-@Produces({ MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON,
-        "application/agiledev.blog.v2+xml", "application/agiledev.blog.v2+json" })
-public interface BlogRestService {
+public class CompensatableTransaction {
 
-    @GET
-    @Path("/posts")
-    List<Post> getPosts();
+    private final UUID id = UUID.randomUUID();
 
-    @GET
-    @Path("/post/{id}")
-    Post getPost(@PathParam("id") int id);
+    private Class<? extends CompensationHandler> compensationHandler;
 
-    @POST
-    @Path("/post")
-    Response addPost(Post post);
+    /**
+     * Set CompensationHandler by which this transaction can be compensated
+     */
+    void setCompensationHandler(Class<? extends CompensationHandler> handler) {
+        if (handler == null) {
+            throw new IllegalArgumentException(
+                "CompensationHandler may not be null");
+        } else {
+            this.compensationHandler = handler;
+        }
+    }
 
-    @DELETE
-    @Path("/post/{id}")
-    Response deletePost(@PathParam("id") int id);
+    /**
+     * Returns CompensationHandler by which this transaction can be compensated.
+     */
+    Class<? extends CompensationHandler> getCompensationHandler() {
+        return compensationHandler;
+    }
+
 }
