@@ -51,5 +51,5 @@ import org.springframework.stereotype.Component;
 @Component
 class CompensatableTransactionCoordinator {
 
-//TransactionSynchronizationManager of Spring to
+    // TransactionSynchronizationManager of Spring to
 }
