@@ -37,27 +37,16 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
-package org.uniknow.spring.compensatable.impl;
+package org.uniknow.spring.tcc.impl;
 
-import org.aopalliance.aop.Advice;
-import org.aopalliance.intercept.MethodInterceptor;
-import org.aopalliance.intercept.MethodInvocation;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
-import org.aspectj.lang.annotation.Before;
-import org.aspectj.lang.reflect.MethodSignature;
-import org.springframework.aop.Pointcut;
-import org.springframework.aop.support.AbstractPointcutAdvisor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.TransactionStatus;
-import org.springframework.transaction.support.DefaultTransactionDefinition;
-import org.uniknow.spring.compensatable.api.Compensatable;
-import org.uniknow.spring.compensatable.api.CompensatableTransactionManager;
-
-import java.lang.reflect.Method;
-import java.util.logging.Logger;
+import org.uniknow.spring.tcc.api.Compensatable;
+import org.uniknow.spring.tcc.api.CompensatableTransactionManager;
 
 /**
  * Intercepts methods which are annotated with @Compensatable.

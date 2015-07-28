@@ -111,7 +111,7 @@
         <module>dbc4java</module>
         <module>cucumber-reporting</module>
         <module>cucumber-reporting-example</module>
-        <!--<module>spring-tcc-transactions</module>-->
+        <module>spring-tcc-transactions</module>
         <module>narayana-tomcat-listener</module>
         <module>tutorials/archimate</module>
         <module>tutorials/dbc</module>
