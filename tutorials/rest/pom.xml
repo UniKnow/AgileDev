@@ -81,6 +81,11 @@
             <groupId>org.springframework</groupId>
             <artifactId>spring-tx</artifactId>
         </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-test</artifactId>
+            <scope>test</scope>
+        </dependency>
 
         <!-- Dependencies to use Try Cancel/Confirm -->
         <dependency>
@@ -127,9 +132,9 @@
             <scope>provided</scope>
         </dependency>
         <!--<dependency>-->
-            <!--<groupId>org.uniknow.spring</groupId>-->
-            <!--<artifactId>spring-tcc-transactions</artifactId>-->
-            <!--<version>${project.version}</version>-->
+        <!--<groupId>org.uniknow.spring</groupId>-->
+        <!--<artifactId>spring-tcc-transactions</artifactId>-->
+        <!--<version>${project.version}</version>-->
         <!--</dependency>-->
         <dependency>
             <groupId>org.jboss.logging</groupId>

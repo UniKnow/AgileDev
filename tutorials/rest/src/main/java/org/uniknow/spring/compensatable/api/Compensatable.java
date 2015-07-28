@@ -41,6 +41,7 @@ package org.uniknow.spring.compensatable.api;
 
 import org.springframework.transaction.annotation.Propagation;
 import org.uniknow.spring.compensatable.impl.DefaultCompensationHandler;
+import org.uniknow.spring.compensatable.impl.DefaultConfirmationHandler;
 
 import java.lang.annotation.*;
 
@@ -77,6 +78,12 @@ public @interface Compensatable {
      * invoked to compensate the rolled back action.
      */
     public Class<? extends CompensationHandler> compensateHandler() default DefaultCompensationHandler.class;
+
+    /**
+     * By setting the confirmation handler we specify the class that should be
+     * invoked to confirm the committed action.
+     */
+    public Class<? extends ConfirmationHandler> confirmationHandler() default DefaultConfirmationHandler.class;
 
     /**
      * The cancelOn element can be set to indicate exceptions that must cause

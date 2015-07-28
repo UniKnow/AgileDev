@@ -39,38 +39,165 @@
  */
 package org.uniknow.spring.compensatable.impl;
 
-import org.springframework.transaction.support.AbstractTransactionStatus;
-import org.springframework.transaction.support.DefaultTransactionDefinition;
+import org.springframework.context.ApplicationContext;
 import org.uniknow.spring.compensatable.api.CompensationHandler;
+import org.uniknow.spring.compensatable.api.ConfirmationHandler;
 
+import java.util.List;
 import java.util.UUID;
+import java.util.Vector;
 
 /**
  * Created by mase on 7/23/2015.
  */
-public class CompensatableTransaction {
+public final class CompensatableTransaction {
 
+    /*
+     * Contains context in which the transaction is executed
+     */
+    private final ApplicationContext context;
+
+    /*
+     * Contains initial definition of transaction
+     */
+    private CompensatableTransactionDefinition definition;
+
+    /*
+     * Contains unique identifier of transaction
+     */
     private final UUID id = UUID.randomUUID();
 
+    /*
+     * Contains the state of this transaction
+     */
+    private CompensatableTransactionState state = CompensatableTransactionState.TRY;
+
+    /*
+     * Contains the handler that will be called when compensating this
+     * transaction
+     */
     private Class<? extends CompensationHandler> compensationHandler;
 
-    /**
-     * Set CompensationHandler by which this transaction can be compensated
+    /*
+     * Contains the handler that will be called when confirming this transaction
      */
-    void setCompensationHandler(Class<? extends CompensationHandler> handler) {
-        if (handler == null) {
-            throw new IllegalArgumentException(
-                "CompensationHandler may not be null");
-        } else {
-            this.compensationHandler = handler;
+    private Class<? extends ConfirmationHandler> confirmationHandler;
+
+    /*
+     * In case of a nested transaction, parent contains the transaction in which
+     * this transaction is nested
+     */
+    private final CompensatableTransaction parent;
+
+    /*
+     * In case of a nested transaction, children contains the transactions that
+     * are nested within this transaction.
+     */
+    private final List<CompensatableTransaction> children = new Vector<CompensatableTransaction>();
+
+    CompensatableTransaction(ApplicationContext context,
+        CompensatableTransaction parent) {
+        System.out.println("Invoking transaction with parent " + parent);
+        this.context = context;
+        this.parent = parent;
+        if (parent != null) {
+            // Append nested transaction
+            this.parent.addChild(this);
         }
     }
 
     /**
-     * Returns CompensationHandler by which this transaction can be compensated.
+     * Add nested
+     * {@link org.uniknow.spring.compensatable.impl.CompensatableTransaction}.
+     * 
+     * @param transaction
+     *            Nested transaction that has to be added
      */
-    Class<? extends CompensationHandler> getCompensationHandler() {
-        return compensationHandler;
+    void addChild(CompensatableTransaction transaction) {
+        children.add(transaction);
     }
 
+    /**
+     * Returns the nested
+     * {@link org.uniknow.spring.compensatable.impl.CompensatableTransaction}s.
+     * 
+     * @return list of nested
+     *         {@link org.uniknow.spring.compensatable.impl.CompensatableTransaction}
+     *         s.
+     */
+    List<CompensatableTransaction> getChildren() {
+        return children;
+    }
+
+    /**
+     * Returns in case of nested transaction the
+     * {@link org.uniknow.spring.compensatable.impl.CompensatableTransaction} in
+     * which this transaction is nested.
+     * 
+     * @return {@link org.uniknow.spring.compensatable.impl.CompensatableTransaction}
+     *         in which this transaction is nested, otherwise null;
+     */
+    CompensatableTransaction getParent() {
+        return parent;
+    }
+
+    /**
+     * Set initial defintion of transaction
+     */
+    public void setDefinition(CompensatableTransactionDefinition definition) {
+        this.definition = definition;
+    }
+
+    /**
+     * Returns the current status of the transaction
+     */
+    CompensatableTransactionState getState() {
+        return state;
+    }
+
+    /**
+     * Set the current status of the transaction
+     */
+    private void setState(CompensatableTransactionState state) {
+        System.out.println("Changing state of transaction from " + this.state
+            + " to " + state);
+        this.state = state;
+    }
+
+    public void confirm() {
+        // Initiate compensate on nested transactions
+        for (CompensatableTransaction nested : getChildren()) {
+            nested.confirm();
+        }
+
+        // Create instance of ConfirmationHandler and invoke
+        // confirmation
+        System.out.println("Confirming " + this);
+        ConfirmationHandler handler = context.getBean(definition
+            .getConfirmationHandler());
+        handler.confirm();
+
+        setState(CompensatableTransactionState.CONFIRMED);
+    }
+
+    public void compensate() {
+        // Initiate compensate on nested transactions
+        for (CompensatableTransaction nested : getChildren()) {
+            nested.compensate();
+        }
+
+        // Create instance of CompensationHandler and invoke
+        // compensation
+        System.out.println("Compensating " + this);
+        CompensationHandler handler = context.getBean(definition
+            .getCompensationHandler());
+        handler.compensate();
+
+        setState(CompensatableTransactionState.COMPENSATED);
+    }
+
+    public String toString() {
+        return getClass().getSimpleName() + "[" + id + ", " + state + ", "
+            + children + "]";
+    }
 }

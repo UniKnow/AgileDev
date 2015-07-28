@@ -37,42 +37,13 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
-package org.uniknow.spring.compensatable.impl;
+package org.uniknow.spring.compensatable.api;
 
 /**
- * Class responsible for creating new transactions and keeping track of their
- * status.
- * 
- * TODO: implement methods to create, remove, and join other compensatable
- * transactions.
+ * Implementation of confirmation handler logic, to be used in the case where
+ * work annotated with Compensate requires confirmation.
  */
-import org.springframework.stereotype.Component;
+public interface ConfirmationHandler {
 
-@Component
-class CompensatableTransactionCoordinator {
-
-    /**
-     * Contains compensatable transactions for current thread
-     */
-    private static final ThreadLocal<CompensatableTransaction> TRANSACTIONS = new ThreadLocal<>();
-
-    /**
-     * Get the
-     * {@link org.uniknow.spring.compensatable.impl.CompensatableTransaction}
-     * associated with the current thread, if any, otherwise return null.
-     * 
-     * @return instance previously associated with the current thread
-     */
-    static final CompensatableTransaction getCurrentTransaction() {
-        return TRANSACTIONS.get();
-    }
-
-    /**
-     * Set the
-     * {@link org.uniknow.spring.compensatable.impl.CompensatableTransaction}
-     * associated with the current thread.
-     */
-    static final void setCurrentTransaction(CompensatableTransaction transaction) {
-        TRANSACTIONS.set(transaction);
-    }
+    void confirm();
 }

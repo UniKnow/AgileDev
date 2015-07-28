@@ -40,39 +40,10 @@
 package org.uniknow.spring.compensatable.impl;
 
 /**
- * Class responsible for creating new transactions and keeping track of their
- * status.
- * 
- * TODO: implement methods to create, remove, and join other compensatable
- * transactions.
+ * Created by mase on 7/27/2015.
  */
-import org.springframework.stereotype.Component;
+public enum CompensatableTransactionState {
 
-@Component
-class CompensatableTransactionCoordinator {
+    TRY, COMPENSATED, CONFIRMED;
 
-    /**
-     * Contains compensatable transactions for current thread
-     */
-    private static final ThreadLocal<CompensatableTransaction> TRANSACTIONS = new ThreadLocal<>();
-
-    /**
-     * Get the
-     * {@link org.uniknow.spring.compensatable.impl.CompensatableTransaction}
-     * associated with the current thread, if any, otherwise return null.
-     * 
-     * @return instance previously associated with the current thread
-     */
-    static final CompensatableTransaction getCurrentTransaction() {
-        return TRANSACTIONS.get();
-    }
-
-    /**
-     * Set the
-     * {@link org.uniknow.spring.compensatable.impl.CompensatableTransaction}
-     * associated with the current thread.
-     */
-    static final void setCurrentTransaction(CompensatableTransaction transaction) {
-        TRANSACTIONS.set(transaction);
-    }
 }

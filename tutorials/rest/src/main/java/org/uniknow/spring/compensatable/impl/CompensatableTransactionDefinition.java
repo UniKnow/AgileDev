@@ -43,6 +43,7 @@ import org.springframework.transaction.TransactionDefinition;
 import org.springframework.transaction.support.DefaultTransactionDefinition;
 import org.uniknow.spring.compensatable.api.Compensatable;
 import org.uniknow.spring.compensatable.api.CompensationHandler;
+import org.uniknow.spring.compensatable.api.ConfirmationHandler;
 
 import java.io.Serializable;
 
@@ -53,11 +54,20 @@ import java.io.Serializable;
 final class CompensatableTransactionDefinition extends
     DefaultTransactionDefinition {
 
-    private final Class<? extends CompensationHandler> handler;
+    /**
+     * Contains handler by which transaction can be compensated
+     */
+    private final Class<? extends CompensationHandler> compensationHandler;
+
+    /**
+     * Contains handler by which transaction van be confirmed
+     */
+    private final Class<? extends ConfirmationHandler> confirmationHandler;
 
     CompensatableTransactionDefinition(Compensatable compensatable) {
         super();
-        handler = compensatable.compensateHandler();
+        compensationHandler = compensatable.compensateHandler();
+        confirmationHandler = compensatable.confirmationHandler();
     }
 
     /**
@@ -67,7 +77,17 @@ final class CompensatableTransactionDefinition extends
      * @return CompensationHandler class
      */
     Class<? extends CompensationHandler> getCompensationHandler() {
-        return handler;
+        return compensationHandler;
+    }
+
+    /**
+     * Returns ConfirmationHandler class by which compensatable transactions can
+     * be confirmed.
+     * 
+     * @return CompensationHandler class
+     */
+    Class<? extends ConfirmationHandler> getConfirmationHandler() {
+        return confirmationHandler;
     }
 
 }

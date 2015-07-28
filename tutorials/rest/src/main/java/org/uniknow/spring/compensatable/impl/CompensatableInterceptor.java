@@ -82,14 +82,20 @@ public class CompensatableInterceptor {
 
         CompensatableTransactionDefinition transactionDefinition = new CompensatableTransactionDefinition(
             compensatable);
+        System.out.println("Retrieve transaction for " + transactionDefinition);
         TransactionStatus status = transactionManager
             .getTransaction(transactionDefinition);
+
         Object result = null;
         try {
             result = pjp.proceed();
+            System.out.println("Invoking commit for " + pjp.toString()
+                + ", status " + status + " on " + transactionManager);
             transactionManager.commit(status);
         } catch (RuntimeException error) {
-            System.out.println("Call compensating transaction");
+            System.out
+                .println("Call compensating transaction while following exception occurred "
+                    + error);
             transactionManager.rollback(status);
             throw (error);
         }

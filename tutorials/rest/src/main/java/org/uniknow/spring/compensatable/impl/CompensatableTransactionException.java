@@ -39,40 +39,21 @@
  */
 package org.uniknow.spring.compensatable.impl;
 
+import org.springframework.transaction.TransactionException;
+
 /**
- * Class responsible for creating new transactions and keeping track of their
- * status.
- * 
- * TODO: implement methods to create, remove, and join other compensatable
- * transactions.
+ * Created by mase on 7/27/2015.
  */
-import org.springframework.stereotype.Component;
-
-@Component
-class CompensatableTransactionCoordinator {
+public class CompensatableTransactionException extends TransactionException {
 
     /**
-     * Contains compensatable transactions for current thread
-     */
-    private static final ThreadLocal<CompensatableTransaction> TRANSACTIONS = new ThreadLocal<>();
-
-    /**
-     * Get the
-     * {@link org.uniknow.spring.compensatable.impl.CompensatableTransaction}
-     * associated with the current thread, if any, otherwise return null.
+     * Constructor for CompensatableTransactionException.
      * 
-     * @return instance previously associated with the current thread
+     * @param msg
+     *            the detail message
      */
-    static final CompensatableTransaction getCurrentTransaction() {
-        return TRANSACTIONS.get();
+    public CompensatableTransactionException(String msg) {
+        super(msg);
     }
 
-    /**
-     * Set the
-     * {@link org.uniknow.spring.compensatable.impl.CompensatableTransaction}
-     * associated with the current thread.
-     */
-    static final void setCurrentTransaction(CompensatableTransaction transaction) {
-        TRANSACTIONS.set(transaction);
-    }
 }
