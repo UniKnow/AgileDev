@@ -41,7 +41,7 @@ package org.uniknow.spring.cqrs;
 
 /**
  * State of Event. A event can be OK or REJECTED. In case of REJECTED the event
- * won't appear within the EventStream.
+ * should be ignored.
  */
 public enum EventState {
     OK, REJECTED;
