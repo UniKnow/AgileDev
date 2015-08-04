@@ -44,8 +44,11 @@ import org.springframework.stereotype.Component;
 import org.uniknow.spring.cqrs.CommandHandler;
 import org.uniknow.spring.cqrs.Event;
 import org.uniknow.spring.cqrs.example.GameQueryModel;
+import org.uniknow.spring.cqrs.example.UndoCommandHandler;
 import org.uniknow.spring.cqrs.example.domain.Game;
 import org.uniknow.spring.cqrs.example.event.GameCreatedEvent;
+import org.uniknow.spring.tcc.api.Compensatable;
+import org.uniknow.spring.tcc.api.CompensatableContext;
 
 import java.util.Arrays;
 import java.util.List;
@@ -72,7 +75,10 @@ public class CreateGameCommandHandler implements
      * @return List of events
      */
     @Override
-    public List<? extends Event> handle(CreateGameCommand command) {
+    @Compensatable(compensateHandler = UndoCommandHandler.class)
+    @CompensatableContext("events")
+    public List<? extends Event> handle(
+        @CompensatableContext("command") CreateGameCommand command) {
         // Retrieve game from query model
         Game game = queryModel.get(command.gameId);
         if (game == null) {

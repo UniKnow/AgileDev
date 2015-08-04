@@ -37,37 +37,27 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
-package org.uniknow.spring.tcc;
+package org.uniknow.spring.tcc.api;
 
-import org.springframework.beans.factory.config.ConfigurableBeanFactory;
-import org.springframework.context.annotation.Scope;
-import org.springframework.stereotype.Component;
-import org.uniknow.spring.tcc.api.Compensatable;
-import org.uniknow.spring.tcc.api.CompensatableContext;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 
 /**
- * Service which exposes methods that support compensatable transactions
+ * The CompensatableContext annotation provides the application the ability to
+ * declare which values are of interest and need to be persisted within the
+ * current compensatable transaction context. When the compensation or
+ * confirmation handler is called the tranaction context will be passed as input
+ * parameter to the appropriate method.
  */
-@Component
-@Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
-public class Service {
-
-    private String serviceName;
-
-    public void setName(String name) {
-        serviceName = name;
-    }
+@Retention(RetentionPolicy.RUNTIME)
+@Target({ ElementType.PARAMETER, ElementType.METHOD })
+public @interface CompensatableContext {
 
     /**
-     * Dummy method which throws runtime exception when fail is true
-     * 
-     * @param fail
+     * Returns the name by which the input parameter will be known within the
+     * transaction context
      */
-    @Compensatable
-    public void method(@CompensatableContext("Fail") boolean fail) {
-        System.out.println("Invoking method of Service '" + serviceName + "'");
-        if (fail) {
-            throw new RuntimeException();
-        }
-    }
+    public String value();
 }

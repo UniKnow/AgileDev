@@ -43,5 +43,15 @@ import java.util.UUID;
 
 public interface Command {
 
+    /**
+     * Returns unique identifier for command
+     */
+    UUID getId();
+
+    /**
+     * Returns unique identifier of aggregate at which it applies
+     * 
+     * @TODO: Would this be a common attribute within command?
+     */
     UUID aggregateId();
 }

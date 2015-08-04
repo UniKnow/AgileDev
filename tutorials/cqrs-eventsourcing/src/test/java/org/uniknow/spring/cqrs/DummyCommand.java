@@ -39,12 +39,14 @@
  */
 package org.uniknow.spring.cqrs;
 
+import org.uniknow.spring.cqrs.impl.AbstractCommand;
+
 import java.util.UUID;
 
 /**
  * Dummy command purely for testing.
  */
-public class DummyCommand implements Command {
+public class DummyCommand extends AbstractCommand implements Command {
     @Override
     public UUID aggregateId() {
         return null;

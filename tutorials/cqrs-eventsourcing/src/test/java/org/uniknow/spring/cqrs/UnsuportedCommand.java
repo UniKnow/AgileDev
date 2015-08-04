@@ -39,12 +39,14 @@
  */
 package org.uniknow.spring.cqrs;
 
+import org.uniknow.spring.cqrs.impl.AbstractCommand;
+
 import java.util.UUID;
 
 /**
  * Command which has no supporting command handler
  */
-public class UnsuportedCommand implements Command {
+public class UnsuportedCommand extends AbstractCommand implements Command {
 
     @Override
     public UUID aggregateId() {

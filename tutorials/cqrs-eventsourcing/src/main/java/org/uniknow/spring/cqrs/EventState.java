@@ -37,37 +37,12 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
-package org.uniknow.spring.tcc;
-
-import org.springframework.beans.factory.config.ConfigurableBeanFactory;
-import org.springframework.context.annotation.Scope;
-import org.springframework.stereotype.Component;
-import org.uniknow.spring.tcc.api.Compensatable;
-import org.uniknow.spring.tcc.api.CompensatableContext;
+package org.uniknow.spring.cqrs;
 
 /**
- * Service which exposes methods that support compensatable transactions
+ * State of Event. A event can be OK or REJECTED. In case of REJECTED the event
+ * won't appear within the EventStream.
  */
-@Component
-@Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
-public class Service {
-
-    private String serviceName;
-
-    public void setName(String name) {
-        serviceName = name;
-    }
-
-    /**
-     * Dummy method which throws runtime exception when fail is true
-     * 
-     * @param fail
-     */
-    @Compensatable
-    public void method(@CompensatableContext("Fail") boolean fail) {
-        System.out.println("Invoking method of Service '" + serviceName + "'");
-        if (fail) {
-            throw new RuntimeException();
-        }
-    }
+public enum EventState {
+    OK, REJECTED;
 }

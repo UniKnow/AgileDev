@@ -39,6 +39,23 @@
  */
 package org.uniknow.spring.cqrs;
 
+import java.util.UUID;
+
 public interface Event {
 
+    /**
+     * Returns identifier of command that caused this event
+     */
+    // UUID getCommand();
+
+    /**
+     * Returns the state of the Event
+     */
+    EventState getState();
+
+    /**
+     * Changes state of Event. When state of Event becomes REJECTED it will no
+     * longer be included in EventStream/
+     */
+    void changeState(EventState state);
 }

@@ -173,7 +173,7 @@ public final class CompensatableTransaction {
         System.out.println("Confirming " + this);
         ConfirmationHandler handler = context.getBean(definition
             .getConfirmationHandler());
-        handler.confirm();
+        handler.confirm(definition.getTransactionContext());
 
         setState(CompensatableTransactionState.CONFIRMED);
     }
@@ -189,7 +189,7 @@ public final class CompensatableTransaction {
         System.out.println("Compensating " + this);
         CompensationHandler handler = context.getBean(definition
             .getCompensationHandler());
-        handler.compensate();
+        handler.compensate(definition.getTransactionContext());
 
         setState(CompensatableTransactionState.COMPENSATED);
     }

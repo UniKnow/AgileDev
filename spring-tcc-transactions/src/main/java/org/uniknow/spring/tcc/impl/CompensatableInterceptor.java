@@ -39,14 +39,22 @@
  */
 package org.uniknow.spring.tcc.impl;
 
+import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
+import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.annotation.AnnotationUtils;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.TransactionStatus;
 import org.uniknow.spring.tcc.api.Compensatable;
+import org.uniknow.spring.tcc.api.CompensatableContext;
+import org.uniknow.spring.tcc.api.CompensatableTransactionContext;
 import org.uniknow.spring.tcc.api.CompensatableTransactionManager;
+
+import java.lang.annotation.Annotation;
 
 /**
  * Intercepts methods which are annotated with @Compensatable.
@@ -71,9 +79,27 @@ public class CompensatableInterceptor {
         TransactionStatus status = transactionManager
             .getTransaction(transactionDefinition);
 
+        // Extract all input parameters and persist them within transaction
+        // context
+        CompensatableTransactionContext transactionContext = transactionDefinition
+            .getTransactionContext();
+        extractInputParameters(pjp, transactionContext);
+
         Object result = null;
         try {
             result = pjp.proceed();
+
+            // Check whether method is annotated with
+            // CompensatableContext
+            CompensatableContext compensatableContextAnnotation = AnnotationUtils
+                .getAnnotation(
+                    ((MethodSignature) pjp.getSignature()).getMethod(),
+                    CompensatableContext.class);
+            if (compensatableContextAnnotation != null) {
+                transactionContext.put(compensatableContextAnnotation.value(),
+                    result);
+            }
+
             System.out.println("Invoking commit for " + pjp.toString()
                 + ", status " + status + " on " + transactionManager);
             transactionManager.commit(status);
@@ -87,5 +113,49 @@ public class CompensatableInterceptor {
 
         return result;
     }
+
+    /**
+     * Initializes the compensatable transaction context. During initialization
+     * the parameters which are annotated with CompensatableTransactionContext
+     * are added to the context.
+     * 
+     * @param pjp
+     *            joint point from which the annotated input parameters are
+     *            extracted
+     * @param transactionContext
+     *            context to which the annotated input parameters are added
+     */
+    private void extractInputParameters(ProceedingJoinPoint pjp,
+        CompensatableTransactionContext transactionContext) {
+        MethodSignature methodSignature = (MethodSignature) pjp.getSignature();
+
+        // Filter all input arguments
+        Object[] arguments = pjp.getArgs();
+        Annotation[][] annotations = methodSignature.getMethod()
+            .getParameterAnnotations();
+        for (int i = 0; i < arguments.length; i++) {
+            for (Annotation annotation : annotations[i]) {
+                if (annotation.annotationType() == CompensatableContext.class) {
+                    // Append argument to transaction context
+                    CompensatableContext contextDef = (CompensatableContext) annotation;
+                    System.out.println("Adding argument " + contextDef.value()
+                        + " with value " + arguments[i]
+                        + " to transaction context");
+                    transactionContext.put(contextDef.value(), arguments[i]);
+                }
+            }
+        }
+    }
+
+    // /**
+    // * Intercept methods which are annotated with CompensatableContext. For
+    // those method the return value will be appended to the compensatable
+    // context
+    // */
+    // @After("@annotation(compensatableContext")
+    // public void AfterExecution(JoinPoint joinPoint, CompensatableContext
+    // compensatableContext) {
+    // System.out.println("Intercepted method annotated with CompensatableContext after")
+    // }
 
 }

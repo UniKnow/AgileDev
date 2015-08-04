@@ -45,5 +45,12 @@ package org.uniknow.spring.tcc.api;
  */
 public interface CompensationHandler {
 
-    void compensate();
+    /**
+     * Handler which will be invoked when transaction needs to be compensated
+     * 
+     * @param transactionContext
+     *            context containing arguments which where annotated with
+     *            CompensatableTransactionContext
+     */
+    void compensate(CompensatableTransactionContext transactionContext);
 }

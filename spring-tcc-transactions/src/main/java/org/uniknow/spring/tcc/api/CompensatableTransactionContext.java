@@ -37,37 +37,16 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
-package org.uniknow.spring.tcc;
+package org.uniknow.spring.tcc.api;
 
-import org.springframework.beans.factory.config.ConfigurableBeanFactory;
-import org.springframework.context.annotation.Scope;
-import org.springframework.stereotype.Component;
-import org.uniknow.spring.tcc.api.Compensatable;
-import org.uniknow.spring.tcc.api.CompensatableContext;
+import java.util.Map;
 
 /**
- * Service which exposes methods that support compensatable transactions
+ * A compensatable transaction context defines the scope of a compensatable
+ * transaction and contains all input parameters which are annotated with
+ * CompensatableContext. When the application starts a transaction, all input
+ * parameters, of the method that is annotated with Compensatable, that are
+ * annotated with CompensatableContext are persisted withing the context.
  */
-@Component
-@Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
-public class Service {
-
-    private String serviceName;
-
-    public void setName(String name) {
-        serviceName = name;
-    }
-
-    /**
-     * Dummy method which throws runtime exception when fail is true
-     * 
-     * @param fail
-     */
-    @Compensatable
-    public void method(@CompensatableContext("Fail") boolean fail) {
-        System.out.println("Invoking method of Service '" + serviceName + "'");
-        if (fail) {
-            throw new RuntimeException();
-        }
-    }
+public interface CompensatableTransactionContext extends Map {
 }

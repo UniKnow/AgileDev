@@ -45,5 +45,12 @@ package org.uniknow.spring.tcc.api;
  */
 public interface ConfirmationHandler {
 
-    void confirm();
+    /**
+     * Handler which will be invoked when transaction is confirmed
+     * 
+     * @param transactionContext
+     *            context containing arguments which where annotated with
+     *            CompensatableTransactionContext
+     */
+    void confirm(CompensatableTransactionContext transactionContext);
 }

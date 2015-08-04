@@ -41,8 +41,13 @@ package org.uniknow.spring.tcc.impl;
 
 import org.springframework.transaction.support.DefaultTransactionDefinition;
 import org.uniknow.spring.tcc.api.Compensatable;
+import org.uniknow.spring.tcc.api.CompensatableTransactionContext;
 import org.uniknow.spring.tcc.api.CompensationHandler;
 import org.uniknow.spring.tcc.api.ConfirmationHandler;
+
+import java.util.Collection;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * Transaction Definition specific for Compensatable transactions. Instances of
@@ -50,6 +55,11 @@ import org.uniknow.spring.tcc.api.ConfirmationHandler;
  */
 final class CompensatableTransactionDefinition extends
     DefaultTransactionDefinition {
+
+    /**
+     * Contains compensatable transaction context
+     */
+    private final CompensatableTransactionContext transactionContext;
 
     /**
      * Contains handler by which transaction can be compensated
@@ -63,8 +73,16 @@ final class CompensatableTransactionDefinition extends
 
     CompensatableTransactionDefinition(Compensatable compensatable) {
         super();
+        transactionContext = new CompensatableTransactionContextImpl();
         compensationHandler = compensatable.compensateHandler();
         confirmationHandler = compensatable.confirmationHandler();
+    }
+
+    /**
+     * Returns the context of the transaction
+     */
+    CompensatableTransactionContext getTransactionContext() {
+        return transactionContext;
     }
 
     /**

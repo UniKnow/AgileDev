@@ -81,6 +81,8 @@ public class GameQueryModel {
             // Attempt to restore game from event store
             EventStream<Long> eventStream = eventStore.loadEventStream(gameID);
             for (Event event : eventStream) {
+                // TODO: Ignore rejected events (should we do this here or
+                // filter out in iterator?)
                 for (EventHandler eventHandler : eventHandlerProvider
                     .getHandler(event)) {
                     eventHandler.handle(event);
@@ -95,5 +97,12 @@ public class GameQueryModel {
      */
     public void put(Game game) {
         queryModel.put(game.getGameID(), game);
+    }
+
+    /**
+     * Invalidate cached Game. This will happen when transaction is rolled back.
+     */
+    public void invalidate(UUID gameID) {
+        queryModel.remove(gameID);
     }
 }

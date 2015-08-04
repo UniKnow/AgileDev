@@ -40,6 +40,7 @@
 package org.uniknow.spring.tcc.impl;
 
 import org.springframework.stereotype.Component;
+import org.uniknow.spring.tcc.api.CompensatableTransactionContext;
 import org.uniknow.spring.tcc.api.ConfirmationHandler;
 
 /**
@@ -49,8 +50,9 @@ import org.uniknow.spring.tcc.api.ConfirmationHandler;
 @Component
 public class DefaultConfirmationHandler implements ConfirmationHandler {
 
-    public void confirm() {
+    public void confirm(CompensatableTransactionContext transactionContext) {
         System.out
-            .println("Confirm of default Confirmation handler is invoked");
+            .println("Confirm of default Confirmation handler is invoked with context "
+                + transactionContext);
     }
 }

@@ -44,12 +44,15 @@ import org.springframework.stereotype.Component;
 import org.uniknow.spring.cqrs.CommandHandler;
 import org.uniknow.spring.cqrs.Event;
 import org.uniknow.spring.cqrs.example.GameQueryModel;
+import org.uniknow.spring.cqrs.example.UndoCommandHandler;
 import org.uniknow.spring.cqrs.example.domain.Game;
 import org.uniknow.spring.cqrs.example.domain.Move;
 import org.uniknow.spring.cqrs.example.domain.State;
 import org.uniknow.spring.cqrs.example.event.GameTiedEvent;
 import org.uniknow.spring.cqrs.example.event.GameWonEvent;
 import org.uniknow.spring.cqrs.example.event.MoveDecidedEvent;
+import org.uniknow.spring.tcc.api.Compensatable;
+import org.uniknow.spring.tcc.api.CompensatableContext;
 
 import java.util.Arrays;
 import java.util.List;
@@ -76,7 +79,10 @@ public class MakeMoveCommandHandler implements
      * @return List of events
      */
     @Override
-    public List<? extends Event> handle(MakeMoveCommand command) {
+    @Compensatable(compensateHandler = UndoCommandHandler.class)
+    @CompensatableContext("events")
+    public List<? extends Event> handle(
+        @CompensatableContext("command") MakeMoveCommand command) {
         Game game = queryModel.get(command.gameId);
 
         if (game != null) {

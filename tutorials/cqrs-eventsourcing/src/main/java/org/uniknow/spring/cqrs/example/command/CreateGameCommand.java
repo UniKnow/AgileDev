@@ -40,10 +40,11 @@
 package org.uniknow.spring.cqrs.example.command;
 
 import org.uniknow.spring.cqrs.Command;
+import org.uniknow.spring.cqrs.impl.AbstractCommand;
 
 import java.util.UUID;
 
-public class CreateGameCommand implements Command {
+public class CreateGameCommand extends AbstractCommand implements Command {
     public final UUID gameId;
     public final String playerEmail;
 

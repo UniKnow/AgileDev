@@ -37,37 +37,27 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
-package org.uniknow.spring.tcc;
+package org.uniknow.spring.cqrs.impl;
 
-import org.springframework.beans.factory.config.ConfigurableBeanFactory;
-import org.springframework.context.annotation.Scope;
-import org.springframework.stereotype.Component;
-import org.uniknow.spring.tcc.api.Compensatable;
-import org.uniknow.spring.tcc.api.CompensatableContext;
+import org.uniknow.spring.cqrs.Command;
+
+import java.util.UUID;
 
 /**
- * Service which exposes methods that support compensatable transactions
+ * Basic implementation for Command
  */
-@Component
-@Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
-public class Service {
+public abstract class AbstractCommand implements Command {
 
-    private String serviceName;
-
-    public void setName(String name) {
-        serviceName = name;
-    }
+    /*
+     * Contains unique identifier for command
+     */
+    private final UUID id = UUID.randomUUID();
 
     /**
-     * Dummy method which throws runtime exception when fail is true
-     * 
-     * @param fail
+     * Returns unique identifier for command
      */
-    @Compensatable
-    public void method(@CompensatableContext("Fail") boolean fail) {
-        System.out.println("Invoking method of Service '" + serviceName + "'");
-        if (fail) {
-            throw new RuntimeException();
-        }
+    @Override
+    public UUID getId() {
+        return id;
     }
 }

@@ -39,6 +39,8 @@
  */
 package org.uniknow.spring.cqrs;
 
+import org.uniknow.spring.tcc.api.Compensatable;
+
 /**
  * Interface by which CommandHandlers for specific Command can be retrieved.
  */

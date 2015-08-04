@@ -40,6 +40,7 @@
 package org.uniknow.spring.tcc.impl;
 
 import org.springframework.stereotype.Component;
+import org.uniknow.spring.tcc.api.CompensatableTransactionContext;
 import org.uniknow.spring.tcc.api.CompensationHandler;
 
 /**
@@ -50,8 +51,9 @@ import org.uniknow.spring.tcc.api.CompensationHandler;
 public class DefaultCompensationHandler implements CompensationHandler {
 
     @Override
-    public void compensate() {
+    public void compensate(CompensatableTransactionContext transactionContext) {
         System.out
-            .println("Compensate of default Compensation handler is invoked");
+            .println("Compensate of default Compensation handler is invoked with transaction context "
+                + transactionContext);
     }
 }

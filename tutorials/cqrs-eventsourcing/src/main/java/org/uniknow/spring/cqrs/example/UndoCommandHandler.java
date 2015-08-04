@@ -37,37 +37,54 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
-package org.uniknow.spring.tcc;
+package org.uniknow.spring.cqrs.example;
 
-import org.springframework.beans.factory.config.ConfigurableBeanFactory;
-import org.springframework.context.annotation.Scope;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.uniknow.spring.tcc.api.Compensatable;
-import org.uniknow.spring.tcc.api.CompensatableContext;
+import org.uniknow.spring.cqrs.Command;
+import org.uniknow.spring.cqrs.Event;
+import org.uniknow.spring.cqrs.EventState;
+import org.uniknow.spring.tcc.api.CompensatableTransactionContext;
+import org.uniknow.spring.tcc.api.CompensationHandler;
+
+import java.util.List;
 
 /**
- * Service which exposes methods that support compensatable transactions
+ * Created by mase on 8/3/2015.
  */
 @Component
-@Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
-public class Service {
-
-    private String serviceName;
-
-    public void setName(String name) {
-        serviceName = name;
-    }
+public class UndoCommandHandler implements CompensationHandler {
 
     /**
-     * Dummy method which throws runtime exception when fail is true
-     * 
-     * @param fail
+     * Repository by which instances of Game can be retrieved
      */
-    @Compensatable
-    public void method(@CompensatableContext("Fail") boolean fail) {
-        System.out.println("Invoking method of Service '" + serviceName + "'");
-        if (fail) {
-            throw new RuntimeException();
+    @Autowired
+    private GameQueryModel queryModel;
+
+    /**
+     * Handler which will be invoked when transaction needs to be compensated
+     * 
+     * @param transactionContext
+     *            context containing arguments which where annotated with
+     *            CompensatableTransactionContext
+     */
+    @Override
+    public void compensate(CompensatableTransactionContext transactionContext) {
+        System.out.println("intitiating compensate with context "
+            + transactionContext);
+        // Check whether there are events that need to be rejected
+        List<Event> events = (List<Event>) transactionContext.get("events");
+        if (events != null) {
+            // Reject all events that occurred due to the failed command
+            for (Event event : events) {
+                System.out.println("Rejecting event " + event);
+                event.changeState(EventState.REJECTED);
+            }
         }
+
+        // Invalidate game in query model
+        System.out.println("Invalidating query model");
+        queryModel.invalidate(((Command) transactionContext.get("command"))
+            .aggregateId());
     }
 }

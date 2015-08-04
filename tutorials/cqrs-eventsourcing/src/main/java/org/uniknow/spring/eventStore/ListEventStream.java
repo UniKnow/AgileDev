@@ -69,7 +69,8 @@ public class ListEventStream implements EventStream<Long> {
 
     @Override
     public Iterator<Event> iterator() {
-        return events.iterator();
+        return new EventStreamIterator(events);
+        // return events.iterator();
     }
 
     @Override

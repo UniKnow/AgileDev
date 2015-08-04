@@ -44,6 +44,7 @@ import org.springframework.stereotype.Component;
 import org.uniknow.spring.cqrs.*;
 import org.uniknow.spring.eventStore.EventStore;
 import org.uniknow.spring.eventStore.EventStream;
+import org.uniknow.spring.tcc.api.Compensatable;
 
 import java.util.List;
 
@@ -71,12 +72,6 @@ public class ApplicationService {
     public void handle(Command command) throws Exception {
         EventStream<Long> eventStream = eventStore.loadEventStream(command
             .aggregateId());
-        // for (Event event : eventStream) {
-        // for (EventHandler eventHandler : eventHandlerProvider
-        // .getHandler(event)) {
-        // eventHandler.handle(event);
-        // }
-        // }
 
         // Process command
         List<Event> events = (List<Event>) commandHandlerProvider.getHandler(
@@ -95,11 +90,15 @@ public class ApplicationService {
 
     private void notifyAll(List<Event> events) {
         for (Event event : events) {
-            // Get handlers for event
-            List<EventHandler<Event>> eventHandlers = eventHandlerProvider
-                .getHandler(event);
-            for (EventHandler<Event> eventHandler : eventHandlers) {
-                eventHandler.handle(event);
+            if (event.getState() == EventState.OK) {
+                // Get handlers for event
+                List<EventHandler<Event>> eventHandlers = eventHandlerProvider
+                    .getHandler(event);
+                for (EventHandler<Event> eventHandler : eventHandlers) {
+                    eventHandler.handle(event);
+                }
+            } else {
+                throw new RuntimeException("Event should have state OK");
             }
         }
     }

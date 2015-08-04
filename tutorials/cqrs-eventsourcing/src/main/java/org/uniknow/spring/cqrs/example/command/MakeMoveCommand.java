@@ -41,10 +41,11 @@ package org.uniknow.spring.cqrs.example.command;
 
 import org.uniknow.spring.cqrs.Command;
 import org.uniknow.spring.cqrs.example.domain.Move;
+import org.uniknow.spring.cqrs.impl.AbstractCommand;
 
 import java.util.UUID;
 
-public class MakeMoveCommand implements Command {
+public class MakeMoveCommand extends AbstractCommand implements Command {
     public final UUID gameId;
     public final String playerEmail;
     public final Move move;

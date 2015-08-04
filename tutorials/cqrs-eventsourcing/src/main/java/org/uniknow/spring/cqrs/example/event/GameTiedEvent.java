@@ -40,10 +40,11 @@
 package org.uniknow.spring.cqrs.example.event;
 
 import org.uniknow.spring.cqrs.Event;
+import org.uniknow.spring.cqrs.impl.AbstractEvent;
 
 import java.util.UUID;
 
-public class GameTiedEvent implements Event {
+public class GameTiedEvent extends AbstractEvent implements Event {
     public final UUID gameId;
 
     GameTiedEvent() {
