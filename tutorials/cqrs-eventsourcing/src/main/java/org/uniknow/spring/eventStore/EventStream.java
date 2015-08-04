@@ -39,13 +39,11 @@
  */
 package org.uniknow.spring.eventStore;
 
-import org.uniknow.spring.cqrs.Event;
-
 /**
  * Returns stream of events with status OK
  * 
  * @param <V>
  */
-public interface EventStream<V> extends Iterable<Event> {
+public interface EventStream<V, E extends Event> extends Iterable<E> {
     V version();
 }

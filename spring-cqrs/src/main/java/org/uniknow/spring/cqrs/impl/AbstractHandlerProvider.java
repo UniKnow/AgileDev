@@ -39,8 +39,6 @@
  */
 package org.uniknow.spring.cqrs.impl;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
@@ -60,9 +58,6 @@ import java.util.Vector;
  *            Type of Handler
  */
 class AbstractHandlerProvider<H extends Handler> {
-
-    private static final Logger LOGGER = LoggerFactory
-        .getLogger(AbstractHandlerProvider.class);
 
     @Autowired
     private ConfigurableListableBeanFactory beanFactory;

@@ -39,9 +39,6 @@
  */
 package org.uniknow.spring.eventStore;
 
-import org.uniknow.spring.cqrs.Event;
-import org.uniknow.spring.cqrs.EventState;
-
 import java.util.Iterator;
 import java.util.List;
 import java.util.Vector;
@@ -50,17 +47,17 @@ import java.util.Vector;
  * Iterator for EventStream. This iterator will filter out all Events with
  * status REJECTED
  */
-class EventStreamIterator implements Iterator<Event> {
+class EventStreamIterator<E extends Event> implements Iterator<E> {
 
-    private final Iterator<Event> iterator;
+    private final Iterator<E> iterator;
 
-    EventStreamIterator(List<Event> events) {
+    EventStreamIterator(List<E> events) {
         if (events == null) {
             throw new IllegalArgumentException("Events may not be null");
         } else {
             // Create filtered list of events
-            List<Event> filteredEvents = new Vector();
-            for (Event event : events) {
+            List<E> filteredEvents = new Vector();
+            for (E event : events) {
                 // TODO: Check whether we should clone event so that changes
                 // done on Event don't affect this stream
                 // Ignore events which are rejected.
@@ -94,7 +91,7 @@ class EventStreamIterator implements Iterator<Event> {
      *             if the iteration has no more elements
      */
     @Override
-    public Event next() {
+    public E next() {
         return iterator.next();
     }
 

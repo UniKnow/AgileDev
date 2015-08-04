@@ -48,6 +48,7 @@ import org.uniknow.spring.cqrs.Event;
 import org.uniknow.spring.cqrs.example.command.CreateGameCommand;
 import org.uniknow.spring.cqrs.example.command.MakeMoveCommand;
 import org.uniknow.spring.cqrs.example.domain.Move;
+import org.uniknow.spring.cqrs.example.event.BaseEvent;
 import org.uniknow.spring.cqrs.example.event.GameTiedEvent;
 import org.uniknow.spring.cqrs.example.event.GameWonEvent;
 import org.uniknow.spring.eventStore.EventStore;
@@ -110,7 +111,8 @@ public class GameIntegrationTest {
     }
 
     private void assertEventStreamContains(UUID streamId, Event expectedEvent) {
-        EventStream<Long> eventStream = eventStore.loadEventStream(gameId);
+        EventStream<Long, BaseEvent> eventStream = eventStore
+            .loadEventStream(gameId);
         String expected = EventStringUtil.toString(expectedEvent);
         for (Event event : eventStream) {
             if (EventStringUtil.toString(event).equals(expected))

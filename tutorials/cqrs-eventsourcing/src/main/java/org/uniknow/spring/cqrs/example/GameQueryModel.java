@@ -41,14 +41,16 @@ package org.uniknow.spring.cqrs.example;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.uniknow.spring.cqrs.Event;
 import org.uniknow.spring.cqrs.EventHandler;
 import org.uniknow.spring.cqrs.EventHandlerProvider;
 import org.uniknow.spring.cqrs.example.domain.Game;
+import org.uniknow.spring.cqrs.example.event.BaseEvent;
+import org.uniknow.spring.eventStore.Event;
 import org.uniknow.spring.eventStore.EventStore;
 import org.uniknow.spring.eventStore.EventStream;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
@@ -68,7 +70,7 @@ public class GameQueryModel {
      * Contains store in which events for games are persisted
      */
     @Autowired
-    private EventStore eventStore;
+    private EventStore<Long, BaseEvent> eventStore;
 
     private Map<UUID, Game> queryModel = new HashMap<>();
 
@@ -79,8 +81,9 @@ public class GameQueryModel {
         // Check whether game already exist within query model
         if (!queryModel.containsKey(gameID)) {
             // Attempt to restore game from event store
-            EventStream<Long> eventStream = eventStore.loadEventStream(gameID);
-            for (Event event : eventStream) {
+            EventStream<Long, BaseEvent> eventStream = eventStore
+                .loadEventStream(gameID);
+            for (BaseEvent event : eventStream) {
                 // TODO: Ignore rejected events (should we do this here or
                 // filter out in iterator?)
                 for (EventHandler eventHandler : eventHandlerProvider

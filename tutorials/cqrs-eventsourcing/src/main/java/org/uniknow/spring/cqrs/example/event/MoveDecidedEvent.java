@@ -41,11 +41,11 @@ package org.uniknow.spring.cqrs.example.event;
 
 import org.uniknow.spring.cqrs.Event;
 import org.uniknow.spring.cqrs.example.domain.Move;
-import org.uniknow.spring.cqrs.impl.AbstractEvent;
+import org.uniknow.spring.eventStore.impl.AbstractEvent;
 
 import java.util.UUID;
 
-public class MoveDecidedEvent extends AbstractEvent implements Event {
+public class MoveDecidedEvent extends BaseEvent {
 
     public final UUID gameId;
     public final String playerEmail;

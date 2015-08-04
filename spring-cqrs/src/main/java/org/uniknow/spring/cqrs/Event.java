@@ -37,43 +37,23 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
-package org.uniknow.spring.eventStore;
+package org.uniknow.spring.cqrs;
 
-import java.util.Collections;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
+public interface Event {
 
-public class ListEventStream<E extends Event> implements EventStream<Long, E> {
-    private final long version;
-    private final List<E> events;
-
-    public ListEventStream() {
-        this.version = 0;
-        events = Collections.emptyList();
-    }
-
-    public ListEventStream(long version, List<E> events) {
-        this.version = version;
-        this.events = events;
-    }
-
-    public ListEventStream append(List<E> newEvents) {
-        List<E> events = new LinkedList<>(this.events);
-        events.addAll(newEvents);
-        return new ListEventStream(version + 1,
-            Collections.unmodifiableList(events));
-    }
-
-    @Override
-    public Iterator<E> iterator() {
-        return new EventStreamIterator(events);
-        // return events.iterator();
-    }
-
-    @Override
-    public Long version() {
-        return version;
-    }
-
+    // /**
+    // * Returns identifier of command that caused this event
+    // */
+    // // UUID getCommand();
+    //
+    // /**
+    // * Returns the state of the Event
+    // */
+    // EventState getState();
+    //
+    // /**
+    // * Changes state of Event. When state of Event becomes REJECTED it will no
+    // * longer be included in EventStream/
+    // */
+    // void changeState(EventState state);
 }

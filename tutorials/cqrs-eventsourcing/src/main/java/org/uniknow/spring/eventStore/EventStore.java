@@ -39,17 +39,15 @@
  */
 package org.uniknow.spring.eventStore;
 
-import org.uniknow.spring.cqrs.Event;
-
 import java.util.List;
 import java.util.UUID;
 
 // import rx.Observable;
 
-public interface EventStore<V> {
-    EventStream<Long> loadEventStream(UUID aggregateId);
+public interface EventStore<V, E extends Event> {
+    EventStream<Long, E> loadEventStream(UUID aggregateId);
 
-    void store(UUID aggregateId, long version, List<? extends Event> events);
+    void store(UUID aggregateId, long version, List<E> events);
 
     // Observable<Event> all();
 }

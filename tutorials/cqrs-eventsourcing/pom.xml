@@ -13,7 +13,8 @@
     <groupId>org.uniknow.agiledev.tutorials</groupId>
     <artifactId>cqrs-eventsourcing</artifactId>
     <name>Tutorial regarding CQRS and Event sourcing</name>
-    <description>Tutorial showing how to use CQRS and Event sourcing</description>
+    <description>Tutorial showing how to use CQRS and Event sourcing
+    </description>
 
     <properties>
         <maven.compiler.source>1.7</maven.compiler.source>
@@ -77,11 +78,17 @@
 
         <!-- Dependency for tcc -->
         <dependency>
-        <groupId>org.uniknow.spring</groupId>
-        <artifactId>spring-tcc-transactions</artifactId>
-        <version>${project.version}</version>
+            <groupId>org.uniknow.spring</groupId>
+            <artifactId>spring-tcc-transactions</artifactId>
+            <version>${project.version}</version>
         </dependency>
 
+        <!-- Dependency for CQRS -->
+        <dependency>
+            <groupId>org.uniknow.spring</groupId>
+            <artifactId>spring-cqrs</artifactId>
+            <version>${project.version}</version>
+        </dependency>
     </dependencies>
 
     <build>

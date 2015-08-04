@@ -37,12 +37,13 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
-package org.uniknow.spring.cqrs;
+package org.uniknow.spring.cqrs.example.event;
+
+import org.uniknow.spring.cqrs.Event;
+import org.uniknow.spring.eventStore.impl.AbstractEvent;
 
 /**
- * State of Event. A event can be OK or REJECTED. In case of REJECTED the event
- * should be ignored.
+ * Created by mase on 8/4/2015.
  */
-public enum EventState {
-    OK, REJECTED;
+public abstract class BaseEvent extends AbstractEvent implements Event {
 }

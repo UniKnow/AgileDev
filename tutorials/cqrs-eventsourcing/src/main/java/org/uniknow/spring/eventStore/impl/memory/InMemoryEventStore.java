@@ -37,10 +37,10 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
-package org.uniknow.spring.eventStore.memory;
+package org.uniknow.spring.eventStore.impl.memory;
 
 import org.springframework.stereotype.Component;
-import org.uniknow.spring.cqrs.Event;
+import org.uniknow.spring.eventStore.Event;
 import org.uniknow.spring.eventStore.EventStore;
 import org.uniknow.spring.eventStore.EventStream;
 import org.uniknow.spring.eventStore.ListEventStream;
@@ -51,7 +51,7 @@ import java.util.concurrent.ConcurrentHashMap;
 // import rx.Observable;
 
 @Component
-public class InMemoryEventStore implements EventStore<Long> {
+public class InMemoryEventStore<E extends Event> implements EventStore<Long, E> {
     private final Map<UUID, ListEventStream> streams = new ConcurrentHashMap<UUID, ListEventStream>();
     private final TreeSet<Transaction> transactions = new TreeSet<Transaction>();
 
@@ -66,8 +66,7 @@ public class InMemoryEventStore implements EventStore<Long> {
     }
 
     @Override
-    public void store(UUID aggregateId, long version,
-        List<? extends Event> events) {
+    public void store(UUID aggregateId, long version, List<E> events) {
         ListEventStream stream = loadEventStream(aggregateId);
         if (stream.version() != version) {
             throw new ConcurrentModificationException(
@@ -79,7 +78,7 @@ public class InMemoryEventStore implements EventStore<Long> {
         }
     }
 
-    public EventStream<Long> loadEventsAfter(Long timestamp) {
+    public EventStream<Long, E> loadEventsAfter(Long timestamp) {
         // include all events after this timestamp, except the events with the
         // current timestamp
         // since new events might be added with the current timestamp

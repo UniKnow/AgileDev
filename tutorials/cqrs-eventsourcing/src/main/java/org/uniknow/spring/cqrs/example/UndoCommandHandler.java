@@ -42,8 +42,8 @@ package org.uniknow.spring.cqrs.example;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.uniknow.spring.cqrs.Command;
-import org.uniknow.spring.cqrs.Event;
-import org.uniknow.spring.cqrs.EventState;
+import org.uniknow.spring.cqrs.example.event.BaseEvent;
+import org.uniknow.spring.eventStore.EventState;
 import org.uniknow.spring.tcc.api.CompensatableTransactionContext;
 import org.uniknow.spring.tcc.api.CompensationHandler;
 
@@ -73,10 +73,11 @@ public class UndoCommandHandler implements CompensationHandler {
         System.out.println("intitiating compensate with context "
             + transactionContext);
         // Check whether there are events that need to be rejected
-        List<Event> events = (List<Event>) transactionContext.get("events");
+        List<BaseEvent> events = (List<BaseEvent>) transactionContext
+            .get("events");
         if (events != null) {
             // Reject all events that occurred due to the failed command
-            for (Event event : events) {
+            for (BaseEvent event : events) {
                 System.out.println("Rejecting event " + event);
                 event.changeState(EventState.REJECTED);
             }

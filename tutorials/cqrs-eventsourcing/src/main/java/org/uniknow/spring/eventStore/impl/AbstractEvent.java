@@ -37,56 +37,33 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
-package org.uniknow.spring.cqrs.impl;
+package org.uniknow.spring.eventStore.impl;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.context.ApplicationListener;
-import org.springframework.context.event.ContextRefreshedEvent;
-import org.springframework.stereotype.Component;
-import org.uniknow.spring.cqrs.Command;
-import org.uniknow.spring.cqrs.CommandHandler;
-import org.uniknow.spring.cqrs.CommandHandlerProvider;
-
-import java.util.List;
+import org.uniknow.spring.eventStore.Event;
+import org.uniknow.spring.eventStore.EventState;
 
 /**
- * Provider by which CommandHandler for specific Command can be retrieved.
- * 
- * @TODO: Command might need to be processed by multiple handlers. Modify this
- *        class so that this can be supported.
+ * Basic implementation of Event
  */
-@Component
-public class CommandHandlerProviderImpl extends
-    AbstractHandlerProvider<CommandHandler<? extends Command, ?>> implements
-    CommandHandlerProvider, ApplicationListener<ContextRefreshedEvent> {
-
-    private static final Logger LOGGER = LoggerFactory
-        .getLogger(CommandHandlerProviderImpl.class);
+public abstract class AbstractEvent implements Event {
+    private EventState state = EventState.OK;
 
     /**
-     * Loads the configured CommandHandlers within the Spring context
-     * 
-     * @param event
-     *            the event to respond to
+     * Returns the state of the Event
      */
     @Override
-    public void onApplicationEvent(ContextRefreshedEvent event) {
-        System.out.println("Initializing Command Handler Provider");
-        init(CommandHandler.class);
+    public final EventState getState() {
+        return state;
     }
 
     /**
-     * Returns handler for specified command
+     * Changes state of Event. When state of Event becomes REJECTED it will no
+     * longer be included in EventStream/
      * 
-     * @param command
-     *            command for which we want to retrieve the matching handler
-     * @return CommandHandler which is able to process specified command
+     * @param state
      */
     @Override
-    public CommandHandler<? extends Command, ?> getHandler(Command command) {
-        List<CommandHandler<? extends Command, ?>> commandHandlers = getHandlers(command
-            .getClass());
-        return commandHandlers.get(0);
+    public final void changeState(EventState state) {
+        this.state = state;
     }
 }

@@ -37,13 +37,39 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
-package org.uniknow.spring.compensatable.api;
+package org.uniknow.spring.eventStore.impl.memory;
 
-/**
- * Implementation of confirmation handler logic, to be used in the case where
- * work annotated with Compensate requires confirmation.
- */
-public interface ConfirmationHandler {
+import org.junit.Test;
+import org.uniknow.spring.cqrs.example.event.GameTiedEvent;
+import org.uniknow.spring.eventStore.Event;
+import org.uniknow.spring.eventStore.EventStream;
 
-    void confirm();
+import java.util.Arrays;
+import java.util.UUID;
+
+import static org.junit.Assert.assertEquals;
+
+public class InMemoryEventStoreTest {
+    UUID gameId = UUID.randomUUID();
+
+    @Test
+    public void test() throws Exception {
+        InMemoryEventStore es = new InMemoryEventStore();
+        es.store(gameId, 0, Arrays.asList(new GameTiedEvent(gameId)));
+        Thread.sleep(1);
+        es.store(gameId, 1, Arrays.asList(new GameTiedEvent(gameId)));
+        EventStream<Long, Event> stream = es.loadEventsAfter(0L);
+        assertEquals(1, countEvents(stream));
+        Long id = stream.version();
+        System.out.println("id=" + id);
+    }
+
+    private int countEvents(EventStream<Long, Event> stream) {
+        int result = 0;
+        for (Event event : stream) {
+            result++;
+        }
+        return result;
+    }
+
 }

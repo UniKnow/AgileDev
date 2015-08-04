@@ -37,33 +37,22 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
-package org.uniknow.spring.cqrs.impl;
-
-import org.uniknow.spring.cqrs.Event;
-import org.uniknow.spring.cqrs.EventState;
+package org.uniknow.spring.eventStore;
 
 /**
- * Basic implementation of Event
+ * Created by mase on 8/4/2015.
  */
-public abstract class AbstractEvent implements Event {
-    private EventState state = EventState.OK;
+public interface Event {
 
     /**
      * Returns the state of the Event
      */
-    @Override
-    public final EventState getState() {
-        return state;
-    }
+    EventState getState();
 
     /**
      * Changes state of Event. When state of Event becomes REJECTED it will no
      * longer be included in EventStream/
-     * 
-     * @param state
      */
-    @Override
-    public final void changeState(EventState state) {
-        this.state = state;
-    }
+    void changeState(EventState state);
+
 }

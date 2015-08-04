@@ -37,25 +37,51 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
-package org.uniknow.spring.cqrs;
+package org.uniknow.spring.cqrs.impl;
 
-import java.util.UUID;
+import org.springframework.context.ApplicationListener;
+import org.springframework.context.event.ContextRefreshedEvent;
+import org.springframework.stereotype.Component;
+import org.uniknow.spring.cqrs.Command;
+import org.uniknow.spring.cqrs.CommandHandler;
+import org.uniknow.spring.cqrs.CommandHandlerProvider;
 
-public interface Event {
+import java.util.List;
+
+/**
+ * Provider by which CommandHandler for specific Command can be retrieved.
+ * 
+ * @TODO: Command might need to be processed by multiple handlers. Modify this
+ *        class so that this can be supported.
+ */
+@Component
+public class CommandHandlerProviderImpl extends
+    AbstractHandlerProvider<CommandHandler<? extends Command, ?>> implements
+    CommandHandlerProvider, ApplicationListener<ContextRefreshedEvent> {
 
     /**
-     * Returns identifier of command that caused this event
+     * Loads the configured CommandHandlers within the Spring context
+     * 
+     * @param event
+     *            the event to respond to
      */
-    // UUID getCommand();
+    @Override
+    public void onApplicationEvent(ContextRefreshedEvent event) {
+        System.out.println("Initializing Command Handler Provider");
+        init(CommandHandler.class);
+    }
 
     /**
-     * Returns the state of the Event
+     * Returns handler for specified command
+     * 
+     * @param command
+     *            command for which we want to retrieve the matching handler
+     * @return CommandHandler which is able to process specified command
      */
-    EventState getState();
-
-    /**
-     * Changes state of Event. When state of Event becomes REJECTED it will no
-     * longer be included in EventStream/
-     */
-    void changeState(EventState state);
+    @Override
+    public CommandHandler<? extends Command, ?> getHandler(Command command) {
+        List<CommandHandler<? extends Command, ?>> commandHandlers = getHandlers(command
+            .getClass());
+        return commandHandlers.get(0);
+    }
 }
