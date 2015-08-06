@@ -76,6 +76,20 @@
             <version>2.5.1</version>
         </dependency>
 
+        <!-- Dependency for CQRS -->
+        <dependency>
+            <groupId>org.uniknow.spring</groupId>
+            <artifactId>spring-cqrs</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <!-- Dependency for event sourcing -->
+        <dependency>
+            <groupId>org.uniknow.spring</groupId>
+            <artifactId>spring-event-sourcing</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
         <!-- Dependency for tcc -->
         <dependency>
             <groupId>org.uniknow.spring</groupId>
@@ -83,12 +97,6 @@
             <version>${project.version}</version>
         </dependency>
 
-        <!-- Dependency for CQRS -->
-        <dependency>
-            <groupId>org.uniknow.spring</groupId>
-            <artifactId>spring-cqrs</artifactId>
-            <version>${project.version}</version>
-        </dependency>
     </dependencies>
 
     <build>

@@ -39,12 +39,10 @@
  */
 package org.uniknow.agiledev.tutorial.rest.impl;
 
-import org.jboss.narayana.compensations.api.TxCompensate;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.uniknow.agiledev.tutorial.rest.api.BlogService;
 import org.uniknow.agiledev.tutorial.rest.api.domain.MyPost;
-import org.uniknow.spring.compensatable.api.Compensatable;
 
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
@@ -72,8 +70,6 @@ public class BlogServiceImpl implements BlogService {
     }
 
     @Override
-    @Compensatable
-    @TxCompensate(RevertPost.class)
     public int addPost(MyPost post) {
         int id = post.getId();
         if (id == -1) {

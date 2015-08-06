@@ -87,63 +87,6 @@
             <scope>test</scope>
         </dependency>
 
-        <!-- Dependencies to use Try Cancel/Confirm -->
-        <dependency>
-            <groupId>org.jboss.narayana.xts</groupId>
-            <artifactId>jbossxts</artifactId>
-            <classifier>api</classifier>
-            <version>${narayana.version}</version>
-            <scope>provided</scope>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.jboss.logging</groupId>
-                    <artifactId>jboss-logging-spi</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-        <dependency>
-            <groupId>org.jboss.narayana.compensations</groupId>
-            <artifactId>compensations</artifactId>
-            <version>${narayana.version}</version>
-            <!--<scope>provided</scope>-->
-            <exclusions>
-                <exclusion>
-                    <groupId>org.jboss.logging</groupId>
-                    <artifactId>jboss-logging-spi</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-        <dependency>
-            <groupId>org.jboss.narayana.jta</groupId>
-            <artifactId>narayana-jta</artifactId>
-            <version>${narayana.version}</version>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>javax.transaction</groupId>
-            <artifactId>jta</artifactId>
-            <version>${jta.version}</version>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.uniknow.tomcat</groupId>
-            <artifactId>narayana-tomcat-listener</artifactId>
-            <version>${project.version}</version>
-            <scope>provided</scope>
-        </dependency>
-        <!--<dependency>-->
-        <!--<groupId>org.uniknow.spring</groupId>-->
-        <!--<artifactId>spring-tcc-transactions</artifactId>-->
-        <!--<version>${project.version}</version>-->
-        <!--</dependency>-->
-        <dependency>
-            <groupId>org.jboss.logging</groupId>
-            <artifactId>jboss-logging</artifactId>
-            <version>${jboss-logging.version}</version>
-            <scope>provided</scope>
-        </dependency>
-
-
         <dependency>
             <groupId>org.jboss.resteasy</groupId>
             <artifactId>resteasy-spring</artifactId>

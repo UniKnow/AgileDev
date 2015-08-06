@@ -39,15 +39,12 @@
  */
 package org.uniknow.agiledev.tutorial.rest.api.domain;
 
-import org.jboss.narayana.compensations.api.CompensationScoped;
-
 import java.util.Date;
 import java.util.List;
 
 /**
  * Domain entity for persisting the posts
  */
-@CompensationScoped
 public class MyPost {
 
     private int id = -1;

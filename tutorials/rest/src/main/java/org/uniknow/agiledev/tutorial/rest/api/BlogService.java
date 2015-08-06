@@ -39,7 +39,6 @@
  */
 package org.uniknow.agiledev.tutorial.rest.api;
 
-import org.jboss.narayana.compensations.api.Compensatable;
 import org.uniknow.agiledev.tutorial.rest.api.domain.MyPost;
 
 import java.util.List;

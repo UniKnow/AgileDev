@@ -111,6 +111,8 @@
         <module>dbc4java</module>
         <module>cucumber-reporting</module>
         <module>cucumber-reporting-example</module>
+        <module>spring-cqrs</module>
+        <module>spring-event-sourcing</module>
         <module>spring-tcc-transactions</module>
         <module>narayana-tomcat-listener</module>
         <module>tutorials/archimate</module>
@@ -447,87 +449,6 @@
             </plugin>
 
             <!--
-            Plugin to create PDF
-            -->
-            <!--<plugin>-->
-                <!--<artifactId>maven-resources-plugin</artifactId>-->
-                <!--<version>2.7</version>-->
-                <!--<configuration>-->
-                    <!--<outputDirectory>${basedir}/target/pdf/images</outputDirectory>-->
-                    <!--<resources>-->
-                        <!--<resource>-->
-                            <!--<directory>src/site/resources/ddd/images</directory>-->
-                        <!--</resource>-->
-                        <!--<resource>-->
-                            <!--<directory>src/site/resources/eip/images</directory>-->
-                        <!--</resource>-->
-                    <!--</resources>-->
-                <!--</configuration>-->
-                <!--<executions>-->
-                    <!--<execution>-->
-                        <!--&lt;!&ndash; Copy images of DDD and EIP to common images folder &ndash;&gt;-->
-                        <!--<id>copy-images</id>-->
-                        <!--<phase>site</phase>-->
-                        <!--<goals>-->
-                            <!--<goal>copy-resources</goal>-->
-                        <!--</goals>-->
-                        <!--<configuration>-->
-                            <!--<outputDirectory>${basedir}/target/pdf/images</outputDirectory>-->
-                            <!--<resources>-->
-                                <!--<resource>-->
-                                    <!--<directory>src/site/resources/ddd/images</directory>-->
-                                <!--</resource>-->
-                                <!--<resource>-->
-                                    <!--<directory>src/site/resources/eip/images</directory>-->
-                                <!--</resource>-->
-                            <!--</resources>-->
-                        <!--</configuration>-->
-                    <!--</execution>-->
-                <!--</executions>-->
-            <!--</plugin>-->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-pdf-plugin</artifactId>
-                <version>1.3</version>
-                <executions>
-                    <execution>
-                        <id>pdf</id>
-                        <phase>site</phase>
-                        <goals>
-                            <goal>pdf</goal>
-                        </goals>
-                        <configuration>
-                            <outputDirectory>
-                                ${project.reporting.outputDirectory}
-                            </outputDirectory>
-                            <includeReports>false</includeReports>
-                        </configuration>
-                    </execution>
-                </executions>
-                <dependencies>
-                    <!--
-                    allows confluence syntax for site documentation. To use it
-                    place files below src/site/confluence/[filename].confluence
-                    -->
-                    <dependency>
-                        <groupId>org.apache.maven.doxia</groupId>
-                        <artifactId>doxia-module-confluence</artifactId>
-                        <version>${doxia.version}</version>
-                    </dependency>
-
-                    <!--
-                    allows markdown syntax for site documentation. To use it
-                    place files below src/site/markdown/[filename].md
-                    -->
-                    <dependency>
-                        <groupId>org.apache.maven.doxia</groupId>
-                        <artifactId>doxia-module-markdown</artifactId>
-                        <version>${doxia.version}</version>
-                    </dependency>
-                </dependencies>
-            </plugin>
-
-            <!--
             Note: ensure the proper GitHub authentication settings are included
             in your settings.xml
             -->
@@ -670,6 +591,98 @@
                                 </goals>
                             </execution>
                         </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+
+        <profile>
+            <id>generate-PDF</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <artifactId>maven-resources-plugin</artifactId>
+                        <version>2.7</version>
+                        <configuration>
+                            <outputDirectory>${basedir}/target/pdf/images
+                            </outputDirectory>
+                            <resources>
+                                <resource>
+                                    <directory>src/site/resources/ddd/images
+                                    </directory>
+                                </resource>
+                                <resource>
+                                    <directory>src/site/resources/eip/images
+                                    </directory>
+                                </resource>
+                            </resources>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <!-- Copy images of DDD and EIP to common images folder -->
+                                <id>copy-images</id>
+                                <goals>
+                                    <goal>copy-resources</goal>
+                                </goals>
+                                <configuration>
+                                    <outputDirectory>
+                                        ${basedir}/target/pdf/images
+                                    </outputDirectory>
+                                    <resources>
+                                        <resource>
+                                            <directory>
+                                                src/site/resources/ddd/images
+                                            </directory>
+                                        </resource>
+                                        <resource>
+                                            <directory>
+                                                src/site/resources/eip/images
+                                            </directory>
+                                        </resource>
+                                    </resources>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-pdf-plugin</artifactId>
+                        <version>1.3</version>
+                        <executions>
+                            <execution>
+                                <id>pdf</id>
+                                <goals>
+                                    <goal>pdf</goal>
+                                </goals>
+                                <configuration>
+                                    <outputDirectory>
+                                        ${project.reporting.outputDirectory}
+                                    </outputDirectory>
+                                    <includeReports>false</includeReports>
+                                </configuration>
+                            </execution>
+                        </executions>
+                        <dependencies>
+                            <!--
+                            allows confluence syntax for site documentation. To use it
+                            place files below src/site/confluence/[filename].confluence
+                            -->
+                            <dependency>
+                                <groupId>org.apache.maven.doxia</groupId>
+                                <artifactId>doxia-module-confluence</artifactId>
+                                <version>${doxia.version}</version>
+                            </dependency>
+
+                            <!--
+                            allows markdown syntax for site documentation. To use it
+                            place files below src/site/markdown/[filename].md
+                            -->
+                            <dependency>
+                                <groupId>org.apache.maven.doxia</groupId>
+                                <artifactId>doxia-module-markdown</artifactId>
+                                <version>${doxia.version}</version>
+                            </dependency>
+                        </dependencies>
                     </plugin>
                 </plugins>
             </build>
