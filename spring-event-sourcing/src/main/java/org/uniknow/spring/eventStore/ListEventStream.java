@@ -37,21 +37,43 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
-package org.uniknow.spring.compensatable.impl;
+package org.uniknow.spring.eventStore;
 
-import org.springframework.stereotype.Component;
-import org.uniknow.spring.compensatable.api.CompensationHandler;
+import java.util.Collections;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
 
-/**
- * Default implementation for compensation handler. This handler won't do
- * anything.
- */
-@Component
-public class DefaultCompensationHandler implements CompensationHandler {
+public class ListEventStream<E extends Event> implements EventStream<Long, E> {
+    private final long version;
+    private final List<E> events;
+
+    public ListEventStream() {
+        this.version = 0;
+        events = Collections.emptyList();
+    }
+
+    public ListEventStream(long version, List<E> events) {
+        this.version = version;
+        this.events = events;
+    }
+
+    public ListEventStream append(List<E> newEvents) {
+        List<E> events = new LinkedList<>(this.events);
+        events.addAll(newEvents);
+        return new ListEventStream(version + 1,
+            Collections.unmodifiableList(events));
+    }
 
     @Override
-    public void compensate() {
-        System.out
-            .println("Compensate of default Compensation handler is invoked");
+    public Iterator<E> iterator() {
+        return new EventStreamIterator(events);
+        // return events.iterator();
     }
+
+    @Override
+    public Long version() {
+        return version;
+    }
+
 }

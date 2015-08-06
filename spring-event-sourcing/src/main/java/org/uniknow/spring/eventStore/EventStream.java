@@ -37,13 +37,13 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
-package org.uniknow.spring.compensatable.impl;
+package org.uniknow.spring.eventStore;
 
 /**
- * Created by mase on 7/27/2015.
+ * Returns stream of events with status OK
+ * 
+ * @param <V>
  */
-public enum CompensatableTransactionState {
-
-    TRY, COMPENSATED, CONFIRMED;
-
+public interface EventStream<V, E extends Event> extends Iterable<E> {
+    V version();
 }

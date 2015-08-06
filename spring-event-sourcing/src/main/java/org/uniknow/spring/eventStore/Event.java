@@ -37,24 +37,22 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
-package org.uniknow.agiledev.tutorial.rest.impl;
-
-import org.jboss.narayana.compensations.api.CompensationHandler;
-import org.uniknow.agiledev.tutorial.rest.api.domain.MyPost;
-
-import javax.inject.Inject;
+package org.uniknow.spring.eventStore;
 
 /**
- * Class via which added posts can be removed.
+ * Created by mase on 8/4/2015.
  */
-public class RevertPost implements CompensationHandler {
+public interface Event {
 
-    // @Inject
-    // MyPost post;
+    /**
+     * Returns the state of the Event
+     */
+    EventState getState();
 
-    @Override
-    public void compensate() {
-        System.out.println("Reverting post");
-        throw new RuntimeException("Error during compensate");
-    }
+    /**
+     * Changes state of Event. When state of Event becomes REJECTED it will no
+     * longer be included in EventStream/
+     */
+    void changeState(EventState state);
+
 }

@@ -37,15 +37,17 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
-package org.uniknow.spring.compensatable.api;
+package org.uniknow.spring.eventStore;
 
-import org.springframework.stereotype.Component;
+import java.util.List;
+import java.util.UUID;
 
-/**
- * Implementation of compensation handler logic, to be used in the case where
- * work annotated with Compensate requires compensation.
- */
-public interface CompensationHandler {
+// import rx.Observable;
 
-    void compensate();
+public interface EventStore<V, E extends Event> {
+    EventStream<Long, E> loadEventStream(UUID aggregateId);
+
+    void store(UUID aggregateId, long version, List<E> events);
+
+    // Observable<Event> all();
 }

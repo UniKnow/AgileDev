@@ -37,23 +37,12 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
-package org.uniknow.spring.compensatable.impl;
-
-import org.springframework.transaction.TransactionException;
+package org.uniknow.spring.eventStore;
 
 /**
- * Created by mase on 7/27/2015.
+ * State of Event. A event can be OK or REJECTED. In case of REJECTED the event
+ * should be ignored.
  */
-public class CompensatableTransactionException extends TransactionException {
-
-    /**
-     * Constructor for CompensatableTransactionException.
-     * 
-     * @param msg
-     *            the detail message
-     */
-    public CompensatableTransactionException(String msg) {
-        super(msg);
-    }
-
+public enum EventState {
+    OK, REJECTED;
 }

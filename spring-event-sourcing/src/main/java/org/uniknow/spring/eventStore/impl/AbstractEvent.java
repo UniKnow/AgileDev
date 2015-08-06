@@ -37,20 +37,33 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
-package org.uniknow.spring.compensatable.impl;
+package org.uniknow.spring.eventStore.impl;
 
-import org.springframework.stereotype.Component;
-import org.uniknow.spring.compensatable.api.ConfirmationHandler;
+import org.uniknow.spring.eventStore.Event;
+import org.uniknow.spring.eventStore.EventState;
 
 /**
- * Default implementation for confirmation handler. This handler won't do
- * anything.
+ * Basic implementation of Event
  */
-@Component
-public class DefaultConfirmationHandler implements ConfirmationHandler {
+public abstract class AbstractEvent implements Event {
+    private EventState state = EventState.OK;
 
-    public void confirm() {
-        System.out
-            .println("Confirm of default Confirmation handler is invoked");
+    /**
+     * Returns the state of the Event
+     */
+    @Override
+    public final EventState getState() {
+        return state;
+    }
+
+    /**
+     * Changes state of Event. When state of Event becomes REJECTED it will no
+     * longer be included in EventStream/
+     * 
+     * @param state
+     */
+    @Override
+    public final void changeState(EventState state) {
+        this.state = state;
     }
 }
