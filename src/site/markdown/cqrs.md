@@ -30,3 +30,7 @@ So far there are the following benefits:
 
 * Handling complexity - a complex domain may be easier to tackle by using CQRS.
 * Handling high performance applications - CQRS allows you to separate the load from reads and writes allowing you to scale each independently.
+
+## See also
+
+* [Event Sourcing](event-sourcing) - alternative approach for persisting entities.

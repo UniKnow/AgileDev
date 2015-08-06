@@ -27,6 +27,7 @@
             <item name="Semantic versioning" ref="semantic-versioning.md"/>
             <item name="Side effect free functions"
                   ref="side_effect_free_functions.md"/>
+            <item name="Specification by Example" ref="specification-by-example.md"/>
         </item>
 
         <item name="Patterns" ref="patterns.md">
@@ -66,6 +67,7 @@
                       ref="eip/exclusive-consumer.md"/>
                 <item name="Message Router" ref="eip/message-router.md"/>
             </item>
+            <item name="Event Sourcing" ref="event-sourcing.md"/>
             <item name="Exception Handling" ref="exception-handling.md"/>
             <item name="Microservice Architecture"
                   ref="microservice-architecture.md"/>
