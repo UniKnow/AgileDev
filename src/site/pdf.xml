@@ -73,6 +73,7 @@
             <item name="Microservice Architecture"
                   ref="microservice-architecture.md">
                 <item name="Aggregator microservice Design Pattern" ref="aggregator.md"/>
+                <item name="Chained microservice Design Pattern" ref="chained.md"/>
                 <item name="Proxy microservice Design Pattern" ref="proxy.md"/>
             </item>
             <item name="Mocks" ref="mocks.md"/>
