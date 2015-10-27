@@ -71,6 +71,7 @@
                 <item name="Event Sourcing" href="event-sourcing.html"/>
                 <item name="Microservice Architecture" href="microservice-architecture.html">
                     <item name="Aggregator Microservice Design Pattern" href="aggregator.html"/>
+                    <item name="Proxy microservice Design Pattern" href="proxy.html"/>
                 </item>
                 <item name="Mocks" ref="mocks.md"/>
                 <item name="Monitoring" href="monitoring.html">

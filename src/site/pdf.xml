@@ -72,7 +72,8 @@
             <item name="Exception Handling" ref="exception-handling.md"/>
             <item name="Microservice Architecture"
                   ref="microservice-architecture.md">
-                <item name="Aggregator Microservice Design Pattern" ref="aggregator.md"/>
+                <item name="Aggregator microservice Design Pattern" ref="aggregator.md"/>
+                <item name="Proxy microservice Design Pattern" ref="proxy.md"/>
             </item>
             <item name="Mocks" ref="mocks.md"/>
             <item name="Monitoring" ref="monitoring.md">

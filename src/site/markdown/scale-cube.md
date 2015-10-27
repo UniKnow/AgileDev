@@ -6,7 +6,7 @@ The scale cube is a 3 dimensional scalability model:
 
 ## X-axis scaling
 
-X-axis scaling consists of running multiple instances of an application behind a load balancer/ If there are N instances, then each instance handles 1/N of the load. This form of scaling is a commonly approach of scaling and is usually done by running instances of the application behind a load balancer.
+X-axis scaling consists of running multiple instances of an application behind a load balancer. If there are N instances, then each instance handles 1/N of the load. This form of scaling is a commonly approach of scaling and is usually done by running instances of the application behind a load balancer.
 One drawback of this approach is that because each instance potentially accesses all data, caches require more memory to be effective. Another problem with this approach is that it does not tackle the problems of increasing development and application complexity.
 
 ## Y-axis scaling

@@ -1,4 +1,4 @@
-# Aggregator Microservice Design Pattern
+# Aggregator microservice Design Pattern
 
 In its simplest form an Aggregator would be a simple web page that invokes multiple services to achieve the functionality required by the application. Since each service is exposed using a lightweight interface (for example REST), the web page can retrieve the data and process/display it accordingly.
 
