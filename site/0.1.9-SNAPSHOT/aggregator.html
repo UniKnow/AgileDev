@@ -9,7 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="Date-Revision-yyyymmdd" content="20151027" />
     <meta http-equiv="Content-Language" content="en" />
-    <title>AgileDev - Code Reviews</title>
+    <title>AgileDev - Aggregator microservice Design Pattern</title>
     <link rel="stylesheet" href="./css/apache-maven-fluido-1.3.0.min.css" />
     <link rel="stylesheet" href="./css/site.css" />
     <link rel="stylesheet" href="./css/print.css" media="print" />
@@ -87,7 +87,7 @@
           <i class="none"></i>
         Javadoc guidelines</a>
             </li>
-                                                                                                                                                                                                                                          
+                                                                                                                                                                                                                                
       <li>
     
                           <a href="software-design-principles.md" title="Software Design Principles">
@@ -102,10 +102,12 @@
         Behavior Driven Development</a>
             </li>
                       
-      <li class="active">
+      <li>
     
-            <a href="#"><i class="none"></i>Code Reviews</a>
-          </li>
+                          <a href="code-reviews.html" title="Code Reviews">
+          <i class="none"></i>
+        Code Reviews</a>
+            </li>
                       
       <li>
     
@@ -164,7 +166,7 @@
             </li>
               </ul>
         </li>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
       <li>
     
                           <a href="patterns.html" title="Patterns">
@@ -262,7 +264,7 @@
           <i class="none"></i>
         Event Sourcing</a>
             </li>
-                                                                                                                                          
+                                                                                                                                                    
       <li>
     
                           <a href="microservice-architecture.html" title="Microservice Architecture">
@@ -270,12 +272,10 @@
         Microservice Architecture</a>
                     <ul class="nav nav-list">
                       
-      <li>
+      <li class="active">
     
-                          <a href="aggregator.html" title="Aggregator Microservice Design Pattern">
-          <i class="none"></i>
-        Aggregator Microservice Design Pattern</a>
-            </li>
+            <a href="#"><i class="none"></i>Aggregator Microservice Design Pattern</a>
+          </li>
                       
       <li>
     
@@ -591,33 +591,12 @@
                 
         <div id="bodyColumn"  class="span9" >
                                   
-            <h1>Code Reviews</h1>
-<p>Code reviews are a systematic examination (also known as peer reviews) of source code. It is intended to find and fix mistakes overlooked in the initial development phase, improving both the overall quality of software and the developers skills.</p>
-<div class="section">
-<h2>Best practices code reviews<a name="Best_practices_code_reviews"></a></h2>
-
-<ul>
-  
-<li><i>Review fewer than 200-400 lines of code at a time</i> - For optimal effectiveness, developers should review fewer than 200-400 lines of code (loc) at a time.</li>
-  
-<li><i>Aim for an inspection rate of fewer than 300-500 lines of code per hour</i> - Take your time with code review. Research has shown that you will achieve optimal results at an inspection rate of less than 300-500 lines of code per hour.</li>
-  
-<li><i>Never review code for more than 90 minutes at a stretch</i> - After about 60 minutes reviewers simply get tired and stop finding additional defects. It&#x2019;s generally known that when people engage in any activity requiring concentrated effort, performance starts dropping off after 60-90 minutes. Given these human limitations, a reviewe will probably not be able to review more than 300-600 lines of code before performance drop. On the flip side, you should always spend at least 5 minutes reviewing code, even if it&#x2019;s just one line. Often, a single line can have consequences throughout the system, and it&#x2019;s worth the five minutes to think through the possible effects that a change could have.</li>
-  
-<li><i>Have authors annotate source code before the review begins</i> - Annotations guide the reviewers through the changes, showing which files to look at first and defending the reason and methods for each code modification. These notes are not comments in the code, but rather comments given to other reviewers. By annotating the source code the developer is required to double-check his work which will uncover many of the defects before the review even begins.</li>
-  
-<li><i>Establish quantifiable goals for code reviews, and capture metrics so you can improve your process</i> - When you have defined specific goals, you will be able to judge whether peer review is truly achieving the results that you require. It&#x2019;s best to start with external metrics such as &#x201c;reduce support calls by 20%&#x201d;, or &#x201c;halve the percentage of defects injected by development&#x201d;. However, it can take a while before external metrics show results.</li>
-  
-<li><i>Use checklists</i> - Checklists are a highly recommended way to check for the things that you might forget to do. Omissions are the hardest defects to find. as soon as you start recording your defects in a checklist, you will start making fewer of these errors.</li>
-  
-<li><i>Verify that the defects are actually fixed</i> - Many teams that review code don&#x2019;t have a good way of tracking defects found during review and ensuring that bugs are actually fixed before the review is complete.</li>
-  
-<li><i>Foster a good review culture in which finding defects is viewed positively</i> - It&#x2019;s easy to see defects as a bad thing, but fostering a negative attitude toward defects found can sour a whole team. It must be promoted that defects are positive. After all, each one is an opportunity to improve the code, and the goal of the code review process is to make the code as good as possible. Every defect found and fixed in peer review is a defect that a customer never sees and another problem QA doesn&#x2019;t have to spend time tracking down. Reviews present opportunities for all developers to correct bad habits, learn new tricks, and expand their capabilities.</li>
-  
-<li><i>Beware of the big brother effect</i> - Metrics are vital for process measurement, which form the basis for process improvement. If developers believe that metrics will be used against them, not only will they ber hostile to the process, but they will probably focus on improving their metrics rather than truly writing better code and being more productive.</li>
-  
-<li><i>Review at least part of the code to benefit from the ego effect</i> - The ego effect drives developers to write better code because they know that others will be looking at their code and metrics. No one wants to be known as the guy who makes all those mistakes. The ego effect drives developers to review their own work carefully before passing it on to others.</li>
-</ul></div>
+            <h1>Aggregator microservice Design Pattern</h1>
+<p>In its simplest form an Aggregator would be a simple web page that invokes multiple services to achieve the functionality required by the application. Since each service is exposed using a lightweight interface (for example REST), the web page can retrieve the data and process/display it accordingly.</p>
+<p>Another option for Aggregator is where not visualization is required, and instead it is just a higher level composite microservice which can be consumed by other services. In this case, the aggregator would just collect the data from each of the individual microservice, apply business logic to it, and further publish it as a REST endpoint. This can then be consumed by other services that need it.</p>
+<p>This design pattern follows the <a href="dry.md">DRY</a> principle. If there are multiple services that need to access multiple services, then it is recommended to abstract that logic into a composite microservice and aggregate that logic into one service. An advantage of abstracting at this level is that the individual services can evolve independently and the business need is still provided by the composite microservice.</p>
+<p>Note that each individual microservice has its own (optional) caching and database. If the Aggregator is a composite microservice, then it may have its own caching and database layer as well.</p>
+<p>An Aggregator can scale independently on <a href="scale-cube.md">X-axis</a> and <a href="scale-cube.md">Z-axis</a> as well.</p>
                   </div>
             </div>
           </div>
