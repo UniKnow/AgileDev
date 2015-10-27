@@ -27,6 +27,7 @@
                 <item name="Code Reviews" href="code-reviews.html"/>
                 <item name="Defensive Programming" href="defensive-programming.html"/>
                 <item name="Design by Contract" href="dbc.html"/>
+                <item name="Don't Repeat Yourself" href="dry.html" />
                 <item name="Intention revealing interfaces" href="intention_revealing_interfaces.html"/>
                 <item name="Reactive System" href="reactive-system.html"/>
                 <item name="Semantic versioning" href="semantic-versioning.html"/>
@@ -68,7 +69,9 @@
                 </item>
                 <item name="Exception Handling" href="exception-handling.html"/>
                 <item name="Event Sourcing" href="event-sourcing.html"/>
-                <item name="Microservice Architecture" href="microservice-architecture.html"/>
+                <item name="Microservice Architecture" href="microservice-architecture.html">
+                    <item name="Aggregator Microservice Design Pattern" href="aggregator.html"/>
+                </item>
                 <item name="Mocks" ref="mocks.md"/>
                 <item name="Monitoring" href="monitoring.html">
                     <item name="Canary endpoint monitoring" href="canary-endpoint-monitoring.html"/>
@@ -76,6 +79,7 @@
                     <item name="Synthetic monitoring" href="synthetic-monitoring.html"/>
                 </item>
                 <item name="Monolithic Architecture" href="monolithic-architecture.html"/>
+                <item name="Scale Cube" href="scale-cube.html"/>
                 <item name="Self registration" href="self-registration.html"/>
                 <item name="Server Side Discovery" href="server-side-discovery.html"/>
                 <item name="Service Connector" href="service-connector.html"/>

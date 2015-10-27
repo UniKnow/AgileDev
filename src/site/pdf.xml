@@ -21,6 +21,7 @@
             <item name="Code Reviews" ref="code-reviews.md"/>
             <item name="Defensive Programming" ref="defensive-programming.md"/>
             <item name="Design by Contract" ref="dbc.md"/>
+            <item name="Don't Repeat Yourself" ref="dry.md" />
             <item name="Intention revealing interfaces"
                   ref="intention_revealing_interfaces.md"/>
             <item name="Reactive System" ref="reactive-system.md"/>
@@ -70,7 +71,9 @@
             <item name="Event Sourcing" ref="event-sourcing.md"/>
             <item name="Exception Handling" ref="exception-handling.md"/>
             <item name="Microservice Architecture"
-                  ref="microservice-architecture.md"/>
+                  ref="microservice-architecture.md">
+                <item name="Aggregator Microservice Design Pattern" ref="aggregator.md"/>
+            </item>
             <item name="Mocks" ref="mocks.md"/>
             <item name="Monitoring" ref="monitoring.md">
                 <item name="Canary endpoint monitoring" ref="canary-endpoint-monitoring.md"/>
@@ -79,6 +82,7 @@
             </item>
             <item name="Monolithic Architecture"
                   ref="monolithic-architecture.md"/>
+            <item name="Scale Cube" ref="scale-cube.md"/>
             <item name="Self registration" ref="self-registration.md"/>
             <item name="Server Side Discovery" ref="server-side-discovery.md"/>
             <item name="Service Connector" ref="service-connector.md"/>
