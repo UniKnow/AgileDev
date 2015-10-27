@@ -45,6 +45,29 @@ Now the client is required to specify an `Accept` header when using the API. Whe
     @Produces({ MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON,
             "application/agiledev.blog.v2+xml", "application/agiledev.blog.v2+json" })
 
+## Content Negotiation vs URI
+
+There are a number of ways to version your API and within this paragraph we will discuss the most common ways.
+
+* Versions in the URI:
+* Content negotiation: A client specifies the type of resource they want back via the `Accepts` header, and that resource is versioned, (for example `Accepts: application/vnd.clientlist.v1+json`). If the header is missing you could return a 4xx response.
+
+### Pro and Cons versions in the URI
+
+**Con**
+
+* If you have versions in your URL, then the same resource has two resource identifiers, for example `/V1/clients/1` and `/V2/clients/2`.
+
+### Pro and Cons versioning by content negotiation
+
+**Pro**
+
+* The http accept header versioning allows you to version on each resource independently.
+
+**Con**
+
+* Putting a version number in an arbitrary header or the URL requires a layer 7 load balancer
+
 <hr/>
 **TODO**
 
