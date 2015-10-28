@@ -413,6 +413,18 @@ In additional to successful responses (response code `2xx`) consider adding cach
 
 Implement clients and servers such that they do not fail when they do not find expected custom headers.
 
+### Use Rate limiting to prevent abuse
+
+To prevent abuse, it is standard practice to add some sort of rate limiting to an API. RFC 6585 introduced a HTTP status code `429` Too Many Requests to accommodate this.
+
+However, it can be very useful to notify the consumer of their limits before they actually hit it. This is an area that currently lacks standards but has a number of popular conventions using HTTP response headers.
+
+At a minimum, include the following headers (using Twitter's naming conventions as headers typically don't have mid-word capitalization):
+
+    X-Rate-Limit-Limit - The number of allowed requests in the current period
+    X-Rate-Limit-Remaining - The number of remaining requests in the current period
+    X-Rate-Limit-Reset - The number of seconds left in the current period
+
 ## Media types
 
 To identify the form of data that is communicated within a request or response message body, the `Content-Type` header value references a media type.
