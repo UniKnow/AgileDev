@@ -79,7 +79,9 @@
             <item name="Best practices REST API" href="best-practices-rest-api.html">
                 <item name="Resource Archetypes" href="resource-archetypes.html"/>
             </item>
+            <item name="API Design" href="api-design.html"/>
             <item name="Versioning REST API" href="versioning-rest-api.html"/>
+            <item name="Distributed transactions with REST" href="distributed-transactions-with-rest.html" />
         </menu>
     </body>
 </project>

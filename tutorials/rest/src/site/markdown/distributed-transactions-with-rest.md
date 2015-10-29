@@ -41,13 +41,6 @@ One of the guarantees of classic transactions is that every change is temporary 
 
 The goal of cancel is to revert changes across multiple participants in case of failures within a transaction. The cancellation mechanism will be internal and unconditional within each REST service. This way, each REST service will eventually cancel after some time-out.
 
-<hr/>
-**TODO**
-Try how we can generically trace resource changes.
-* Options are to store for each change in the resource status a separate entry which is identified by a unique ID. The resource status becomes permanent when confirm is received.
-* Other approach might be using [Event Sourcing](http://martinfowler.com/eaaDev/EventSourcing.html).
-<hr/>
-
 The goal of confirm is to let the REST service know that the workflow has been ended successfully. If by default everything will be cancelled there needs to be a way to perform otherwise. Within this solution that will be done via an explicit confirm request to the REST service(s) involved. In order to do this with REST the minimal requirement is a URI providing the functionality to confirm the resource state changes. Only the REST service itself should determine what that URI is. Within the response there should be an indication on when the URI will expire, indicating when the REST service itself will cancel automatically.
 
 It is up to the Client and REST service to negotiate an appropriate timeout duration.
@@ -69,7 +62,8 @@ Recovery is needed in two typically cases:
 
 ## See also:
 
-* [Narayana](http://narayana.io/index.html) - Transaction toolkit which provides support for REST transactions
+* [spring-tcc-transaction](https://github.com/UniKnow/AgileDev/tree/develop/spring-tcc-transactions) - Spring implementation of Try Cancel/Confirm methodology.
+* [CQRS Event Sourcing](https://github.com/UniKnow/AgileDev/tree/develop/tutorials/cqrs-eventsourcing) - Example of CQRS event sourcing including Try Cancel/Confirm methodology.
 
 
 
