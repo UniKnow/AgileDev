@@ -53,7 +53,7 @@
         <item name="Best practices REST API" ref="best-practices-rest-api.md">
             <item name="Resource Archetypes" ref="resource-archetypes.md"/>
         </item>
-        <item name="API Design" ref="api-design.md"/>
+        <item name="API Design" ref="documenting-rest-interfaces.md"/>
         <item name="Versioning REST API" ref="versioning-rest-api.md"/>
         <item name="Distributed transactions with REST" ref="distributed-transactions-with-rest.md" />
         <item name="Glossary" ref="glossary.md" />
