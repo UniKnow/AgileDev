@@ -333,4 +333,29 @@ public class ExampleValidationConstraintTest {
         example.setUrl(url);
         assertEquals(url, example.getUrl());
     }
+
+    /**
+     * Verifies constraints are applied on methods with scope protected
+     */
+    @Test(expected = ValidationException.class)
+    public void invokeMethodScopeProtected() {
+        example.applyConstraintMethodScopeProtected(null);
+    }
+
+    /**
+     * Verifies constraints are applied on methods with scope package
+     */
+    @Test(expected = ValidationException.class)
+    public void invokeMethodScopePackage() {
+        example.applyConstraintMethodScopePackage(null);
+    }
+
+    /**
+     * Verifies constraints is not applied on methods with scope package
+     */
+    @Test
+    public void invokeMethodScopePrivate() {
+        example.applyConstraintMethodScopePrivate();
+    }
+
 }

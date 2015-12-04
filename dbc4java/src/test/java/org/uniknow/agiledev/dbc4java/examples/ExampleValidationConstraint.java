@@ -220,4 +220,18 @@ public class ExampleValidationConstraint {
     public String getUrl() {
         return url;
     }
+
+    protected void applyConstraintMethodScopeProtected(@NotNull Object value) {
+    }
+
+    void applyConstraintMethodScopePackage(@NotNull Object value) {
+    }
+
+    public void applyConstraintMethodScopePrivate() {
+        applyConstraintMethodScopePrivate(null);
+    }
+
+    private void applyConstraintMethodScopePrivate(@NotNull Object value) {
+    }
+
 }

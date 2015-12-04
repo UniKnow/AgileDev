@@ -42,6 +42,7 @@ package org.uniknow.agiledev.dbc4java;
 import java.lang.reflect.Method;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.logging.Logger;
 
 import javax.validation.*;
 import javax.validation.executable.ExecutableValidator;
@@ -64,6 +65,9 @@ import org.aspectj.lang.reflect.MethodSignature;
 @Aspect
 public class ValidationInterceptor {
 
+    private static final Logger LOGGER = Logger
+        .getLogger(ValidationInterceptor.class.getName());
+
     private Validator validator;
 
     public ValidationInterceptor() {
@@ -80,20 +84,24 @@ public class ValidationInterceptor {
     @After("execution((@org.uniknow.agiledev.dbc4java.Validated *).new(..))")
     public void validateConstructorInvocation(JoinPoint joinPoint)
         throws Throwable {
-        // Validate invariants class
-        Set<ConstraintViolation<Object>> violations = validator
-            .validate(joinPoint.getTarget());
-        if (!violations.isEmpty()) {
-            throw new ConstraintViolationException(
-                new HashSet<ConstraintViolation<?>>(violations));
+        Object instance = joinPoint.getTarget();
+        if (instance != null) {
+            // Validate invariants class
+            Set<ConstraintViolation<Object>> violations = validator
+                .validate(instance);
+            if (!violations.isEmpty()) {
+                throw new ConstraintViolationException(
+                    new HashSet<ConstraintViolation<?>>(violations));
+            }
         }
     }
 
     /**
-     * Matches any public method, beside equals and hashcode, in a class
+     * Matches any method except private, equals and hashcode, in a class
      * annotated with `@Validated`.
      */
-    @Around("execution(public * (@org.uniknow.agiledev.dbc4java.Validated *).*(..)) && !execution( * *.equals(..)) && !execution(* *.hashCode(..))")
+    @Around("!execution(private * *.*(..)) && execution(* (@org.uniknow.agiledev.dbc4java.Validated *).*(..))"
+        + "&& !execution(* *.equals(..)) && !execution(* *.hashCode(..))")
     public Object validateMethodInvocation(ProceedingJoinPoint pjp)
         throws Throwable {
 
@@ -106,16 +114,19 @@ public class ValidationInterceptor {
 
         ExecutableValidator executableValidator = validator.forExecutables();
 
-        // System.out.println("Validating " + method);
-
-        // Validate constraint(s) method parameters.
-        Object[] arguments = pjp.getArgs();
-        if ((arguments != null) && (arguments.length > 0)) {
-            violations = executableValidator.validateParameters(instance,
-                method, arguments);
-            if (!violations.isEmpty()) {
-                throw new ConstraintViolationException(violations);
+        if ((instance != null) && (method != null)) {
+            // Validate constraint(s) method parameters.
+            Object[] arguments = pjp.getArgs();
+            if ((arguments != null) && (arguments.length > 0)) {
+                violations = executableValidator.validateParameters(instance,
+                    method, arguments);
+                if (!violations.isEmpty()) {
+                    throw new ConstraintViolationException(violations);
+                }
             }
+        } else {
+            LOGGER
+                .fine("Skipped validation method parameters while method/instance is null");
         }
 
         result = pjp.proceed(); // Execute the method
@@ -127,17 +138,24 @@ public class ValidationInterceptor {
                 throw new ConstraintViolationException(
                     new HashSet<ConstraintViolation<?>>(violations));
             }
-        }
 
-        if (!signature.getReturnType().equals(Void.TYPE)) {
-            // Validate constraint return value method
-            violations = executableValidator.validateReturnValue(instance,
-                method, result);
-            if (!violations.isEmpty()) {
-                throw new ConstraintViolationException(violations);
+            if ((method != null)
+                && !signature.getReturnType().equals(Void.TYPE)) {
+                // Validate constraint return value method
+                violations = executableValidator.validateReturnValue(instance,
+                    method, result);
+                if (!violations.isEmpty()) {
+                    throw new ConstraintViolationException(violations);
+                }
+            } else {
+                LOGGER
+                    .fine("Skipped validation return value while method is null");
             }
-        }
 
+        } else {
+            LOGGER
+                .fine("Skipped validation invariants and return value while method/instance is null");
+        }
         return result;
     }
 
