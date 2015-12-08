@@ -53,7 +53,7 @@
         <maven.build.timestamp.format>yyyy-MM-dd HH:mm</maven.build.timestamp.format>
 
         <!-- Version information dependencies -->
-        <aspectj.version>1.8.5</aspectj.version>
+        <aspectj.version>1.8.7</aspectj.version>
         <cglib.version>3.1</cglib.version>
         <cucumber.version>1.1.5</cucumber.version>
         <doxia.version>1.5</doxia.version>
