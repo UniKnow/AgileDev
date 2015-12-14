@@ -111,6 +111,7 @@
         <module>dbc4java</module>
         <module>cucumber-reporting</module>
         <module>cucumber-reporting-example</module>
+        <module>embedded-mysql</module>
         <module>spring-cqrs</module>
         <module>spring-event-sourcing</module>
         <module>spring-tcc-transactions</module>
