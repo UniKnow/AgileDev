@@ -1,5 +1,9 @@
 language: java
 
+# Use JAva 1.8 for this project
+jdk:
+  - oraclejdk8
+
 # setting install to true to avoid unnecessary build
 install: true
 
