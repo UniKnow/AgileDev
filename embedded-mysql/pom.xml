@@ -11,6 +11,7 @@
         <relativePath>../parent/pom.xml</relativePath>
     </parent>
 
+    <groupId>org.uniknow.agiledev.support</groupId>
     <artifactId>embedded-mysql</artifactId>
 
     <name>Embedded MySQL Server</name>

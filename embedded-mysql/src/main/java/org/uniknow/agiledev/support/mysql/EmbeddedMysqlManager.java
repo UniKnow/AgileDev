@@ -37,7 +37,7 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
-package com.tomtom.support.mysql;
+package org.uniknow.agiledev.support.mysql;
 
 import java.io.File;
 import java.io.IOException;
@@ -67,18 +67,6 @@ import com.mysql.management.MysqldResourceI;
  * <p/>
  * See http://dev.mysql.com/doc/refman/5.1/en/connector-mxj.html for more
  * details
- * 
- * 
- * @since October 2014.
- * @author a.stoisavljevic
- * 
- *         As from Spring 3.1.3 {@link SimpleJdbcTemplate} and
- *         {@link SimpleJdbcTestUtils} are deprecated we should use
- *         {@link JdbcTemplate} and {@link JdbcTestUtils}. Therefore latest
- *         change is to amend those deprecated Spring Framework classes for
- *         newer once
- * 
- * @see line 131 and line 137
  */
 public class EmbeddedMysqlManager {
     private final Logger log = LoggerFactory.getLogger(getClass());

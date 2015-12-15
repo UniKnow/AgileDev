@@ -1,0 +1,115 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>org.uniknow.agiledev</groupId>
+        <artifactId>parent</artifactId>
+        <version>0.1.10-SNAPSHOT</version>
+    </parent>
+
+    <groupId>org.uniknow.agiledev.support.maven-embedded-mysql</groupId>
+    <artifactId>basic-usage</artifactId>
+    <packaging>jar</packaging>
+
+    <properties>
+        <database.server>127.0.0.1</database.server>
+        <mysql.user>TEST</mysql.user>
+        <mysql.password>TEST</mysql.password>
+        <version.mysql-connector>5.1.26</version.mysql-connector>
+    </properties>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+            </plugin>
+
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>build-helper-maven-plugin</artifactId>
+                <version>1.8</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>reserve-network-port</goal>
+                        </goals>
+                        <configuration>
+                            <portNames>
+                                <portName>mysql.port</portName>
+                            </portNames>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <!-- Instantiate embedded mysql database -->
+            <plugin>
+                <groupId>org.uniknow.agiledev.support</groupId>
+                <artifactId>maven-embedded-mysql</artifactId>
+                <version>${project.version}</version>
+                <configuration>
+                    <user>${mysql.user}</user>
+                    <password>${mysql.password}</password>
+                    <port>${mysql.port}</port>
+                </configuration>
+
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>start</goal>
+                            <goal>stop</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <!-- Create the user and the empty databases -->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>sql-maven-plugin</artifactId>
+                <!--<version>${version.sql-maven-plugin}</version>-->
+
+                <dependencies>
+                    <dependency>
+                        <groupId>mysql</groupId>
+                        <artifactId>mysql-connector-java</artifactId>
+                        <version>${version.mysql-connector}</version>
+                    </dependency>
+                </dependencies>
+
+                <executions>
+                    <execution>
+                        <id>create-databases</id>
+                        <phase>pre-integration-test</phase>
+                        <goals>
+                            <goal>execute</goal>
+                        </goals>
+                        <configuration>
+                            <autocommit>true</autocommit>
+                            <driver>com.mysql.jdbc.Driver</driver>
+                            <url>
+                                jdbc:mysql://${database.server}:${mysql.port}/mysql
+                            </url>
+                            <username>${mysql.user}</username>
+                            <password>${mysql.password}</password>
+                            <sqlCommand>
+                                CREATE USER '${mysql.user}' IDENTIFIED BY
+                                '${mysql.password}';
+                                CREATE DATABASE `TEST-DATABASE`;
+                                <!-- Grant privileges to external users -->
+                                GRANT ALL PRIVILEGES ON *.* TO
+                                '${mysql.user}'@'%' IDENTIFIED BY
+                                '${mysql.password}' WITH GRANT OPTION;
+                                FLUSH PRIVILEGES;
+                            </sqlCommand>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+        </plugins>
+    </build>
+</project>
