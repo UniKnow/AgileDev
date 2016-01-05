@@ -45,6 +45,7 @@ import java.util.*;
 
 import junitparams.internal.*;
 
+import org.junit.Test;
 import org.junit.internal.runners.model.*;
 import org.junit.runner.*;
 import org.junit.runner.notification.*;
@@ -78,8 +79,11 @@ public class BDDRunner extends BlockJUnit4ClassRunner {
             @Override
             protected void computeTestMethods(TestClass testClass) {
                 testMethodsList = new ArrayList<TestMethod>();
+
+                // Include all methods which are annotated with Scenario
                 List<FrameworkMethod> annotatedMethods = getTestClass()
                     .getAnnotatedMethods(Scenario.class);
+
                 for (final FrameworkMethod frameworkMethod : annotatedMethods) {
                     testMethodsList.add(new TestMethod(frameworkMethod,
                         getTestClass()) {
@@ -112,6 +116,8 @@ public class BDDRunner extends BlockJUnit4ClassRunner {
     protected void runChild(FrameworkMethod method, RunNotifier notifier) {
         if (handleIgnored(method, notifier))
             return;
+
+        System.out.println("Processing method " + method);
 
         Statement methodBlock = methodBlock(method);
 

@@ -76,7 +76,7 @@ public class StoryModel implements WithText {
      * Contains scenarios which are covered by this story
      */
     @NotNull
-    private final List<ScenarioModel> scenarios = new ArrayList();
+    private final List<ScenarioModel> scenarios = new ArrayList<>();
 
     private String packageName = "";
 

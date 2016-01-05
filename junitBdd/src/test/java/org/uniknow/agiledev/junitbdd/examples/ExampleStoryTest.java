@@ -63,6 +63,14 @@ public class ExampleStoryTest {
     }
 
     /**
+     * Regular test
+     */
+    @Test
+    public void testRegularTest() {
+        assertTrue(false);
+    }
+
+    /**
      * Example Scenario
      */
     @Scenario("Example of scenario with all possible steps")
