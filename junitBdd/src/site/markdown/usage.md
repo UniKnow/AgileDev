@@ -1,5 +1,7 @@
 # Usage JUnitBDD
 
+*NOTE:* Only methods which are annotated with `@Scenario` will be executed during test!
+
     /**
      * Example of unit test, enrich with BDD functionality
      */
