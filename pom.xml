@@ -123,6 +123,7 @@
         <module>tutorials/dbc</module>
         <module>tutorials/ddd</module>
         <module>tutorials/rest</module>
+        <module>tutorials/typescript</module>
     </modules>
 
     <dependencyManagement>
@@ -455,28 +456,28 @@
             Note: ensure the proper GitHub authentication settings are included
             in your settings.xml
             -->
-            <plugin>
-                <groupId>com.github.github</groupId>
-                <artifactId>site-maven-plugin</artifactId>
-                <version>0.11</version>
-                <configuration>
-                    <message>
-                        Creating site for ${project.artifactId},
-                        ${project.version}
-                    </message>
-                    <path>${project.distributionManagement.site.url}</path>
-                    <merge>true</merge>
-                </configuration>
-                <executions>
-                    <execution>
-                        <id>github-site</id>
-                        <goals>
-                            <goal>site</goal>
-                        </goals>
-                        <phase>site</phase>
-                    </execution>
-                </executions>
-            </plugin>
+            <!--<plugin>-->
+                <!--<groupId>com.github.github</groupId>-->
+                <!--<artifactId>site-maven-plugin</artifactId>-->
+                <!--<version>0.11</version>-->
+                <!--<configuration>-->
+                    <!--<message>-->
+                        <!--Creating site for ${project.artifactId},-->
+                        <!--${project.version}-->
+                    <!--</message>-->
+                    <!--<path>${project.distributionManagement.site.url}</path>-->
+                    <!--<merge>true</merge>-->
+                <!--</configuration>-->
+                <!--<executions>-->
+                    <!--<execution>-->
+                        <!--<id>github-site</id>-->
+                        <!--<goals>-->
+                            <!--<goal>site</goal>-->
+                        <!--</goals>-->
+                        <!--<phase>site</phase>-->
+                    <!--</execution>-->
+                <!--</executions>-->
+            <!--</plugin>-->
 
             <!-- ================================================== -->
             <!-- GitFlow plugin								        -->
