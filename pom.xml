@@ -276,6 +276,8 @@
                             <exclude>**/*.iml</exclude>
                             <exclude>target/**</exclude>
                             <exclude>.idea/**</exclude>
+                            <exclude>node/**</exclude>
+                            <exclude>node_modules/**</exclude>
                         </excludes>
 
                     </configuration>

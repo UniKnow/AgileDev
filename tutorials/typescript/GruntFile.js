@@ -62,6 +62,6 @@ module.exports = function( grunt ){
       // more plugin configs go here.
    });
 
-   grunt.registerTask('default',['typescript:compile']);
+   grunt.registerTask('default',['typescript']);
 
 };
