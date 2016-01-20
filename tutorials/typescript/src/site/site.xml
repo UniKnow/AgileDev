@@ -40,9 +40,6 @@
     ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 -->
-<!--
-    http://maven.apache.org/plugins/maven-site-plugin/examples/sitedescriptor.html
--->
 <project xmlns="http://maven.apache.org/DECORATION/1.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/DECORATION/1.0.0 http://maven.apache.org/xsd/decoration-1.0.0.xsd"
@@ -77,6 +74,7 @@
         <menu name="Documentation">
             <item name="Introduction" href="index.html" />
             <item name="Building TypeScript with Maven" href="buildingTypeScriptWithMaven.html" />
+            <item name="Classes" href="classes.html" />
         </menu>
     </body>
 </project>
