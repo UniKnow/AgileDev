@@ -52,6 +52,7 @@
     <toc name="Table of Contents">
         <item name="Introduction" ref="index.md" />
         <item name="Building TypeScript with Maven" ref="buildingTypeScriptWithMaven.md" />
+        <item name="Classes" ref="classes.md" />
     </toc>
 
     <cover>
