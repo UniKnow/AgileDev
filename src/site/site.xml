@@ -66,6 +66,8 @@
                     <item name="Correlation ID" href="eip/correlation-id.html"/>
                     <item name="Exclusive Consumer" href="eip/exclusive-consumer.html"/>
                     <item name="Message Router" href="eip/message-router.html"/>
+                    <item name="Publish-Subscribe channel" href="eip/publish-subscribe-channel.html" />
+                    <item name="Selective Consumer" href="eip/selective-consumer.html" />
                 </item>
                 <item name="Exception Handling" href="exception-handling.html"/>
                 <item name="Event Sourcing" href="event-sourcing.html"/>
