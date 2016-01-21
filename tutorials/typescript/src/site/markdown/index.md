@@ -8,3 +8,4 @@ Resources:
 
 * [TypeScript Deep Dive](https://basarat.gitbooks.io/typescript/content/docs/const.html)
 * [Typescript Handbook](http://www.typescriptlang.org/Handbook)
+* [TypeScript classes part II](http://mobilemancer.com/2015/11/21/typescript-classes-part-ii/)
