@@ -112,6 +112,7 @@ The tasks that need to performed by Grunt are defined within `GruntFile.js`.
                     basePath: 'src/main/typescript',
                     sourceMap: true,
                     declaration: true,
+                    fast: 'never',
                     experimentalDecorators: true
                 },
                 files: [

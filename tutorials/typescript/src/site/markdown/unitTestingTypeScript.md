@@ -20,29 +20,14 @@ build by Grunt.
     module.exports = function( grunt ){
     
        // tell grunt to load task plugins.
-       grunt.loadNpmTasks('grunt-ts');
+       ...
        grunt.loadNpmTasks('grunt-mocha-test');
            
        // configure tasks
        grunt.initConfig({
     
-            ts: {
-                compile: {
-                    options: {
-                        module: 'commonjs', //or commonjs
-                        target: 'es5', //or es3
-                        basePath: 'src/main/typescript',
-                        sourceMap: true,
-                        declaration: true,
-                        experimentalDecorators: true
-                    },
-                    files: [
-                        { src: ['src/main/typescript/**/*.ts'], dest: 'target/generated/javascript/' },
-                        { src: ['src/test/typescript/**/*.ts'], dest: 'target/generated/javascript/' }
-                    ],                    
-                },
-            },
-    
+            ...
+                
             // Configure a mocha task
             mochaTest: {
                 test: {
