@@ -28,8 +28,6 @@ build by Grunt.
     
             ts: {
                 compile: {
-                    src: ['src/main/typescript/**/*.ts'],
-                    outDir: 'target/generated/javascript/',
                     options: {
                         module: 'commonjs', //or commonjs
                         target: 'es5', //or es3
@@ -37,7 +35,11 @@ build by Grunt.
                         sourceMap: true,
                         declaration: true,
                         experimentalDecorators: true
-                    }
+                    },
+                    files: [
+                        { src: ['src/main/typescript/**/*.ts'], dest: 'target/generated/javascript/' },
+                        { src: ['src/test/typescript/**/*.ts'], dest: 'target/generated/javascript/' }
+                    ],                    
                 },
             },
     
@@ -80,27 +82,19 @@ A unit tests comprises a `@Suite` of tests, containing individual test function 
 
     /// <reference path="/Users/mase/Development/WorkSpace/uniknow/AgileDev/tutorials/typescript/node_modules/type-unit/dist/type-unit.d.ts" />
     /// <reference path="/Users/mase/Development/WorkSpace/uniknow/AgileDev/tutorials/typescript/node_modules/type-unit/dist/index"/>
-    import typeunit = require("type-unit");
+    import {Suite, Fact, Theory} from 'type-unit';
     import assert = require("assert");
     
     import {Calculator} from "./Calculator";
     
-    var Fact = typeunit.Fact,
-        Theory = typeunit.Theory,
-        Suite = typeunit.Suite;
-    
     @Suite("Calculator")
     class CalculatorTests {
     
-        private calculator : Calculator
-    
-        constructor() {
-            calculator = new Calculator();
-        }
+        private calculator = new Calculator();
     
         @Fact("Add")
         testAdd() {
-            assert.equal(calculator.add(1,1), 2);
+            assert.equal(this.calculator.add(1,1), 2);
         }
     
         @Theory("Additions", [
@@ -109,9 +103,9 @@ A unit tests comprises a `@Suite` of tests, containing individual test function 
           [-1, -1, -2]
           ])
         testMultipleAdditions(valueOne: number, valueTwo: number, result: number) {
-           assert.equal(calculator.add(valueOne, valueTwo), result);
+           assert.equal(this.calculator.add(valueOne, valueTwo), result);
         }
     
     }
-    
+        
 To run the unit test execute the maven build, (`mvn test`)

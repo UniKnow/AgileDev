@@ -106,8 +106,6 @@ The tasks that need to performed by Grunt are defined within `GruntFile.js`.
     
         ts: {
             compile: {
-                src: ['src/main/typescript/**/*.ts'],
-                outDir: 'target/generated/javascript/',
                 options: {
                     module: 'commonjs', //or commonjs
                     target: 'es5', //or es3
@@ -115,7 +113,11 @@ The tasks that need to performed by Grunt are defined within `GruntFile.js`.
                     sourceMap: true,
                     declaration: true,
                     experimentalDecorators: true
-                }
+                },
+                files: [
+                    { src: ['src/main/typescript/**/*.ts'], dest: 'target/generated/javascript/' },
+                    { src: ['src/test/typescript/**/*.ts'], dest: 'target/generated/javascript/' }
+                ],                                   
             },
         }
     
@@ -126,4 +128,4 @@ The tasks that need to performed by Grunt are defined within `GruntFile.js`.
     
     };
     
-In the above grunt configuration, we define the `ts` task, which compiles all the `*.ts` files within `src/main/typescript/` map and writes the result within `target/generated/javascript`. More plugin configuration can be added to the `options` section. See [grunt-ts](https://github.com/TypeStrong/grunt-ts) for more options. Finally `ts` is added to the `default` task with `grunt.registerTask`.  
+In the above grunt configuration, we define the `ts` task, which compiles all the `*.ts` files within `src/main/typescript/` and `src/test/typescript` and writes the result within `target/generated/javascript`. More plugin configuration can be added to the `options` section. See [grunt-ts](https://github.com/TypeStrong/grunt-ts) for more options. Finally `ts` is added to the `default` task with `grunt.registerTask`.  

@@ -48,16 +48,18 @@ module.exports = function( grunt ){
 
         ts: {
             compile: {
-                src: ['src/main/typescript/**/*.ts'],
-                outDir: 'target/generated/javascript/',
                 options: {
-                    module: 'commonjs', //or commonjs
-                    target: 'es5', //or es3
+                    module: 'commonjs',
+                    target: 'es5',
                     basePath: 'src/main/typescript',
                     sourceMap: true,
                     declaration: true,
                     experimentalDecorators: true
-                }
+                },
+                files: [
+                    { src: ['src/main/typescript/**/*.ts'], dest: 'target/generated/javascript/' },
+                    { src: ['src/test/typescript/**/*.ts'], dest: 'target/generated/javascript/' }
+                ],
             },
         },
 
