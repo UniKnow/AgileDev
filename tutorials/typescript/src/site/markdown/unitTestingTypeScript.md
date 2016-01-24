@@ -65,8 +65,8 @@ To give a short introduction on how the unit tests has to be created with `type-
     
 A unit tests comprises a `@Suite` of tests, containing individual test function as a `@Fact`. To run a tests with a series of different parameters is a `@Theory`. 
 
-    /// <reference path="/Users/mase/Development/WorkSpace/uniknow/AgileDev/tutorials/typescript/node_modules/type-unit/dist/type-unit.d.ts" />
-    /// <reference path="/Users/mase/Development/WorkSpace/uniknow/AgileDev/tutorials/typescript/node_modules/type-unit/dist/index"/>
+    /// <reference path="../../../node_modules/type-unit/dist/type-unit.d.ts" />
+    /// <reference path="../../../node_modules/type-unit/dist/index"/>
     import {Suite, Fact, Theory} from 'type-unit';
     import assert = require("assert");
     
