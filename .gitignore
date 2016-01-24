@@ -9,4 +9,9 @@ bin/
 .idea
 *.bak
 
+# Grunt/Node/TypeScript
+node/
+node_modules/
+.baseDir.ts
+
 

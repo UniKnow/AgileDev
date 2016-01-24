@@ -47,15 +47,15 @@ The following execution imports `node.js` and `NPM` binaries to your project.
         </executions>
     </plugin>
     
-The `package.json` has pretty much the same responsibility for `NPM` as the POM has for maven. The `package.json` contains a description of you project and it's dependencies. The primary feature we want to realize is compiling `typescript`, so we add the `grunt-typescript` plugin.
+The `package.json` has pretty much the same responsibility for `NPM` as the POM has for maven. The `package.json` contains a description of you project and it's dependencies. The primary feature we want to realize is compiling `typescript`, so we add the `grunt-ts` plugin.
 
     {
-       "name":"poc-typescript",
+       "name":"tutorial-typescript",
        "version":"0.0.1-SNAPSHOT",
        "dependencies": {
           "grunt": "~0.4.5",
           "grunt-cli": "~0.1.13",
-          "grunt-typescript":"~0.2.4"
+          "grunt-ts":"~5.3.2"
        },
        "devDependencies": {
     
@@ -76,7 +76,7 @@ With the `package.json` in place, the `npm-install` execution can be added to th
 		</configuration>
 	</execution>
 
-NPM will now install dependencies as defined in `package.json` in `node_modules` when you run the maven build, in our case `grunt-typescript`, `grunt` and `grunt-cli`.
+NPM will now install dependencies as defined in `package.json` in `node_modules` when you run the maven build, in our case `grunt-ts`, `grunt` and `grunt-cli`.
   
 Last step in the build process is kickstart the grunt task runner.
 
@@ -99,30 +99,31 @@ The tasks that need to performed by Grunt are defined within `GruntFile.js`.
     module.exports = function( grunt ){
     
        // tell grunt to load task plugins.
-       grunt.loadNpmTasks('grunt-typescript');
+        grunt.loadNpmTasks('grunt-ts');
     
        // configure tasks
        grunt.initConfig({
     
-          typescript: {
-              compile: {
+        ts: {
+            compile: {
                 src: ['src/main/typescript/**/*.ts'],
-                dest: 'target/generated/javascript',
+                outDir: 'target/generated/javascript/',
                 options: {
-                  module: 'amd', //or commonjs
-                  target: 'es5', //or es3
-                  basePath: 'src/main/typescript',
-                  sourceMap: true,
-                  declaration: true
+                    module: 'commonjs', //or commonjs
+                    target: 'es5', //or es3
+                    basePath: 'src/main/typescript',
+                    sourceMap: true,
+                    declaration: true,
+                    experimentalDecorators: true
                 }
-              }
-          }
+            },
+        }
     
-          // more plugin configs go here.
+        // more plugin configs go here.
        });
     
-       grunt.registerTask('default',['typescript']);
+       grunt.registerTask('default',['ts']);
     
     };
     
-In the above grunt configuration, we define the `typescript` task, which compiles all the `*.ts` files within `src/main/typescript/` map and writes the result within `target/generated/javascript`. More plugin configuration can be added to the `options` section. See [grunt-typescript](https://www.npmjs.com/package/grunt-typescript) for more options. Finally `typescript` is added to the `default` task with `grunt.registerTask`.  
+In the above grunt configuration, we define the `ts` task, which compiles all the `*.ts` files within `src/main/typescript/` map and writes the result within `target/generated/javascript`. More plugin configuration can be added to the `options` section. See [grunt-ts](https://github.com/TypeStrong/grunt-ts) for more options. Finally `ts` is added to the `default` task with `grunt.registerTask`.  

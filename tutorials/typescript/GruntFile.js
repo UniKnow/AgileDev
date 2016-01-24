@@ -40,28 +40,43 @@
 module.exports = function( grunt ){
 
    // tell grunt to load task plugins.
-   grunt.loadNpmTasks('grunt-typescript');
+   grunt.loadNpmTasks('grunt-ts');
+   grunt.loadNpmTasks('grunt-mocha-test');
 
    // configure tasks
    grunt.initConfig({
 
-      typescript: {
-          compile: {
-            src: ['src/main/typescript/**/*.ts'],
-            dest: 'target/generated/javascript',
-            options: {
-              module: 'amd', //or commonjs
-              target: 'es5', //or es3
-              basePath: 'src/main/typescript',
-              sourceMap: true,
-              declaration: true
+        ts: {
+            compile: {
+                src: ['src/main/typescript/**/*.ts'],
+                outDir: 'target/generated/javascript/',
+                options: {
+                    module: 'commonjs', //or commonjs
+                    target: 'es5', //or es3
+                    basePath: 'src/main/typescript',
+                    sourceMap: true,
+                    declaration: true,
+                    experimentalDecorators: true
+                }
+            },
+        },
+
+        // Configure a mocha task
+        mochaTest: {
+            test: {
+                options: {
+                    reporter: 'spec',
+                    captureFile: 'results.txt', // Optionally capture the reporter output to a file
+                    quiet: false, // Optionally suppress output to standard out (defaults to false)
+                    clearRequireCache: false // Optionally clear the require cache before running tests (defaults to false)
+                },
+                src: ['target/generated/javascript/**/*Test.js']
             }
-          }
-      }
+        }
 
       // more plugin configs go here.
    });
 
-   grunt.registerTask('default',['typescript']);
+   grunt.registerTask('default',['ts','mochaTest']);
 
 };

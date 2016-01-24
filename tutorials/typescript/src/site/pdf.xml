@@ -53,6 +53,7 @@
         <item name="Introduction" ref="index.md" />
         <item name="Building TypeScript with Maven" ref="buildingTypeScriptWithMaven.md" />
         <item name="Classes" ref="classes.md" />
+        <item name="Unit testing TypeScript" ref="unitTestingTypeScript.md"/>
     </toc>
 
     <cover>
