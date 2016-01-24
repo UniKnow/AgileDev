@@ -54,6 +54,7 @@ module.exports = function( grunt ){
                     basePath: 'src/main/typescript',
                     sourceMap: true,
                     declaration: true,
+                    fast: 'never',
                     experimentalDecorators: true
                 },
                 files: [

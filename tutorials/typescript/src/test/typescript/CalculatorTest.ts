@@ -1,12 +1,11 @@
-/// <reference path="/Users/mase/Development/WorkSpace/uniknow/AgileDev/tutorials/typescript/node_modules/type-unit/dist/type-unit.d.ts" />
-/// <reference path="/Users/mase/Development/WorkSpace/uniknow/AgileDev/tutorials/typescript/node_modules/type-unit/dist/index"/>
 import {Suite, Fact, Theory} from 'type-unit';
 import assert = require("assert");
 
-import {Calculator} from "./Calculator";
+import {Calculator} from "../../main/typescript/Calculator";
+import {UnitTest} from "./UnitTest";
 
 @Suite("Calculator")
-class CalculatorTests {
+class CalculatorTests extends UnitTest {
 
     private calculator = new Calculator();
 
