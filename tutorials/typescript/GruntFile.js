@@ -51,15 +51,14 @@ module.exports = function( grunt ){
                 options: {
                     module: 'commonjs',
                     target: 'es5',
-                    basePath: 'src/main/typescript',
+                    rootDir: 'src',
                     sourceMap: true,
-                    declaration: true,
+                    declaration: false,
                     fast: 'never',
                     experimentalDecorators: true
                 },
                 files: [
-                    { src: ['src/main/typescript/**/*.ts'], dest: 'target/generated/javascript/' },
-                    { src: ['src/test/typescript/**/*.ts'], dest: 'target/generated/javascript/' }
+                    { src: ['src/**/*.ts'], dest: 'target/generated/javascript/' }
                 ],
             },
         },

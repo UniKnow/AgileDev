@@ -1,13 +1,16 @@
 import {Suite, Fact, Theory} from 'type-unit';
 import assert = require("assert");
 
-import {Calculator} from "../../main/typescript/Calculator";
-import {UnitTest} from "./UnitTest";
+///ts:import=Example
+import Example = require('../../main/typescript/Example'); ///ts:import:generated
+
+///ts:import=UnitTest
+import UnitTest = require('./UnitTest'); ///ts:import:generated
 
 @Suite("Calculator")
 class CalculatorTests extends UnitTest {
 
-    private calculator = new Calculator();
+    private calculator = new Example.Calculator();
 
     @Fact("Add")
     testAdd() {
