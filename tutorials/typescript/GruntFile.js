@@ -50,10 +50,11 @@ module.exports = function( grunt ){
             compile: {
                 options: {
                     module: 'commonjs',
+                    moduleResolution: 'node',
                     target: 'es5',
                     rootDir: 'src',
                     sourceMap: true,
-                    declaration: false,
+                    declaration: true,
                     fast: 'never',
                     experimentalDecorators: true
                 },
