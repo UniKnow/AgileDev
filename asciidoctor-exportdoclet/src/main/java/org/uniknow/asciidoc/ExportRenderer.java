@@ -64,24 +64,52 @@ public class ExportRenderer {
         try {
             PrintWriter writer = getWriter(doc.containingPackage(), doc.name());
 
-            writer.println("//tag::class-description");
             if (doc.position() != null) {
+                writer.println("//tag::class-description[]");
                 outputText(doc.name(), doc.getRawCommentText(), writer);
+                writer.println("//end::class-description[]");
             }
-            writer.println("//end::class-description");
 
-            for (MemberDoc member : doc.fields(false)) {
-                outputText(member.name(), member.getRawCommentText(), writer);
+            if (doc.fields().length > 0) {
+                writer.println("//tag::field-descriptions[]");
+                for (MemberDoc member : doc.fields(false)) {
+                    outputText(member.name(), member.getRawCommentText(),
+                        writer);
+                }
+                writer.println("//end::field-descriptions[]");
             }
-            for (MemberDoc member : doc.constructors(false)) {
-                outputText(member.name(), member.getRawCommentText(), writer);
+
+            if (doc.constructors(false).length > 0) {
+                writer.println("//tag::constructor-descriptions[]");
+                for (MemberDoc member : doc.constructors(false)) {
+                    outputText(member.name(), member.getRawCommentText(),
+                        writer);
+                }
+                writer.println("//end::constructor-descriptions[]");
             }
-            for (MemberDoc member : doc.methods(false)) {
-                outputText(member.name(), member.getRawCommentText(), writer);
+
+            if (doc.methods(false).length > 0) {
+                writer.println("//tag::method-descriptions[]");
+                for (MethodDoc member : doc.methods(false)) {
+                    outputText(member, writer);
+                }
+                writer.println("//end::method-descriptions[]");
             }
-            for (MemberDoc member : doc.enumConstants()) {
-                outputText(member.name(), member.getRawCommentText(), writer);
+
+            if (doc.enumConstants().length > 0) {
+                writer.println("//tag::enum-descriptions[]");
+                writer.println("." + doc.name());
+                writer
+                    .println("[caption=\"Enums values(s) \",width=\"100%\",options=\"header\"]");
+                writer.println("|===");
+                writer.println("|Name|Description");
+                for (FieldDoc member : doc.enumConstants()) {
+                    outputTextEnum(member, writer);
+                }
+                writer.println("|===");
+                writer.println("//end::enum-descriptions[]");
             }
+
             if (doc instanceof AnnotationTypeDoc) {
                 for (MemberDoc member : ((AnnotationTypeDoc) doc).elements()) {
                     outputText(member.name(), member.getRawCommentText(),
@@ -97,7 +125,7 @@ public class ExportRenderer {
     public void renderPackage(PackageDoc doc) {
         try {
             PrintWriter writer = getWriter(doc, "package-info");
-            writer.println("//tag::package-description");
+            writer.println("//tag::package-description[]");
             if (doc.position() != null) {
                 outputText(doc.name(), doc.getRawCommentText(), writer);
             }
@@ -107,11 +135,73 @@ public class ExportRenderer {
                         writer);
                 }
             }
-            writer.println("//end::package-description");
+            writer.println("//end::package-description[]");
             writer.flush();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
+    }
+
+    /**
+     * Generate output for Enum
+     * 
+     * @param member
+     *            enumeration for which we want to generate AsciiDoc
+     * @param writer
+     *            Writer that will be used to generate output.
+     */
+    private void outputTextEnum(FieldDoc member, PrintWriter writer) {
+
+        writer.println("|");
+        writer.println("// tag::enum-name[]");
+        writer.println(member.name());
+        writer.println("// tag::enum-name[]");
+        writer.println("|");
+        writer.println(member.commentText());
+    }
+
+    /**
+     * Generate output for Method
+     * 
+     * @param method
+     *            Method for which we want to create asciidoc
+     * @param writer
+     *            Writer that will be used to generate output
+     */
+    private void outputText(MethodDoc method, PrintWriter writer) {
+        writer.println("// tag::method-description[]");
+        writer.println("// tag::method-name[]");
+        writer.println("." + method.name());
+        writer.println("// end::method-name[]");
+        writer.println("[caption=\"Method \"]");
+        writer.println("==========================");
+        if (!method.commentText().trim().isEmpty()) {
+            writer.println("// tag::method-comment[]");
+            writer.println(parseMethodComment(method.commentText()) + " +");
+            writer.println("// end::method-comment[]");
+        }
+
+        if (method.parameters().length > 0) {
+            writer.println("// tag::method-parameters[]");
+            writer.println(".method " + method.name());
+            writer
+                .println("[caption=\"Parameter(s) \",width=\"100%\",options=\"header\"]");
+            writer.println("|===");
+            writer.println("|Name|Type");
+            for (Parameter parameter : method.parameters()) {
+                writer.println("|" + parameter.name() + "|"
+                    + parameter.typeName() + "|");
+            }
+            writer.println("|===");
+            writer.println("// end::method-parameters[]");
+        }
+
+        writer.println("_Return:_ ");
+        writer.println("// tag::method-return[]");
+        writer.println(method.returnType() + " +");
+        writer.println("// end::method-return[]");
+        writer.println("==========================");
+        writer.println("// end::method-description[]");
     }
 
     private void outputText(String tag, String comment, PrintWriter writer) {
@@ -120,13 +210,23 @@ public class ExportRenderer {
         writer.println("// end::" + tag + "[]");
     }
 
+    private String parseMethodComment(String input) {
+        String cleanedText = cleanJavadocInput(input);
+
+        // Replace all @param entries with _Parameter_
+        cleanedText = cleanedText.replaceAll("@param", "_Parameter:_ ");
+        cleanedText = cleanedText.replaceAll("@return", "_Return:_ ");
+
+        return cleanedText;
+    }
+
     protected String cleanJavadocInput(String input) {
         return input.trim().replaceAll("\n ", "\n") // Newline space to
-                                                    // accommodate javadoc
-                                                    // newlines.
+            // accommodate javadoc
+            // newlines.
             .replaceAll("(?m)^( *)\\*\\\\/$", "$1*/"); // Multi-line comment end
-                                                       // tag is translated into
-                                                       // */.
+        // tag is translated into
+        // */.
     }
 
     private PrintWriter getWriter(PackageDoc packageDoc, String name)
