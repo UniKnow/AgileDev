@@ -104,6 +104,7 @@
 
     <modules>
         <module>buildConfiguration</module>
+        <module>asciidoctor-exportdoclet</module>
         <module>asciidoctor-site-diagram-activator</module>
         <module>maven-site-indexer</module>
         <module>common</module>
