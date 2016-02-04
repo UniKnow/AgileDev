@@ -51,14 +51,11 @@ import java.util.Set;
 public class ExportRenderer {
 
     public boolean render(RootDoc rootDoc) {
-        Set<PackageDoc> packages = new HashSet<PackageDoc>();
         for (ClassDoc doc : rootDoc.classes()) {
-            packages.add(doc.containingPackage());
             renderClass(doc);
         }
-        for (PackageDoc doc : packages) {
+        for (PackageDoc doc : rootDoc.specifiedPackages()) {
             renderPackage(doc);
-            // renderer.renderDoc(doc);
         }
         return true;
     }
@@ -66,9 +63,13 @@ public class ExportRenderer {
     public void renderClass(ClassDoc doc) {
         try {
             PrintWriter writer = getWriter(doc.containingPackage(), doc.name());
+
+            writer.println("//tag::class-description");
             if (doc.position() != null) {
                 outputText(doc.name(), doc.getRawCommentText(), writer);
             }
+            writer.println("//end::class-description");
+
             for (MemberDoc member : doc.fields(false)) {
                 outputText(member.name(), member.getRawCommentText(), writer);
             }
@@ -96,7 +97,7 @@ public class ExportRenderer {
     public void renderPackage(PackageDoc doc) {
         try {
             PrintWriter writer = getWriter(doc, "package-info");
-            writer.println(doc.name());
+            writer.println("//tag::package-description");
             if (doc.position() != null) {
                 outputText(doc.name(), doc.getRawCommentText(), writer);
             }
@@ -106,6 +107,7 @@ public class ExportRenderer {
                         writer);
                 }
             }
+            writer.println("//end::package-description");
             writer.flush();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -134,7 +136,7 @@ public class ExportRenderer {
         if (!pacakgeDirectory.exists()) {
             pacakgeDirectory.mkdirs();
         }
-        File file = new File(pacakgeDirectory, name + ".adoc");
+        File file = new File(pacakgeDirectory, name + ".ad");
         return new PrintWriter(new OutputStreamWriter(
             new FileOutputStream(file)));
     }
