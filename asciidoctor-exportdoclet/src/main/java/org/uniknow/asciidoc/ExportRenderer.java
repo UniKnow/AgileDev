@@ -182,8 +182,8 @@ public class ExportRenderer {
         }
 
         if (method.parameters().length > 0) {
+            writer.println("_Parameters:_ +");
             writer.println("// tag::method-parameters[]");
-            writer.println(".method " + method.name());
             writer
                 .println("[caption=\"Parameter(s) \",width=\"100%\",options=\"header\"]");
             writer.println("|===");
