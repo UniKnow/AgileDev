@@ -579,7 +579,7 @@
 
     <profiles>
         <profile>
-            <id>release-profile</id>
+            <id>release-signed-artifacts</id>
             <activation>
                 <property>
                     <name>performRelease</name>
