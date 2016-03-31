@@ -94,10 +94,10 @@
 
     <scm>
         <connection>
-            scm:git:git://github.com/uniKnow/AgileDev.git
+            scm:git:git://github.com/UniKnow/AgileDev.git
         </connection>
         <developerConnection>
-            scm:git:ssh://git@github.com/uniKnow/AgileDev.git
+            scm:git:ssh://git@github.com/UniKnow/AgileDev.git
         </developerConnection>
         <url>https://github.com/UniKnow/AgileDev</url>
       <tag>agiledev-0.1.10-SNAPSHOT</tag>
