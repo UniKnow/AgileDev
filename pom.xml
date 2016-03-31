@@ -1,11 +1,10 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <name>AgileDev</name>
     <groupId>org.uniknow</groupId>
     <artifactId>agiledev</artifactId>
-    <version>0.1.10-SNAPSHOT</version>
+    <version>0.1.10</version>
     <packaging>pom</packaging>
     <description>Tooling for Agile development</description>
     <url>https://github.com/UniKnow/AgileDev</url>
@@ -101,7 +100,8 @@
             scm:git:git@github.com:uniKnow/AgileDev.git
         </developerConnection>
         <url>https://github.com/UniKnow/AgileDev</url>
-    </scm>
+      <tag>agiledev-0.1.10</tag>
+  </scm>
 
     <modules>
         <module>buildConfiguration</module>
@@ -295,7 +295,7 @@
                         <dependency>
                             <groupId>org.uniknow.agiledev</groupId>
                             <artifactId>buildConfiguration</artifactId>
-                            <version>0.1.10-SNAPSHOT</version>
+                            <version>0.1.10</version>
                         </dependency>
                     </dependencies>
                 </plugin>
@@ -325,7 +325,7 @@
                         <dependency>
                             <groupId>org.uniknow.agiledev</groupId>
                             <artifactId>buildConfiguration</artifactId>
-                            <version>0.1.10-SNAPSHOT</version>
+                            <version>0.1.10</version>
                         </dependency>
                     </dependencies>
                 </plugin>
@@ -407,9 +407,9 @@
                     <skip>false</skip>
                     <fail>true</fail>
                     <rules>
-                        <requireUpperBoundDeps/>
+                        <requireUpperBoundDeps />
                         <!-- ensure uniquely versioned dependencies during the build -->
-                        <dependencyConvergence/>
+                        <dependencyConvergence />
                     </rules>
                 </configuration>
                 <executions>
