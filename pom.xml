@@ -94,7 +94,7 @@
 
     <scm>
         <connection>
-            scm:git:git://github.com/UniKnow/AgileDev.git
+            scm:git:ssh://github.com/UniKnow/AgileDev.git
         </connection>
         <developerConnection>
             scm:git:ssh://git@github.com/UniKnow/AgileDev.git
