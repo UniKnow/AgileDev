@@ -97,7 +97,7 @@
             scm:git:git://github.com/uniKnow/AgileDev.git
         </connection>
         <developerConnection>
-            scm:git:git@github.com:uniKnow/AgileDev.git
+            scm:git:ssh://github.com/uniKnow/AgileDev.git
         </developerConnection>
         <url>https://github.com/UniKnow/AgileDev</url>
       <tag>agiledev-0.1.10</tag>
