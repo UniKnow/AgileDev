@@ -125,7 +125,7 @@
         <module>tutorials/dbc</module>
         <module>tutorials/ddd</module>
         <module>tutorials/rest</module>
-        <module>tutorials/typescript</module>
+        <!--<module>tutorials/typescript</module>-->
     </modules>
 
     <dependencyManagement>
