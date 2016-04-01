@@ -4,7 +4,7 @@
     <parent>
         <groupId>org.uniknow</groupId>
         <artifactId>agiledev</artifactId>
-        <version>0.1.13</version>
+        <version>0.1.14-SNAPSHOT</version>
     </parent>
 
     <groupId>org.uniknow.agiledev</groupId>
