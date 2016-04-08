@@ -13,4 +13,4 @@
 
  Within [introduction design by contract](introduction_dbc.html) we provide a deeper understanding of design by contract. The [Usage dbc4spring](usage.html) chapter describes how the `dbc4java` framework can be used within your project. The [Validation Constraints](validation_constraints.html) provides an overview of the constraint annotations that are default supported by `dbc4java`.
 
-*NOTE:* The `dbc4java` framework doesn't support constraints on java constructors!
+*NOTE:* The `dbc4java` framework doesn't support constraints on java constructors or static methods!
