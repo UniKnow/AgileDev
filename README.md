@@ -11,4 +11,4 @@ Tooling for Agile development.
 |[Tutorial DDD](http://uniknow.github.io/AgileDev/site/0.1.10-SNAPSHOT-SNAPSHOT/parent/ddd/index.html)|Tutorial describing the concepts of Domain Driven Design and best practices for applying Domain Driven Design.|
 |[Tutorial REST](http://uniknow.github.io/AgileDev/site/0.1.10-SNAPSHOT-SNAPSHOT/parent/rest/index.html)|Tutorial explaining how to quickly setup REST services|
 
-See [Project documentation](http://uniknow.github.io/AgileDev/site/0.1.10-SNAPSHOT-SNAPSHOT/index.html) for more information.
+See [Project documentation](http://uniknow.github.io/AgileDev/site/0.1.10-SNAPSHOT/index.html) for more information.
