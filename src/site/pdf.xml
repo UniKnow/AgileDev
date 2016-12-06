@@ -68,7 +68,7 @@
                       ref="eip/exclusive-consumer.md"/>
                 <item name="Message Router" ref="eip/message-router.md"/>
                 <item name="Publish-Subscribe channel" ref="eip/publish-subscribe-channel.md" />
-                <item name="Selective Consumer" href="eip/selective-consumer.md" />
+                <item name="Selective Consumer" ref="eip/selective-consumer.md" />
             </item>
             <item name="Event Sourcing" ref="event-sourcing.md"/>
             <item name="Exception Handling" ref="exception-handling.md"/>

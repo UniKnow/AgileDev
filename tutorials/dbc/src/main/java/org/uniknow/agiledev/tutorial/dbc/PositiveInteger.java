@@ -47,7 +47,7 @@ import javax.validation.constraints.Min;
 public class PositiveInteger {
 
     @Min(0)
-    private int value = 0;
+    int value = 0;
 
     public void add(int addedValue) {
         value += addedValue;
