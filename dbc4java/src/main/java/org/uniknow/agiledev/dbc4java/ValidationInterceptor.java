@@ -86,12 +86,15 @@ public class ValidationInterceptor {
         throws Throwable {
         Object instance = joinPoint.getTarget();
         if (instance != null) {
-            // Validate invariants class
-            Set<ConstraintViolation<Object>> violations = validator
-                .validate(instance);
-            if (!violations.isEmpty()) {
-                throw new ConstraintViolationException(
-                    new HashSet<ConstraintViolation<?>>(violations));
+            // Only validate constraints when object completely constructed
+            if (instance.getClass().equals(
+                joinPoint.getSignature().getDeclaringType())) {
+                Set<ConstraintViolation<Object>> violations = validator
+                    .validate(instance);
+                if (!violations.isEmpty()) {
+                    throw new ConstraintViolationException(
+                        new HashSet<ConstraintViolation<?>>(violations));
+                }
             }
         }
     }

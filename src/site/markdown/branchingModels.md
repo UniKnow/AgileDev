@@ -34,13 +34,13 @@ As you can see in the picture above, there is only a single `master` branch and 
 3. **Regularly push to `origin`** - In contrary of the Git-Flow where developers doesn't have to push its local `feature` branch to the main repo, you have to do that regularly within the GitHub model.
 4. **Open a pull-request at anytime**
 5. **Only merge after a pull request review** - This is more an advice than an absolute rule. It's a best practice that another developer should review the pull request and confirm that the branch is stable. From here you can, merge the branch back into `master` and delete the `merge` branch.
-6. **Immediately deploy after you merge into `master`** - Once your branch is merged into `master` the whole thing is deployed to production. Doing so, you will stress on the necessite to keep `master` stable. Developers don't want to break everything because of its modifications were deployed, so they are more likely to pay attention to code stability before merge.
+6. **Immediately deploy after you merge into `master`** - Once your branch is merged into `master` the whole thing is deployed to production. Doing so, you will stress on the necessity to keep `master` stable. Developers don't want to break everything because of its modifications were deployed, so they are more likely to pay attention to code stability before merge.
 
 The GitHub model perfectly fits projects that don't have releases nor versions.
 
 You do continuously integrate into `master` and you deploy the stable project to production regularly; sometimes several time a day.
 
-Due to this it's very unlikely to add serries of big bugs. If problems appear, they are quickly fixed on the go. There is no difference between a big feature and a small hotfix in terms of process.
+Due to this it's very unlikely to add series of big bugs. If problems appear, they are quickly fixed on the go. There is no difference between a big feature and a small hotfix in terms of process.
 
 ## Final words
 

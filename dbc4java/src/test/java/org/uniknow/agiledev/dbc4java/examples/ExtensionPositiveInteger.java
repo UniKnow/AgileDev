@@ -39,30 +39,21 @@
  */
 package org.uniknow.agiledev.dbc4java.examples;
 
-import org.uniknow.agiledev.dbc4java.Validated;
-
-import javax.inject.Named;
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
+import javax.validation.Valid;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
- * A simple contract is shown below. The client of the method must send a
- * parameter of type `int` that is smaller than
- * {@code MAX_VALUES. In return the client can be certain that that the method returns the value placed at the requested postion in the array.
+ * Class by which is verified that constraint validation is only done after the
+ * full object is initialized/constructed.
  */
-@Named
-@Validated
-public class SimpleMethodContract {
+public class ExtensionPositiveInteger extends PositiveInteger {
 
-    /**
-     * Max number of values that can be persisted.
-     */
-    public static final int MAX_VALUES = 10;
+    private final List<PositiveInteger> history;
 
-    private int values[] = new int[MAX_VALUES];
-
-    public int getValue(@Max(MAX_VALUES - 1) @Min(0) final int index) {
-        return values[index];
+    @Valid
+    public ExtensionPositiveInteger() {
+        super();
+        history = new ArrayList<>();
     }
-
 }
