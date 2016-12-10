@@ -37,28 +37,25 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
-package org.uniknow.agiledev.ddd.domain.model.common;
-
-import org.springframework.beans.BeansException;
-import org.uniknow.agiledev.dbc4java.Validated;
+package org.uniknow.agiledev.dbc4java;
 
 import javax.validation.constraints.NotNull;
 
 /**
- * Created by mase on 3/17/2015.
+ * Deliberately returning invalid response to verify validator is handling it
+ * correctly.
  */
 @Validated
-public abstract class Factory<T> {
+public class InvalidImplementation {
 
     /**
-     * Return an instance (possibly shared or independent) of the object managed
-     * by this factory.
+     * Causes Hibernate validator exception since getter applies to non class
+     * member property.
      * 
-     * @return an instance of the bean (should never be <code>null</code>)
-     * @throws org.springframework.beans.BeansException
-     *             in case of creation errors
+     * @return
      */
-    // @NotNull
-    public abstract T getObject() throws BeansException;
-
+    @NotNull
+    public Object getInvalidResponse() {
+        return null;
+    }
 }

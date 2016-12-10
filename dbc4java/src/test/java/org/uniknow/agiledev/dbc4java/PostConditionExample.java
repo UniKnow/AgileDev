@@ -37,28 +37,65 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
-package org.uniknow.agiledev.ddd.domain.model.common;
+package org.uniknow.agiledev.dbc4java;
 
-import org.springframework.beans.BeansException;
-import org.uniknow.agiledev.dbc4java.Validated;
-
+import javax.validation.constraints.Max;
 import javax.validation.constraints.NotNull;
 
 /**
- * Created by mase on 3/17/2015.
+ * Verifies post conditions are properly handled.
  */
 @Validated
-public abstract class Factory<T> {
+public class PostConditionExample {
+
+    private Object property;
+
+    @Max(10)
+    private int calculatedValue = 0;
+
+    @NotNull
+    public Object getProperty(Object value) {
+        property = value;
+        return property;
+    }
 
     /**
-     * Return an instance (possibly shared or independent) of the object managed
-     * by this factory.
-     * 
-     * @return an instance of the bean (should never be <code>null</code>)
-     * @throws org.springframework.beans.BeansException
-     *             in case of creation errors
+     * Causes hibernate validator constraint violation because getter doesn't
+     * apply to property of class.
      */
-    // @NotNull
-    public abstract T getObject() throws BeansException;
+    @NotNull
+    public Object getValueNonClassMember(Object value) {
+        return value;
+    }
+
+    /**
+     * Results in valid calculated value
+     */
+    public void calculateValid() {
+        for (int i = 0; i < 10; i++) {
+            calculatedValue++;
+        }
+    }
+
+    /**
+     * Results in invalid calculated value
+     */
+    public void calculateInvalid() {
+        for (int i = 0; i < 15; i++) {
+            calculatedValue++;
+        }
+    }
+
+    /**
+     * Results in invalid calculated value
+     */
+    @Max(10)
+    public int calculateValidIterative(int intialValue, final int maxValue) {
+        if (intialValue < maxValue) {
+            return calculateValidIterative(++intialValue, maxValue);
+        } else {
+            return intialValue;
+        }
+    }
 
 }

@@ -39,8 +39,11 @@
  */
 package org.uniknow.agiledev.dbc4java;
 
+import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 import java.util.logging.Logger;
 
@@ -50,13 +53,16 @@ import javax.validation.executable.ExecutableValidator;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.After;
+import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
+import org.aspectj.lang.reflect.ConstructorSignature;
 import org.aspectj.lang.reflect.MethodSignature;
 
 /**
- * Intercepts method calls of calsses which are annotated with
+ * Intercepts method calls of classes which are annotated with
  * {@code @Validated}.
  * 
  * @author mase
@@ -67,6 +73,11 @@ public class ValidationInterceptor {
 
     private static final Logger LOGGER = Logger
         .getLogger(ValidationInterceptor.class.getName());
+
+    /**
+     * Contains instances for which invariant checks are currently in progress.
+     */
+    private Set<Object> invariantChecksInProgress = new HashSet<>();
 
     private Validator validator;
 
@@ -89,22 +100,68 @@ public class ValidationInterceptor {
             // Only validate constraints when object completely constructed
             if (instance.getClass().equals(
                 joinPoint.getSignature().getDeclaringType())) {
-                Set<ConstraintViolation<Object>> violations = validator
-                    .validate(instance);
-                if (!violations.isEmpty()) {
-                    throw new ConstraintViolationException(
-                        new HashSet<ConstraintViolation<?>>(violations));
-                }
+                checkInvariants(instance);
             }
         }
+    }
+
+    /**
+     * Matches any validated instance
+     */
+    @Pointcut("adviceexecution() && within(org.uniknow.agiledev.dbc4java.Validated)")
+    public void validatedInstance() {
     }
 
     /**
      * Matches any method except private, equals and hashcode, in a class
      * annotated with `@Validated`.
      */
-    @Around("!execution(private * *.*(..)) && execution(* (@org.uniknow.agiledev.dbc4java.Validated *).*(..))"
-        + "&& !execution(* *.equals(..)) && !execution(* *.hashCode(..))")
+    @Pointcut("execution(* *.*(..))" + "&& !execution(private * *.*(..)) "
+        + "&& !execution(* *.equals(..)) " + "&& !execution(* *.hashCode(..))")
+    public void atMethodInvocation() {
+    }
+
+    /**
+     * Verifies invariants of class. This method assures the the is only done
+     * once (to prevent infinite loop).
+     */
+    private synchronized void checkInvariants(Object instance) {
+        if (!invariantChecksInProgress.contains(instance)) {
+            Set<ConstraintViolation<Object>> violations = new HashSet<>();
+            try {
+                invariantChecksInProgress.add(instance);
+
+                // Validate invariants class
+                violations = validator.validate(instance);
+
+            } catch (ValidationException error) {
+                if (error.getMessage().contains("HV000090")) {
+                    // Error possibly caused due to post condition on getter of
+                    // non class member
+                    throw new ValidationException(
+                        "Unable to access post conditions for "
+                            + instance.toString()
+                            + ". Possibly due to post conditions on 'property' getters which are not a class member.",
+                        error);
+                } else {
+                    throw error;
+                }
+            } finally {
+                invariantChecksInProgress.remove(instance);
+            }
+
+            if (!violations.isEmpty()) {
+                throw new ConstraintViolationException(
+                    new HashSet<ConstraintViolation<?>>(violations));
+            }
+
+        }
+    }
+
+    // @Around("execution(* (@org.uniknow.agiledev.dbc4java.Validated *).*(..))"
+    // + "&& !execution(private * *.*(..)) "
+    // + "&& !execution(* *.equals(..)) " + "&& !execution(* *.hashCode(..))")
+    @Around("atMethodInvocation() && !cflow(validatedInstance())")
     public Object validateMethodInvocation(ProceedingJoinPoint pjp)
         throws Throwable {
 
@@ -135,12 +192,6 @@ public class ValidationInterceptor {
         result = pjp.proceed(); // Execute the method
 
         if (instance != null) {
-            // Validate invariants class
-            violations = validator.validate(instance);
-            if (!violations.isEmpty()) {
-                throw new ConstraintViolationException(
-                    new HashSet<ConstraintViolation<?>>(violations));
-            }
 
             if ((method != null)
                 && !signature.getReturnType().equals(Void.TYPE)) {
@@ -154,6 +205,14 @@ public class ValidationInterceptor {
                 LOGGER
                     .fine("Skipped validation return value while method is null");
             }
+
+            // Validate invariants class
+            checkInvariants(instance);
+            // violations = validator.validate(instance);
+            // if (!violations.isEmpty()) {
+            // throw new ConstraintViolationException(
+            // new HashSet<ConstraintViolation<?>>(violations));
+            // }
 
         } else {
             LOGGER
