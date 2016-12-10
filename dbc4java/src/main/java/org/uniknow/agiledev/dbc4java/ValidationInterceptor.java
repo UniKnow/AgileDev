@@ -139,7 +139,7 @@ public class ValidationInterceptor {
                     // Error possibly caused due to post condition on getter of
                     // non class member
                     throw new ValidationException(
-                        "Unable to access post conditions for "
+                        "Unable to validate post conditions for "
                             + instance.toString()
                             + ". Possibly due to post conditions on 'property' getters which are not a class member.",
                         error);
