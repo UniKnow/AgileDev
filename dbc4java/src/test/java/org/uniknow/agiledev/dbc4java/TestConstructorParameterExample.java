@@ -37,32 +37,25 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
-package org.uniknow.agiledev.dbc4java.examples;
+package org.uniknow.agiledev.dbc4java;
 
-import org.uniknow.agiledev.dbc4java.Validated;
+import org.junit.Test;
 
-import javax.inject.Named;
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
+import javax.validation.ConstraintViolationException;
 
 /**
- * A simple contract is shown below. The client of the method must send a
- * parameter of type `int` that is smaller than
- * {@code MAX_VALUES. In return the client can be certain that that the method returns the value placed at the requested postion in the array.
+ * Created by mase on 12/12/2016.
  */
-@Named
-@Validated
-public class SimpleMethodContract {
+public class TestConstructorParameterExample {
 
-    /**
-     * Max number of values that can be persisted.
-     */
-    public static final int MAX_VALUES = 10;
+    @Test(expected = ConstraintViolationException.class)
+    public void constructWithInvalidValue() {
+        new ConstructorParameterExample(-1);
+    }
 
-    private int values[] = new int[MAX_VALUES];
-
-    public int getValue(@Max(MAX_VALUES - 1) @Min(0) final int index) {
-        return values[index];
+    @Test
+    public void constructWithValidValue() {
+        new ConstructorParameterExample(1);
     }
 
 }

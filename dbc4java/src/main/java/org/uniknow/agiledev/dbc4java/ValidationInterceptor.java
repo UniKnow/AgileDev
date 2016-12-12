@@ -88,6 +88,31 @@ public class ValidationInterceptor {
     }
 
     /**
+     * Matches constructor parameters in class annotated with `@Validated`.
+     * <p/>
+     * *NOTE:* This will only work when class compiled with aspectj.
+     */
+    @Before("execution((@org.uniknow.agiledev.dbc4java.Validated *).new(..))")
+    public void validateConstructorParameters(JoinPoint joinPoint)
+        throws Throwable {
+        Object instance = joinPoint.getTarget();
+        if (instance != null) {
+            Constructor constructor = ((ConstructorSignature) joinPoint
+                .getSignature()).getConstructor();
+
+            Set<ConstraintViolation<Object>> violations = validator
+                .forExecutables().validateConstructorParameters(constructor,
+                    joinPoint.getArgs());
+
+            if (!violations.isEmpty()) {
+                throw new ConstraintViolationException(
+                    new HashSet<ConstraintViolation<?>>(violations));
+            }
+
+        }
+    }
+
+    /**
      * Matches constructor in class annotated with `@Validated`.
      * <p/>
      * *NOTE:* This will only work when class compiled with aspectj.
