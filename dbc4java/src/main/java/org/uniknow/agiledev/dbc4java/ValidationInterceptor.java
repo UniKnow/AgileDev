@@ -131,22 +131,6 @@ public class ValidationInterceptor {
     }
 
     /**
-     * Matches any validated instance
-     */
-    @Pointcut("adviceexecution() && within(org.uniknow.agiledev.dbc4java.Validated)")
-    public void validatedInstance() {
-    }
-
-    /**
-     * Matches any method except private, equals and hashcode, in a class
-     * annotated with `@Validated`.
-     */
-    @Pointcut("execution(* *.*(..))" + "&& !execution(private * *.*(..)) "
-        + "&& !execution(* *.equals(..)) " + "&& !execution(* *.hashCode(..))")
-    public void atMethodInvocation() {
-    }
-
-    /**
      * Verifies invariants of class. This method assures the the is only done
      * once (to prevent infinite loop).
      */
@@ -183,10 +167,9 @@ public class ValidationInterceptor {
         }
     }
 
-    // @Around("execution(* (@org.uniknow.agiledev.dbc4java.Validated *).*(..))"
-    // + "&& !execution(private * *.*(..)) "
-    // + "&& !execution(* *.equals(..)) " + "&& !execution(* *.hashCode(..))")
-    @Around("atMethodInvocation() && !cflow(validatedInstance())")
+    @Around("execution(* (@org.uniknow.agiledev.dbc4java.Validated *).*(..))"
+        + "&& !execution(private * *.*(..)) "
+        + "&& !execution(* *.equals(..)) " + "&& !execution(* *.hashCode(..))")
     public Object validateMethodInvocation(ProceedingJoinPoint pjp)
         throws Throwable {
 
