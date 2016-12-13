@@ -7,6 +7,8 @@ jdk:
 # setting install to true to avoid unnecessary build
 install: true
 
+before_install: echo "MAVEN_OPTS='-XX:-UseGCOverheadLimit'"
+
 script: mvn clean install --settings settings.xml
 
 after_success: mvn site deploy --settings settings.xml
