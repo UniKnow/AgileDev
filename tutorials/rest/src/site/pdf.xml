@@ -57,6 +57,7 @@
         <item name="Versioning REST API" ref="versioning-rest-api.md"/>
         <item name="Distributed transactions with REST" ref="distributed-transactions-with-rest.md" />
         <item name="Glossary" ref="glossary.md" />
+        <item name="Resources" ref="resources.md" />
     </toc>
 
     <cover>
