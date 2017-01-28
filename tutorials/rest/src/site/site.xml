@@ -82,6 +82,7 @@
             <item name="API Design" href="documenting-rest-interfaces.html"/>
             <item name="Versioning REST API" href="versioning-rest-api.html"/>
             <item name="Distributed transactions with REST" href="distributed-transactions-with-rest.html" />
+            <item name="Resources" href="resources.html"/>
         </menu>
     </body>
 </project>
