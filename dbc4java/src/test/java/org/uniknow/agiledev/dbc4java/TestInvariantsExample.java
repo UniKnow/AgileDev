@@ -37,33 +37,55 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
-package org.uniknow.agiledev.dbc4java.examples;
+package org.uniknow.agiledev.dbc4java;
 
-import org.uniknow.agiledev.dbc4java.Validated;
+import org.junit.Test;
 
-import javax.inject.Named;
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
+import javax.validation.ConstraintViolationException;
+
+import static org.junit.Assert.assertEquals;
 
 /**
- * A simple contract is shown below. The client of the method must send a
- * parameter of type `int` that is smaller than
- * {@code MAX_VALUES. In return the client can be certain that that the method returns the value placed at the requested postion in the array.
-
+ * Created by mase on 27-01-17.
  */
-@Named
-@Validated
-public class SimpleMethodContract {
+public class TestInvariantsExample {
 
     /**
-     * Max number of values that can be persisted.
+     * Verifies exception is thrown when passed value at construction breaks
+     * invariant constraint
      */
-    public static final int MAX_VALUES = 10;
+    @Test(expected = ConstraintViolationException.class)
+    public void testConstructorInvalidValue() {
+        new InvariantsExample(-1);
+    }
 
-    private int values[] = new int[MAX_VALUES];
+    /**
+     * Verifies instance properly constructed
+     */
+    @Test
+    public void testConstructor() {
+        InvariantsExample example = new InvariantsExample(0);
+        assertEquals(0, example.getValue());
+    }
 
-    public int getValue(@Max(MAX_VALUES - 1) @Min(0) final int index) {
-        return values[index];
+    /**
+     * Verifies exception is thrown when value set breaks invariant constraint
+     */
+    @Test(expected = ConstraintViolationException.class)
+    public void testSetInvalidValue() {
+        InvariantsExample example = new InvariantsExample(1);
+        example.setValue(-1);
+    }
+
+    /**
+     * Verifies value properly set
+     */
+    @Test
+    public void testSetValue() {
+        InvariantsExample example = new InvariantsExample(1);
+        example.setValue(10);
+
+        assertEquals(10, example.getValue());
     }
 
 }

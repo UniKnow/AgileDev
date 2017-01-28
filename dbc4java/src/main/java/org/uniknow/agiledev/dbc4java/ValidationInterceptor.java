@@ -92,7 +92,7 @@ public class ValidationInterceptor {
      * <p/>
      * *NOTE:* This will only work when class compiled with aspectj.
      */
-    @Before("execution((@org.uniknow.agiledev.dbc4java.Validated *).new(..))")
+    @Before("execution(*.new(.., @(javax.validation.* || javax.validation.constraints.* || org.hibernate.validator.constraints.*) (*), ..))")
     public void validateConstructorParameters(JoinPoint joinPoint)
         throws Throwable {
         Object instance = joinPoint.getTarget();
@@ -109,24 +109,6 @@ public class ValidationInterceptor {
                     new HashSet<ConstraintViolation<?>>(violations));
             }
 
-        }
-    }
-
-    /**
-     * Matches constructor in class annotated with `@Validated`.
-     * <p/>
-     * *NOTE:* This will only work when class compiled with aspectj.
-     */
-    @After("execution((@org.uniknow.agiledev.dbc4java.Validated *).new(..))")
-    public void validateConstructorInvocation(JoinPoint joinPoint)
-        throws Throwable {
-        Object instance = joinPoint.getTarget();
-        if (instance != null) {
-            // Only validate constraints when object completely constructed
-            if (instance.getClass().equals(
-                joinPoint.getSignature().getDeclaringType())) {
-                checkInvariants(instance);
-            }
         }
     }
 
@@ -165,15 +147,16 @@ public class ValidationInterceptor {
             }
 
         }
+
     }
 
-    @Around("execution(* (@org.uniknow.agiledev.dbc4java.Validated *).*(..))"
-        + "&& !execution(private * *.*(..)) "
-        + "&& !execution(* *.equals(..)) " + "&& !execution(* *.hashCode(..))")
-    public Object validateMethodInvocation(ProceedingJoinPoint pjp)
-        throws Throwable {
+    /**
+     * Validate arguments of a method invocation annotated with constraints
+     */
+    @Before("execution(* *(.., @(javax.validation.* || javax.validation.constraints.* || org.hibernate.validator.constraints.*) (*), ..))")
+    public void validateMethodInvocation(JoinPoint pjp) throws Throwable {
 
-        Object result;
+        // Object result;
         Set<ConstraintViolation<Object>> violations;
 
         MethodSignature signature = (MethodSignature) pjp.getSignature();
@@ -197,7 +180,22 @@ public class ValidationInterceptor {
                 .fine("Skipped validation method parameters while method/instance is null");
         }
 
-        result = pjp.proceed(); // Execute the method
+    }
+
+    /**
+     * Validate method response if annotated with constraints.
+     */
+    @AfterReturning(
+        pointcut = "execution(@(javax.validation.* || javax.validation.constraints.*) * *(..))",
+        returning = "result")
+    public void after(final JoinPoint pjp, final Object result) {
+        Set<ConstraintViolation<Object>> violations;
+
+        MethodSignature signature = (MethodSignature) pjp.getSignature();
+        Method method = signature.getMethod();
+        Object instance = pjp.getTarget();
+
+        ExecutableValidator executableValidator = validator.forExecutables();
 
         if (instance != null) {
 
@@ -213,20 +211,20 @@ public class ValidationInterceptor {
                 LOGGER
                     .fine("Skipped validation return value while method is null");
             }
-
-            // Validate invariants class
-            checkInvariants(instance);
-            // violations = validator.validate(instance);
-            // if (!violations.isEmpty()) {
-            // throw new ConstraintViolationException(
-            // new HashSet<ConstraintViolation<?>>(violations));
-            // }
-
-        } else {
-            LOGGER
-                .fine("Skipped validation invariants and return value while method/instance is null");
         }
-        return result;
+    }
+
+    /**
+     * Validates invariants class if annotated with Validated
+     */
+    @After("(execution(* (@org.uniknow.agiledev.dbc4java.Validated *).*(..)) "
+        + "|| execution((@org.uniknow.agiledev.dbc4java.Validated *).new(..)))"
+        + "&& !execution(* *.equals(..)) && !execution(* *.hashCode(..))")
+    public void validateInvariants(JoinPoint joinPoint) throws Throwable {
+        Object instance = joinPoint.getTarget();
+        if (instance != null) {
+            checkInvariants(instance);
+        }
     }
 
 }

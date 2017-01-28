@@ -351,9 +351,9 @@ public class ExampleValidationConstraintTest {
     }
 
     /**
-     * Verifies constraints is not applied on methods with scope package
+     * Verifies constraints are applied on methods with scope package
      */
-    @Test
+    @Test(expected = ValidationException.class)
     public void invokeMethodScopePrivate() {
         example.applyConstraintMethodScopePrivate();
     }

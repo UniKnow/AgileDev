@@ -37,33 +37,28 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
-package org.uniknow.agiledev.dbc4java.examples;
+package org.uniknow.agiledev.dbc4java;
 
-import org.uniknow.agiledev.dbc4java.Validated;
-
-import javax.inject.Named;
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
+import org.hibernate.validator.constraints.Range;
 
 /**
- * A simple contract is shown below. The client of the method must send a
- * parameter of type `int` that is smaller than
- * {@code MAX_VALUES. In return the client can be certain that that the method returns the value placed at the requested postion in the array.
-
+ * Example of class specifying invariant constraints.
  */
-@Named
 @Validated
-public class SimpleMethodContract {
+public class InvariantsExample {
 
-    /**
-     * Max number of values that can be persisted.
-     */
-    public static final int MAX_VALUES = 10;
+    @Range(min = 0, max = 10)
+    private int value;
 
-    private int values[] = new int[MAX_VALUES];
-
-    public int getValue(@Max(MAX_VALUES - 1) @Min(0) final int index) {
-        return values[index];
+    public InvariantsExample(final int value) {
+        this.value = value;
     }
 
+    public void setValue(final int value) {
+        this.value = value;
+    }
+
+    public int getValue() {
+        return value;
+    }
 }

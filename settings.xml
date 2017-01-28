@@ -3,6 +3,11 @@
 	<servers>
         <!-- Credentials for accessing GitHub Repository -->
         <server>
+            <id>github.com</id>
+            <username>${env.CI_GITHUB_USERNAME}</username>
+            <password>${env.CI_GITHUB_PASSWORD}</password>
+        </server>
+        <server>
             <id>github</id>
             <username>${env.CI_GITHUB_USERNAME}</username>
             <password>${env.CI_GITHUB_PASSWORD}</password>
