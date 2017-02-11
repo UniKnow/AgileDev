@@ -39,13 +39,8 @@
  */
 package org.uniknow.agiledev.junitbdd.internal;
 
-import org.uniknow.agiledev.dbc4java.Validated;
 import org.uniknow.agiledev.junitbdd.internal.domain.*;
 
-import javax.validation.constraints.NotNull;
-
-// MASE: temporary disabled since @NotNull on static method causes problems
-// @Validated
 public class ScenarioManager {
 
     /**
@@ -61,7 +56,6 @@ public class ScenarioManager {
         threadSafeScenario.remove();
     }
 
-    @NotNull
     public synchronized static ScenarioModel currentScenario() {
         ScenarioModel scenario = threadSafeScenario.get();
         if (scenario == null) {

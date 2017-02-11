@@ -42,7 +42,6 @@ package org.uniknow.agiledev.junitbdd.internal.domain;
 import java.util.*;
 
 import org.junit.runner.*;
-import org.uniknow.agiledev.dbc4java.Validated;
 
 public class ScenarioModel {
 

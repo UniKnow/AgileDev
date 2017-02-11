@@ -50,7 +50,6 @@ import junitparams.*;
 import org.junit.runner.*;
 import org.junit.runner.notification.*;
 
-import org.uniknow.agiledev.dbc4java.Validated;
 import org.uniknow.agiledev.junitbdd.Narrative;
 import org.uniknow.agiledev.junitbdd.Scenario;
 import org.uniknow.agiledev.junitbdd.Story;
