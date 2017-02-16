@@ -117,8 +117,6 @@ public class BDDRunner extends BlockJUnit4ClassRunner {
         if (handleIgnored(method, notifier))
             return;
 
-        System.out.println("Processing method " + method);
-
         Statement methodBlock = methodBlock(method);
 
         Description description = describeMethod(method);
