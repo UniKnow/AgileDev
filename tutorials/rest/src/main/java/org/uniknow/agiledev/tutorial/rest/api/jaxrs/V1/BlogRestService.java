@@ -59,21 +59,21 @@ public interface BlogRestService {
 
     @GET
     @Path("/posts")
-    @ApiOperation("Returns all blog messages")
+    @ApiOperation("Returns all blog messages - version 1")
     List<Post> getPosts();
 
     @GET
     @Path("/post/{id}")
-    @ApiOperation("Returns specified blog message")
+    @ApiOperation("Returns specified blog message - version 1")
     Post getPost(@PathParam("id") int id);
 
     @POST
     @Path("/post")
-    @ApiOperation("Adds blog message")
+    @ApiOperation("Adds blog message - version 1")
     Response addPost(Post post);
 
     @DELETE
     @Path("/post/{id}")
-    @ApiOperation("Removes blog message")
+    @ApiOperation("Removes blog message - version 1")
     Response deletePost(@PathParam("id") int id);
 }

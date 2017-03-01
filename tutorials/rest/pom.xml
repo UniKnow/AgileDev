@@ -107,7 +107,7 @@
                     <apiSources>
                         <apiSource>
                             <locations>
-                                org.uniknow.agiledev.tutorial.rest.api.jaxrs.V1
+                                org.uniknow.agiledev.tutorial.rest.api.jaxrs
                             </locations>
                             <schemes>http</schemes>
                             <host>[HOST]</host>
@@ -129,7 +129,7 @@
                 </configuration>
                 <executions>
                     <execution>
-                        <phase>pre-site</phase>
+                        <phase>compile</phase>
                         <goals>
                             <goal>generate</goal>
                         </goals>
