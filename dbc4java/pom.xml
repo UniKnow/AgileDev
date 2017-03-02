@@ -58,17 +58,6 @@
             <artifactId>aspectjrt</artifactId>
             <scope>provided</scope>
         </dependency>
-        <dependency>
-            <groupId>org.aspectj</groupId>
-            <artifactId>aspectjweaver</artifactId>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>cglib</groupId>
-            <artifactId>cglib</artifactId>
-            <scope>provided</scope>
-        </dependency>
-
 
         <!--
           Dependencies Test
