@@ -106,21 +106,12 @@
                 <configuration>
                     <apiSources>
                         <apiSource>
-                            <locations>
-                                org.uniknow.agiledev.tutorial.rest.api.jaxrs.V1
-                            </locations>
+                            <locations>org.uniknow.agiledev.tutorial.rest.api.jaxrs.V1</locations>
                             <schemes>http</schemes>
                             <host>[HOST]</host>
-                            <info>
-                                <title>API Blog service</title>
-                                <version>${project.version}</version>
-                            </info>
                             <templatePath>
                                 ${basedir}/src/swagger/templates/documentation.html.hbs
                             </templatePath>
-                            <outputPath>
-                                ${project.build.directory}/generated-swagger/API.html
-                            </outputPath>
                             <swaggerDirectory>
                                 ${project.build.directory}/generated-swagger/swagger-ui
                             </swaggerDirectory>
@@ -129,10 +120,50 @@
                 </configuration>
                 <executions>
                     <execution>
+                        <id>Generate-api-docs-v1</id>
                         <phase>pre-site</phase>
                         <goals>
                             <goal>generate</goal>
                         </goals>
+                        <configuration>
+                            <apiSources>
+                                <apiSource>
+                                    <locations>org.uniknow.agiledev.tutorial.rest.api.jaxrs.V1</locations>
+                                    <schemes>http</schemes>
+                                    <host>[HOST]</host>
+                                    <info>
+                                        <title>API Blog service</title>
+                                        <version>V1.0</version>
+                                    </info>
+                                    <outputPath>
+                                        ${project.build.directory}/generated-swagger/API-V1.0.html
+                                    </outputPath>
+                                </apiSource>
+                            </apiSources>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>Generate-api-docs-v2</id>
+                        <phase>pre-site</phase>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                        <configuration>
+                            <apiSources>
+                                <apiSource>
+                                    <locations>org.uniknow.agiledev.tutorial.rest.api.jaxrs.V2</locations>
+                                    <schemes>http</schemes>
+                                    <host>[HOST]</host>
+                                    <info>
+                                        <title>API Blog service</title>
+                                        <version>V2.0</version>
+                                    </info>
+                                    <outputPath>
+                                        ${project.build.directory}/generated-swagger/API-V2.0.html
+                                    </outputPath>
+                                </apiSource>
+                            </apiSources>
+                        </configuration>
                     </execution>
                 </executions>
             </plugin>

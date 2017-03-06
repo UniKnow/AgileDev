@@ -41,6 +41,8 @@ package org.uniknow.agiledev.tutorial.rest.api.jaxrs.V1;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.Info;
+import io.swagger.annotations.SwaggerDefinition;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
@@ -50,6 +52,8 @@ import java.util.List;
  * Version 1 of Blog Rest Service
  */
 @Api(value = "/blog", description = "Version 1 of Blog REST service")
+@SwaggerDefinition(info = @Info(description = "Version 1 of Blog REST service",
+    version = "V1.0", title = "Blog REST API"))
 @Path("/blog")
 @Consumes({ "application/agiledev.blog.v1+xml",
         "application/agiledev.blog.v1+json" })
