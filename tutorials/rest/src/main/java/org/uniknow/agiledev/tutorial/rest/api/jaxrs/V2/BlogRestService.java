@@ -40,6 +40,7 @@
 package org.uniknow.agiledev.tutorial.rest.api.jaxrs.V2;
 
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -59,17 +60,21 @@ public interface BlogRestService {
 
     @GET
     @Path("/posts")
+    @ApiOperation("Returns all blog messages - version 2")
     List<Post> getPosts();
 
     @GET
     @Path("/post/{id}")
+    @ApiOperation("Returns specified blog message - version 2")
     Post getPost(@PathParam("id") int id);
 
     @POST
     @Path("/post")
+    @ApiOperation("Adds blog message - version 2")
     Response addPost(Post post);
 
     @DELETE
     @Path("/post/{id}")
+    @ApiOperation("Removes blog message - version 2")
     Response deletePost(@PathParam("id") int id);
 }
