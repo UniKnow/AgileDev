@@ -69,7 +69,7 @@
         <narayana.version>5.2.0.Final</narayana.version>
         <oval.version>1.84</oval.version>
         <spring.framework.version>[3.0.7.RELEASE,3.2.13.RELEASE]</spring.framework.version>
-        <tomcat.version>7.0.63</tomcat.version>
+        <tomcat.version>7.0.75</tomcat.version>
     </properties>
 
     <distributionManagement>
