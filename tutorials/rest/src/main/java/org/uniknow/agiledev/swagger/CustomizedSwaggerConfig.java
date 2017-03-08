@@ -73,44 +73,6 @@ public class CustomizedSwaggerConfig extends BeanConfig {
         return filterOnVersion(classes, version);
     }
 
-    // public Set<Class<?>> classes() {
-    // ConfigurationBuilder config = new ConfigurationBuilder();
-    // Set<String> acceptablePackages = new HashSet<String>();
-    //
-    // boolean allowAllPackages = false;
-    //
-    // if (getResourcePackage() != null && !"".equals(getResourcePackage())) {
-    // String[] parts = getResourcePackage().split(",");
-    // for (String pkg : parts) {
-    // if (!"".equals(pkg)) {
-    // acceptablePackages.add(pkg);
-    // config.addUrls(ClasspathHelper.forPackage(pkg));
-    // }
-    // }
-    // } else {
-    // allowAllPackages = true;
-    // }
-    //
-    // config.setScanners(new ResourcesScanner(),
-    // new TypeAnnotationsScanner(), new SubTypesScanner());
-    //
-    // Set<Class<?>> classes = getSwaggerAnnotatedClasses(config);
-    //
-    // Set<Class<?>> output = new HashSet<Class<?>>();
-    // for (Class<?> cls : classes) {
-    // if (allowAllPackages) {
-    // output.add(cls);
-    // } else {
-    // for (String pkg : acceptablePackages) {
-    // if (cls.getPackage().getName().startsWith(pkg)) {
-    // output.add(cls);
-    // }
-    // }
-    // }
-    // }
-    // return output;
-    // }
-
     /**
      * Returns all classes which version matches the specified one. If the class
      * doesn't specify a version number it will be kept in the set of returned
@@ -141,26 +103,4 @@ public class CustomizedSwaggerConfig extends BeanConfig {
         }
         return filteredClasses;
     }
-    // public Swagger configure(Swagger swagger) {
-    // if (getSchemes() != null) {
-    // for (String scheme : getSchemes()) {
-    // swagger.scheme(Scheme.forValue(scheme));
-    // }
-    // }
-    //
-    // if (getFilterClass() != null) {
-    // try {
-    // SwaggerSpecFilter filter = (SwaggerSpecFilter) Class.forName(
-    // getFilterClass()).newInstance();
-    // if (filter != null) {
-    // FilterFactory.setFilter(filter);
-    // }
-    // } catch (Exception e) {
-    // // LOGGER.error("failed to load filter", e);
-    // }
-    // }
-    //
-    // return swagger;
-    // }
-
 }

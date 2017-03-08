@@ -58,19 +58,6 @@ public class RestApplication extends Application {
             .setResourcePackage("org.uniknow.agiledev.tutorial.rest.api.jaxrs.V1,"
                 + "org.uniknow.agiledev.tutorial.rest.api.jaxrs.V2");
         config.setBasePath("rest/api");
-
-        // String hostBasePath =
-        // props.getProperty("http:0.0.0.0:8080/rest/api");
-        // BeanConfig beanConfig = new BeanConfig();
-        // // Should be picked up from Swagger definition
-        // // beanConfigV1.setVersion("1.0");
-        // // beanConfig.setBasePath(hostBasePath);
-        // beanConfig
-        // .setResourcePackage("org.uniknow.agiledev.tutorial.rest.api.jaxrs.V1,"
-        // + "org.uniknow.agiledev.tutorial.rest.api.jaxrs.V2");
-        // beanConfig.setScan(true);
-        // beanConfig.setBasePath("rest/api");
-
     }
 
     @Override
