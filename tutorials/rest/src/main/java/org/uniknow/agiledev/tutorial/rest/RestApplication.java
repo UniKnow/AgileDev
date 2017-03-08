@@ -39,7 +39,8 @@
  */
 package org.uniknow.agiledev.tutorial.rest;
 
-import io.swagger.jaxrs.config.BeanConfig;
+import org.uniknow.agiledev.swagger.ApiListingResource;
+import org.uniknow.agiledev.swagger.CustomizedSwaggerConfig;
 
 import javax.ws.rs.core.Application;
 import java.util.HashSet;
@@ -51,14 +52,25 @@ public class RestApplication extends Application {
     Properties props = new Properties();
 
     public RestApplication() {
-        String hostBasePath = props.getProperty("http:0.0.0.0:8080/rest/api");
-        BeanConfig beanConfig = new BeanConfig();
-        beanConfig.setVersion("1.0");
-        beanConfig.setBasePath(hostBasePath);
-        beanConfig
-            .setResourcePackage("org.uniknow.agiledev.tutorial.rest.api.jaxrs");
-        beanConfig.setScan(true);
-        beanConfig.setBasePath("rest/api");
+        CustomizedSwaggerConfig config = new CustomizedSwaggerConfig();
+        config.setScan(true);
+        config
+            .setResourcePackage("org.uniknow.agiledev.tutorial.rest.api.jaxrs.V1,"
+                + "org.uniknow.agiledev.tutorial.rest.api.jaxrs.V2");
+        config.setBasePath("rest/api");
+
+        // String hostBasePath =
+        // props.getProperty("http:0.0.0.0:8080/rest/api");
+        // BeanConfig beanConfig = new BeanConfig();
+        // // Should be picked up from Swagger definition
+        // // beanConfigV1.setVersion("1.0");
+        // // beanConfig.setBasePath(hostBasePath);
+        // beanConfig
+        // .setResourcePackage("org.uniknow.agiledev.tutorial.rest.api.jaxrs.V1,"
+        // + "org.uniknow.agiledev.tutorial.rest.api.jaxrs.V2");
+        // beanConfig.setScan(true);
+        // beanConfig.setBasePath("rest/api");
+
     }
 
     @Override
@@ -66,7 +78,7 @@ public class RestApplication extends Application {
         Set<Class<?>> resources = new HashSet();
 
         // Swagger Resources
-        resources.add(io.swagger.jaxrs.listing.ApiListingResource.class);
+        resources.add(ApiListingResource.class);
         resources.add(io.swagger.jaxrs.listing.SwaggerSerializers.class);
 
         return resources;

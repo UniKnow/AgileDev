@@ -21,7 +21,7 @@ Once the application is running the Rest services can be invoked by using for ex
 
 To add a new message invoke a `POST` to the following URL http://localhost:8080/rest/api/blog/post with a body that matches the following. Make sure that the `Content-Type` is set to `application/xml`.
 
-    <api:post xmlns:api="http://www.uniknow.org/rest/blog/api/v2">
+    <api:post xmlns:api="http://www.uniknow.org/rest/blog/api/v2" id="200">
         <title>Me again</title>
         <datePublished>2015-07-21T12:02:40.386+02:00</datePublished>
         <tags>example</tags>

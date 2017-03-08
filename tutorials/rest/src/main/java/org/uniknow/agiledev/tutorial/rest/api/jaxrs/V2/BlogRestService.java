@@ -54,7 +54,7 @@ import java.util.List;
  */
 @Api(value = "/blog", description = "Version 2 of Blog REST service")
 @SwaggerDefinition(info = @Info(description = "Version 2 of Blog REST service",
-    version = "V2.0", title = "Blog REST API"))
+    version = "2.0", title = "Blog REST API"))
 @Path("/blog")
 @Consumes({ MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON,
         "application/agiledev.blog.v2+xml", "application/agiledev.blog.v2+json" })
