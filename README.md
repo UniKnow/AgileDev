@@ -12,3 +12,7 @@ Tooling for Agile development.
 |[Tutorial REST](http://uniknow.github.io/AgileDev/site/0.1.15-SNAPSHOT/parent/rest/index.html)|Tutorial explaining how to quickly setup REST services|
 
 See [Project documentation](http://uniknow.github.io/AgileDev/site/0.1.15-SNAPSHOT/index.html) for more information.
+
+## TODO
+
+* Include part 'best practices' in site documentation and include [10 tips proper application logging](https://www.javacodegeeks.com/2011/01/10-tips-proper-application-logging.html)
