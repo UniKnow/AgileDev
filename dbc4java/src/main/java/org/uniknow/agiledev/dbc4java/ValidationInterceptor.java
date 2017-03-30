@@ -114,7 +114,7 @@ public class ValidationInterceptor {
      * Verifies invariants of class. This method assures the the is only done
      * once (to prevent infinite loop).
      */
-    private synchronized void checkInvariants(Object instance) {
+    private void checkInvariants(Object instance) {
         if (!invariantChecksInProgress.contains(instance)) {
             Set<ConstraintViolation<Object>> violations = new HashSet<>();
             try {
