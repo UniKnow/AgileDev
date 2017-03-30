@@ -41,10 +41,7 @@ package org.uniknow.agiledev.dbc4java;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.logging.Logger;
 
 import javax.validation.*;
@@ -77,7 +74,8 @@ public class ValidationInterceptor {
     /**
      * Contains instances for which invariant checks are currently in progress.
      */
-    private Set<Object> invariantChecksInProgress = new HashSet<>();
+    private Set<Object> invariantChecksInProgress = Collections
+        .synchronizedSet(new HashSet<>());
 
     private Validator validator;
 
@@ -116,7 +114,7 @@ public class ValidationInterceptor {
      * Verifies invariants of class. This method assures the the is only done
      * once (to prevent infinite loop).
      */
-    private synchronized void checkInvariants(Object instance) {
+    private void checkInvariants(Object instance) {
         if (!invariantChecksInProgress.contains(instance)) {
             Set<ConstraintViolation<Object>> violations = new HashSet<>();
             try {
