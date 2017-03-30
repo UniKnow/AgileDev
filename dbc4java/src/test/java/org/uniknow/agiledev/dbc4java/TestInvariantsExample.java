@@ -69,6 +69,33 @@ public class TestInvariantsExample {
     }
 
     /**
+     * Verifies type (containing invariant checks) extending abstract class with
+     * invariant checks is successfully created
+     */
+    @Test
+    public void testConstructorExtendedAbstractType() {
+        new ExtendInvariantExample("TEST", "TEST");
+    }
+
+    /**
+     * Verifies type (containing invariant checks) extending abstract class with
+     * invariant checks is successfully created
+     */
+    @Test(expected = ConstraintViolationException.class)
+    public void testConstructorExtendedClassInvalidValueAbstractType() {
+        new ExtendInvariantExample(null, "TEST");
+    }
+
+    /**
+     * Verifies type (containing invariant checks) extending abstract class with
+     * invariant checks is successfully created
+     */
+    @Test(expected = ConstraintViolationException.class)
+    public void testConstructorExtendedAbstractClassInvalidValue() {
+        new ExtendInvariantExample("TEST", null);
+    }
+
+    /**
      * Verifies exception is thrown when value set breaks invariant constraint
      */
     @Test(expected = ConstraintViolationException.class)

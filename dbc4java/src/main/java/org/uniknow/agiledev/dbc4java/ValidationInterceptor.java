@@ -114,7 +114,7 @@ public class ValidationInterceptor {
      * Verifies invariants of class. This method assures the the is only done
      * once (to prevent infinite loop).
      */
-    private void checkInvariants(Object instance) {
+    private synchronized void checkInvariants(Object instance) {
         if (!invariantChecksInProgress.contains(instance)) {
             Set<ConstraintViolation<Object>> violations = new HashSet<>();
             try {
@@ -215,13 +215,17 @@ public class ValidationInterceptor {
     /**
      * Validates invariants class if annotated with Validated
      */
-    @After("(execution(* (@org.uniknow.agiledev.dbc4java.Validated *).*(..)) "
+    @AfterReturning("(execution(* (@org.uniknow.agiledev.dbc4java.Validated *).*(..)) "
         + "|| execution((@org.uniknow.agiledev.dbc4java.Validated *).new(..)))"
         + "&& !execution(* *.equals(..)) && !execution(* *.hashCode(..))")
     public void validateInvariants(JoinPoint joinPoint) throws Throwable {
         Object instance = joinPoint.getTarget();
         if (instance != null) {
-            checkInvariants(instance);
+            // Only validate constraints when object completely constructed
+            if (instance.getClass().equals(
+                joinPoint.getSignature().getDeclaringType())) {
+                checkInvariants(instance);
+            }
         }
     }
 
