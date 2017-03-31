@@ -47,9 +47,18 @@
 
     <display-name>Tutorial AgileDev REST</display-name>
 
+    <welcome-file-list>
+        <welcome-file>index.html</welcome-file>
+    </welcome-file-list>
+
     <session-config>
         <session-timeout>30</session-timeout>
     </session-config>
+
+    <context-param>
+        <param-name>javax.ws.rs.core.Application</param-name>
+        <param-value>org.uniknow.agiledev.tutorial.rest.RestApplication</param-value>
+    </context-param>
 
     <!--While using Spring integration set resteasy.scan to false or don't
             configure resteasy.scan parameter at all -->

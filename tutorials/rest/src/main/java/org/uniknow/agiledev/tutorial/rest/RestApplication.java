@@ -37,47 +37,38 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
-package org.uniknow.agiledev.tutorial.rest.api.jaxrs.V1;
+package org.uniknow.agiledev.tutorial.rest;
 
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.Info;
-import io.swagger.annotations.SwaggerDefinition;
+import org.uniknow.agiledev.swagger.ApiListingResource;
+import org.uniknow.agiledev.swagger.CustomizedSwaggerConfig;
 
-import javax.ws.rs.*;
-import javax.ws.rs.core.Response;
-import java.util.List;
+import javax.ws.rs.core.Application;
+import java.util.HashSet;
+import java.util.Properties;
+import java.util.Set;
 
-/**
- * Version 1 of Blog Rest Service
- */
-@Api(value = "/blog", description = "Version 1 of Blog REST service")
-@SwaggerDefinition(info = @Info(description = "Version 1 of Blog REST service",
-    version = "1.0", title = "Blog REST API"))
-@Path("/blog")
-@Consumes({ "application/agiledev.blog.v1+xml",
-        "application/agiledev.blog.v1+json" })
-@Produces({ "application/agiledev.blog.v1+xml",
-        "application/agiledev.blog.v1+json" })
-public interface BlogRestService {
+public class RestApplication extends Application {
 
-    @GET
-    @Path("/posts")
-    @ApiOperation("Returns all blog messages")
-    List<Post> getPosts();
+    Properties props = new Properties();
 
-    @GET
-    @Path("/post/{id}")
-    @ApiOperation("Returns specified blog message")
-    Post getPost(@PathParam("id") int id);
+    public RestApplication() {
+        CustomizedSwaggerConfig config = new CustomizedSwaggerConfig();
+        config.setScan(true);
+        config
+            .setResourcePackage("org.uniknow.agiledev.tutorial.rest.api.jaxrs.V1,"
+                + "org.uniknow.agiledev.tutorial.rest.api.jaxrs.V2");
+        config.setBasePath("rest/api");
+    }
 
-    @POST
-    @Path("/post")
-    @ApiOperation("Adds blog message")
-    Response addPost(Post post);
+    @Override
+    public Set<Class<?>> getClasses() {
+        Set<Class<?>> resources = new HashSet();
 
-    @DELETE
-    @Path("/post/{id}")
-    @ApiOperation("Removes blog message")
-    Response deletePost(@PathParam("id") int id);
+        // Swagger Resources
+        resources.add(ApiListingResource.class);
+        resources.add(io.swagger.jaxrs.listing.SwaggerSerializers.class);
+
+        return resources;
+    }
+
 }

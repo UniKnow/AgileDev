@@ -37,47 +37,21 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
-package org.uniknow.agiledev.tutorial.rest.api.jaxrs.V1;
+package org.uniknow.agiledev.dbc4java;
 
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.Info;
-import io.swagger.annotations.SwaggerDefinition;
-
-import javax.ws.rs.*;
-import javax.ws.rs.core.Response;
-import java.util.List;
+import javax.validation.constraints.NotNull;
 
 /**
- * Version 1 of Blog Rest Service
+ * Created by mase on 3/30/2017.
  */
-@Api(value = "/blog", description = "Version 1 of Blog REST service")
-@SwaggerDefinition(info = @Info(description = "Version 1 of Blog REST service",
-    version = "1.0", title = "Blog REST API"))
-@Path("/blog")
-@Consumes({ "application/agiledev.blog.v1+xml",
-        "application/agiledev.blog.v1+json" })
-@Produces({ "application/agiledev.blog.v1+xml",
-        "application/agiledev.blog.v1+json" })
-public interface BlogRestService {
+@Validated
+public class ExtendInvariantExample extends AbstractType {
 
-    @GET
-    @Path("/posts")
-    @ApiOperation("Returns all blog messages")
-    List<Post> getPosts();
+    @NotNull
+    private String otherValue;
 
-    @GET
-    @Path("/post/{id}")
-    @ApiOperation("Returns specified blog message")
-    Post getPost(@PathParam("id") int id);
-
-    @POST
-    @Path("/post")
-    @ApiOperation("Adds blog message")
-    Response addPost(Post post);
-
-    @DELETE
-    @Path("/post/{id}")
-    @ApiOperation("Removes blog message")
-    Response deletePost(@PathParam("id") int id);
+    ExtendInvariantExample(String value, String otherValue) {
+        super(value);
+        this.otherValue = otherValue;
+    }
 }

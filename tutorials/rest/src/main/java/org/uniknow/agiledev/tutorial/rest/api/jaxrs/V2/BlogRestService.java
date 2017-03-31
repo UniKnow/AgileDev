@@ -40,6 +40,9 @@
 package org.uniknow.agiledev.tutorial.rest.api.jaxrs.V2;
 
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.Info;
+import io.swagger.annotations.SwaggerDefinition;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -50,6 +53,8 @@ import java.util.List;
  * Version 2 of Blog Rest Service
  */
 @Api(value = "/blog", description = "Version 2 of Blog REST service")
+@SwaggerDefinition(info = @Info(description = "Version 2 of Blog REST service",
+    version = "2.0", title = "Blog REST API"))
 @Path("/blog")
 @Consumes({ MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON,
         "application/agiledev.blog.v2+xml", "application/agiledev.blog.v2+json" })
@@ -59,17 +64,21 @@ public interface BlogRestService {
 
     @GET
     @Path("/posts")
+    @ApiOperation("Returns all blog messages")
     List<Post> getPosts();
 
     @GET
     @Path("/post/{id}")
+    @ApiOperation("Returns specified blog message")
     Post getPost(@PathParam("id") int id);
 
     @POST
     @Path("/post")
+    @ApiOperation("Adds blog message")
     Response addPost(Post post);
 
     @DELETE
     @Path("/post/{id}")
+    @ApiOperation("Removes blog message")
     Response deletePost(@PathParam("id") int id);
 }

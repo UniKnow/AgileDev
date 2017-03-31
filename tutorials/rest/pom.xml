@@ -20,6 +20,8 @@
         <resteasy.version>3.0.8.Final</resteasy.version>
         <swagger.version>1.5.0</swagger.version>
         <swagger-maven-plugin.version>3.1.0</swagger-maven-plugin.version>
+        <jackson.version>2.5.1</jackson.version>
+        <guava.version>15.0</guava.version>
         <!--<spring.version>3.0.3.RELEASE</spring.version>-->
     </properties>
 
@@ -30,6 +32,42 @@
             <artifactId>swagger-annotations</artifactId>
             <version>${swagger.version}</version>
         </dependency>
+        <dependency>
+            <groupId>io.swagger</groupId>
+            <artifactId>swagger-jersey2-jaxrs</artifactId>
+            <version>${swagger.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>com.fasterxml.jackson.core</groupId>
+                    <artifactId>jackson-annotations</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>com.google.guava</groupId>
+                    <artifactId>guava</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.slf4j</groupId>
+                    <artifactId>slf4j-api</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-annotations</artifactId>
+            <version>${jackson.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>${guava.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>3.1.0</version>
+        </dependency>
+
+
 
         <!-- Design by Contract dependencies -->
         <dependency>
@@ -94,6 +132,22 @@
             <artifactId>dozer</artifactId>
             <version>${dozer.version}</version>
         </dependency>
+
+        <!--<dependency>-->
+            <!--<groupId>org.jboss.narayana.jta</groupId>-->
+            <!--<artifactId>narayana-jta</artifactId>-->
+        <!--</dependency>-->
+        <dependency>
+            <groupId>org.uniknow.tomcat</groupId>
+            <artifactId>narayana-tomcat-listener</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>javax.transaction</groupId>
+            <artifactId>jta</artifactId>
+            <version>${jta.version}</version>
+        </dependency>
+
     </dependencies>
 
     <build>
@@ -106,21 +160,12 @@
                 <configuration>
                     <apiSources>
                         <apiSource>
-                            <locations>
-                                org.uniknow.agiledev.tutorial.rest.api.jaxrs.V1
-                            </locations>
+                            <locations>org.uniknow.agiledev.tutorial.rest.api.jaxrs.V1</locations>
                             <schemes>http</schemes>
                             <host>[HOST]</host>
-                            <info>
-                                <title>API Blog service</title>
-                                <version>${project.version}</version>
-                            </info>
                             <templatePath>
                                 ${basedir}/src/swagger/templates/documentation.html.hbs
                             </templatePath>
-                            <outputPath>
-                                ${project.build.directory}/generated-swagger/API.html
-                            </outputPath>
                             <swaggerDirectory>
                                 ${project.build.directory}/generated-swagger/swagger-ui
                             </swaggerDirectory>
@@ -129,10 +174,50 @@
                 </configuration>
                 <executions>
                     <execution>
+                        <id>Generate-api-docs-v1</id>
                         <phase>pre-site</phase>
                         <goals>
                             <goal>generate</goal>
                         </goals>
+                        <configuration>
+                            <apiSources>
+                                <apiSource>
+                                    <locations>org.uniknow.agiledev.tutorial.rest.api.jaxrs.V1</locations>
+                                    <schemes>http</schemes>
+                                    <host>[HOST]</host>
+                                    <info>
+                                        <title>API Blog service</title>
+                                        <version>V1.0</version>
+                                    </info>
+                                    <outputPath>
+                                        ${project.build.directory}/generated-swagger/API-V1.0.html
+                                    </outputPath>
+                                </apiSource>
+                            </apiSources>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>Generate-api-docs-v2</id>
+                        <phase>pre-site</phase>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                        <configuration>
+                            <apiSources>
+                                <apiSource>
+                                    <locations>org.uniknow.agiledev.tutorial.rest.api.jaxrs.V2</locations>
+                                    <schemes>http</schemes>
+                                    <host>[HOST]</host>
+                                    <info>
+                                        <title>API Blog service</title>
+                                        <version>V2.0</version>
+                                    </info>
+                                    <outputPath>
+                                        ${project.build.directory}/generated-swagger/API-V2.0.html
+                                    </outputPath>
+                                </apiSource>
+                            </apiSources>
+                        </configuration>
                     </execution>
                 </executions>
             </plugin>
