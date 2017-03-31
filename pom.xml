@@ -1,4 +1,5 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <name>AgileDev</name>
@@ -54,9 +55,11 @@
 
         <!-- Version information dependencies -->
         <aspectj.version>1.8.7</aspectj.version>
+        <contiperf.version>2.1.0</contiperf.version>
         <cucumber.version>1.1.5</cucumber.version>
         <doxia.version>1.5</doxia.version>
         <findbugs.jsr305.version>3.0.0</findbugs.jsr305.version>
+        <gatling.version>2.2.4</gatling.version>
         <groovy.version>2.1.6</groovy.version>
         <hibernate.version>[4.2.0.Final,4.3.2.Final]</hibernate.version>
         <hibernate-validator.version>5.3.3.Final</hibernate-validator.version>
@@ -99,8 +102,8 @@
             scm:git:https://github.com/UniKnow/AgileDev.git
         </developerConnection>
         <url>https://github.com/UniKnow/AgileDev</url>
-      <tag>agiledev-0.1.15-SNAPSHOT</tag>
-  </scm>
+        <tag>agiledev-0.1.15-SNAPSHOT</tag>
+    </scm>
 
     <modules>
         <module>buildConfiguration</module>
@@ -228,6 +231,18 @@
                 <groupId>junit</groupId>
                 <artifactId>junit</artifactId>
                 <version>${junit.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.databene</groupId>
+                <artifactId>contiperf</artifactId>
+                <version>${contiperf.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>io.gatling.highcharts</groupId>
+                <artifactId>gatling-charts-highcharts</artifactId>
+                <version>${gatling.version}</version>
                 <scope>test</scope>
             </dependency>
 
@@ -385,6 +400,32 @@
                     </executions>
                 </plugin>
 
+                <!-- Plugins for executing load tests -->
+                <plugin>
+                    <groupId>net.alchim31.maven</groupId>
+                    <artifactId>scala-maven-plugin</artifactId>
+                    <version>3.2.2</version>
+                </plugin>
+                <plugin>
+                    <groupId>io.gatling</groupId>
+                    <artifactId>gatling-maven-plugin</artifactId>
+                    <version>${gatling.version}</version>
+                    <configuration>
+                        <configFolder>src/loadTest/resources</configFolder>
+                        <dataFolder>src/loadTest/resources/data</dataFolder>
+                        <resultsFolder>target/gatling/results</resultsFolder>
+                        <bodiesFolder>src/loadTest/resources/bodies</bodiesFolder>
+                        <simulationsFolder>src/loadTest/scala</simulationsFolder>
+                    </configuration>
+                    <executions>
+                        <execution>
+                            <goals>
+                                <goal>execute</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+
             </plugins>
         </pluginManagement>
 
@@ -397,9 +438,9 @@
                     <skip>false</skip>
                     <fail>true</fail>
                     <rules>
-                        <requireUpperBoundDeps />
+                        <requireUpperBoundDeps/>
                         <!-- ensure uniquely versioned dependencies during the build -->
-                        <dependencyConvergence />
+                        <dependencyConvergence/>
                     </rules>
                 </configuration>
                 <executions>
