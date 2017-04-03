@@ -90,7 +90,7 @@ public class ValidationInterceptor {
      * <p/>
      * *NOTE:* This will only work when class compiled with aspectj.
      */
-    @Before("execution(*.new(.., @(javax.validation.* || javax.validation.constraints.* || org.hibernate.validator.constraints.*) (*), ..))")
+    @Before("execution(*.new(.., @(javax.validation.constraints.* || org.hibernate.validator.constraints.*) (*), ..))")
     public void validateConstructorParameters(JoinPoint joinPoint)
         throws Throwable {
         Object instance = joinPoint.getTarget();
@@ -115,11 +115,12 @@ public class ValidationInterceptor {
      * once (to prevent infinite loop).
      */
     private void checkInvariants(Object instance) {
-        if (!invariantChecksInProgress.contains(instance)) {
+        // if (!invariantChecksInProgress.contains(instance)) {
+        // invariantChecksInProgress.add(instance);
+        if (invariantChecksInProgress.add(instance)) {
+
             Set<ConstraintViolation<Object>> violations = new HashSet<>();
             try {
-                invariantChecksInProgress.add(instance);
-
                 // Validate invariants class
                 violations = validator.validate(instance);
 
@@ -151,7 +152,7 @@ public class ValidationInterceptor {
     /**
      * Validate arguments of a method invocation annotated with constraints
      */
-    @Before("execution(* *(.., @(javax.validation.* || javax.validation.constraints.* || org.hibernate.validator.constraints.*) (*), ..))")
+    @Before("execution(* *(.., @(javax.validation.constraints.* || org.hibernate.validator.constraints.*) (*), ..))")
     public void validateMethodInvocation(JoinPoint pjp) throws Throwable {
 
         // Object result;
@@ -184,7 +185,7 @@ public class ValidationInterceptor {
      * Validate method response if annotated with constraints.
      */
     @AfterReturning(
-        pointcut = "execution(@(javax.validation.* || javax.validation.constraints.*) * *(..))",
+        pointcut = "execution(@(javax.validation.constraints.*) * *(..))",
         returning = "result")
     public void after(final JoinPoint pjp, final Object result) {
         Set<ConstraintViolation<Object>> violations;
