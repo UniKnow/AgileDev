@@ -78,30 +78,30 @@ public class LoadTest {
     /**
      * Creates class with unacceptable value for invariant constraint.
      */
-    @Test
+    @Test(expected = ConstraintViolationException.class)
     @PerfTest(invocations = 1000000, rampUp = 100, threads = 100)
     @Required(average = 10)
     public void testConstructorWithUnacceptableInvariantConstraints() {
-        try {
-            new InvariantsExample(15);
-        } catch (ConstraintViolationException error) {
-            // Expected failure
-        }
+        // try {
+        new InvariantsExample(15);
+        // } catch (ConstraintViolationException error) {
+        // Expected failure
+        // }
     }
 
     /**
      * Creates class with unacceptable value for invariant constraint in class
      * that it extends.
      */
-    @Test
+    @Test(expected = ConstraintViolationException.class)
     @PerfTest(invocations = 1000000, rampUp = 100, threads = 100)
     @Required(average = 10)
     public void testConstructorExtendedClassWithUnacceptableInvariantConstraints() {
-        try {
-            new ExtendInvariantExample("TEST", null);
-        } catch (ConstraintViolationException error) {
-            // Expected failure
-        }
+        // try {
+        new ExtendInvariantExample("TEST", null);
+        // } catch (ConstraintViolationException error) {
+        // // Expected failure
+        // }
     }
 
     /**
@@ -118,6 +118,7 @@ public class LoadTest {
     /**
      * Set unacceptable value for instance invariant constraint.
      */
+    // @Test(expected = ConstraintViolationException.class)
     @Test
     @PerfTest(invocations = 1000000, rampUp = 100, threads = 100)
     @Required(average = 10)
@@ -152,15 +153,15 @@ public class LoadTest {
     /**
      * Set invalid value of instance invoking method with pre conditions
      */
-    @Test
+    @Test(expected = ConstraintViolationException.class)
     @PerfTest(invocations = 1000000, rampUp = 100, threads = 100)
     @Required(average = 10)
     public void testSetUnacceptableValuePostCondition() {
-        try {
-            instanceWithConstrains.setQuantity(15);
-        } catch (ConstraintViolationException error) {
-            // Expected failure
-        }
+        // try {
+        instanceWithConstrains.setQuantity(15);
+        // } catch (ConstraintViolationException error) {
+        // // Expected failure
+        // }
     }
 
 }

@@ -51,7 +51,6 @@ import java.util.Date;
  * Examples of appliance constraints.
  */
 @Named
-@Validated
 public class ExampleValidationConstraint {
 
     private BigDecimal price = new BigDecimal(0);

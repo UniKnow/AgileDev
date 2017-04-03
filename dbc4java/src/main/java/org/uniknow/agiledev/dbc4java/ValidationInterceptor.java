@@ -77,13 +77,12 @@ public final class ValidationInterceptor {
     private final Set<Object> invariantChecksInProgress = Collections
         .synchronizedSet(new HashSet<>());
 
-    private final Validator validator;
+    private static final Validator validator = Validation
+        .buildDefaultValidatorFactory().getValidator();;
 
-    public ValidationInterceptor() {
-
-        ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
-        validator = factory.getValidator();
-    }
+    // public ValidationInterceptor() {
+    // // validator = Validation.buildDefaultValidatorFactory().getValidator();
+    // }
 
     /**
      * Matches constructor parameters in class annotated with `@Validated`.
@@ -93,20 +92,19 @@ public final class ValidationInterceptor {
     @Before("execution(*.new(.., @(javax.validation.constraints.* || org.hibernate.validator.constraints.*) (*), ..))")
     public final void validateConstructorParameters(final JoinPoint joinPoint)
         throws Throwable {
-        if (joinPoint.getTarget() != null) {
-            final Constructor constructor = ((ConstructorSignature) joinPoint
-                .getSignature()).getConstructor();
+        // if (joinPoint.getTarget() != null) {
+        final Constructor constructor = ((ConstructorSignature) joinPoint
+            .getSignature()).getConstructor();
 
-            Set<ConstraintViolation<Object>> violations = validator
-                .forExecutables().validateConstructorParameters(constructor,
-                    joinPoint.getArgs());
+        final Set<ConstraintViolation<Object>> violations = validator
+            .forExecutables().validateConstructorParameters(constructor,
+                joinPoint.getArgs());
 
-            if (!violations.isEmpty()) {
-                throw new ConstraintViolationException(
-                    new HashSet<ConstraintViolation<?>>(violations));
-            }
-
+        if (!violations.isEmpty()) {
+            throw new ConstraintViolationException(violations);
+            // new HashSet<ConstraintViolation<?>>(violations));
         }
+        // }
     }
 
     /**
@@ -140,8 +138,7 @@ public final class ValidationInterceptor {
             }
 
             if (!violations.isEmpty()) {
-                throw new ConstraintViolationException(
-                    new HashSet<ConstraintViolation<?>>(violations));
+                throw new ConstraintViolationException(violations);
             }
 
         }
@@ -152,23 +149,20 @@ public final class ValidationInterceptor {
      * Validate arguments of a method invocation annotated with constraints
      */
     @Before("execution(* *(.., @(javax.validation.constraints.* || org.hibernate.validator.constraints.*) (*), ..))")
-    public void validateMethodInvocation(JoinPoint pjp) throws Throwable {
+    public final void validateMethodInvocation(final JoinPoint pjp)
+        throws Throwable {
 
-        // Object result;
-        Set<ConstraintViolation<Object>> violations;
-
-        MethodSignature signature = (MethodSignature) pjp.getSignature();
-        Method method = signature.getMethod();
-        Object instance = pjp.getTarget();
-
-        ExecutableValidator executableValidator = validator.forExecutables();
+        final Method method = ((MethodSignature) pjp.getSignature())
+            .getMethod();
+        final Object instance = pjp.getTarget();
 
         if ((instance != null) && (method != null)) {
             // Validate constraint(s) method parameters.
-            Object[] arguments = pjp.getArgs();
+            final Object[] arguments = pjp.getArgs();
             if ((arguments != null) && (arguments.length > 0)) {
-                violations = executableValidator.validateParameters(instance,
-                    method, arguments);
+                final Set<ConstraintViolation<Object>> violations = validator
+                    .forExecutables().validateParameters(instance, method,
+                        arguments);
                 if (!violations.isEmpty()) {
                     throw new ConstraintViolationException(violations);
                 }
@@ -187,21 +181,21 @@ public final class ValidationInterceptor {
         pointcut = "execution(@(javax.validation.constraints.*) * *(..))",
         returning = "result")
     public void after(final JoinPoint pjp, final Object result) {
-        Set<ConstraintViolation<Object>> violations;
 
-        MethodSignature signature = (MethodSignature) pjp.getSignature();
-        Method method = signature.getMethod();
-        Object instance = pjp.getTarget();
-
-        ExecutableValidator executableValidator = validator.forExecutables();
+        // final MethodSignature signature = (MethodSignature)
+        // pjp.getSignature();
+        final Object instance = pjp.getTarget();
 
         if (instance != null) {
 
-            if ((method != null)
-                && !signature.getReturnType().equals(Void.TYPE)) {
+            final Method method = ((MethodSignature) pjp.getSignature())
+                .getMethod();
+
+            if ((method != null) && !method.getReturnType().equals(Void.TYPE)) {
                 // Validate constraint return value method
-                violations = executableValidator.validateReturnValue(instance,
-                    method, result);
+                final Set<ConstraintViolation<Object>> violations = validator
+                    .forExecutables().validateReturnValue(instance, method,
+                        result);
                 if (!violations.isEmpty()) {
                     throw new ConstraintViolationException(violations);
                 }
@@ -218,8 +212,8 @@ public final class ValidationInterceptor {
     @AfterReturning("(execution(* (@org.uniknow.agiledev.dbc4java.Validated *).*(..)) "
         + "|| execution((@org.uniknow.agiledev.dbc4java.Validated *).new(..)))"
         + "&& !execution(* *.equals(..)) && !execution(* *.hashCode(..))")
-    public void validateInvariants(JoinPoint joinPoint) throws Throwable {
-        Object instance = joinPoint.getTarget();
+    public final void validateInvariants(JoinPoint joinPoint) throws Throwable {
+        final Object instance = joinPoint.getTarget();
         if (instance != null) {
             // Only validate constraints when object completely constructed
             if (instance.getClass().equals(
