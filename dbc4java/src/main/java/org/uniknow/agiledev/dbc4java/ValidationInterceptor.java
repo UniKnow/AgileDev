@@ -66,7 +66,7 @@ import org.aspectj.lang.reflect.MethodSignature;
  * @since 0.1.3
  */
 @Aspect
-public class ValidationInterceptor {
+public final class ValidationInterceptor {
 
     private static final Logger LOGGER = Logger
         .getLogger(ValidationInterceptor.class.getName());
@@ -74,10 +74,10 @@ public class ValidationInterceptor {
     /**
      * Contains instances for which invariant checks are currently in progress.
      */
-    private Set<Object> invariantChecksInProgress = Collections
+    private final Set<Object> invariantChecksInProgress = Collections
         .synchronizedSet(new HashSet<>());
 
-    private Validator validator;
+    private final Validator validator;
 
     public ValidationInterceptor() {
 
@@ -91,11 +91,10 @@ public class ValidationInterceptor {
      * *NOTE:* This will only work when class compiled with aspectj.
      */
     @Before("execution(*.new(.., @(javax.validation.constraints.* || org.hibernate.validator.constraints.*) (*), ..))")
-    public void validateConstructorParameters(JoinPoint joinPoint)
+    public final void validateConstructorParameters(final JoinPoint joinPoint)
         throws Throwable {
-        Object instance = joinPoint.getTarget();
-        if (instance != null) {
-            Constructor constructor = ((ConstructorSignature) joinPoint
+        if (joinPoint.getTarget() != null) {
+            final Constructor constructor = ((ConstructorSignature) joinPoint
                 .getSignature()).getConstructor();
 
             Set<ConstraintViolation<Object>> violations = validator
