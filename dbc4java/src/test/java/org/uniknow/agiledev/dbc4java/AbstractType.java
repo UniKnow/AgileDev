@@ -44,13 +44,11 @@ import javax.validation.constraints.NotNull;
 /**
  * Test class with invariant checks.
  */
-@Validated
 public abstract class AbstractType {
 
-    @NotNull
     private String value;
 
-    AbstractType(String value) {
+    AbstractType(@NotNull String value) {
         this.value = value;
     }
 }

@@ -49,8 +49,6 @@ import java.util.Date;
  * Created by mase on 3/11/2015.
  */
 @Named
-@Validated
-// This should come from interface Repository :(
 public class MovieRepository implements Repository<Movie> {
 
     @Inject

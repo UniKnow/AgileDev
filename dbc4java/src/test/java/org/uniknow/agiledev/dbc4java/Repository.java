@@ -45,7 +45,6 @@ import java.util.Date;
 /**
  * Created by mase on 3/12/2015.
  */
-@Validated
 public interface Repository<T> {
 
     T createMovie(@NotNull Date releaseDate);

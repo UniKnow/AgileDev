@@ -45,7 +45,6 @@ import javax.validation.constraints.NotNull;
  * Deliberately returning invalid response to verify validator is handling it
  * correctly.
  */
-@Validated
 public class InvalidImplementation {
 
     /**

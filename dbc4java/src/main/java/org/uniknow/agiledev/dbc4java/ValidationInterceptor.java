@@ -39,24 +39,26 @@
  */
 package org.uniknow.agiledev.dbc4java;
 
-import java.lang.reflect.Constructor;
-import java.lang.reflect.Method;
-import java.util.*;
-import java.util.logging.Logger;
-
-import javax.validation.*;
-import javax.validation.executable.ExecutableValidator;
-
 import org.aspectj.lang.JoinPoint;
-import org.aspectj.lang.ProceedingJoinPoint;
-import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.AfterReturning;
-import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
-import org.aspectj.lang.annotation.Pointcut;
 import org.aspectj.lang.reflect.ConstructorSignature;
 import org.aspectj.lang.reflect.MethodSignature;
+import org.hibernate.validator.HibernateValidator;
+
+import javax.validation.ConstraintViolation;
+import javax.validation.ConstraintViolationException;
+import javax.validation.Validation;
+import javax.validation.Validator;
+import javax.validation.executable.ExecutableValidator;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.Method;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.TreeSet;
+import java.util.logging.Logger;
 
 /**
  * Intercepts method calls of classes which are annotated with
@@ -75,14 +77,16 @@ public final class ValidationInterceptor {
      * Contains instances for which invariant checks are currently in progress.
      */
     private final Set<Object> invariantChecksInProgress = Collections
-        .synchronizedSet(new HashSet<>());
+        .synchronizedSet(new TreeSet());
 
-    private static final Validator validator = Validation
-        .buildDefaultValidatorFactory().getValidator();;
+    private final Validator validator;
+    private final ExecutableValidator executableValidator;
 
-    // public ValidationInterceptor() {
-    // // validator = Validation.buildDefaultValidatorFactory().getValidator();
-    // }
+    ValidationInterceptor() {
+        validator = Validation.byProvider(HibernateValidator.class).configure()
+            .failFast(true).buildValidatorFactory().getValidator();
+        executableValidator = validator.forExecutables();
+    }
 
     /**
      * Matches constructor parameters in class annotated with `@Validated`.
@@ -96,53 +100,14 @@ public final class ValidationInterceptor {
         final Constructor constructor = ((ConstructorSignature) joinPoint
             .getSignature()).getConstructor();
 
-        final Set<ConstraintViolation<Object>> violations = validator
-            .forExecutables().validateConstructorParameters(constructor,
-                joinPoint.getArgs());
+        final Set<ConstraintViolation<Object>> violations = executableValidator
+            .validateConstructorParameters(constructor, joinPoint.getArgs());
 
         if (!violations.isEmpty()) {
             throw new ConstraintViolationException(violations);
             // new HashSet<ConstraintViolation<?>>(violations));
         }
         // }
-    }
-
-    /**
-     * Verifies invariants of class. This method assures the the is only done
-     * once (to prevent infinite loop).
-     */
-    private void checkInvariants(Object instance) {
-        // if (!invariantChecksInProgress.contains(instance)) {
-        // invariantChecksInProgress.add(instance);
-        if (invariantChecksInProgress.add(instance)) {
-
-            Set<ConstraintViolation<Object>> violations = new HashSet<>();
-            try {
-                // Validate invariants class
-                violations = validator.validate(instance);
-
-            } catch (ValidationException error) {
-                if (error.getMessage().contains("HV000090")) {
-                    // Error possibly caused due to post condition on getter of
-                    // non class member
-                    throw new ValidationException(
-                        "Unable to validate post conditions for "
-                            + instance.toString()
-                            + ". Possibly due to post conditions on 'property' getters which are not a class member.",
-                        error);
-                } else {
-                    throw error;
-                }
-            } finally {
-                invariantChecksInProgress.remove(instance);
-            }
-
-            if (!violations.isEmpty()) {
-                throw new ConstraintViolationException(violations);
-            }
-
-        }
-
     }
 
     /**
@@ -160,9 +125,8 @@ public final class ValidationInterceptor {
             // Validate constraint(s) method parameters.
             final Object[] arguments = pjp.getArgs();
             if ((arguments != null) && (arguments.length > 0)) {
-                final Set<ConstraintViolation<Object>> violations = validator
-                    .forExecutables().validateParameters(instance, method,
-                        arguments);
+                final Set<ConstraintViolation<Object>> violations = executableValidator
+                    .validateParameters(instance, method, arguments);
                 if (!violations.isEmpty()) {
                     throw new ConstraintViolationException(violations);
                 }
@@ -193,32 +157,14 @@ public final class ValidationInterceptor {
 
             if ((method != null) && !method.getReturnType().equals(Void.TYPE)) {
                 // Validate constraint return value method
-                final Set<ConstraintViolation<Object>> violations = validator
-                    .forExecutables().validateReturnValue(instance, method,
-                        result);
+                final Set<ConstraintViolation<Object>> violations = executableValidator
+                    .validateReturnValue(instance, method, result);
                 if (!violations.isEmpty()) {
                     throw new ConstraintViolationException(violations);
                 }
             } else {
                 LOGGER
                     .fine("Skipped validation return value while method is null");
-            }
-        }
-    }
-
-    /**
-     * Validates invariants class if annotated with Validated
-     */
-    @AfterReturning("(execution(* (@org.uniknow.agiledev.dbc4java.Validated *).*(..)) "
-        + "|| execution((@org.uniknow.agiledev.dbc4java.Validated *).new(..)))"
-        + "&& !execution(* *.equals(..)) && !execution(* *.hashCode(..))")
-    public final void validateInvariants(JoinPoint joinPoint) throws Throwable {
-        final Object instance = joinPoint.getTarget();
-        if (instance != null) {
-            // Only validate constraints when object completely constructed
-            if (instance.getClass().equals(
-                joinPoint.getSignature().getDeclaringType())) {
-                checkInvariants(instance);
             }
         }
     }

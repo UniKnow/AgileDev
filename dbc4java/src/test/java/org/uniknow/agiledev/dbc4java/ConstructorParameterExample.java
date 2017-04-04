@@ -41,15 +41,17 @@ package org.uniknow.agiledev.dbc4java;
 
 import org.hibernate.validator.constraints.Range;
 
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+
 /**
  * Created by mase on 12/12/2016.
  */
-@Validated
 public class ConstructorParameterExample {
 
     private int value;
 
-    public ConstructorParameterExample(@Range(min = 0, max = 10) int value) {
+    public ConstructorParameterExample(@Min(0) @Max(10) int value) {
         this.value = value;
     }
 }

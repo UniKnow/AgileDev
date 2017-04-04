@@ -39,8 +39,6 @@
  */
 package org.uniknow.agiledev.dbc4java.examples;
 
-import org.uniknow.agiledev.dbc4java.Validated;
-
 import javax.inject.Named;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
@@ -52,7 +50,6 @@ import javax.validation.constraints.Min;
 
  */
 @Named
-@Validated
 public class SimpleMethodContract {
 
     /**

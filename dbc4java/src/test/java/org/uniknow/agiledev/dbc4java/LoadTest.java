@@ -62,83 +62,7 @@ public class LoadTest {
     @Rule
     public ContiPerfRule rule = new ContiPerfRule();
 
-    private InvariantsExample instanceWithInvariants = new InvariantsExample(5);
     private ExampleValidationConstraint instanceWithConstrains = new ExampleValidationConstraint();
-
-    /**
-     * Creates class with acceptable value for invariant constraint.
-     */
-    @Test
-    @PerfTest(invocations = 1000000, rampUp = 100, threads = 100)
-    @Required(average = 10)
-    public void testConstructorWithAcceptableValueInvariantConstraints() {
-        new InvariantsExample(5);
-    }
-
-    /**
-     * Creates class with unacceptable value for invariant constraint.
-     */
-    @Test(expected = ConstraintViolationException.class)
-    @PerfTest(invocations = 1000000, rampUp = 100, threads = 100)
-    @Required(average = 10)
-    public void testConstructorWithUnacceptableInvariantConstraints() {
-        // try {
-        new InvariantsExample(15);
-        // } catch (ConstraintViolationException error) {
-        // Expected failure
-        // }
-    }
-
-    /**
-     * Creates class with unacceptable value for invariant constraint in class
-     * that it extends.
-     */
-    @Test(expected = ConstraintViolationException.class)
-    @PerfTest(invocations = 1000000, rampUp = 100, threads = 100)
-    @Required(average = 10)
-    public void testConstructorExtendedClassWithUnacceptableInvariantConstraints() {
-        // try {
-        new ExtendInvariantExample("TEST", null);
-        // } catch (ConstraintViolationException error) {
-        // // Expected failure
-        // }
-    }
-
-    /**
-     * Creates class with acceptable value for invariant constraint in class
-     * that it extends.
-     */
-    @Test
-    @PerfTest(invocations = 1000000, rampUp = 100, threads = 100)
-    @Required(average = 10)
-    public void testConstructorExtendedClassWithAcceptableInvariantConstraints() {
-        new ExtendInvariantExample("TEST", "OTHER-TEST");
-    }
-
-    /**
-     * Set unacceptable value for instance invariant constraint.
-     */
-    // @Test(expected = ConstraintViolationException.class)
-    @Test
-    @PerfTest(invocations = 1000000, rampUp = 100, threads = 100)
-    @Required(average = 10)
-    public void testSetUnacceptableValueInvariantConstraints() {
-        try {
-            instanceWithInvariants.setValue(15);
-        } catch (ConstraintViolationException error) {
-            // Expected failure
-        }
-    }
-
-    /**
-     * Set acceptable value for instance invariant constraint.
-     */
-    @Test
-    @PerfTest(invocations = 1000000, rampUp = 100, threads = 100)
-    @Required(average = 10)
-    public void testSetAcceptableValueInvariantConstraints() {
-        instanceWithInvariants.setValue(7);
-    }
 
     /**
      * Set value of instance invoking method with pre conditions
@@ -157,11 +81,7 @@ public class LoadTest {
     @PerfTest(invocations = 1000000, rampUp = 100, threads = 100)
     @Required(average = 10)
     public void testSetUnacceptableValuePostCondition() {
-        // try {
         instanceWithConstrains.setQuantity(15);
-        // } catch (ConstraintViolationException error) {
-        // // Expected failure
-        // }
     }
 
 }

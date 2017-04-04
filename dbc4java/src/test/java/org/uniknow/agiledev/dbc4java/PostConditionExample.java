@@ -45,12 +45,10 @@ import javax.validation.constraints.NotNull;
 /**
  * Verifies post conditions are properly handled.
  */
-@Validated
 public class PostConditionExample {
 
     private Object property;
 
-    @Max(10)
     private int calculatedValue = 0;
 
     @NotNull

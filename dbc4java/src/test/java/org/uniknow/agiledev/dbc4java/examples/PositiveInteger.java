@@ -41,7 +41,6 @@ package org.uniknow.agiledev.dbc4java.examples;
 
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.context.annotation.Scope;
-import org.uniknow.agiledev.dbc4java.Validated;
 
 import javax.inject.Named;
 import javax.validation.constraints.Min;
@@ -50,14 +49,12 @@ import javax.validation.constraints.Min;
  * Example of an invariant that guarantees that value is positive
  */
 @Named
-@Validated
 @Scope(BeanDefinition.SCOPE_PROTOTYPE)
 public class PositiveInteger {
 
-    @Min(0)
     private int value = 0;
 
-    public void add(int addedValue) {
+    public void add(@Min(0) int addedValue) {
         value += addedValue;
     }
 
@@ -65,6 +62,7 @@ public class PositiveInteger {
         value -= subtractedValue;
     }
 
+    @Min(0)
     public int toInt() {
         return value;
     }

@@ -50,11 +50,9 @@ import java.util.Date;
  * Created by mase on 3/11/2015.
  */
 @Named
-@Validated
 @Scope(BeanDefinition.SCOPE_PROTOTYPE)
 public class Movie {
 
-    @NotNull(message = "Null is not a valid value for release date")
     private Date releaseDate;
 
     private String title;
@@ -71,11 +69,13 @@ public class Movie {
      * 
      * @param releaseDate
      */
-    public Movie(Date releaseDate) {
+    public Movie(@NotNull(
+        message = "Null is not a valid value for release date") Date releaseDate) {
         this.releaseDate = releaseDate;
     }
 
-    public void setReleaseDate(Date releaseDate) {
+    public void setReleaseDate(@NotNull(
+        message = "Null is not a valid value for release date") Date releaseDate) {
         this.releaseDate = releaseDate;
     }
 

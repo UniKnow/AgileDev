@@ -103,16 +103,6 @@ public class TestPostConditionExample {
     }
 
     /**
-     * Verifies exception occurs when implementation of class causes wrong
-     * internal state
-     */
-    @Test(expected = ConstraintViolationException.class)
-    public void testInValidInvariants() {
-        PostConditionExample instance = new PostConditionExample();
-        instance.calculateInvalid();
-    }
-
-    /**
      * Verifies validaton exception occurs when trying to invoke getter on
      * wrongly implemented method
      */
