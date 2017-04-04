@@ -45,7 +45,6 @@ import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.reflect.ConstructorSignature;
 import org.aspectj.lang.reflect.MethodSignature;
-import org.hibernate.validator.HibernateValidator;
 
 import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
@@ -73,19 +72,12 @@ public final class ValidationInterceptor {
     private static final Logger LOGGER = Logger
         .getLogger(ValidationInterceptor.class.getName());
 
-    /**
-     * Contains instances for which invariant checks are currently in progress.
-     */
-    private final Set<Object> invariantChecksInProgress = Collections
-        .synchronizedSet(new TreeSet());
-
-    private final Validator validator;
+    // private final Validator validator;
     private final ExecutableValidator executableValidator;
 
     ValidationInterceptor() {
-        validator = Validation.byProvider(HibernateValidator.class).configure()
-            .failFast(true).buildValidatorFactory().getValidator();
-        executableValidator = validator.forExecutables();
+        executableValidator = Validation.buildDefaultValidatorFactory()
+            .getValidator().forExecutables();
     }
 
     /**
@@ -96,7 +88,7 @@ public final class ValidationInterceptor {
     @Before("execution(*.new(.., @(javax.validation.constraints.* || org.hibernate.validator.constraints.*) (*), ..))")
     public final void validateConstructorParameters(final JoinPoint joinPoint)
         throws Throwable {
-        // if (joinPoint.getTarget() != null) {
+
         final Constructor constructor = ((ConstructorSignature) joinPoint
             .getSignature()).getConstructor();
 
@@ -105,9 +97,7 @@ public final class ValidationInterceptor {
 
         if (!violations.isEmpty()) {
             throw new ConstraintViolationException(violations);
-            // new HashSet<ConstraintViolation<?>>(violations));
         }
-        // }
     }
 
     /**
@@ -121,20 +111,20 @@ public final class ValidationInterceptor {
             .getMethod();
         final Object instance = pjp.getTarget();
 
-        if ((instance != null) && (method != null)) {
-            // Validate constraint(s) method parameters.
-            final Object[] arguments = pjp.getArgs();
-            if ((arguments != null) && (arguments.length > 0)) {
-                final Set<ConstraintViolation<Object>> violations = executableValidator
-                    .validateParameters(instance, method, arguments);
-                if (!violations.isEmpty()) {
-                    throw new ConstraintViolationException(violations);
-                }
-            }
-        } else {
-            LOGGER
-                .fine("Skipped validation method parameters while method/instance is null");
+        // if ((instance != null) && (method != null)) {
+        // Validate constraint(s) method parameters.
+        final Object[] arguments = pjp.getArgs();
+        // if ((arguments != null) && (arguments.length > 0)) {
+        final Set<ConstraintViolation<Object>> violations = executableValidator
+            .validateParameters(instance, method, arguments);
+        if (!violations.isEmpty()) {
+            throw new ConstraintViolationException(violations);
         }
+        // }
+        // } else {
+        // LOGGER
+        // .fine("Skipped validation method parameters while method/instance is null");
+        // }
 
     }
 

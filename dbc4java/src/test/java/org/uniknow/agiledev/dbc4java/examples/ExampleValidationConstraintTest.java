@@ -187,22 +187,6 @@ public class ExampleValidationConstraintTest {
     }
 
     /**
-     * Verifies exception is thrown when passed value is empty string
-     */
-    @Test(expected = ValidationException.class)
-    public void testSetUserNameEmptyString() {
-        example.setUserName("");
-    }
-
-    /**
-     * Verifies exception is thrown when passed value is blank string
-     */
-    @Test(expected = ValidationException.class)
-    public void testSetUserNameBlankString() {
-        example.setUserName("    ");
-    }
-
-    /**
      * Verifies user name is properly set.
      */
     @Test
@@ -244,26 +228,6 @@ public class ExampleValidationConstraintTest {
         Date birthday = new Date(System.currentTimeMillis() - 1000);
         example.setBirthday(birthday);
         assertEquals(birthday, example.getBirthday());
-    }
-
-    /**
-     * Verifies exception is thrown when passed value doesn't comply to email
-     * format
-     */
-    @Test(expected = ValidationException.class)
-    public void testSetEmailAddressInvalidValue() {
-        example.setEmailAddress("TEST");
-    }
-
-    /**
-     * Verifies email address is properly set.
-     */
-    @Test
-    public void testSetEmailAddress() {
-        String emailAddress = "test@test.com";
-
-        example.setEmailAddress(emailAddress);
-        assertEquals(emailAddress, example.getEmailAddress());
     }
 
     /**
@@ -313,25 +277,6 @@ public class ExampleValidationConstraintTest {
 
         example.setPhoneNumber(phoneNumber);
         assertEquals(phoneNumber, example.getPhoneNumber());
-    }
-
-    /**
-     * Verifies exception is thrown when passed String is not a valid url
-     */
-    @Test(expected = ValidationException.class)
-    public void testSetUrlInvalidValue() {
-        example.setUrl("TEST");
-    }
-
-    /**
-     * Set url
-     */
-    @Test
-    public void testSetUrl() {
-        String url = "http://www.google.com";
-
-        example.setUrl(url);
-        assertEquals(url, example.getUrl());
     }
 
     /**

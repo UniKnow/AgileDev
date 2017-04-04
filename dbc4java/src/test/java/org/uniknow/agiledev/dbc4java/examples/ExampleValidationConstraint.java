@@ -39,8 +39,6 @@
  */
 package org.uniknow.agiledev.dbc4java.examples;
 
-import org.hibernate.validator.constraints.*;
-
 import javax.inject.Named;
 import javax.validation.constraints.*;
 import java.math.BigDecimal;
@@ -64,13 +62,9 @@ public class ExampleValidationConstraint {
 
     private String userName;
 
-    private String email;
-
     private String identifier;
 
     private String phoneNumber;
-
-    private String url;
 
     /**
      * Method by which price is set.
@@ -146,7 +140,7 @@ public class ExampleValidationConstraint {
      * Example of method for which the passed value may not be {@code null},
      * empty or blank string.
      */
-    public void setUserName(@NotNull @NotEmpty @NotBlank String userName) {
+    public void setUserName(@NotNull String userName) {
         this.userName = userName;
     }
 
@@ -185,18 +179,6 @@ public class ExampleValidationConstraint {
     }
 
     /**
-     * Example of method for which the value must match a particular regular
-     * expression.
-     */
-    public void setEmailAddress(@Email String email) {
-        this.email = email;
-    }
-
-    public String getEmailAddress() {
-        return email;
-    }
-
-    /**
      * Example of method for which the size of the String must be within certain
      * boundaries
      */
@@ -206,17 +188,6 @@ public class ExampleValidationConstraint {
 
     public String getIdentifier() {
         return identifier;
-    }
-
-    /**
-     * Example of method for which the passed parameter must be a valid url
-     */
-    public void setUrl(@URL String url) {
-        this.url = url;
-    }
-
-    public String getUrl() {
-        return url;
     }
 
     protected void applyConstraintMethodScopeProtected(@NotNull Object value) {

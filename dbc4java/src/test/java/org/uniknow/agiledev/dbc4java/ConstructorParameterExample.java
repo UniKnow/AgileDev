@@ -39,8 +39,6 @@
  */
 package org.uniknow.agiledev.dbc4java;
 
-import org.hibernate.validator.constraints.Range;
-
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 
