@@ -1,31 +1,31 @@
 /**
  * Copyright (C) 2014 uniknow. All rights reserved.
- * 
+ *
  * This Java class is subject of the following restrictions:
- * 
+ *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
- * 
+ *
  * 1. Redistributions of source code must retain the above copyright notice,
  * this list of conditions and the following disclaimer.
- * 
+ *
  * 2. Redistributions in binary form must reproduce the above copyright notice,
  * this list of conditions and the following disclaimer in the documentation
  * and/or other materials provided with the distribution.
- * 
+ *
  * 3. The end-user documentation included with the redistribution, if any, must
  * include the following acknowledgment: "This product includes software
  * developed by uniknow." Alternately, this acknowledgment may appear in the
  * software itself, if and wherever such third-party acknowledgments normally
  * appear.
- * 
+ *
  * 4. The name ''uniknow'' must not be used to endorse or promote products
  * derived from this software without prior written permission.
- * 
+ *
  * 5. Products derived from this software may not be called ''UniKnow'', nor may
  * ''uniknow'' appear in their name, without prior written permission of
  * uniknow.
- * 
+ *
  * THIS SOFTWARE IS PROVIDED ''AS IS'' AND ANY EXPRESSED OR IMPLIED WARRANTIES,
  * INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
  * FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL WWS OR ITS
@@ -62,7 +62,7 @@ import java.util.logging.Logger;
 /**
  * Intercepts method calls of classes which are annotated with
  * {@code @Validated}.
- * 
+ *
  * @author mase
  * @since 0.1.3
  */
@@ -72,7 +72,6 @@ public final class ValidationInterceptor {
     private static final Logger LOGGER = Logger
         .getLogger(ValidationInterceptor.class.getName());
 
-    // private final Validator validator;
     private final ExecutableValidator executableValidator;
 
     ValidationInterceptor() {
@@ -114,18 +113,11 @@ public final class ValidationInterceptor {
         // if ((instance != null) && (method != null)) {
         // Validate constraint(s) method parameters.
         final Object[] arguments = pjp.getArgs();
-        // if ((arguments != null) && (arguments.length > 0)) {
         final Set<ConstraintViolation<Object>> violations = executableValidator
             .validateParameters(instance, method, arguments);
         if (!violations.isEmpty()) {
             throw new ConstraintViolationException(violations);
         }
-        // }
-        // } else {
-        // LOGGER
-        // .fine("Skipped validation method parameters while method/instance is null");
-        // }
-
     }
 
     /**
@@ -136,8 +128,6 @@ public final class ValidationInterceptor {
         returning = "result")
     public void after(final JoinPoint pjp, final Object result) {
 
-        // final MethodSignature signature = (MethodSignature)
-        // pjp.getSignature();
         final Object instance = pjp.getTarget();
 
         if (instance != null) {
