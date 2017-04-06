@@ -39,24 +39,25 @@
  */
 package org.uniknow.agiledev.tutorial.dbc;
 
-import org.uniknow.agiledev.dbc4java.Validated;
-
 import javax.validation.constraints.Min;
 
-@Validated
 public class PositiveInteger {
 
-    @Min(0)
     int value = 0;
 
-    public void add(int addedValue) {
+    @Min(0)
+    public int add(int addedValue) {
         value += addedValue;
+        return value;
     }
 
-    public void subtract(int subtractedValue) {
+    @Min(0)
+    public int subtract(int subtractedValue) {
         value -= subtractedValue;
+        return value;
     }
 
+    @Min(0)
     public int toInt() {
         return value;
     }

@@ -39,11 +39,8 @@
  */
 package org.uniknow.agiledev.cqrs.command;
 
-import org.uniknow.agiledev.dbc4java.Validated;
-
 /**
  * Commands are things that indicate requests to our domain.
  */
-@Validated
 public class Command {
 }

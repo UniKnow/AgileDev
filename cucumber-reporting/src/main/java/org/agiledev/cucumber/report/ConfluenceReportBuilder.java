@@ -42,7 +42,6 @@ package org.agiledev.cucumber.report;
 import cucumber.runtime.CucumberException;
 import org.eclipse.mylyn.internal.wikitext.confluence.core.ConfluenceDocumentBuilder;
 import org.eclipse.mylyn.wikitext.core.parser.Attributes;
-import org.uniknow.agiledev.dbc4java.Validated;
 
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
@@ -54,10 +53,8 @@ import java.util.List;
  * Created with IntelliJ IDEA. User: mase Date: 6/3/14 Time: 12:09 PM To change
  * this template use File | Settings | File Templates.
  */
-@Validated
 public class ConfluenceReportBuilder extends ConfluenceDocumentBuilder {
 
-    @NotNull
     private final Writer writer;
 
     /**
@@ -66,7 +63,7 @@ public class ConfluenceReportBuilder extends ConfluenceDocumentBuilder {
      * @param writer
      *            Writer that will be used to persist confluence report
      */
-    public ConfluenceReportBuilder(Writer writer) {
+    public ConfluenceReportBuilder(@NotNull Writer writer) {
         super(writer);
         this.writer = writer;
     }

@@ -40,14 +40,12 @@
 package org.uniknow.agiledev.ddd.domain.model.common;
 
 import org.springframework.beans.BeansException;
-import org.uniknow.agiledev.dbc4java.Validated;
 
 import javax.validation.constraints.NotNull;
 
 /**
  * Created by mase on 3/17/2015.
  */
-@Validated
 public abstract class Factory<T> {
 
     /**
@@ -58,7 +56,7 @@ public abstract class Factory<T> {
      * @throws org.springframework.beans.BeansException
      *             in case of creation errors
      */
-    // @NotNull
+    @NotNull
     public abstract T getObject() throws BeansException;
 
 }
