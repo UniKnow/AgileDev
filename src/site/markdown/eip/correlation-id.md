@@ -20,3 +20,4 @@ TODO: determine whether we should use (custom) HTTP Header or URI parameter. Adv
 ## See also
 
 * [Implementing Correlation IDs in Spring Boot](http://java.dzone.com/articles/implementing-correlation-ids-0)
+* [Spring cloud Sleuth](https://cloud.spring.io/spring-cloud-sleuth/)
